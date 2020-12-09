@@ -13,7 +13,12 @@ var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 
 var birthJ = false;
 
-  //아이디 중복확인 
+ 
+
+
+$(document).ready(function () {
+	var address = $('#member_secondaddr');
+  	 //아이디 중복확인 
     $("#idchk").click(function () {
         if ($('#member_id').val() == '') {
             $('#id_check').text('아이디를 입력하세요.');
@@ -23,15 +28,14 @@ var birthJ = false;
             $('#id_check').css('color', 'red');
         } else if ($('#member_id').val() != '') {
             var member_id = $('#member_id').val();
+console.log(member_id);
             $.ajax({
-                async: true,
+				
                 type: 'POST',
-                data: member_id,
-                url: 'idcheck.do',
-                dateType: 'json',
-                contentType: "application/json; charset=UTF-8",
-                success: function (value) {
-                    if (value.value>0) {
+                url: 'idcheck.do?member_id='+member_id,
+                contentType: "application/json",
+                success: function (msg) {
+                    if (msg.value>0) {
                         $('#id_check').text('중복된 아이디 입니다.');
                         $('#id_check').css('color', 'red');
                         $("#usercheck").attr("disabled", true);
@@ -54,12 +58,8 @@ var birthJ = false;
             }); //ajax/// 
         } //else if 
     }); //blur 
-
-
-$(document).ready(function () {
-  
     $('form').on('submit', function () {
-        var inval_Arr = new Array(8).fill(false);
+        var inval_Arr = new Array(7).fill(false);
         if (idJ.test($('#member_id').val())) {
             inval_Arr[0] = true;
         } else {
@@ -110,20 +110,13 @@ $(document).ready(function () {
             alert('휴대폰 번호를 확인하세요.');
             return false;
         }
-        //성별 확인 
-        if (memberber.member_gender[0].checked == false && memberber.member_gender[1].checked == false) {
-            inval_Arr[6] = false;
-            alert('성별을 확인하세요.');
-            return false;
-        } else {
-            inval_Arr[6] = true;
-        }
+       
         //주소확인 
         if (address.val() == '') {
-            inval_Arr[7] = false;
+            inval_Arr[6] = false;
             alert('주소를 확인하세요.');
             return false;
-        } else inval_Arr[7] = true;
+        } else inval_Arr[6] = true;
         //전체 유효성 검사 
         var validAll = true;
         for (var i = 0; i < inval_Arr.length; i++) {
@@ -133,11 +126,12 @@ $(document).ready(function () {
         }
         if (validAll == true) {
             // 유효성 모두 통과 
-            alert('NANALAND 가족이 되어주셔 감사합니다.');
+            alert('감사합니다.');
         } else {
             alert('정보를 다시 확인하세요.')
         }
     });
+
     $('#member_id').blur(function () {
         if (idJ.test($('#member_id').val())) {
             console.log('true');
@@ -164,7 +158,7 @@ $(document).ready(function () {
             $('#pw2_check').text('비밀번호가 일치하지 않습니다.');
             $('#pw2_check').css('color', 'red');
         } else {
-            $('#pw2_check').text('');
+            $('#pw2_check').text('비밀번호가 일치합니다.');
         }
     });
     //이름에 특수문자 들어가지 않도록 설정 
@@ -281,8 +275,8 @@ function execPostCode() {
             if(a == null || b = null){ 
                 alert("주소를 확인하세요."); return false; }
                  */
-            $("[name=member_zipcode]").val(data.zonecode);
-            $("[name=member_firstaddr]").val(fullRoadAddr);
+            $("input[name=member_zipcode]").val(data.zonecode);
+            $("input[name=member_firstaddr]").val(fullRoadAddr);
             document.getElementById('member_zipcode').value = data.zonecode;
             //5자리 새우편번호 사용 
             document.getElementById('member_firstaddr').value = fullRoadAddr;

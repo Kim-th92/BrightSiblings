@@ -21,12 +21,11 @@
 				<form action="/ajaxlogin.do" method="post">
 					<h1>로그인</h1>
 					<div class="inputarea">
-						<input type="text" name="member_id"> <span data-placeholder="아이디"></span>
+						<input type="text" id = "member_id" name="member_id"/> 
 					</div>
 
 					<div class="inputarea">
-						<input type="password" name="member_pw"> <span
-							data-placeholder="비밀번호"></span>
+						<input type="password" id="member_pw" name="member_pw"/>
 					</div>
 					<table>
 						<tr>
@@ -62,13 +61,12 @@
 	});
 	
 	function login(){
-		var memberid = $("[name='member_id']").val().trim();
-		var memberpw = $("[name='member_px']").val().trim();
+		var memberid = $("#member_id").val().trim();
+		var memberpw = $("#member_pw").val().trim();
 		
 		var loginValue = {
 			"member_id" : memberid,
 			"member_pw" : memberpw
-				
 		};
 
 		if(memberid ==null ||memberid =="" || memberpw==null || memberpw==""){

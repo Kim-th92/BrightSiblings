@@ -19,6 +19,7 @@ public class Member_Dto {
 	private String member_role;
 	private String member_payment;
 	private String member_delflag;
+	
 	public int getMember_no() {
 		return member_no;
 	}

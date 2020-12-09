@@ -11,10 +11,10 @@
 	</select>
 		
 	<insert id="register" parameterType="memberDto">
-		INSERT INTO MEMBER VALUSE(memberseq.nextval,#{member_id},#{member_pw}
-		,#{member_name},#{member_email},#{member_phone},#{member_birthday},#{member_zipcode},
-		#{member_firstaddr},#{member_secondaddr},'',
-		sysdate,'member','','N')
+		INSERT INTO MEMBER (member_no,member_id,member_pw,member_name,member_email,member_phone,member_birthday,member_zipcode,
+		member_firstaddr,member_secondaddr,member_regdate,member_role,member_delflag) VALUES
+		(memberseq.nextval, #{member_id}, #{member_pw}, #{member_name}, #{member_email}, #{member_phone},#{member_birthday},#{member_zipcode},
+		#{member_firstaddr},#{member_secondaddr},SYSDATE,'member','N')
 	</insert>
 	
 	<update id ="updateProfile" parameterType="memberDto">

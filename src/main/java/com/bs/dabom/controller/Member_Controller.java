@@ -16,9 +16,12 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bs.dabom.model.biz.Member_Biz;
 import com.bs.dabom.model.dto.Member_Dto;
@@ -65,7 +68,7 @@ public class Member_Controller {
 	
 	
 	
-	@RequestMapping("/ajaxlogin.do")
+	@RequestMapping("ajaxlogin.do")
 	public Map<String,Boolean> login(@RequestBody Member_Dto dto,HttpSession session) {
 		
 		Member_Dto res =  biz.login(dto);
@@ -83,23 +86,24 @@ public class Member_Controller {
 
 	
 	
-	@RequestMapping("/register.do")
+	@RequestMapping("register.do")
 	public String register() {
 		return "register";
 	}
 	
-	@RequestMapping("/registerres.do")
+	@RequestMapping("registerres.do")
 	public String registerRes(Member_Dto dto) {
-		
+		System.out.println(dto);
 		dto.setMember_pw(passwordEncoder.encode(dto.getMember_pw()));
 		
 		if(biz.register(dto)>0)
-			return "redirect:index.jsp";
-		return "redirect:registerform.do";
+			return "redirect:login.do";
+		return "redirect:register.do";
 	}
 	
-	@RequestMapping("/idcheck.do")
-	public Map<String,Integer> idchk(@RequestBody String id) {		
+	@PostMapping("idcheck.do")
+	public @ResponseBody Map<String,Integer> idchk(@RequestParam("member_id") String id) {	
+		System.out.println(id);
 		int value = biz.idChk(id);
 		
 		Map<String,Integer> map = new HashMap<String, Integer>();
