@@ -1,0 +1,59 @@
+
+*{
+	margin : 0;
+	padding : 0;
+	text-decoration: none;
+	font-family: montserrat;
+	box-sizing :border-box;
+	}
+body {
+	
+	background-color: #f2f2f2;
+}
+#main-container{
+	min-height: 100%;
+	height:auto;
+	padding-bottom:60px;
+	position:relative;
+	 
+	}
+
+#container-left{
+	width: 45%;
+    display: inline-block;
+    margin: 100px;
+	
+}
+#container-right{
+	text-align:center;
+	width: auto;
+    display: inline-block;
+    float: right;
+    text-align: center;
+    background: white;
+    padding: 150px 100px;
+    margin: 40px 50px 100px 0px;
+    border-radius: 50 50;
+   }
+
+#chartdiv{
+	 width: 100%;
+  height: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+#content{
+	width: 50%;
+}
+#footer{
+	height:70px;
+	background : #99ccff;
+	position :absolute;
+	/* transform : translateY(-100%); 자기자신의 100%만큼 올라와	 */
+	/* margin-top : -60px; */
+}
+
+
+defs {
+    display: none;
+}
+

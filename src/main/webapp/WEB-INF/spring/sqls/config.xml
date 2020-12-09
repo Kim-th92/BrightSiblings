@@ -4,7 +4,18 @@
 <configuration>
 
 <!-- type aliases -->
-
+	<typeAliases>
+		<typeAlias type="com.bs.dabom.model.dto.Member_Dto" alias = "memberDto"/>
+	</typeAliases>
+	
+	
+	
+	
+	
 <!-- mapper -->
+	<mappers>
+		<mapper resource ="/mybatis/member-mapper.xml"/>
+	</mappers>
+
 
 </configuration>

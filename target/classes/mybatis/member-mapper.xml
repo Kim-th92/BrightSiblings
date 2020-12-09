@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "member">
+	
+	<select id = "login" parameterType="memberDto" resultType="memberDto">
+		select * from member where member_id=#{member_id}
+	</select>
+	
+	<select id ="idchk" parameterType="String" resultType="String">
+		select member_id from member where member_id = #{member_id}
+	</select>
+		
+	<insert id="register" parameterType="memberDto">
+		INSERT INTO MEMBER VALUSE(memberseq.nextval,#{member_id},#{member_pw}
+		,#{member_name},#{member_email},#{member_phone},#{member_birthday},#{member_zipcode},
+		#{member_firstaddr},#{member_secondaddr},'',
+		sysdate,'member','','N')
+	</insert>
+	
+	<update id ="updateProfile" parameterType="memberDto">
+	
+	</update>
+</mapper>

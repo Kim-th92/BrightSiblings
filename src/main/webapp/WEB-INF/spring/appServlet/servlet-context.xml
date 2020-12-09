@@ -24,5 +24,49 @@
 	<context:component-scan base-package="com.bs.dabom" />
 	
 	
+	<beans:bean id="naverClientID" class="java.lang.String">
+		<beans:constructor-arg value="oFvmCB8Ob7h20ayn4V_9"></beans:constructor-arg>
+		
+	</beans:bean>
+	<beans:bean id="naverClientSecret" class="java.lang.String">
+		<beans:constructor-arg value="sHM9cvLWN5"></beans:constructor-arg>
+	</beans:bean>
+	<beans:bean id="naverRedirectUrl" class="java.lang.String">
+		<beans:constructor-arg value="http://localhost:8080/auth/naver/callback"></beans:constructor-arg>
+	</beans:bean>
+	<beans:bean id="naverSns" class="com.bs.dabom.snslogin.SNS">
+		<beans:constructor-arg value="naver"></beans:constructor-arg>
+		<beans:constructor-arg ref="naverClientID"></beans:constructor-arg>
+		<beans:constructor-arg ref="naverClientSecret"></beans:constructor-arg>
+		<beans:constructor-arg ref="naverRedirectUrl"></beans:constructor-arg>
+	</beans:bean>
+	
+	<beans:bean id="googleClientID" class="java.lang.String">
+		<beans:constructor-arg value="910896443172-366kir8vgkbehvc0pqmsb12fj0q73ndp.apps.googleusercontent.com"></beans:constructor-arg>
+		
+	</beans:bean>
+	<beans:bean id="googleClientSecret" class="java.lang.String">
+		<beans:constructor-arg value="xiUsVxHuBpM1qlR0V1rVGQfO"></beans:constructor-arg>
+	</beans:bean>
+	<beans:bean id="googleRedirectUrl" class="java.lang.String">
+		<beans:constructor-arg value="http://localhost:8080/auth/google/callback"></beans:constructor-arg>
+	</beans:bean>
+	<beans:bean id="googleSns" class="com.bs.dabom.snslogin.SNS">
+		<beans:constructor-arg value="google"></beans:constructor-arg>
+		<beans:constructor-arg ref="googleClientID"></beans:constructor-arg>
+		<beans:constructor-arg ref="googleClientSecret"></beans:constructor-arg>
+		<beans:constructor-arg ref="googleRedirectUrl"></beans:constructor-arg>
+	</beans:bean>
+	<beans:bean id="googleConnectionFactory"       
+                                 class="org.springframework.social.google.connect.GoogleConnectionFactory">
+<beans:constructor-arg ref="googleClientID" />
+<beans:constructor-arg ref="googleClientSecret" />
+</beans:bean>
+    
+<beans:bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+        <beans:property name="scope" value="https://www.googleapis.com/auth/userinfo.email" />
+        <!-- <beans:property name="scope" value="https://www.googleapis.com/auth/plus.login" /> -->
+        <beans:property name="redirectUri" ref="googleRedirectUrl" />
+</beans:bean>	
 	
 </beans:beans>
