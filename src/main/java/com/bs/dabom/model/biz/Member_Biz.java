@@ -7,8 +7,11 @@ public interface Member_Biz {
 
 	public Member_Dto login(Member_Dto dto);
 
-	public Member_Dto snsLogin(Member_Dto dto);
 
 	public int idChk(String id);
+	
+	public Member_Dto snsLogin(Member_Dto dto);
+
+	public int snsRegister(Member_Dto dto);
 
 }

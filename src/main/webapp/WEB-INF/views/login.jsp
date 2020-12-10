@@ -7,8 +7,16 @@
 <title>다이어트에 봄이왔따 </title>
 <link rel="stylesheet" href="resources/css/login.css">
 <link rel="shortcut icon" href="resources/image/favicon.png">
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+  </script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+  
 <body>
 
 	<div id="main-container">
@@ -16,9 +24,8 @@
 			<div id="chartdiv"></div>
 			<div id="content"><h1>다이어트의 봄이찾아올거예요~</h1></div>
 		</div>
-		<div id="container-right">
+		<div id="container-right" data-aos="fade-left">
 			<div id="login-form">
-				<form action="/ajaxlogin.do" method="post">
 					<h1>로그인</h1>
 					<div class="inputarea">
 						<input type="text" id = "member_id" name="member_id"/> 
@@ -32,27 +39,34 @@
 							<td colspan="2" class="err" style="padding: 10px 0px;"></td>
 						</tr>
 						<tr>
-							<td colspan="2"><button type="submit" class="logbtn">로그인</button></td>
+							<td colspan="2"><input type="button" value="로그인" onclick="login();"  class="logbtn"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><a href="${kakao_url}"><img style ="width:200px;"alt="카카오로그인" src="resources/image/kakao.png"></a></td>
 						</tr>
 						<tr>
 							<td colspan="2"><a href="${naver_url}"><img style ="width:200px;"alt="네이버로그인" src="resources/image/naver.PNG"></a></td>
 						</tr>
-						<tr>
-							<td colspan="2"><a href="${google_url}"><img style ="width:200px;"alt="구글로그인" src="resources/image/google.png"></a></td>
-						</tr>
+						
 						<tr>
 							<td colspan="2" style="text-align: center; margin-top: 10px;">
-								<a href="findidpw.do">아이디 패스워드 찾기</a> | <a href="register.do">회원가입</a>
+								<a href="findidpw.do">비밀 번호를 잊어버리셨나요? </a> <hr/>
+								<a href="register.do">회원가입</a>
 							</td>
 						</tr>
 					</table>
-				</form>
 			</div>
 		</div>
 
 	</div>
 	<div id="footer"></div>
 
+	<script>
+  AOS.init({
+	  delay : 30,
+	  
+  });
+</script>
 
 	<script type="text/javascript">
 	$(function(){
@@ -70,12 +84,14 @@
 		};
 
 		if(memberid ==null ||memberid =="" || memberpw==null || memberpw==""){
-			alert("ID 혹은 PW를 확인해주세요");
+			$(".err").show();
+			$(".err").html("ID또는 PW를 제대로 입력해주세요!");
+			$(".err").css("color","red");
 		}else{
 			$.ajax({
 				type:"post",
-				url:"ajaxlogin.do",
-				data:JSON.stringify(loginValue),
+				url: "/dabom/ajaxlogin.do",
+				data: JSON.stringify(loginValue),
 				contentType : "application/json",
 				success: function (msg){
 					if(msg.check == true){
@@ -86,7 +102,8 @@
 						$(".err").css("color","red");
 					}
 				},
-				error:function(){
+				error:function(msg){
+					console.log(msg);
 					alert("통신 실패");
 				}
 			});
@@ -96,6 +113,7 @@
 
 
 </script>
+
 	<!-- 워드클라우드 임포트 코드-->
 	<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 	<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>

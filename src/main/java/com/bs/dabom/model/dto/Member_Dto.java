@@ -141,6 +141,10 @@ public class Member_Dto {
 	}
 	public Member_Dto() {
 	}
+	public Member_Dto(String member_id, String member_name) {
+		this.member_id = member_id;
+		this.member_name = member_name;
+	}
 	
 	
 }

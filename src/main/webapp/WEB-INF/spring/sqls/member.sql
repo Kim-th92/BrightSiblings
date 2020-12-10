@@ -29,6 +29,7 @@ create table member(
 
 
 insert into member values(memberseq.nextval,'admin','admin1234','관리자','admin@naver.com','010-1234-5678'
-,'19931207','15905','서울 강동구','237-76','',sysdate,'admin','','N')
+,'19931207','15905','서울 강동구','237-76','https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.i-boss.co.kr%2Fab-2110-9380&psig=AOvVaw05akYMbTfCj7CognpMpCpn&ust=1607628958985000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIiWhdzSwe0CFQAAAAAdAAAAABAD',sysdate,'admin','','N')
 
-select * from member;
+select member_profile from member;
+delete from member where member_id ='tlwj321';

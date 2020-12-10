@@ -12,6 +12,8 @@ public interface Member_Dao {
 
 	public Member_Dto snsLogin(Member_Dto dto);
 
+	public int snsRegister(Member_Dto dto);
+	
 	public int idChk(String id);
 
 }

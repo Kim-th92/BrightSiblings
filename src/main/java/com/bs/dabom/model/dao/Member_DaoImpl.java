@@ -37,10 +37,7 @@ public class Member_DaoImpl implements Member_Dao {
 		return login;
 	}
 
-	@Override
-	public Member_Dto snsLogin(Member_Dto dto) {
-		return null;
-	}
+	
 
 	@Override
 	public int idChk(String id) {
@@ -50,6 +47,25 @@ public class Member_DaoImpl implements Member_Dao {
 			idchk =0;
 		}
 		return idchk;
+	}
+
+	@Override
+	public Member_Dto snsLogin(Member_Dto dto) {
+		Member_Dto res
+			= sqlSession.selectOne(NAMESPACE+"snslogin", dto.getMember_id());
+		
+		return res;
+	}
+
+	@Override
+	public int snsRegister(Member_Dto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.insert(NAMESPACE+"snsloginregister", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 }
