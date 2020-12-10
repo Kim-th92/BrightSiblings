@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>mypage ${login.member_id}</h1>
+<h1>${login.member_name} </h1>
+<a href="mypage/main.do">마이페이지</a>
 
 </body>
 </html>

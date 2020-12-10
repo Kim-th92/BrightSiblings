@@ -19,6 +19,7 @@ public class Member_Dto {
 	private String member_role;
 	private String member_payment;
 	private String member_delflag;
+	
 	public int getMember_no() {
 		return member_no;
 	}
@@ -139,6 +140,10 @@ public class Member_Dto {
 		this.member_delflag = member_delflag;
 	}
 	public Member_Dto() {
+	}
+	public Member_Dto(String member_id, String member_name) {
+		this.member_id = member_id;
+		this.member_name = member_name;
 	}
 	
 	

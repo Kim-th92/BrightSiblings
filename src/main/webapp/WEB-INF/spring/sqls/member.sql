@@ -7,7 +7,7 @@ create sequence memberseq;
 create table member(
 	member_no number not null,
 	member_id varchar2(100) not null,
-	member_pw varchar2(50) not null,
+	member_pw varchar2(100),
 	member_name varchar2(40),
 	member_email varchar2(100),
 	member_phone varchar2(20),
@@ -26,7 +26,10 @@ create table member(
 	constraint delflag_check CHECK(member_delflag IN('Y','N'))
 	
 	);
-insert into member values(memberseq.nextval,'admin','admin1234','관리자','admin@naver.com','010-1234-5678'
-,'19931207','15905','서울 강동구','237-76','',sysdate,'admin','','N')
 
-select * from member;
+
+insert into member values(memberseq.nextval,'admin','admin1234','관리자','admin@naver.com','010-1234-5678'
+,'19931207','15905','서울 강동구','237-76','https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.i-boss.co.kr%2Fab-2110-9380&psig=AOvVaw05akYMbTfCj7CognpMpCpn&ust=1607628958985000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIiWhdzSwe0CFQAAAAAdAAAAABAD',sysdate,'admin','','N')
+
+select member_profile from member;
+delete from member where member_id ='tlwj321';

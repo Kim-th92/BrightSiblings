@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%@include file="header.jsp" %>
+<h1>${login.member_name} </h1>
 </body>
 </html>

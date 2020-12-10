@@ -24,16 +24,22 @@ public class Member_BizImpl implements Member_Biz {
 		return dao.login(dto);
 	}
 
-	@Override
-	public Member_Dto snsLogin(Member_Dto dto) {
-		
-		return dao.snsLogin(dto);
-	}
-
+	
 	@Override
 	public int idChk(String id) {
 		
 		return dao.idChk(id);
 	}
+
+	@Override
+	public Member_Dto snsLogin(Member_Dto dto) {
+		return dao.snsLogin(dto);
+	}
+
+	@Override
+	public int snsRegister(Member_Dto dto) {
+		return dao.snsRegister(dto);
+	}
+	
 
 }
