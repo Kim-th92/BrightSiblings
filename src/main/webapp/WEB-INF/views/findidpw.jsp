@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% response.sendRedirect("login.do"); %>
-
+	<h1>이걸 꼭 해야하는 것일까.. 준비중입니다. </h1>
 </body>
 </html>

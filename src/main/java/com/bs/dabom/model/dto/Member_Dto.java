@@ -2,6 +2,9 @@ package com.bs.dabom.model.dto;
 
 import java.util.Date;
 
+import lombok.Data;
+
+
 public class Member_Dto {
 
 	private int member_no;
@@ -18,6 +21,7 @@ public class Member_Dto {
 	private Date member_regdate;
 	private String member_role;
 	private String member_payment;
+	private String sns;
 	private String member_delflag;
 	
 	public int getMember_no() {
@@ -110,6 +114,13 @@ public class Member_Dto {
 	public void setMember_delflag(String member_delflag) {
 		this.member_delflag = member_delflag;
 	}
+	
+	public String getSns() {
+		return sns;
+	}
+	public void setSns(String sns) {
+		this.sns = sns;
+	}
 	@Override
 	public String toString() {
 		return "Member_Dto [member_no=" + member_no + ", member_id=" + member_id + ", member_pw=" + member_pw
@@ -119,10 +130,11 @@ public class Member_Dto {
 				+ member_profile + ", member_regdate=" + member_regdate + ", member_role=" + member_role
 				+ ", member_payment=" + member_payment + ", member_delflag=" + member_delflag + "]";
 	}
+
 	public Member_Dto(int member_no, String member_id, String member_pw, String member_name, String member_birthday,
 			String member_phone, String member_zipcode, String member_firstaddr, String member_secondaddr,
 			String member_email, String member_profile, Date member_regdate, String member_role, String member_payment,
-			String member_delflag) {
+			String sns, String member_delflag) {
 		this.member_no = member_no;
 		this.member_id = member_id;
 		this.member_pw = member_pw;
@@ -137,6 +149,7 @@ public class Member_Dto {
 		this.member_regdate = member_regdate;
 		this.member_role = member_role;
 		this.member_payment = member_payment;
+		this.sns = sns;
 		this.member_delflag = member_delflag;
 	}
 	public Member_Dto() {

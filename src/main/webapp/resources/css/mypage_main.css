@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+#profile-section{
+	text-align: center;
+	margin:20px;
+	border-bottom: 1px solid black;
+}
+
+
+
+
+#mypage-navbar ul {
+	margin: 0;
+	padding: 8px 15px;
+	list-style: none;
+	display: flex;
+}
+
+div#mypage-navbar ul li {
+    padding: 10px 40px;
+}
+
+
+div#mypage-navbar ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.3em;
+}

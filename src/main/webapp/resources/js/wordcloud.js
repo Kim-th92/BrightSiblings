@@ -95,8 +95,8 @@ series.dataFields.value = "count";
 series.heatRules.push({
  "target": series.labels.template,
  "property": "fill",
- "min": am4core.color("#8080ff"),
- "max": am4core.color("#00004d"),
+ "min": am4core.color("#ffb3cc"),
+ "max": am4core.color("#cc0044"),
  "dataField": "value"
 });
 

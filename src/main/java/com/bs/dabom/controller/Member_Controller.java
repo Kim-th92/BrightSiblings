@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.bs.dabom.model.biz.Member_Biz;
 import com.bs.dabom.model.dto.Member_Dto;
 import com.bs.dabom.snslogin.NaverLoginBo;
@@ -64,7 +66,8 @@ public class Member_Controller {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	@RequestMapping("/login.do")
+	
+	@RequestMapping("login.do")
 	public String snsLogin(Model model, HttpSession session) throws Exception {
 		String naver_url = naverLoginBO.getAuthorizationUrl(session);
 		model.addAttribute("naver_url", naver_url);
@@ -80,22 +83,89 @@ public class Member_Controller {
 		Member_Dto res = biz.login(dto);
 		HttpSession session = req.getSession();
 		boolean check = false;
-		if (res != null) {
-			if (passwordEncoder.matches(dto.getMember_pw(), res.getMember_pw())) {
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		
+		if (res.getMember_delflag().equals("N")) {
+			if (passwordEncoder.matches(dto.getMember_pw(), res.getMember_pw())  ) {
 				session.setAttribute("login", res);
 				check = true;
-
+				
 			}
+		}else if(res.getMember_delflag().equals("Y")) {
+			check=true;
+			map.put("del", true);
+			
+		}else {
+			check= false;
 		}
-		System.out.println(check);
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("check", check);
 		return map;
 	}
+	
+	// 회원가입 폼 반환
+	@RequestMapping("register.do")
+	public String register() {
+		return "register";
+	}
+	
+	// 아이디 중복확인 에이작스로
+		@PostMapping("idcheck.do")
+		public @ResponseBody Map<String, Integer> idchk(@RequestParam("member_id") String id) {
+			System.out.println(id);
+			int value = biz.idChk(id);
+
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("value", value);
+			return map;
+		}
+
+
+	// 회원가입 결과 반환
+	@RequestMapping("registerres.do")
+	public String registerRes(Member_Dto dto) {
+		System.out.println(dto);
+		dto.setMember_pw(passwordEncoder.encode(dto.getMember_pw()));
+
+		if (biz.register(dto) > 0)
+			return "redirect:login.do";
+		return "redirect:register.do";
+	}
+
+	//로그아웃 
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	//아이디 패스워드 찾기 
+	@RequestMapping("findidpw.do")
+	public String findIdpw(Model model) {
+		return "findidpw";
+	}
+	
+	
+	//회원탈퇴
+	@RequestMapping(value="delete.do" ,method = RequestMethod.POST)
+	public @ResponseBody Map<String,Integer> ajaxdelete(@RequestBody Member_Dto dto){
+		int res = biz.deleteMember(dto.getMember_no());
+		Map<String,Integer> map = new HashMap<String, Integer>();
+				
+		if(res>0) {
+			map.put("check", 1);
+		}else {
+			map.put("check", 0);
+		}
+		
+		return map;
+	}
+	
+	
 
 	// 네이버 로그인
 	@RequestMapping(value = "auth/naver/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,RedirectAttributes rttr)
 			throws Exception {
 		System.out.println("여기는 callback");
 		OAuth2AccessToken oauthToken;
@@ -127,20 +197,30 @@ public class Member_Controller {
 			System.out.println("들어왔!!");
 			res = biz.snsLogin(dto);
 			System.out.println(res);
-			session.setAttribute("login", res); // 세션 생성
-			return "redirect:/mainpage.do";
+			if(res==null) {
+				System.out.println("여기까진가 ");
+				model.addAttribute("msg", "탈퇴");
+				return "redirect";
+			}else {
+				System.out.println("여긴");
+				session.setAttribute("login", res); // 세션 생성
+				return "redirect:/mainpage.do";
+			}
+			
 		} else if (biz.idChk(member_email) == 0) {
 			System.out.println("들어왔");
+			dto.setSns("naver");
 			snsregres = biz.snsRegister(dto);
 			if (snsregres > 0)
 				return "redirect:/login.do";
 		}
 		return "redirect:/login.do";
 	}
+	
 	//카카오 로그인 
 	@RequestMapping(value = "oauth/kakao/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String kekoLogin(@RequestParam("code") String code,HttpServletRequest req,HttpServletResponse res
-			,HttpSession session ) throws Exception{
+			,HttpSession session,Model model) throws Exception{
 		
 		//결과값을 노드에 담아준다.
 		JsonNode  node = getAccessToken(code);
@@ -159,14 +239,22 @@ public class Member_Controller {
 		Member_Dto result = null;
 		int snsregres = 0;
 		if (biz.idChk(member_email) > 0) {
-			System.out.println("들어왔zkzk!!");
-			
+			System.out.println("들어왔!!");
 			result = biz.snsLogin(dto);
 			System.out.println(result);
-			session.setAttribute("login", result); // 세션 생성
-			return "redirect:/mainpage.do";
+			if(result==null) {
+				System.out.println("여기까진가 ");
+				model.addAttribute("msg", "탈퇴");
+				return "redirect";
+			}else {
+				System.out.println("여긴");
+				session.setAttribute("login", result); // 세션 생성
+				return "redirect:/mainpage.do";
+			}
+			
 		} else if (biz.idChk(member_email) == 0) {
-			System.out.println("들어왔카");
+			System.out.println("들어왔");
+			dto.setSns("kakao");
 			snsregres = biz.snsRegister(dto);
 			if (snsregres > 0)
 				return "redirect:/login.do";
@@ -174,34 +262,8 @@ public class Member_Controller {
 		return "redirect:/login.do";
 		
 	}
-	// 회원가입 폼 반환
-	@RequestMapping("register.do")
-	public String register() {
-		return "register";
-	}
 
-	// 회원가입 결과 반환
-	@RequestMapping("registerres.do")
-	public String registerRes(Member_Dto dto) {
-		System.out.println(dto);
-		dto.setMember_pw(passwordEncoder.encode(dto.getMember_pw()));
-
-		if (biz.register(dto) > 0)
-			return "redirect:login.do";
-		return "redirect:register.do";
-	}
-
-	// 아이디 중복확인 에이작스로
-	@PostMapping("idcheck.do")
-	public @ResponseBody Map<String, Integer> idchk(@RequestParam("member_id") String id) {
-		System.out.println(id);
-		int value = biz.idChk(id);
-
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("value", value);
-		return map;
-	}
-
+	
 	// 카카오 로그인 설정
 	public static JsonNode getAccessToken(String autorize_code) {
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token";

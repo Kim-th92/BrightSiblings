@@ -1,0 +1,31 @@
+
+body{
+	background-color : #ffe0d8;
+/* background-color: -webkit-linear-gradient(#ffe0d8,#ff9b93);
+Chrome 10+, Saf5.1+ 
+background-color: -moz-linear-gradient(#ffe0d8,#ff9b93); 
+FF3.6+ 
+background-color: linear-gradient(#ffe0d8,#ff9b93);
+ W3C ; */
+}
+#container{
+    width: 70%;
+    justify-content: center;
+    position: absolute;
+    margin: 70px 0px;
+	
+
+}
+
+#register {
+    width: 70%;
+    align-content: center;
+    position: absolute;
+    left: 40%;
+    padding:30px;
+    border-radius:3%;
+	background-color:white;
+
+}
+h1{text-align: center;}
+img{width:100px; height:100px;text-align: center;}

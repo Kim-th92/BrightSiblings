@@ -68,4 +68,12 @@ public class Member_DaoImpl implements Member_Dao {
 		return res;
 	}
 
+	@Override
+	public int deleteMember(int member_no) {
+		int res = 0;
+		res = sqlSession.update(NAMESPACE+"deletemember", member_no);
+		
+		return res;
+	}
+
 }

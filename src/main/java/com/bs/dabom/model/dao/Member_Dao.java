@@ -15,5 +15,6 @@ public interface Member_Dao {
 	public int snsRegister(Member_Dto dto);
 	
 	public int idChk(String id);
+	public int deleteMember(int member_no);
 
 }

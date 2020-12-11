@@ -40,6 +40,12 @@ public class Member_BizImpl implements Member_Biz {
 	public int snsRegister(Member_Dto dto) {
 		return dao.snsRegister(dto);
 	}
+
+	@Override
+	public int deleteMember(int member_no) {
+
+		return dao.deleteMember(member_no);
+	}
 	
 
 }
