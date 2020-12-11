@@ -1,18 +1,18 @@
 package com.bs.dabom.common.interceptor;
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
-	public class LoginCheckIntercepter  implements HandlerInterceptor {
+	public class LoginCheckIntercepter  extends HandlerInterceptorAdapter {
 
 		private Logger logger = LoggerFactory.getLogger(LoginCheckIntercepter.class);
 		
@@ -22,15 +22,36 @@ import org.springframework.web.servlet.ModelAndView;
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 				throws Exception {
 			logger.info("[INTERCEPTOR] postHandle");
+			ArrayList<String> excludeCheckUrl = new ArrayList<String>();
 
-			if(request.getSession().getAttribute("login")==null 
-					&&request.getRequestURI().contains("/login.do") ) {
+			excludeCheckUrl.add("/");
+			excludeCheckUrl.add("register.do");
+			excludeCheckUrl.add("ajaxlogin.do");
+			excludeCheckUrl.add("registerres.do");
+			excludeCheckUrl.add("idcheck.do");
+			excludeCheckUrl.add("auth/naver/callback.do");
+			excludeCheckUrl.add("oauth/kakao/callback.do");
+			excludeCheckUrl.add("logout.do");
+			
+			
+			if((request.getSession().getAttribute("login")==null 
+					&&request.getRequestURI().contains("/login.do"))
+					||request.getRequestURI().contains("/ajaxlogin.do")
+					||request.getRequestURI().contains("/register.do")
+					||request.getRequestURI().contains("/registerres.do")
+					||request.getRequestURI().contains("/logout.do")
+					||request.getRequestURI().contains("/idcheck.do")
+					||request.getRequestURI().contains("/findidpw.do")
+					||request.getRequestURI().contains("/oauth/kakao/callback.do")
+					||request.getRequestURI().contains("/oauth/naver/callback.do")								
+					) {
 				return true;
 			}
 			
-			if(request.getSession().getAttribute("login")==null||request.getRequestURI().contains("/logout.do") ) {
+			
+			if(request.getSession().getAttribute("login")==null ) {
 				response.sendRedirect("login.do");
-				return false;
+				
 			}
 				
 			return true;
@@ -42,24 +63,11 @@ import org.springframework.web.servlet.ModelAndView;
 		@Override
 		public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 				ModelAndView modelAndView) throws Exception {
-			  HttpSession session = request.getSession();
-		        ModelMap modelMap = modelAndView.getModelMap();
-		        Object userVO = modelMap.get("login");
-		        
-		        if(userVO != null) {
-		        
-		            // 로그인 성공시 Session에 저장후, 초기 화면 이동
-		            logger.info("new login success");
-		            session.setAttribute("login", userVO);
-		            
-		        }
+			logger.info("[INTERCEPTOR] postHandle");
+			if(modelAndView != null) {
+				logger.info(modelAndView.getViewName());
+			}
 		}
 
-		//View 가 rendering 된 후 
-		@Override
-		public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-				throws Exception {
-			logger.info("[INTERCEPTOR] afterCompletion");
-			
-		}
+	
 }

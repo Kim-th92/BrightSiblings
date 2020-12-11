@@ -133,10 +133,11 @@ public class Member_Controller {
 
 	//로그아웃 
 	@RequestMapping("logout.do")
-	public String logout(HttpSession session) {
+	public String logout(HttpServletRequest req) {
+		req.getSession().invalidate();
+		req.getSession(true);
 		
-		session.invalidate();
-		return "redirect:/";
+		return "login";
 	}
 	
 	//아이디 패스워드 찾기 
