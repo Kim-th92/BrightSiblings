@@ -33,13 +33,13 @@
 		<interceptor>
 			<mapping path="/*" />
 			<exclude-mapping path="/" />
-			<exclude-mapping path="/dabom/register.do" />
-			<exclude-mapping path="/dabom/ajaxlogin.do" />
-			<exclude-mapping path="/dabom/register.do" />
-			<exclude-mapping path="/dabom/idcheck.do" />
-			<exclude-mapping path="/dabom/registerres.do" />
-			<exclude-mapping path="/dabom/auth/naver/callback.do" />
-			<exclude-mapping path="/dabom/oauth/kakao/callback.do" />
+			<exclude-mapping path="register.do" />
+			<exclude-mapping path="ajaxlogin.do" />
+			<exclude-mapping path="registerres.do" />
+			<exclude-mapping path="idcheck.do" />
+			<exclude-mapping path="registerres.do" />
+			<exclude-mapping path="auth/naver/callback.do" />
+			<exclude-mapping path="oauth/kakao/callback.do" />
 			<beans:bean class="com.bs.dabom.common.interceptor.LoginCheckIntercepter" />
 		</interceptor>
     
