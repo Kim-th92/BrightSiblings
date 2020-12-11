@@ -47,6 +47,9 @@
                 		<li><a href="logout.do" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
                 		<li><a onclick="deletemember();" class="hidecontent"><i class="fas fa-user-minus"></i>회원탈퇴</a></li>
            	</ul>
+           <div id="msg-hide">
+           
+           </div>
         </nav>
     </header>
 <script type="text/javascript">
@@ -55,11 +58,24 @@
 	hoverbtn.addEventListener("click",function(){
 		var hideul = document.getElementById("hide");
 		if(hideul.style.opacity==0){
+			hideul.fadeDown();
 			hideul.style.opacity ="1";
 		}else{
 			hideul.style.opacity ="0";
 		}
 		
+	
+	});
+	
+	var messagebtn = document.getElementById("btn_msg");
+	messagebtn.addEventListener("click",function(){
+		var hideul = document.getElementById("msg-hide");
+		if(hideul.style.opacity==0){
+			hideul.style.opacity ="1";
+		}else{
+			hideul.style.opacity ="0";
+		} 
+		 
 	
 	});
 	
