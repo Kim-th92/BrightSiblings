@@ -36,7 +36,7 @@
 			<div id="chartdiv"></div>
 			<div id="content">
 				<h1 class="ml6">
-					<span class="text-wrapper"> <span class="letters">다이어터들에게 봄이왔어요</span>
+					<span class="text-wrapper"> <span class="letters"><b style="color:#cc0044">다</b>이어터들에게 <b style="color:#cc0044">봄</b>이왔어요</span>
 					</span>
 				</h1>
 			</div>

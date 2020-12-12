@@ -26,7 +26,7 @@
                 <li> <a href="mainpage.do" id="dabom"><img style="width:30px;height:30px;" alt="로고" src="resources/image/cherry-blossom.png"/> </a> </li>
                 <li id="search_wrapper">  
                 <input type="text" class="search-input" placeholder="검색" />
-                <button id="search_btn" onclick="" class="tooltip-" > <i class="fas fa-search"></i> </button> 
+                <button id="search_btn" onclick="search();" class="tooltip-" > <i class="fas fa-search"></i> </button> 
                 </li>
                 
                 <li id="space2"></li>
@@ -42,38 +42,91 @@
                 <li> <a class="tooltip" data-tooltip="Message" id="btn_msg"><i class="fab fa-facebook-messenger"></i></a></li>
                 <li> <a class="tooltip" data-tooltip="Notification" id="btn_bell"> <i class="fas fa-bell"></i></a></li>
                 <li>  <a class="tooltip" data-tooltip="Settings" id="btn_profile"><i class="fas fa-cog"></i></a></li>
+                 <li>  <a class="tooltip" data-tooltip="Donation" id="btn_donation"><i class="fas fa-hand-holding-usd"></i></a></li>
+                
             </ul>
             <ul id="hide">
                 		<li><a href="logout.do" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
                 		<li><a onclick="deletemember();" class="hidecontent"><i class="fas fa-user-minus"></i>회원탈퇴</a></li>
            	</ul>
-           <div id="msg-hide">
-           
+           <div id="msg-hide"></div>
+           <div id="search-hide" class="search-hide">
+  			
            </div>
         </nav>
     </header>
+    
+    
+    
+    
 <script type="text/javascript">
- 
+	function search(){
+		var keyword = $(".search-input").val();
+		if (keyword ==''){
+			$("#search-hide").html('<p>검색어를 입력해 주세요</p>');
+		}else{
+
+			var arr =[];
+			var searchlist	='';
+			$.ajax({
+				url: "search.do?keyword="+keyword,
+				type:"GET",
+				success:function(data){
+					if(data.check == "OK"){
+						arr = data.searchlist;
+						console.log(arr);
+						
+						for(var i = 0; i < arr.length ; i++){
+							console.log(arr[i].member_no);
+							searchlist = "<p class='search-res'><img class='search-img'  style='width:40px;height:40px;border-radius:50% 50%;' src='"+arr[i].member_profile+"' alt='프로필사진'/><a class='search-a' href='friendpage.do?member_no=?'"+arr[i].member_no+"><span>"+arr[i].member_name+"<i class='fas fa-arrow-alt-circle-right'></i></span></a><p>";
+							$("#search-div").html(searchlist);
+						}
+					
+					}else{
+						 var searchlist = "<p>검색하신 조건으로 조회된 결과가 없습니다.</p>"
+							 $("#search-hide").html(searchlist);
+					}
+						
+						
+				},error:function(err){
+				}
+				
+			});
+			
+		}
+		
+	}
+
+
+$("#search_btn").click(function(){
+		$(".search-hide").stop().slideDown(500);
+	return false; //중요
+});
+ $(document).click(function(e){ 
+		if(e.target.className =="search-hide"){return false}
+		$(".search-hide").stop().slideUp(500);
+});
+
+
 	var hoverbtn = document.getElementById("btn_profile");
 	hoverbtn.addEventListener("click",function(){
 		var hideul = document.getElementById("hide");
-		if(hideul.style.opacity==0){
-			hideul.fadeDown();
-			hideul.style.opacity ="1";
+
+		if(hideul.style.display=='none'){
+			hideul.style.display='block';
 		}else{
-			hideul.style.opacity ="0";
-		}
-		
-	
+			hideul.style.display='none'
+	} 
 	});
 	
+	
 	var messagebtn = document.getElementById("btn_msg");
-	messagebtn.addEventListener("click",function(){
-		var hideul = document.getElementById("msg-hide");
-		if(hideul.style.opacity==0){
-			hideul.style.opacity ="1";
-		}else{
-			hideul.style.opacity ="0";
+		messagebtn.addEventListener("click",function(){
+			var hidemsg = document.getElementById("msg-hide");
+			if(hidemsg.style.display=='none'){
+				hidemsg.style.display='block';
+			}else{
+				hidemsg.style.display='none'
 		} 
 		 
 	
@@ -121,7 +174,6 @@
 	}
 	
 </script> 
- 
 
 </body>
 </html>

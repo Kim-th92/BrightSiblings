@@ -34,4 +34,6 @@ insert into member values(memberseq.nextval,'admin','admin1234','관리자','adm
 
 update member set member_role = 'admin' where member_id ='admin';
 select member_profile from member;
-delete from member where member_id ='tlwj321';
+select * from member;
+
+delete from member where member_id ='admin';

@@ -2,9 +2,10 @@ package com.bs.dabom.model.dto;
 
 import java.util.Date;
 
-import lombok.Data;
+import org.springframework.stereotype.Component;
 
 
+@Component
 public class Member_Dto {
 
 	private int member_no;
@@ -23,7 +24,16 @@ public class Member_Dto {
 	private String member_payment;
 	private String sns;
 	private String member_delflag;
+	private Friends_Dto friends_dto;
 	
+	
+	
+	public Friends_Dto getFriends_dto() {
+		return friends_dto;
+	}
+	public void setFriends_dto(Friends_Dto friends_dto) {
+		this.friends_dto = friends_dto;
+	}
 	public int getMember_no() {
 		return member_no;
 	}
@@ -121,20 +131,12 @@ public class Member_Dto {
 	public void setSns(String sns) {
 		this.sns = sns;
 	}
-	@Override
-	public String toString() {
-		return "Member_Dto [member_no=" + member_no + ", member_id=" + member_id + ", member_pw=" + member_pw
-				+ ", member_name=" + member_name + ", member_birthday=" + member_birthday + ", member_phone="
-				+ member_phone + ", member_zipcode=" + member_zipcode + ", member_firstaddr=" + member_firstaddr
-				+ ", member_secondaddr=" + member_secondaddr + ", member_email=" + member_email + ", member_profile="
-				+ member_profile + ", member_regdate=" + member_regdate + ", member_role=" + member_role
-				+ ", member_payment=" + member_payment + ", member_delflag=" + member_delflag + "]";
-	}
 
 	public Member_Dto(int member_no, String member_id, String member_pw, String member_name, String member_birthday,
 			String member_phone, String member_zipcode, String member_firstaddr, String member_secondaddr,
 			String member_email, String member_profile, Date member_regdate, String member_role, String member_payment,
-			String sns, String member_delflag) {
+			String sns, String member_delflag, Friends_Dto friends_dto) {
+		super();
 		this.member_no = member_no;
 		this.member_id = member_id;
 		this.member_pw = member_pw;
@@ -151,6 +153,17 @@ public class Member_Dto {
 		this.member_payment = member_payment;
 		this.sns = sns;
 		this.member_delflag = member_delflag;
+		this.friends_dto = friends_dto;
+	}
+	@Override
+	public String toString() {
+		return "Member_Dto [member_no=" + member_no + ", member_id=" + member_id + ", member_pw=" + member_pw
+				+ ", member_name=" + member_name + ", member_birthday=" + member_birthday + ", member_phone="
+				+ member_phone + ", member_zipcode=" + member_zipcode + ", member_firstaddr=" + member_firstaddr
+				+ ", member_secondaddr=" + member_secondaddr + ", member_email=" + member_email + ", member_profile="
+				+ member_profile + ", member_regdate=" + member_regdate + ", member_role=" + member_role
+				+ ", member_payment=" + member_payment + ", sns=" + sns + ", member_delflag=" + member_delflag
+				+ ", friends_dto=" + friends_dto + "]";
 	}
 	public Member_Dto() {
 	}

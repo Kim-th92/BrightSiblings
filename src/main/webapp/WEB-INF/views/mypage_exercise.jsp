@@ -9,7 +9,6 @@
 <body>
 <%@include file="header.jsp" %>
 <%@include file="mypage_middle.jsp" %>
-게시판
-
+운동
 </body>
 </html>

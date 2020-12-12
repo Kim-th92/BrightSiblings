@@ -1,0 +1,15 @@
+
+#wraper {
+	background: #ececf9;
+	border-top : 2px solid #d9d9f2;
+}
+#nofriend{
+	    width: 80%;
+    height: 600px;
+    border-radius: 5%;
+    text-align: center;
+
+}
+#friendslist{
+	background: red;
+}

@@ -79,7 +79,7 @@ nav ul li a {
 	transition: .5s;
 }
 
-nav ul li #btn_plus, nav ul li #btn_msg, nav ul li #btn_bell, nav ul li #btn_profile
+nav ul li #btn_plus, nav ul li #btn_msg, nav ul li #btn_bell, nav ul li #btn_profile,nav ul li #btn_donation
 	{
 	height: 40px;
 	width: 40px;
@@ -136,9 +136,11 @@ nav ul li:hover #home, nav ul li:hover #group, nav ul li:hover #tv, nav ul li:ho
 	opacity: 1;
 }
 
-nav ul li #btn_profile::after {
+nav ul li #btn_donation::after {
 	margin-left: -20px;
+	
 }
+
  
 .profileimg{
  	height: 40px;
@@ -167,7 +169,7 @@ ul#hide {
     display: inline-block;
     right: 0;
     box-shadow: 1px 6px 5px rgba(0, 0, 0, 0.3);
-    opacity:0;
+    display:none;
     
 }
 ul#hide li:hover .hidecontent{
@@ -186,7 +188,23 @@ ul#hide li:hover .hidecontent{
     right: 1.5%;
     border-radius: 3%;
     border: pink 2px solid;
-    opacity: 0;
+    display:none;
+}
+
+#search-hide{
+	width: 250px;
+    height: 300px;
+    position: absolute;
+    z-index: 100;
+    float: right;
+    background: white;
+    margin: 2px 5px 0px 0px;
+    left:1.5%;
+    border-radius: 3%;
+    border: pink 2px solid;
+    overflow: auto;
+    display:none;
+
 }
 
 .headerFixed{

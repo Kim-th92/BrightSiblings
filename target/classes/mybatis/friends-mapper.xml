@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="friends">
+
+	<resultMap type="memberDto" id="friendjoin">
+		<result column = "MEMBER_NAME" property="member_name"/>
+		<result column = "MEMBER_NO" property="member_no"/>
+		<result column = "MEMBER_PROFILE" property="member_profile"/>
+		<collection property ="friends_dto" resultMap="friendsDto"/>
+	</resultMap>
+  	<resultMap type="friendsDto" id="friendsDto">
+  		<result column = "MEMBER_NO" property="member_no"/>
+		<result column = "FRIEND_NO" property="friend_no"/>
+  	</resultMap>
+
+
+	<select id="friendslist" resultMap="friendjoin" parameterType="int">
+		select m.member_name, m.member_no,m.member_profile
+		from member m left join friends f
+		on m.member_no = f.member_no
+		where
+		m.member_no in (select friend_no from friends where member_no =#{member_no})
+	</select>
+	
+	<select id ="searchlist" resultType="memberDto" parameterType="String">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_NAME LIKE '%'||#{member_name}||'%' 
+	</select>
+	
+	
+</mapper>
