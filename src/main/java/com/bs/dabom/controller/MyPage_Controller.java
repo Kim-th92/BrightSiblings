@@ -1,10 +1,12 @@
 package com.bs.dabom.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bs.dabom.model.biz.Friends_Biz;
+import com.bs.dabom.model.biz.Member_Biz;
 import com.bs.dabom.model.dto.Member_Dto;
 
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+
+import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.util.WebUtils;
 @Controller
 public class MyPage_Controller {
 
+	@Autowired
+	private Member_Biz member_biz;
+	
+	public static void main(String[] args) {
+		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 
+	}
 	@Autowired
 	private Friends_Biz biz;
 	
@@ -32,6 +56,7 @@ public class MyPage_Controller {
 		List<Member_Dto> list = biz.friendsList(memberno);
 		model.addAttribute("list",list);
 		
+
 		return "mypage_friends";
 	}
 	
@@ -62,7 +87,6 @@ public class MyPage_Controller {
 		if(list.isEmpty()) {
 			map.put("check", "NO"); 
 			map.put("searchlist",list);
-			
 		}else if(list != null) {
 			map.put("check", "OK"); 
 			map.put("searchlist",list);
@@ -71,4 +95,85 @@ public class MyPage_Controller {
 		return map;
 	}
 	
+	
+	//파일업로드 서비스는 멤버에 위치
+	@RequestMapping("profilePicUpload.do")
+	public @ResponseBody Map<String, Integer> profilePicUpload(HttpSession session,MultipartHttpServletRequest mtf) throws UnsupportedEncodingException{
+		MultipartFile file = mtf.getFile("file");
+		boolean isc = file.isEmpty();
+		
+		Member_Dto member_dto = (Member_Dto) session.getAttribute("login");
+		
+		System.out.println(member_dto.getMember_no());
+		if(isc ==true) {
+			
+			member_dto.setMember_profile("resources/image/profile-default.jpg");
+			
+		}else {
+			
+			String oriName = file.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			String filePath = mtf.getSession().getServletContext().getRealPath("/");
+			
+			InputStream inputStream =null;
+			OutputStream outputStream = null;
+			
+			System.out.println(oriName);
+			System.out.println(ext);
+			System.out.println(filePath);
+			
+
+			try {
+				inputStream = file.getInputStream();
+				String path = mtf.getSession().getServletContext().getRealPath("/resources/profile_img");
+			
+				System.out.println("업로드될 실제 경로 : " + path);
+				
+				File storage = new File(path);
+				if(!storage.exists()) {
+					storage.mkdir();
+				}
+				
+				File newFile = new File(path +"/" + oriName);
+				if(!newFile.exists()) {
+					newFile.createNewFile();
+				}
+				
+				outputStream = new FileOutputStream(newFile);
+				
+				int read = 0;
+				byte[] b = new byte[(int)file.getSize()];
+				
+				while((read=inputStream.read(b))!= -1) {
+					outputStream.write(b,0,read);
+					
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					inputStream.close();
+					outputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			member_dto.setMember_profile("resources/profile_img/"+ oriName);
+			
+		}
+		
+		int result = member_biz.uploadProfile(member_dto);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("result", result);
+		
+		return map;
+	}
+	
 }
+	
+	
+	
+				
+		

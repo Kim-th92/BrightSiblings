@@ -1,3 +1,4 @@
+<%@page import="org.springframework.web.util.WebUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,6 +16,10 @@
 		<div id="mypage-photo">
 			<div id ="mypage-profileimg">
 				<img src="${login.member_profile}"/>
+				<div>
+				<form method="post" id="uploadprofilepic" enctype="mulipart/form-data">
+				<input type="file" name="file"  id="profile-file"  accept="image/gif,image/jpg,image/jpeg,image/png" style="display:none"/></form>
+				<button id="profile-pic-add" title="사진편집" onclick="document.getElementById('profile-file').click();"><i class="fas fa-camera"></i></button></div>
 			</div>
 			<div>
 				<h1>${login.member_name }</h1>
@@ -32,5 +37,34 @@
 	</div>
 	</div>
 </div>
+<script>
+
+
+$('#profile-file').change(function(){
+	
+	var form = $('#uploadprofilepic')[0];
+	console.log(form);
+	var formData = new FormData(form);
+	console.log(formData);
+	$.ajax({
+		url : "profilePicUpload.do"
+			, type : "POST"
+		        , processData : false
+		        , contentType : false
+		        , data : formData
+		        , success:function(msg) {
+		        	console.log(msg);
+		        	alert("사진 수정 완료 !");
+		        	location.reload();
+		        },error:function(err){
+		        	console.log(err)
+		        }
+	});
+})
+
+
+
+</script>
+
 </body>
 </html>

@@ -46,6 +46,11 @@ public class Member_BizImpl implements Member_Biz {
 
 		return dao.deleteMember(member_no);
 	}
+
+	@Override
+	public int uploadProfile(Member_Dto dto) {
+		return dao.uploadProfile(dto);
+	}
 	
 
 }

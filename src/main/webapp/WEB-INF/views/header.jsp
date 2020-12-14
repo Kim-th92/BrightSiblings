@@ -9,12 +9,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DABOM, 다이어트의 봄 </title>
-<!-- 제이쿼리 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- 파비콘-->
 <link rel="shortcut icon" href="resources/image/cherry-blossom.png">
 <link rel="stylesheet" href="resources/css/header.css"/>
+<title>DABOM, 다이어트의 봄 </title>
+<!-- 제이쿼리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <!-- 아이콘 -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
   />
@@ -45,11 +46,11 @@
                  <li>  <a class="tooltip" data-tooltip="Donation" id="btn_donation"><i class="fas fa-hand-holding-usd"></i></a></li>
                 
             </ul>
-            <ul id="hide">
+            <ul id="hide" class="hide">
                 		<li><a href="logout.do" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
                 		<li><a onclick="deletemember();" class="hidecontent"><i class="fas fa-user-minus"></i>회원탈퇴</a></li>
            	</ul>
-           <div id="msg-hide"></div>
+           <div id="msg-hide" class=""></div>
            <div id="search-hide" class="search-hide">
   			
            </div>
@@ -66,22 +67,21 @@
 			$("#search-hide").html('<p>검색어를 입력해 주세요</p>');
 		}else{
 
-			var arr =[];
-			var searchlist	='';
+			
 			$.ajax({
 				url: "search.do?keyword="+keyword,
 				type:"GET",
 				success:function(data){
 					if(data.check == "OK"){
-						arr = data.searchlist;
+						var arr = data.searchlist;
 						console.log(arr);
-						
+						var searchlist	='';
 						for(var i = 0; i < arr.length ; i++){
-							console.log(arr[i].member_no);
-							searchlist = "<p class='search-res'><img class='search-img'  style='width:40px;height:40px;border-radius:50% 50%;' src='"+arr[i].member_profile+"' alt='프로필사진'/><a class='search-a' href='friendpage.do?member_no=?'"+arr[i].member_no+"><span>"+arr[i].member_name+"<i class='fas fa-arrow-alt-circle-right'></i></span></a><p>";
-							$("#search-div").html(searchlist);
+							searchlist += "<p class='search-res'><img class='search-img'  style='width:40px;height:40px;border-radius:50% 50%;' src='"+arr[i].member_profile+"' alt='프로필사진'/><a class='search-a' href="+"'friendpage.do?member_no="+arr[i].member_no+"'><span>"+arr[i].member_name+"<i class='fas fa-arrow-alt-circle-right'></i></span></a><p>";
+							
 						}
-					
+						console.log(searchlist);
+						$("#search-hide").html(searchlist);
 					}else{
 						 var searchlist = "<p>검색하신 조건으로 조회된 결과가 없습니다.</p>"
 							 $("#search-hide").html(searchlist);
@@ -104,11 +104,33 @@ $("#search_btn").click(function(){
 });
  $(document).click(function(e){ 
 		if(e.target.className =="search-hide"){return false}
-		$(".search-hide").stop().slideUp(500);
+	  		$(".search-hide").stop().slideUp(500);
+			
+});
+
+ $("#btn_profile").click(function(){
+		$("#hide").stop().slideDown(500);
+	return false; //중요
+});
+$(document).click(function(e){ 
+		if(e.target.className =="hide"){return false}
+	  		$("#hide").stop().slideUp(500);
+			
 });
 
 
-	var hoverbtn = document.getElementById("btn_profile");
+$("#btn_msg").click(function(){
+	$("#msg-hide").stop().slideDown(500);
+return false; //중요
+});
+$(document).click(function(e){ 
+	if(e.target.className =="msg-hide"){return false}
+  		$("#msg-hide").stop().slideUp(500);
+		
+});
+
+
+/* 	var hoverbtn = document.getElementById("btn_profile");
 	hoverbtn.addEventListener("click",function(){
 		var hideul = document.getElementById("hide");
 
@@ -117,20 +139,12 @@ $("#search_btn").click(function(){
 		}else{
 			hideul.style.display='none'
 	} 
-	});
+	}); */
 	
-	
-	var messagebtn = document.getElementById("btn_msg");
-		messagebtn.addEventListener("click",function(){
-			var hidemsg = document.getElementById("msg-hide");
-			if(hidemsg.style.display=='none'){
-				hidemsg.style.display='block';
-			}else{
-				hidemsg.style.display='none'
-		} 
+
 		 
 	
-	});
+	
 	
 	$( document ).ready( function() {
         var jbOffset = $( 'header' ).offset();

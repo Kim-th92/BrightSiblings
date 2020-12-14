@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -127,14 +129,22 @@ public class Member_Controller {
 		dto.setMember_pw(passwordEncoder.encode(dto.getMember_pw()));
 
 		if (biz.register(dto) > 0)
-			return "redirect:login.do";
+			return "redirect:login.do"; 
 		return "redirect:register.do";
 	}
 
 	//로그아웃 
 	@RequestMapping("logout.do")
-	public String logout(HttpServletRequest req) {
+	public String logout(HttpServletRequest req,HttpServletResponse resp) {
 		req.getSession().invalidate();
+		 Cookie[] cookies = req.getCookies();
+		    if (cookies != null)
+		        for (Cookie cookie : cookies) {
+		            cookie.setValue("");
+		            cookie.setPath("/");
+		            cookie.setMaxAge(0);
+		            resp.addCookie(cookie);
+		        }
 		req.getSession(true);
 		
 		return "login";

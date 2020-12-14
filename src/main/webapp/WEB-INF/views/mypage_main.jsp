@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="header.jsp" %>
-<%@include file="mypage_middle.jsp" %>
+<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="mypage_middle.jsp"></jsp:include>
 게시판
 
 </body>

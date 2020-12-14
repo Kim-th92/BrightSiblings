@@ -10,4 +10,6 @@ public class Friends_Dto {
 
 	private int member_no;
 	private int friend_no;
+	private int status_no;
+	private int action_member;
 }

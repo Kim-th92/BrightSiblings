@@ -15,6 +15,7 @@ create table member(
 	member_zipcode varchar2(20),
 	member_firstaddr varchar2(200),
 	member_secondaddr varchar2(200),
+	
 	member_profile varchar2(1000) default '',
 	member_regdate DATE not null,
 	member_role varchar2(8),
@@ -35,5 +36,8 @@ insert into member values(memberseq.nextval,'admin','admin1234','관리자','adm
 update member set member_role = 'admin' where member_id ='admin';
 select member_profile from member;
 select * from member;
+
+update member set member_delflag ='N' where member_no = 1;
+update member set member_profile = 'resources/image/profile-default.jpg' ;
 
 delete from member where member_id ='admin';

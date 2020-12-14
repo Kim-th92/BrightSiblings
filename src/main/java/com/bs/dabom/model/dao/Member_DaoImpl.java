@@ -76,4 +76,12 @@ public class Member_DaoImpl implements Member_Dao {
 		return res;
 	}
 
+	@Override
+	public int uploadProfile(Member_Dto dto) {
+		int res = 0;
+		res = sqlSession.update(NAMESPACE+"uploadProfile",dto);
+		
+		return res;
+	}
+
 }

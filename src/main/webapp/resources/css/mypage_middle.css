@@ -12,9 +12,6 @@
 	
 }
 
-
-
-
 #mypage-navbar ul {
 	margin: 0;
 	padding: 8px 15px;
@@ -44,8 +41,22 @@ div#mypage-navbar ul li a {
     border-radius: 5% 5%;
 }
 
+
 #mypage-profileimg img{
 	width:200px;
 	height:200px;
 	border-radius : 50% 50%;
 }
+#mypage-profileimg button{
+	height: 40px;
+	width: 40px;
+	font-size: 1rem;
+	color: #444;
+	border: none;
+	outline: none;
+	border-radius: 50%;
+	cursor: pointer;
+	transform : translate(70px -40px);
+}
+
+

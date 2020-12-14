@@ -15,4 +15,6 @@ public interface Member_Biz {
 	public int snsRegister(Member_Dto dto);
 
 	public int deleteMember(int member_no);
+	
+	public int uploadProfile(Member_Dto dto);
 }

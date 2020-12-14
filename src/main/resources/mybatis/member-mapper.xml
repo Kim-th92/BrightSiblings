@@ -20,20 +20,24 @@
 		member_firstaddr,member_secondaddr,member_regdate,member_profile,member_role,member_delflag) VALUES
 		(memberseq.nextval, #{member_id}, #{member_pw}, #{member_name}, #{member_email}, #{member_phone},#{member_birthday},#{member_zipcode},
 		#{member_firstaddr},#{member_secondaddr},SYSDATE,
-		'https://uwosh.edu/deanofstudents/wp-content/uploads/sites/156/2019/02/profile-default.jpg'
+		'resources/image/profile-default.jpg'
 		,'member','N') ]]>
 	</insert>
 	
 	<insert id="snsloginregister" parameterType="memberDto">
 	 <![CDATA[
 		INSERT INTO MEMBER (member_no,member_id,member_name,member_email,member_regdate,member_profile,member_role,member_delflag,sns)
-		values (memberseq.nextval,#{member_id},#{member_name},#{member_id},SYSDATE,'https://uwosh.edu/deanofstudents/wp-content/uploads/sites/156/2019/02/profile-default.jpg'
+		values (memberseq.nextval,#{member_id},#{member_name},#{member_id},SYSDATE,'resources/image/profile-default.jpg'
 		,'member','N',#{sns})
 	]]>
 	</insert>
 	
 	<update id ="updateProfile" parameterType="memberDto">
 	
+	</update>
+	
+	<update id="uploadProfile" parameterType="memberDto">
+		UPDATE MEMBER SET MEMBER_PROFILE ='${member_profile}' WHERE MEMBER_NO = #{member_no}
 	</update>
 	
 	<update id="deletemember" parameterType="int">

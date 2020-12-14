@@ -9,11 +9,12 @@
 
 </head>
 
-
-<link rel="stylesheet"   href="resources/css/mypage_friends.css">
-<body>
 <%@include file="header.jsp" %>
 <%@include file="mypage_middle.jsp" %>
+<link rel="stylesheet"   href="resources/css/mypage_friends.css">
+
+<body>
+
 
 <div id= "wrapper">
 	<div id="friendslist">
@@ -30,7 +31,7 @@
 			<c:otherwise>
 				<c:forEach items="${list}" var="dto">
 					<li>
-						<img src="${dto.member_profile}"/> <a href=""> ${dto.member_name}</a> 
+						<img id ="profile-img" src="${dto.member_profile}"/> <a href=""> ${dto.member_name}</a> 
 						<button><i class="fas fa-user-plus"></i></button>
 						<button><i class="fab fa-facebook-messenger"></i></button>
 						<button> <i class="fas fa-user-minus"></i></button>

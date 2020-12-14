@@ -1,5 +1,7 @@
 package com.bs.dabom.model.dto;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
@@ -98,6 +100,11 @@ public class Member_Dto {
 		return member_profile;
 	}
 	public void setMember_profile(String member_profile) {
+		try {
+			this.member_profile = URLEncoder.encode(member_profile,"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		this.member_profile = member_profile;
 	}
 	public Date getMember_regdate() {
