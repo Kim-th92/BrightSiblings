@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+.background{
+	position: fixed; left: 0; top: 0; width: 100%; height: 100%;
+	background: rgba(0,0,0,0.5);
+	z-index: 99;
+	display: none;
+}
+.popup{
+	position:fixed;
+	left: 50%;
+	top: 50%;
+	padding-top: 15px;
+	width: 427px;
+	height: 553px;
+	transform:translate(-50%, -50%);
+	box-sizing: border-box;
+	background-color: #FFFFFF;
+	z-index: 100;
+	display: none;
+}
+.popup h2{
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333;
+	text-align: center;
+	border-bottom: 1px solid #E2E2E2;
+	padding-left: 0px;
+	padding-right: 0px;
+	line-height: 100%;
+	padding-bottom: 20px;
+}
+
+.popup_body{
+	padding: 0 35px;
+}
+.logo_pay img{
+	padding-top: 20px;
+	padding-bottom: 5px;
+	width: 67px;
+	height: 27px;
+}
+p{
+	margin: 0;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333333;
+	padding-bottom: 30px;
+}
+form{
+	text-align: left;
+}
+
+tr {
+	width: 100%;
+}
+.pay_ask{
+	font-size: 12px;
+	padding-bottom: 12px;
+}
+.pay_input{
+	padding-bottom: 12px;
+}
+input{
+	border: 0px;
+	border-bottom: 1px solid #E2E2E2;
+	width: 343px;
+}
+input:focus{
+	outline:none;
+}
+input[placeholder] {
+	font-size: 18px;
+	color:#E2E2E2;
+	padding-bottom: 5px;
+}
+input[type="submit"] {
+	border-radius: 5px;
+	padding: 25px 143px;
+	background: #DDDDDD;
+}
+.submit{
+	padding-top: 50px;
+	text-align: center;
+}
+.submit > input[value="입력확인"] {
+	font-size: 18px;
+	font-weight: bold;
+	color: #999999;
+}
+.popup .close{
+	position: absolute;
+	right: 19px;
+	top: 22px;
+}
+.close> img{
+	width: 20px;
+	height: 21px;
+}
+
