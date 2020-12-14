@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "board">
+	
+	
+	<insert id="insert" parameterType="boardDto">
+		INSERT INTO BOARD
+		VALUES(
+				BOARDSEQ.NEXTVAL,
+				#{member_no},
+				#{board_content},
+				'FILE URL',
+				'FILE HASHTAG',
+				0,
+				'Y',
+				SYSDATE,
+				SYSDATE
+		)
+	</insert>
+</mapper>
