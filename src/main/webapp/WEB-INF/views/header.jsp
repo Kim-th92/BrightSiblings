@@ -219,5 +219,7 @@ response.setDateHeader("Expires", 0L);
 
 	</script>
 	<%@include file="insertdonation.jsp" %>
+	
+	<script type="text/javascript" src="resources/js/header.js"></script> <!-- 김태형이 추가함 충돌나면 지우세요! -->
 </body>
 </html>
