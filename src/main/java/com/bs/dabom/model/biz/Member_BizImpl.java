@@ -51,6 +51,11 @@ public class Member_BizImpl implements Member_Biz {
 	public int uploadProfile(Member_Dto dto) {
 		return dao.uploadProfile(dto);
 	}
+
+	@Override
+	public Member_Dto friendDetail(int member_no) {
+		return dao.friendDetail(member_no);
+	}
 	
 
 }

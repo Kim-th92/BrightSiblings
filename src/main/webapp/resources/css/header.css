@@ -204,8 +204,19 @@ ul#hide li:hover .hidecontent{
     border: pink 2px solid;
     overflow: auto;
     display:none;
+    padding:20px 20px;
 
 }
+#search-hide span{
+	border-bottom: 1px solid black;
+	text-decoration: none;
+}
+
+#search-hide a {
+	text-decoration: none;
+    color: black;
+}
+
 
 .headerFixed{
 		position:fixed;
@@ -214,3 +225,14 @@ ul#hide li:hover .hidecontent{
 	
 }
 
+
+.badge{
+	    position: absolute;
+    top: -7px;
+    right: -3px;
+    padding: 3px 6px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+	
+}

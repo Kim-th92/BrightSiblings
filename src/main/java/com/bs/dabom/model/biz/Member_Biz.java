@@ -7,6 +7,7 @@ public interface Member_Biz {
 
 	public Member_Dto login(Member_Dto dto);
 
+	public Member_Dto friendDetail(int member_no);
 
 	public int idChk(String id);
 	

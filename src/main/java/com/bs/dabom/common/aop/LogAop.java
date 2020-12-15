@@ -23,13 +23,13 @@ public class LogAop {
 	public void after(JoinPoint join) {
 		Logger logger = LoggerFactory.getLogger(join.getTarget()+""); //대상 객체  (cc)
 		logger.info("---------------------AOP end-----------------");
-		
+		 
 	}
 	
 	public void afterThrowing(JoinPoint join) {
 		Logger logger = LoggerFactory.getLogger(join.getTarget()+""); //대상 객체  (cc)
 		logger.info("---------------------ERROR Log");
-		logger.info("* Error : " +join.getArgs());
+		logger.info("* Error : " +join. getArgs());
 		logger.info("* Error : " +join);
 	}
 }

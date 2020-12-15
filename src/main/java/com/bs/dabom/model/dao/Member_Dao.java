@@ -18,4 +18,6 @@ public interface Member_Dao {
 	public int deleteMember(int member_no);
 
 	public int uploadProfile(Member_Dto dto);
+
+	public Member_Dto friendDetail(int member_no);
 }

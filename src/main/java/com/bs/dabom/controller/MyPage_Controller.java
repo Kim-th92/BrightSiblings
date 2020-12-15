@@ -24,18 +24,14 @@ import com.bs.dabom.model.dto.Member_Dto;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.util.WebUtils;
 @Controller
 public class MyPage_Controller {
 
@@ -77,12 +73,15 @@ public class MyPage_Controller {
 	}
 	
 	@RequestMapping("search.do")
-	public @ResponseBody Map<String,Object> search(@RequestParam("keyword") String keyword) {
-		System.out.println("keyword: " + keyword);
+	public @ResponseBody Map<String,Object> search(@RequestParam("keyword") String keyword,HttpSession session) {
+
+
+		Member_Dto dto= (Member_Dto)session.getAttribute("login");
+		int member_no  = dto.getMember_no();
+		
 		List<Member_Dto> list = null;
-				list = biz.searchFriends(keyword);
+				list = biz.searchFriends(keyword,member_no);
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(list.toString());
 		
 		if(list.isEmpty()) {
 			map.put("check", "NO"); 

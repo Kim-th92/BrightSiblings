@@ -22,9 +22,11 @@
 		m.member_no in (select friend_no from friends where member_no =#{member_no})
 	</select>
 	
-	<select id ="searchlist" resultType="memberDto" parameterType="String">
+	<select id ="searchlist" resultType="memberDto" parameterType="map">
+		 <![CDATA[
 		SELECT * FROM MEMBER
-		WHERE MEMBER_NAME LIKE '%'||#{member_name}||'%' 
+		WHERE MEMBER_NAME LIKE '%'||#{keyword}||'%' and member_no  <> #{member_no}
+		]]>
 	</select>
 	
 	
