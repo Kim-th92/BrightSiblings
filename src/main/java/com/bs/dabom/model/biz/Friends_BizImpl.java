@@ -31,8 +31,8 @@ public class Friends_BizImpl implements Friends_Biz {
 	}
 
 	@Override
-	public List<Member_Dto> searchFriends(String name) {
-		return dao.searchFriends(name);
+	public List<Member_Dto> searchFriends(String name,int member_no) {
+		return dao.searchFriends(name,member_no);
 	}
 
 	

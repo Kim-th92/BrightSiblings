@@ -24,6 +24,7 @@ response.setDateHeader("Expires", 0L);
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 </head>
 <body>
+	
 	<header>
 		<nav>
 			<ul>
@@ -60,7 +61,8 @@ response.setDateHeader("Expires", 0L);
 				<li><a class="tooltip" data-tooltip="Message" id="btn_msg"><i
 						class="fab fa-facebook-messenger"></i></a></li>
 				<li><a class="tooltip" data-tooltip="Notification"
-					id="btn_bell"> <i class="fas fa-bell"></i></a></li>
+					id="btn_bell"> <i class="fas fa-bell"></i> <span
+						class="noti-badge "></span></a></li>
 				<li><a class="tooltip" data-tooltip="Settings" id="btn_profile"><i
 						class="fas fa-cog"></i></a></li>
 				<li><a class="tooltip" data-tooltip="Donation"
@@ -182,9 +184,7 @@ response.setDateHeader("Expires", 0L);
 		});
 		function deletemember() {
 			var checkdelete = confirm("정말로 삭제하시겠습니까?");
-			var member_no = $
-			{
-				login.member_no
+			var member_no = ${login.member_no
 			}
 			;
 			var loginValue = {
@@ -213,11 +213,8 @@ response.setDateHeader("Expires", 0L);
 				});
 			}
 		}
-
-
-		
-
 	</script>
-	<%@include file="insertdonation.jsp" %>
+	<%@include file="insertdonation.jsp"%>
+	<script src="resources/js/header.js"></script>
 </body>
 </html>

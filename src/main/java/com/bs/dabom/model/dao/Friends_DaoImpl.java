@@ -1,7 +1,9 @@
 package com.bs.dabom.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +43,14 @@ public class Friends_DaoImpl implements Friends_Dao {
 	}
 
 	@Override
-	public List<Member_Dto> searchFriends(String name) {
+	public List<Member_Dto> searchFriends(String name,int member_no) {
 		List<Member_Dto> list =new ArrayList<Member_Dto>();
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		map.put("keyword",name);
+		map.put("member_no",member_no);
 		try {
-			list = sqlSession.selectList(NAMESPACE+"searchlist",name);
+			list = sqlSession.selectList(NAMESPACE+"searchlist",map);
 		} catch (Exception e) {
 			System.out.println("error:searchFriends");
 			e.printStackTrace();

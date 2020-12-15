@@ -31,7 +31,7 @@
 
 	<!-- websocket -->
 		<!-- websocket handler -->
-	<!-- <beans:bean id="echoHandler" class="" />
+	 <beans:bean id="echoHandler" class="com.bs.dabom.ws.WebsocketHandler" />
  
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo" />
@@ -41,7 +41,7 @@
  
 	      <websocket:sockjs/>
 	 </websocket:handlers>
- -->
+
 
 	<!-- 컨트롤러로 요청이 가기전에 인터셉트 -->
 
