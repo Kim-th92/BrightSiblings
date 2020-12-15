@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="donation">
+
+	<select id="selectList" resultType="donationDto">
+		select donation_no, member_name, donation, donation_date
+		from donation a, member b where a.member_no = b.member_no
+		order by donation_no DESC
+	</select>
+	
+	<select id="selectOne" resultType="donationDto">
+		select donation, donation_date
+		from donation
+		where member_no = #{member_no} 
+		order by donation_no DESC
+	</select>
+	
+	<insert id="insert" parameterType="donationDto">
+		insert into donation
+		values(donationseq.nextval, #{member_no}, #{donation}, SYSDATE)
+	</insert>
+</mapper>
