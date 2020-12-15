@@ -35,6 +35,11 @@ public class Friends_BizImpl implements Friends_Biz {
 		return dao.searchFriends(name,member_no);
 	}
 
+	@Override
+	public List<Member_Dto> friendsRequest(int member_no) {
+		return dao.friendRequest( member_no);
+	}
+
 	
 
 

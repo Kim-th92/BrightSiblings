@@ -28,52 +28,31 @@ response.setDateHeader("Expires", 0L);
 	<header>
 		<nav>
 			<ul>
-				<li><a href="mainpage.do" id="dabom"><img
-						style="width: 30px; height: 30px;" alt="로고"
-						src="resources/image/cherry-blossom.png" /> </a></li>
-				<li id="search_wrapper"><input type="text" class="search-input"
-					placeholder="검색" />
-					<button id="search_btn" onclick="search();" class="tooltip-">
-						<i class="fas fa-search"></i>
-					</button></li>
+				 <li><a href="mainpage.do" id="dabom"><img style="width:30px;height:30px;" alt="로고" src="resources/image/cherry-blossom.png"/> </a> </li>
+                <li id="search_wrapper">  
+                <input type="text" class="search-input" placeholder="검색" />
+                <button id="search_btn" onclick="search();" class="tooltip-" > <i class="fas fa-search"></i> </button> 
+                </li>
 
 				<li id="space2"></li>
 
-				<li><a class="tooltip center-icon" data-tooltip="Home"
-					href="mainpage.do" id="home"> <i class="fas fa-home"></i>
-				</a></li>
-				<li><a class="tooltip center-icon" data-tooltip="Friends"
-					href="#" id="group"> <i class="fas fa-user-friends"></i>
-				</a></li>
-				<li><a class="tooltip center-icon" data-tooltip="Calories"
-					href="#" id="tv"> <i class="fas fa-utensils"></i>
-				</a></li>
-				<li><a class="tooltip center-icon" data-tooltip="NewsPaper"
-					href="#" id="friend"> <i class="fas fa-newspaper"></i>
-				</a></li>
+		        <li> <a class="tooltip center-icon" data-tooltip="Home" href="mainpage.do" id="home"> <i class="fas fa-home"></i> </a> </li>
+                <li> <a class="tooltip center-icon" data-tooltip="Friends" href="friendsmainpage.do?member_no=${login.member_no}" id="group"> <i class="fas fa-user-friends"></i> </a></li>
+                <li> <a class="tooltip center-icon" data-tooltip="Calories" href="#" id="tv"> <i class="fas fa-utensils"></i> </a> </li>
+                <li> <a class="tooltip center-icon" data-tooltip="NewsPaper" href="#" id="friend"> <i class="fas fa-newspaper"></i> </a> </li>
 
 				<li id="space1"></li>
 				<li><a>${login.member_name }님 반갑습니다.</a></li>
-				<li><a href="mypage_main.do" class="tooltip"
-					data-tooltip="MYPAGE" id="btn_plus"><img
-						style="width: 40px; height: 40px;" class="profileimg" alt="프로필사진"
-						src="${login.member_profile }"></a></li>
-				<li><a class="tooltip" data-tooltip="Message" id="btn_msg"><i
-						class="fab fa-facebook-messenger"></i></a></li>
-				<li><a class="tooltip" data-tooltip="Notification"
-					id="btn_bell"> <i class="fas fa-bell"></i> <span
-						class="noti-badge "></span></a></li>
-				<li><a class="tooltip" data-tooltip="Settings" id="btn_profile"><i
-						class="fas fa-cog"></i></a></li>
-				<li><a class="tooltip" data-tooltip="Donation"
-					id="btn_donation"><i class="fas fa-hand-holding-usd"></i></a></li>
+				<li><a href="mypage_main.do" class="tooltip" data-tooltip="MYPAGE" id="btn_plus"><img 	style="width: 40px; height: 40px;" class="profileimg" alt="프로필사진"  src="${login.member_profile }"></a></li>
+				<li><a class="tooltip" data-tooltip="Message" id="btn_msg"><i class="fab fa-facebook-messenger"></i></a></li> 		
+				<li><a class="tooltip" data-tooltip="Notification"  id="btn_bell"> <i class="fas fa-bell"></i> <span 	class="noti-badge "></span></a></li>
+				<li><a class="tooltip" data-tooltip="Settings" id="btn_profile"><i class="fas fa-cog"></i></a></li> 
+				<li><a class="tooltip" data-tooltip="Donation" id="btn_donation"><i class="fas fa-hand-holding-usd"></i></a></li>
 
 			</ul>
 			<ul id="hide" class="hide">
-				<li><a href="logout.do" class="hidecontent"><i
-						class="fas fa-sign-out-alt"></i>로그아웃</a></li>
-				<li><a onclick="deletemember();" class="hidecontent"><i
-						class="fas fa-user-minus"></i>회원탈퇴</a></li>
+				<li><a href="logout.do" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+				<li><a onclick="deletemember();" class="hidecontent"><i	class="fas fa-user-minus"></i>회원탈퇴</a></li>
 			</ul>
 			<div id="msg-hide" class=""></div>
 			<div id="search-hide" class="search-hide"></div>

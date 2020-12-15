@@ -14,12 +14,12 @@
   	</resultMap>
 
 
-	<select id="friendslist" resultMap="friendjoin" parameterType="int">
+	<select id="friendslist"  resultMap="friendjoin" parameterType="int">
 		select m.member_name, m.member_no,m.member_profile
-		from member m left join friends f
-		on m.member_no = f.member_no
+		from member m join friends f
+		on m.member_no = f.friend_no
 		where
-		m.member_no in (select friend_no from friends where member_no =#{member_no})
+		m.member_no in (select friend_no from friends where member_no =#{member_no}) and f.status =1
 	</select>
 	
 	<select id ="searchlist" resultType="memberDto" parameterType="map">
@@ -28,6 +28,15 @@
 		WHERE MEMBER_NAME LIKE '%'||#{keyword}||'%' and member_no  <> #{member_no}
 		]]>
 	</select>
+	
+	<select id= "friendsrequest" resultMap="friendjoin"  >
+		select m.member_name, m.member_no,m.member_profile
+		from member m  join friends f
+		on m.member_no = f.friend_no
+		where
+		m.member_no in (select friend_no from friends where member_no =#{member_no}) and  f.status =0
+	</select>
+	
 	
 	
 </mapper>

@@ -24,10 +24,13 @@ public class FriendPage_Controller {
 	@Autowired
 	private Friends_Biz friend_biz;
 	
-	@RequestMapping("friends.do")
-	public String friendMainPage() {
+	@RequestMapping("friendsmainpage.do")
+	public String friendMainPage(@RequestParam("member_no") int member_no,Model model) {
+		List<Member_Dto> list = friend_biz.friendsRequest(member_no);
+		model.addAttribute("requestlist", list);
+		System.out.println(list.toString());
 		
-		return null;
+		return "friends_mainpage";
 	}
 	
 	@RequestMapping("friendDetail.do")

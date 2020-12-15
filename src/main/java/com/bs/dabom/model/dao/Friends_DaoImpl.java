@@ -58,4 +58,14 @@ public class Friends_DaoImpl implements Friends_Dao {
 		return list;
 	}
 
+	@Override
+	public List<Member_Dto> friendRequest(int member_no) {
+			List<Member_Dto> list = new ArrayList<Member_Dto>();
+			
+			list = sqlSession.selectList(NAMESPACE+"friendsrequest",member_no);
+			System.out.println("리스트느느느ㅡ느느:" +list);
+			return list;
+		
+	}
+
 }

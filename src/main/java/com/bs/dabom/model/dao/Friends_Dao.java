@@ -15,4 +15,6 @@ public interface Friends_Dao {
 	public int deleteFriends(int memberno,int friendsno);
 	
 	public List<Member_Dto> searchFriends(String name,int member_no);
+
+	public List<Member_Dto> friendRequest(int member_no);
 }
