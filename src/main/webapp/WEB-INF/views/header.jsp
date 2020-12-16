@@ -37,9 +37,9 @@ response.setDateHeader("Expires", 0L);
 				<li id="space2"></li>
 
 		        <li> <a class="tooltip center-icon" data-tooltip="Home" href="mainpage.do" id="home"> <i class="fas fa-home"></i> </a> </li>
-                <li> <a class="tooltip center-icon" data-tooltip="Friends" href="friendsmainpage.do?member_no=${login.member_no}" id="group"> <i class="fas fa-user-friends"></i> </a></li>
-                <li> <a class="tooltip center-icon" data-tooltip="Calories" href="#" id="tv"> <i class="fas fa-utensils"></i> </a> </li>
-                <li> <a class="tooltip center-icon" data-tooltip="NewsPaper" href="#" id="friend"> <i class="fas fa-newspaper"></i> </a> </li>
+		        <li> <a class="tooltip center-icon" data-tooltip="Friends" href="friendsmainpage.do?member_no=${login.member_no}" id="group"> <i class="fas fa-user-friends"></i> </a></li>
+                <li> <a class="tooltip center-icon" data-tooltip="Calories" href="#" id="calories"> <i class="fas fa-utensils"></i> </a> </li>
+                <li> <a class="tooltip center-icon" data-tooltip="Youtube" href="#" id="youtube"> <i class="fab fa-youtube"></i> </a> </li>
 
 				<li id="space1"></li>
 				<li><a>${login.member_name }님 반갑습니다.</a></li>
@@ -58,7 +58,6 @@ response.setDateHeader("Expires", 0L);
 			<div id="search-hide" class="search-hide"></div>
 		</nav>
 	</header>
-
 
 	<script type="text/javascript">
 		function search() {
@@ -80,7 +79,7 @@ response.setDateHeader("Expires", 0L);
 										searchlist += "<p class='search-res'><img class='search-img'  style='width:40px;height:40px;border-radius:50% 50%;' src='"
 												+ arr[i].member_profile
 												+ "' alt='프로필사진'/><a class='search-a' href="
-												+ "'friendpage.do?member_no="
+												+ "'friendDetail.do?member_no="
 												+ arr[i].member_no
 												+ "'><span>"
 												+ arr[i].member_name
@@ -193,7 +192,7 @@ response.setDateHeader("Expires", 0L);
 			}
 		}
 	</script>
-	<%@include file="insertdonation.jsp"%>
+	<%@include file="insertdonation.jsp"%>	
 	<script src="resources/js/header.js"></script>
 </body>
 </html>

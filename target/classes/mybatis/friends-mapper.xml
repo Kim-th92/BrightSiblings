@@ -11,6 +11,8 @@
   	<resultMap type="friendsDto" id="friendsDto">
   		<result column = "MEMBER_NO" property="member_no"/>
 		<result column = "FRIEND_NO" property="friend_no"/>
+		<result column = "STATUS" property="status"/>
+		<result column = "ACTION_MEMBER" property="action_member"/>
   	</resultMap>
 
 
@@ -37,6 +39,12 @@
 		m.member_no in (select friend_no from friends where member_no =#{member_no}) and  f.status =0
 	</select>
 	
+	<update id="friendAccepted" >
+	update friends set status =1 where member_no =#{member_no} and friend_no = #{friend_no}
+	</update>
 	
+	<update id="friendDennied" >
+	update friends set status =2 where member_no =#{member_no} and friend_no = #{friend_no}
+	</update>
 	
 </mapper>

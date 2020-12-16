@@ -1,55 +1,7 @@
-
-    var wsUri = "ws://localhost:8181/ex/count";
-
-    function send_message() {
-
-        websocket = new WebSocket(wsUri);
-        websocket.onopen = function(evt) {
-
-            onOpen(evt);
-
-        };
-
-        websocket.onmessage = function(evt) {
-
-            onMessage(evt);
-
-        };
-
-        websocket.onerror = function(evt) {
-
-            onError(evt);
-
-        };
-
-    }
+    
 
 
-    function onOpen(evt) 
-
-    {
-
-       websocket.send("${nick}");
-
-    }
-
-    function onMessage(evt) {
-
-    		$('#count').append(evt.data);
-
-    }
-
-    function onError(evt) {
-
-    }
-
-    $(document).ready(function(){
-
-    		send_message();
-
-    });
-
-//--------
+   
 
 $("#search_btn").click(function(){
 		$(".search-hide").stop().slideDown(500);

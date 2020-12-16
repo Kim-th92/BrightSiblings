@@ -6,6 +6,9 @@
 	--btn-width-100: 100px;
 }
 
+header {
+	z-index:100;
+}
 body {
 	margin: 0;
 	padding: 0;
@@ -95,7 +98,7 @@ nav ul li #btn_plus, nav ul li #btn_msg, nav ul li #btn_bell, nav ul li #btn_pro
 	cursor: pointer;
 }
 
-nav ul li:hover #home, nav ul li:hover #group, nav ul li:hover #tv, nav ul li:hover #friend
+nav ul li:hover #home, nav ul li:hover #group, nav ul li:hover #calories, nav ul li:hover #youtube
 	{
 	background: rgba(0, 0, 0, 0.138);
 	color: #ea97ad;

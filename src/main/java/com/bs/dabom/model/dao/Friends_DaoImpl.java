@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bs.dabom.model.dto.Friends_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
 
 @Repository
@@ -59,13 +60,29 @@ public class Friends_DaoImpl implements Friends_Dao {
 	}
 
 	@Override
-	public List<Member_Dto> friendRequest(int member_no) {
+	public List<Member_Dto> friendRequestList(int member_no) {
 			List<Member_Dto> list = new ArrayList<Member_Dto>();
 			
 			list = sqlSession.selectList(NAMESPACE+"friendsrequest",member_no);
 			System.out.println("리스트느느느ㅡ느느:" +list);
 			return list;
 		
+	}
+
+	@Override
+	public int friendAccepted(Friends_Dto dto) {
+		int res = 0;
+	    res  = sqlSession.update(NAMESPACE+"friendAccepted",dto);
+		
+		return res;
+	}
+
+	@Override
+	public int friendDennied(Friends_Dto dto) {
+		int res = 0;
+	    res  = sqlSession.update(NAMESPACE+"friendDennied",dto);
+		
+		return res;
 	}
 
 }

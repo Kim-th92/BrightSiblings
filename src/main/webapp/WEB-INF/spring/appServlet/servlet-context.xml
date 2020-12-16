@@ -29,12 +29,12 @@
 	<context:component-scan
 		base-package="com.bs.dabom" />
 
-	<!-- websocket -->
+ 
 		<!-- websocket handler -->
-	 <beans:bean id="echoHandler" class="com.bs.dabom.ws.WebsocketHandler" />
+	<beans:bean id="echoHandler" class="com.bs.dabom.ws.WebsocketHandler" />
  
 	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/echo" />
+		<websocket:mapping handler="echoHandler" path="/chat.do" />
 		<websocket:handshake-interceptors>
 	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 	      </websocket:handshake-interceptors>

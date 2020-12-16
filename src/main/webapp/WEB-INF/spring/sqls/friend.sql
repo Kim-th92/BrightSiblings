@@ -17,23 +17,24 @@ create table friends(
 --action_member는 친추한 사람 --
 
 
-insert into friends values(1,5, 1,5);
-insert into friends values(1,10,1,10);
-insert into friends values(1,6,1,6);
-insert into friends values(1,4);
-insert into friends values(1,5);
-insert into friends values(1,6);
-insert into friends values(1,7);
+insert into friends values(1,5, 0,5);
+insert into friends values(1,10,0,10);
+insert into friends values(1,7,1,7);
 
 
+select m.member_name, m.member_no,m.member_profile
+		from member m  left join friends f
+		on m.member_no = f.member_no
+		where
+		m.member_no in (select friend_no from friends where member_no =1) and status =1;
 
-select m.member_name, m.member_no
-from member m full outer join friends f
-on m.member_no = f.member_no
+select m.member_name,m.member_profile
+from member m join friends f
+on m.member_no = f.friend_no
 where
-m.member_no in(select friend_no from friends where member_no =1);
+m.member_no in(select friend_no from friends where member_no =1) and status =0;
 
-
+update friends set status =1 where member_no =1 and friend_no = 5;
 select * from friends;
 
 select friend_no from friends where member_no =1;

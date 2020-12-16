@@ -38,7 +38,7 @@
 					<button onclick="" class="friend"><i class=" fas fa-user-minus"></i>친구차단</button></li>
 					</c:when>
 					<c:otherwise>
-					<li><button onclick="" id ="request-friend"> <i class="fas fa-user-plus"></i>친구추가</button></li>
+					<li><button onclick="friendRequest(${dto.member_no});" id ="request-friend"> <i class="fas fa-user-plus"></i>친구추가</button></li>
 					</c:otherwise>
 				</c:choose>
 
@@ -50,4 +50,26 @@
 
 	<h1>${dto.member_name}의 페이지 입니다.</h1>
 </body>
+
+<script type="text/javascript">
+	function friendRequest(member_no){
+		var friend_no = ${login.member_no}
+		var friendrequest = {
+				member_no : member_no,
+				friend_no : friend_no
+		};
+		$.ajax({
+			url : "friendRequest.do",
+			type:"POST",
+			data:JSON.stringify(friendrequest),
+			contentType : "application/json",
+			success : function(){
+				
+			},error: function(){
+				
+			}
+		});
+		
+	}
+</script>
 </html>
