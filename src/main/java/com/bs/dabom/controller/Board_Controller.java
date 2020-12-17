@@ -131,6 +131,11 @@ public class Board_Controller {
 		int res = biz.delete(board_no);
 		return "redirect:mainpage.do";
 	}
+	
+	@RequestMapping("/youtube.do")
+	public String youtube() {
+		return "youtube";
+	}
 }
 
 
