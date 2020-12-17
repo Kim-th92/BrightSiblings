@@ -8,6 +8,7 @@
 		<typeAlias type="com.bs.dabom.model.dto.Member_Dto" alias = "memberDto"/>
 		<typeAlias type ="com.bs.dabom.model.dto.Friends_Dto" alias ="friendsDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Board_Dto" alias = "boardDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.AddInfo_Dto" alias = "addinfoDto"/>
 	</typeAliases>
 	
 	
@@ -17,8 +18,9 @@
 <!-- mapper -->
 	<mappers>
 		<mapper resource ="/mybatis/member-mapper.xml"/>
-		<mapper resource="/mybatis/friends-mapper.xml"/>
+		<mapper resource ="/mybatis/friends-mapper.xml"/>
 		<mapper resource ="/mybatis/board-mapper.xml"/>
+		<mapper resource ="/mybatis/addinfo-mapper.xml"/>
 	</mappers>
 
 
