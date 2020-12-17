@@ -39,7 +39,7 @@ response.setDateHeader("Expires", 0L);
 		        <li> <a class="tooltip center-icon" data-tooltip="Home" href="mainpage.do" id="home"> <i class="fas fa-home"></i> </a> </li>
 		        <li> <a class="tooltip center-icon" data-tooltip="Friends" href="friendsmainpage.do?member_no=${login.member_no}" id="group"> <i class="fas fa-user-friends"></i> </a></li>
                 <li> <a class="tooltip center-icon" data-tooltip="Calories" href="#" id="calories"> <i class="fas fa-utensils"></i> </a> </li>
-                <li> <a class="tooltip center-icon" data-tooltip="Youtube" href="#" id="youtube"> <i class="fab fa-youtube"></i> </a> </li>
+                <li> <a class="tooltip center-icon" data-tooltip="Youtube" href="youtube.do" id="youtube"> <i class="fab fa-youtube"></i> </a> </li>
 
 				<li id="space1"></li>
 				<li><a>${login.member_name }님 반갑습니다.</a></li>

@@ -58,6 +58,11 @@ public class Board_Controller {
 		model.addAttribute("url", url);
 		return "NewFile";
 	}
+	
+	@RequestMapping("/youtube.do")
+	public String youtube() {
+		return "youtube";
+	}
 }
 
 
