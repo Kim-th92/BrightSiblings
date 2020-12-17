@@ -63,10 +63,14 @@
 			type:"POST",
 			data:JSON.stringify(friendrequest),
 			contentType : "application/json",
-			success : function(){
-				
-			},error: function(){
-				
+			success : function(msg){
+			 	if(msg.result==1){
+			 		alert("친구요청 되었습니다! 조금만기다려주시면 친구가 수락해주겠죠?!");
+			 	}else{
+			 		alert("실패..")
+			 	}
+			},error: function(err){
+				console.log(err);
 			}
 		});
 		

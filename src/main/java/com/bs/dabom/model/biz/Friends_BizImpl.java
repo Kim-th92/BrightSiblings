@@ -21,10 +21,6 @@ public class Friends_BizImpl implements Friends_Biz {
 		return dao.friendsList(memberno);
 	}
 
-	@Override
-	public int addFriends(int memberno, int friendsno) {
-		return dao.addFriends(memberno, friendsno);
-	}
 
 	@Override
 	public int deleteFriends(int memberno, int friendsno) {
@@ -57,6 +53,22 @@ public class Friends_BizImpl implements Friends_Biz {
 		dto.setMember_no(myno);
 		
 		return dao.friendDennied(dto);
+	}
+
+	@Override
+	public List<Member_Dto> friendsRequestingList(int member_no) {
+		return dao.friendRequestingList(member_no);
+	}
+
+	@Override
+	public int friendRequest(Friends_Dto friends_dto) {
+		return dao.friendRequest(friends_dto);
+	}
+
+
+	@Override
+	public int cancelRequest(Friends_Dto dto) {
+		return dao.cancelRequest(dto);
 	}
 
 	

@@ -21,7 +21,7 @@
 		from member m join friends f
 		on m.member_no = f.friend_no
 		where
-		m.member_no in (select friend_no from friends where member_no =#{member_no}) and f.status =1
+		m.member_no in (select friend_no from friends where member_no =#{member_no} or  friend_no = #{member_no}) and f.status =1
 	</select>
 	
 	<select id ="searchlist" resultType="memberDto" parameterType="map">
@@ -31,13 +31,27 @@
 		]]>
 	</select>
 	
-	<select id= "friendsrequest" resultMap="friendjoin"  >
+	<select id ="friendsrequestting" resultMap="friendjoin">
+		select m.member_name, m.member_no,m.member_profile
+		from member m  left join friends f
+		on m.member_no = f.member_no
+		where
+		m.member_no in (select member_no  from friends where friend_no = #{friend_no}) and status =0
+	</select>
+	
+	
+	
+	<select id= "friendsrequested" resultMap="friendjoin"  >
 		select m.member_name, m.member_no,m.member_profile
 		from member m  join friends f
 		on m.member_no = f.friend_no
 		where
 		m.member_no in (select friend_no from friends where member_no =#{member_no}) and  f.status =0
 	</select>
+	
+	<insert id="friendAdd" parameterType="friendsDto">
+		insert into friends values (#{member_no},#{friend_no},0,#{friend_no})
+	</insert>
 	
 	<update id="friendAccepted" >
 	update friends set status =1 where member_no =#{member_no} and friend_no = #{friend_no}
@@ -46,5 +60,9 @@
 	<update id="friendDennied" >
 	update friends set status =2 where member_no =#{member_no} and friend_no = #{friend_no}
 	</update>
+	
+	<delete id="cancelRequest" parameterType="friendsDto">
+		delete from friends where member_no = #{member_no} and action_member= #{friend_no}
+	</delete>
 	
 </mapper>

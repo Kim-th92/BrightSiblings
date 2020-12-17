@@ -237,6 +237,7 @@ public class Member_Controller {
 		JsonNode  node = getAccessToken(code);
 		//액세스 토큰에 사용자의 로그인한 정보가 들어있다.
 		JsonNode accessToken = node.get("access_token");
+		
 		JsonNode userInfo = getKakaoUserInfo(accessToken);
 		
 		JsonNode kakao_account = userInfo.path("kakao_account");

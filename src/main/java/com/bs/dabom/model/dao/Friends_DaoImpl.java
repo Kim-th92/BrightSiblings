@@ -18,6 +18,7 @@ public class Friends_DaoImpl implements Friends_Dao {
 	@Autowired 
 	private SqlSessionTemplate sqlSession;
 
+	//친구가 된 목록들 
 	@Override
 	public List<Member_Dto> friendsList(int memberno) {
 		List<Member_Dto> list =new ArrayList<Member_Dto>();
@@ -33,16 +34,14 @@ public class Friends_DaoImpl implements Friends_Dao {
 		return list;
 	}
 
-	@Override
-	public int addFriends(int memberno, int friendsno) {
-		return 0;
-	}
-
+	
+	//친구 삭제 (차단)
 	@Override
 	public int deleteFriends(int memberno, int friendsno) {
 		return 0;
 	}
-
+	
+	//친구 검색
 	@Override
 	public List<Member_Dto> searchFriends(String name,int member_no) {
 		List<Member_Dto> list =new ArrayList<Member_Dto>();
@@ -59,16 +58,17 @@ public class Friends_DaoImpl implements Friends_Dao {
 		return list;
 	}
 
+	//친구 요청된  목록 
 	@Override
 	public List<Member_Dto> friendRequestList(int member_no) {
 			List<Member_Dto> list = new ArrayList<Member_Dto>();
 			
-			list = sqlSession.selectList(NAMESPACE+"friendsrequest",member_no);
-			System.out.println("리스트느느느ㅡ느느:" +list);
+			list = sqlSession.selectList(NAMESPACE+"friendsrequested",member_no);
 			return list;
 		
 	}
 
+	//친구요청 수락
 	@Override
 	public int friendAccepted(Friends_Dto dto) {
 		int res = 0;
@@ -76,12 +76,39 @@ public class Friends_DaoImpl implements Friends_Dao {
 		
 		return res;
 	}
-
+	
+	//친구 거절
 	@Override
 	public int friendDennied(Friends_Dto dto) {
 		int res = 0;
 	    res  = sqlSession.update(NAMESPACE+"friendDennied",dto);
 		
+		return res;
+	}
+
+	//내가 요청하고 수락을 기다림 
+	@Override
+	public List<Member_Dto> friendRequestingList(int member_no) {
+		List<Member_Dto> list = new ArrayList<Member_Dto>();
+		
+		list = sqlSession.selectList(NAMESPACE+"friendsrequestting",member_no);
+		return list;
+	}
+
+	//
+	@Override
+	public int friendRequest(Friends_Dto friends_dto) {
+		int res = 0;
+		res = sqlSession.insert(NAMESPACE+"friendAdd", friends_dto);
+		
+		return res;
+	}
+
+
+	@Override
+	public int cancelRequest(Friends_Dto dto) {
+		int res =0;
+		res = sqlSession.delete(NAMESPACE+"cancelRequest", dto);
 		return res;
 	}
 
