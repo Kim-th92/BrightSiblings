@@ -11,21 +11,40 @@
   	<resultMap type="friendsDto" id="friendsDto">
   		<result column = "MEMBER_NO" property="member_no"/>
 		<result column = "FRIEND_NO" property="friend_no"/>
+		<result column = "STATUS" property="status"/>
+		<result column = "ACTION_MEMBER" property="action_member"/>
   	</resultMap>
 
 
-	<select id="friendslist" resultMap="friendjoin" parameterType="int">
+	<select id="friendslist"  resultMap="friendjoin" parameterType="int">
 		select m.member_name, m.member_no,m.member_profile
-		from member m left join friends f
-		on m.member_no = f.member_no
+		from member m join friends f
+		on m.member_no = f.friend_no
 		where
-		m.member_no in (select friend_no from friends where member_no =#{member_no})
+		m.member_no in (select friend_no from friends where member_no =#{member_no}) and f.status =1
 	</select>
 	
-	<select id ="searchlist" resultType="memberDto" parameterType="String">
+	<select id ="searchlist" resultType="memberDto" parameterType="map">
+		 <![CDATA[
 		SELECT * FROM MEMBER
-		WHERE MEMBER_NAME LIKE '%'||#{member_name}||'%' 
+		WHERE MEMBER_NAME LIKE '%'||#{keyword}||'%' and member_no  <> #{member_no}
+		]]>
 	</select>
 	
+	<select id= "friendsrequest" resultMap="friendjoin"  >
+		select m.member_name, m.member_no,m.member_profile
+		from member m  join friends f
+		on m.member_no = f.friend_no
+		where
+		m.member_no in (select friend_no from friends where member_no =#{member_no}) and  f.status =0
+	</select>
+	
+	<update id="friendAccepted" >
+	update friends set status =1 where member_no =#{member_no} and friend_no = #{friend_no}
+	</update>
+	
+	<update id="friendDennied" >
+	update friends set status =2 where member_no =#{member_no} and friend_no = #{friend_no}
+	</update>
 	
 </mapper>

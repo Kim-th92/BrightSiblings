@@ -1,7 +1,10 @@
 *{
 	margin : 0px;
 	padding : 0px;
+	z-index: 50;
 }
+
+/* district separate */
 
 #mainWrap {
 	width : 100%;
@@ -19,24 +22,24 @@
 }
 
 #navi{
+	width: 20%;
 	position:fixed;
-	width:20%;
-	background-color : red;
+	background-color : #F8EEF8;
 	height : 100%;
 }
 
 #board{
 	width : 100%;
-	background-color : yellow;
 	height : 100%;
 }
 #boardDiv{
 	width : 60%;
 	margin: auto;
-	background-color: maroon;
+	background-color: ghostwhite;
 	height : 100%;
 }
 
+/*
 #friendList{
 	position: absolute;
 	width : 20%;
@@ -47,6 +50,58 @@
 #friendDiv{
 	position: fixed;
 	width: 20%;
-	background-color : ghostwhite;
+	background-color : black;
 	height : 100%;
+}
+*/
+
+/* write css */
+
+.writeWrap {
+	width: 90%;
+	height: 100px;
+	margin: auto;
+	border: 1px solid #ffe6f7;
+	text-align: center;
+}
+
+
+/* main css */
+
+.feedWrap {
+	width: 90%;
+	height: auto;
+	margin: auto;
+	border: 1px solid #ffe6f7;
+}
+
+.feedProp {
+	height: 80px;
+	padding: 10px;
+}
+.feedProp img {
+	width : 60px;
+	height: 60px;
+	border-radius:70%;
+	overflow: hidden;
+}
+.feedProp span {
+}
+.feedImage {
+	padding: 10px;
+}
+.feedContent{
+	padding: 10px;
+}
+.feedContent span{
+	font-weight: bold;
+}
+.likeWrap {
+	padding: 10px;
+}
+.replyProp img {
+	width : 60px;
+	height: 60px;
+	border-radius:70%;
+	overflow: hidden;
 }

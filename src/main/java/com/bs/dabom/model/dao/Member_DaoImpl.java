@@ -84,4 +84,12 @@ public class Member_DaoImpl implements Member_Dao {
 		return res;
 	}
 
+	@Override
+	public Member_Dto friendDetail(int member_no) {
+		Member_Dto dto = null;
+		dto = sqlSession.selectOne(NAMESPACE+"friendDetail",member_no);
+		
+		return dto;
+	}
+
 }

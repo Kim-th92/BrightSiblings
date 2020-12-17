@@ -10,6 +10,10 @@
 		select member_id from member where member_id = #{member_id}
 	</select>
 	
+	<select id = "friendDetail" resultType="memberDto" parameterType= "int">
+		select * from member where member_no  =#{member_no}
+	</select>
+	
 	<select id="snslogin" parameterType="memberDto" resultType="memberDto">
 		select * from member where member_email = #{member_email} and member_delflag='N'
 	</select>
@@ -35,6 +39,9 @@
 	<update id ="updateProfile" parameterType="memberDto">
 	
 	</update>
+	
+	
+	
 	
 	<update id="uploadProfile" parameterType="memberDto">
 		UPDATE MEMBER SET MEMBER_PROFILE ='${member_profile}' WHERE MEMBER_NO = #{member_no}

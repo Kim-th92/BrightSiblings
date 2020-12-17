@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bs.dabom.model.dao.Friends_Dao;
+import com.bs.dabom.model.dto.Friends_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
 
 
@@ -31,8 +32,31 @@ public class Friends_BizImpl implements Friends_Biz {
 	}
 
 	@Override
-	public List<Member_Dto> searchFriends(String name) {
-		return dao.searchFriends(name);
+	public List<Member_Dto> searchFriends(String name,int member_no) {
+		return dao.searchFriends(name,member_no);
+	}
+
+	@Override
+	public List<Member_Dto> friendsRequestList(int member_no) {
+		return dao.friendRequestList( member_no);
+	}
+
+	@Override
+	public int friendAccepted(int friend_no, int myno) {
+		Friends_Dto dto = new Friends_Dto();
+		dto.setFriend_no(friend_no);
+		dto.setMember_no(myno);
+		
+		return dao.friendAccepted(dto);
+	}
+
+	@Override
+	public int friendDennied(int friend_no, int myno) {
+		Friends_Dto dto = new Friends_Dto();
+		dto.setFriend_no(friend_no);
+		dto.setMember_no(myno);
+		
+		return dao.friendDennied(dto);
 	}
 
 	

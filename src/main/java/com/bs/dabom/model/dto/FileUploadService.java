@@ -2,6 +2,8 @@ package com.bs.dabom.model.dto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Calendar;
 
 import javax.servlet.ServletContext;
@@ -15,20 +17,18 @@ import org.springframework.web.util.WebUtils;
 @Service
 public class FileUploadService {
 	
-		
-		
 		// 리눅스 기준으로 파일 경로를 작성 ( 루트 경로인 /으로 시작한다. )
 		// 윈도우라면 workspace의 드라이브를 파악하여 JVM이 알아서 처리해준다.
 		// 따라서 workspace가 C드라이브에 있다면 C드라이브에 upload 폴더를 생성해 놓아야 한다.
 		private static final String SAVE_PATH = "/upload";
 		// C:/upload
-		private static final String PREFIX_URL = "/upload/";
+		private static final String PREFIX_URL = "resources/feed_img/";
 		// 프로젝트의 폴더의 .metadata / ... / 
 		
 		//String path = servletContext.getRealPath("/") + "resources/image";
 		
 		
-		public String restore(MultipartFile multipartFile) {
+		public String restore(MultipartFile multipartFile, HttpServletRequest request) {
 			String url = null;
 			
 			try {
@@ -48,8 +48,9 @@ public class FileUploadService {
 				System.out.println("size : " + size);
 				System.out.println("saveFileName : " + saveFileName);
 				
-				writeFile(multipartFile, saveFileName);
+				writeFile(multipartFile, saveFileName, request);
 				url = PREFIX_URL + saveFileName;
+				System.out.println("<url로 넘어가는 String은" + url + "입니다.>");
 			}
 			catch (IOException e) {
 				// 원래라면 RuntimeException 을 상속받은 예외가 처리되어야 하지만
@@ -80,16 +81,18 @@ public class FileUploadService {
 		
 		
 		// 파일을 실제로 write 하는 메서드
-		private boolean writeFile(MultipartFile multipartFile, String saveFileName)
+		private boolean writeFile(MultipartFile multipartFile, String saveFileName,  HttpServletRequest request)
 									throws IOException{
 			boolean result = false;
 
 			byte[] data = multipartFile.getBytes();
-			FileOutputStream fos = new FileOutputStream(SAVE_PATH + "/" + saveFileName);
-			System.out.println(SAVE_PATH + "/" + saveFileName);
-			// /upload/2020111453736800.jpg 라고 출력된다.
-			// C:/upload/ 와 같다. 즉 C드라이브 경로로 저장 중. 이걸 프로젝트 내부 폴더로 바꿔야함.
+			String path = request.getSession().getServletContext().getRealPath("/resources/feed_img");
+			// resource/feed_img 폴더의 경로.
 			
+			FileOutputStream fos = new FileOutputStream(path + "/" + saveFileName);
+			System.out.println("이것은" + "/resources/" + saveFileName);
+			
+			System.out.println(path);
 			
 			fos.write(data);
 			fos.close();
