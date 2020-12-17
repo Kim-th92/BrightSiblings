@@ -28,27 +28,54 @@ public class Donation_DaoImpl implements Donation_Dao {
 	}
 
 	@Override
-	public Donation_Dto detaildonation(int member_no) {
-		Donation_Dto dto = new Donation_Dto(); 
+	public List<Donation_Dto> detailDonation(int member_no) {
+		List<Donation_Dto> selectlist = new ArrayList<Donation_Dto>();
 		try {
-			dto = sqlSession.selectOne(NAMESPACE + "selectOne", member_no);
+			selectlist = sqlSession.selectList(NAMESPACE + "selectOne", member_no);
 		} catch (Exception e) {
 			System.out.println("[ERROR] Donation SelectOne");
 			e.printStackTrace();
 		}
-		return dto;
+		System.out.println();
+		return selectlist;
 	}
 
 	@Override
-	public int insertdonation(Donation_Dto dto) {
+	public int insertDonation(Donation_Dto dto) {
 		int res = 0;
 		try {
 			res = sqlSession.insert(NAMESPACE + "insert", dto);
 		} catch (Exception e) {
-			System.out.println("[ERROR] Doantion Payment");
+			System.out.println("[ERROR] Doantion Insert");
 			e.printStackTrace();
 		}
 		return res;
+	}
+	
+	@Override
+	public int donationSum() {
+		int sum = 0;
+		
+		try {
+			sum = sqlSession.selectOne(NAMESPACE + "donationSum");
+		} catch (Exception e) {
+			System.out.println("[ERROR] Donor Donation Sum");
+			e.printStackTrace();
+		}
+		return sum;
+	}
+	
+	@Override
+	public int selectDonationSum(int member_no) {
+		int sum = 0;
+		
+		try {
+			sum = sqlSession.selectOne(NAMESPACE + "selectDonationSum", member_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] Select Donor Donation Sum");
+			e.printStackTrace();
+		}
+		return sum;
 	}
 
 }

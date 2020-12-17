@@ -26,8 +26,10 @@ public class Donation_Controller {
 	}
 	
 	@RequestMapping("/detaildonation.do")
-	public String detaildonation(Model model, int donation_no) {
-		model.addAttribute("dto", biz.detaildonation(donation_no));
+	public String detaildonation(Model model, @RequestParam int member_no, String member_name) {
+		model.addAttribute("detaildonation_list", biz.detailDonation(member_no));
+		model.addAttribute("donation_name", member_name);
+		model.addAttribute("select_donation_sum", biz.selectDonationSum(member_no));
 		return "detaildonation";
 	}
 	
@@ -45,7 +47,7 @@ public class Donation_Controller {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int res = biz.insertdonation(dto);
+		int res = biz.insertDonation(dto);
 		if(res > 0) {
 			map.put("member_no", member_no);
 			map.put("donation", donation);
