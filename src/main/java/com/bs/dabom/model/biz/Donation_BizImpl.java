@@ -20,13 +20,22 @@ public class Donation_BizImpl implements Donation_Biz {
 	}
 
 	@Override
-	public Donation_Dto detaildonation(int member_no) {
-		return dao.detaildonation(member_no);
+	public List<Donation_Dto> detailDonation(int member_no) {
+		return dao.detailDonation(member_no);
 	}
 
 	@Override
-	public int insertdonation(Donation_Dto dto) {
-		return dao.insertdonation(dto);
+	public int insertDonation(Donation_Dto dto) {
+		return dao.insertDonation(dto);
 	}
 
+	@Override
+	public int donationSum() {
+		return dao.donationSum();
+	}
+	
+	@Override
+	public int selectDonationSum(int member_no) {
+		return dao.selectDonationSum(member_no);
+	}
 }

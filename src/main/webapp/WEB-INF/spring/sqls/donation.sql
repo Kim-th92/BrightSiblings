@@ -20,6 +20,19 @@ order by member_no desc;
 insert into donation
 values(donationseq.nextval, '1', '1', sysdate);
 
-select donation_no, member_name, donation, donation_date
+select a.donation_no, b.member_no, b.member_name, a.donation, a.donation_date
 from donation a, member b where a.member_no = b.member_no
-order by donation_no desc;
+order by donation_no DESC
+
+select a.donation_no, b.member_no, a.donation, a.donation_date
+from donation a join member b on (a.member_no = b.member_no)
+where a.member_no = #{member_no}
+order by donation_no DESC
+
+select sum(a.donation)
+from donation a join member b on (a.member_no = b.member_no) 
+having a.member_no = 11
+group by a.member_no
+
+select sum(a.donation)
+from donation a join member b on (a.member_no = b.member_no) 
