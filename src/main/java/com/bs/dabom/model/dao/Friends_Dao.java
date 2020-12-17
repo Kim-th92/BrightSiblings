@@ -11,7 +11,6 @@ public interface Friends_Dao {
 	
 	public List<Member_Dto> friendsList(int memberno);
 	
-	public int addFriends(int memberno,int friendsno);
 	
 	public int deleteFriends(int memberno,int friendsno);
 	
@@ -22,4 +21,11 @@ public interface Friends_Dao {
 	public int friendAccepted(Friends_Dto dto);
 
 	public int friendDennied(Friends_Dto dto);
+
+	public List<Member_Dto> friendRequestingList(int member_no);
+
+	public int friendRequest(Friends_Dto friends_dto);
+
+
+	public int cancelRequest(Friends_Dto dto);
 }

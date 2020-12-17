@@ -194,5 +194,46 @@ response.setDateHeader("Expires", 0L);
 	</script>
 	<%@include file="insertdonation.jsp"%>	
 	<script src="resources/js/header.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script>
+// 전역변수 설정
+var websocket  = null;
+
+
+$(document).ready(function(){
+    
+   send_message();
+  
+});
+function send_message(){
+	websocket= new WebSocket("ws://localhost:8787/dabom/echo.do");
+	
+	//웹소켓열릴때
+	websocket.onopen = function(evt){
+		onOpen(evt);
+	};
+	//웹소켓 핸들러
+	websocket.onmessage =function(evt){
+		onMessage(evt);
+	};
+	
+	websocket.onerror = function(evt){
+		onError(evt);
+	};
+	
+}
+
+function onOpen(evt){
+	websocket.send("${login.member_no}");
+}
+function onMessage(evt){
+	$('.noti-badge').append(evt.data);
+	$('.noti-badge').addClass('badge');
+}
+function onError(evt) {
+
+}
+
+</script>
 </body>
 </html>

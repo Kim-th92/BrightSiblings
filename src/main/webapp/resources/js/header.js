@@ -1,8 +1,4 @@
-    
-
-
    
-
 $("#search_btn").click(function(){
 		$(".search-hide").stop().slideDown(500);
 	return false; //중요

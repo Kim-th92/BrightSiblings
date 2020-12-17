@@ -42,15 +42,19 @@ public class MyPage_Controller {
 		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 
 	}
 	@Autowired
-	private Friends_Biz biz;
+	private Friends_Biz friend_biz;
 	
 	@RequestMapping(value="mypage_friends.do",method=RequestMethod.GET)
 	public String mypageMain(Model model,HttpSession session) {
 		Member_Dto dto= (Member_Dto)session.getAttribute("login");
 		int memberno = dto.getMember_no();
-		System.out.println(memberno);
-		List<Member_Dto> list = biz.friendsList(memberno);
+		List<Member_Dto> list = friend_biz.friendsList(memberno);
+		List<Member_Dto> requestlist = friend_biz.friendsRequestList(dto.getMember_no());
+		List<Member_Dto> requestinglist = friend_biz.friendsRequestingList(memberno);
+	
+		model.addAttribute("requestlist", requestlist);
 		model.addAttribute("list",list);
+		model.addAttribute("requestinglist",requestinglist);
 		
 
 		return "mypage_friends";
@@ -80,7 +84,7 @@ public class MyPage_Controller {
 		int member_no  = dto.getMember_no();
 		
 		List<Member_Dto> list = null;
-				list = biz.searchFriends(keyword,member_no);
+				list = friend_biz.searchFriends(keyword,member_no);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if(list.isEmpty()) {

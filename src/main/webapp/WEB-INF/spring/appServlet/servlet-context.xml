@@ -29,20 +29,6 @@
 	<context:component-scan
 		base-package="com.bs.dabom" />
 
- 
-		<!-- websocket handler -->
-	<beans:bean id="echoHandler" class="com.bs.dabom.ws.WebsocketHandler" />
- 
-	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/chat.do" />
-		<websocket:handshake-interceptors>
-	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
-	      </websocket:handshake-interceptors>
- 
-	      <websocket:sockjs/>
-	 </websocket:handlers>
-
-
 	<!-- 컨트롤러로 요청이 가기전에 인터셉트 -->
 
 	<interceptors>
