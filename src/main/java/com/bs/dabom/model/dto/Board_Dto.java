@@ -19,6 +19,12 @@ public class Board_Dto {
 	}
 	
 	
+	public Board_Dto(int member_no,String board_content) {
+		this.member_no = member_no;
+		this.board_content = board_content;
+	}
+
+
 	public Board_Dto(int board_no, int member_no, String board_content, String board_file, String board_hashtag,
 			String board_like, String board_privacy, Date board_regdate, Date board_updatedate) {
 		this.board_no = board_no;
