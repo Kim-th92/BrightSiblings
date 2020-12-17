@@ -8,6 +8,7 @@
 		<typeAlias type="com.bs.dabom.model.dto.Member_Dto" alias = "memberDto"/>
 		<typeAlias type ="com.bs.dabom.model.dto.Friends_Dto" alias ="friendsDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Board_Dto" alias = "boardDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.Files_Dto" alias = "filesDto" />
 	</typeAliases>
 	
 	

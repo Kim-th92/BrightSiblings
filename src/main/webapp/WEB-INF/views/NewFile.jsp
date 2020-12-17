@@ -9,7 +9,13 @@
 <body>
 <h1>Upload completed</h1>
 <div class="result-images">
-        <img src="${pageContext.request.contextPath }${url }" style="width:150px">
+        <img src="${pageContext.request.contextPath }/resources${url }" style="width:150px">
+        <!-- 
+	        servlet-context 적용이 안됨. 확인해볼 것
+        -->
+        
+        
+        
 </div>
 
 <p> <a href='/fileupload/form'> 다시 업로드 하기 </a> /p>
