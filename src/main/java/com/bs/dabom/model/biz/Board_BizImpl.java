@@ -46,7 +46,7 @@ public class Board_BizImpl implements Board_Biz {
 	
 	@Override
 	public int update(Board_Dto dto) {
-		return 0;
+		return dao.update(dto);
 	}
 
 	@Override
@@ -60,10 +60,11 @@ public class Board_BizImpl implements Board_Biz {
 	}
 
 	@Override
-	public Files_Dto getFileUrl(int board_no) {
+	public List<Files_Dto> getFileUrl(int board_no) {
 		return dao.getFileUrl(board_no);
 	}
 
+	
 
 
 	

@@ -5,6 +5,7 @@
 	<select id="selectList" resultType="boardDto">
 		SELECT *
 		FROM BOARD
+		ORDER BY BOARD_NO DESC
 	</select>
 	
 	<select id="select" resultType="boardDto">
@@ -27,7 +28,7 @@
 	<select id="getFileUrl" resultType="filesDto">
 		SELECT *
 		FROM FILES
-		WHERE FILES_NO = #{board_no}
+		WHERE BOARD_NO = #{board_no}
 	</select>
 	
 	<insert id="insert" parameterType="boardDto">
@@ -54,7 +55,9 @@
 				SYSDATE
 		)
 	</insert>
+	<update id="update" parameterType="boardDto">
 	
+	</update>
 	<delete id="deleteFile">
 		DELETE FROM FILES
 		WHERE BOARD_NO = #{board_no}
@@ -63,5 +66,6 @@
 		DELETE FROM BOARD
 		WHERE BOARD_NO = #{board_no}
 	</delete>
+
 	
 </mapper>
