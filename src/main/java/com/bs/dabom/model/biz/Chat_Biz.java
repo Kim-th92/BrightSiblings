@@ -10,9 +10,7 @@ public interface Chat_Biz {
 
 		public List<Chatroom_Dto> chatroomlist(int member_no);
 
-		public Chatroom_Dto isRoom(int chatroom_no);
-
-		public int insertChat(List<Chatmsg_Dto> list);
+		public int isRoom(int chatroom_no);
 
 		public int createRoom(Chatroom_Dto roomDto);
 
@@ -23,5 +21,7 @@ public interface Chat_Biz {
 		public String getName(int member_no);
 		
 		public List<Member_Dto> getNameProfile(int chatroom_no);
+
+		public int existRoom(Chatroom_Dto roomDto);
 
 }

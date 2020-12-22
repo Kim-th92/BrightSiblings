@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +32,7 @@ public class Chat_Controller {
 		List<Chatroom_Dto> list = chat_biz.chatroomlist(member_no);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("chatroomlist", list);
+		System.out.println(list.toString());
 		if(list.isEmpty()) {
 			map.put("check",false);
 		}else {
@@ -52,11 +52,17 @@ public class Chat_Controller {
 		System.out.println(roomDto);
 		
 		if(chatroom_no !=null) {
-			roomDto = chat_biz.isRoom(chatroom_no);
-			if (roomDto==null) {
+			int roomRes = chat_biz.isRoom(chatroom_no);
+			if (roomRes == 0) {
 				roomDto = new Chatroom_Dto();
-				roomDto.setUser_one(myno);
-				roomDto.setUser_two(member_no);
+				if(myno <member_no) {
+					roomDto.setUser_one(myno);
+					roomDto.setUser_two(member_no);
+				}else {
+					roomDto.setUser_one(member_no);
+					roomDto.setUser_two(myno);
+				}
+				
 				int res = chat_biz.createRoom(roomDto);
 				if(res>0) {
 					chatroom_no = chat_biz.getRoomnumber(roomDto);
@@ -67,25 +73,41 @@ public class Chat_Controller {
 			}else {
 				List<Chatmsg_Dto> list = new ArrayList<Chatmsg_Dto>();
 				List<Member_Dto> memberlist = chat_biz.getNameProfile(chatroom_no);
-				System.out.println("여기까진가......");
+				
 				list = chat_biz.msglist(chatroom_no);
-				System.out.println("list 느느으으으으으ㅡㅇ"+list.toString());
 				model.addAttribute("memberlist",memberlist);
 				model.addAttribute("chatmsglist", list);
+				model.addAttribute("roomno", chatroom_no);
 				return "chatroom";
 		
 			}
 		}else {
+			
 			roomDto = new Chatroom_Dto();
-			roomDto.setUser_one(myno);
-			roomDto.setUser_two(member_no);
-			int res = chat_biz.createRoom(roomDto);
-			if(res>0) {
-				chatroom_no = chat_biz.getRoomnumber(roomDto);
-				return "redirect:chatmsglist.do?chatroom_no="+chatroom_no;
+			if(myno <member_no) {
+				roomDto.setUser_one(myno);
+				roomDto.setUser_two(member_no);
 			}else {
-				return "redirect:mainpage.do";
+				roomDto.setUser_one(member_no);
+				roomDto.setUser_two(myno);
 			}
+			int exist = chat_biz.existRoom(roomDto);
+			
+			if(exist>0) {
+					chatroom_no = chat_biz.getRoomnumber(roomDto);
+					return "redirect:chatmsglist.do?chatroom_no="+chatroom_no;
+			}else {
+				int res = chat_biz.createRoom(roomDto);
+				if(res>0) {
+					chatroom_no = chat_biz.getRoomnumber(roomDto);
+					return "redirect:chatmsglist.do?chatroom_no="+chatroom_no;
+				}else {
+					return "redirect:mainpage.do";
+				}
+			}
+			
+			
+			
 		}
 		
 	

@@ -1,6 +1,8 @@
 package com.bs.dabom.model.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,13 +12,13 @@ import org.springframework.stereotype.Repository;
 import com.bs.dabom.model.dto.Chatmsg_Dto;
 import com.bs.dabom.model.dto.Chatroom_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
-
 @Repository
 public class Chat_DaoImpl implements Chat_Dao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	@Override
 	public List<Chatroom_Dto> chatroomlist(int member_no) {
 		List<Chatroom_Dto> list =null;
@@ -45,16 +47,8 @@ public class Chat_DaoImpl implements Chat_Dao {
 	}
 
 	@Override
-	public Chatroom_Dto isRoom(int chatroom_no) {
-		Chatroom_Dto dto = new Chatroom_Dto();
-		dto = sqlSession.selectOne(NAMESPACE+"isRoom",chatroom_no);
-		return dto;
-	}
-
-	@Override
-	public int insertChat(List<Chatmsg_Dto> list) {
-		int res = 0;
-		res = sqlSession.insert(NAMESPACE+"insertChat", list);
+	public int isRoom(int chatroom_no) {
+		int res  = sqlSession.selectOne(NAMESPACE+"isRoom",chatroom_no);
 		return res;
 	}
 
@@ -93,6 +87,12 @@ public class Chat_DaoImpl implements Chat_Dao {
 			List<Member_Dto> list = null;
 			list = sqlSession.selectList(NAMESPACE+"getNameProfile",chatroom_no);
 		return list;
+	}
+
+	@Override
+	public int existRoom(Chatroom_Dto roomDto) {
+		int res = sqlSession.selectOne(NAMESPACE+"existRoom",roomDto);
+		return res;
 	}
 
 }

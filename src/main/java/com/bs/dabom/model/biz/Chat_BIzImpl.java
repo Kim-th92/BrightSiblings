@@ -22,15 +22,12 @@ public class Chat_BIzImpl implements Chat_Biz {
 	}
 
 	@Override
-	public Chatroom_Dto isRoom(int chatroom_no) {
+	public int isRoom(int chatroom_no) {
 		
 		return dao.isRoom(chatroom_no);
 	}
 
-	@Override
-	public int insertChat(List<Chatmsg_Dto> list) {
-		return dao.insertChat(list);
-	}
+	
 
 	@Override
 	public int createRoom(Chatroom_Dto roomDto) {
@@ -55,6 +52,11 @@ public class Chat_BIzImpl implements Chat_Biz {
 	@Override
 	public List<Member_Dto> getNameProfile(int chatroom_no) {
 		return dao.getNameProfile(chatroom_no);
+	}
+
+	@Override
+	public int existRoom(Chatroom_Dto roomDto) {
+		return dao.existRoom(roomDto);
 	}
 
 }

@@ -51,39 +51,40 @@
 
 </head>
 <body>
-
+	<input type="hidden" name="chat_room_no" value="${roomno }" />
 	<div class="col-md-12 col-xl-12 chat">
 		<div class="card">
 			<div class="card-header msg_head">
 				<div class="d-flex bd-highlight">
-					
 
-						<c:forEach items="${membelist }" var="dto">
+
+					<c:forEach items="${membelist }" var="dto">
 							${dto.member_no } ||login.member_no
 							<c:choose>
-								<c:when test="${dto.member_no eq login.member_no }">
+							<c:when test="${dto.member_no eq login.member_no }">
 
-								</c:when>
-								<c:otherwise>
+							</c:when>
+							<c:otherwise>
 								<div class="img_cont">
 									<img src="${dto.member_profile }"
-										class="rounded-circle user_img">
-									<span class="online_icon"></span>
-									</div>
-										<div class="user_info">
-						<span> ${dto.member_name} </span></div>
-						</c:otherwise> 
+										class="rounded-circle user_img"> <span
+										class="online_icon"></span>
+								</div>
+								<div class="user_info">
+									<span> ${dto.member_name} </span>
+								</div>
+							</c:otherwise>
 						</c:choose>
-						 </c:forEach>
+					</c:forEach>
 
 
-						
 
-					
+
+
 					<div class="video_cam">
 						<span onclick=""><i class="fas fa-video"></i></span> <span
 							onclick=""><i class="fas fa-phone"></i></span> <span
-							onclick="disconnect();">나가기 </span>
+							onclick="disconnect()">나가기 </span>
 					</div>
 				</div>
 				<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
@@ -104,16 +105,14 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${chatmsglist }" var="dto">
-							<input type="hidden" name="chat_room_no"
-								value="${dto.chatroomno }" />
+
 							<div class="d-flex msgsending  mb-4" title="${dto.member_no}">
 								<div class="img_cont_msg">
 									<img src="${dto.memberDto.member_profile }"
 										class="rounded-circle user_img_msg">
 								</div>
 								<div class="msg_cotainer">
-									${dto.message } <span class="msg_time"><fmt:formatDate
-											value="${dto.sendingtime}" pattern="yyyy-MM-dd KK:mm:ss" /></span>
+									${dto.message } <span class="msg_time">${dto.sendingtime}</span>
 								</div>
 							</div>
 						</c:forEach>
@@ -123,8 +122,7 @@
 			<div class="card-footer">
 				<div class="input-group">
 
-					<textarea name="" id="message" class="form-control type_msg"
-						placeholder="Type your message..."></textarea>
+					<textarea name="" id="message" class="form-control type_msg" placeholder="Type your message..."></textarea>
 					<div class="input-group-append">
 						<span id="sendBtn" class="input-group-text send_btn"><i
 							class="fas fa-location-arrow"></i></span>
@@ -136,46 +134,74 @@
 
 	<script type="text/javascript">
  var sock= new WebSocket('ws://localhost:8787/dabom/echo.do'); 
+	
+	function disconnect(){
+		sock.close();
+		window.close();
+
+	}
+ 
  $(function(){
 		$('#chatMessageArea').scrollTop($('#chatMessageArea')[0].scrollHeight+20);
-	
+		
 	})
-	
-
-
-	 sock.open = function(event){
-		console.log('open');
-		var val = $('input[name=chat_room_no]').val();
-		sock.send(val);
-		console.log(val);
-	 };
-	 
-	 sock.onmessage= function(evt){
-		 //상대방이 메세지를 보내면 들어온다 
-		 var data = JSON.parse(evt.data);
+	sock.addEventListener('open',function(evt){
+		var room_no = $("input[name='chat_room_no']").val();
+		
+		sock.send(room_no);
+	});
+ 
+ 	sock.addEventListener('message',function(evt){
+ 		console.log('msg from server ',evt.data);
+ 		 var data = JSON.parse(evt.data);
 		 console.log(data);
 		 var $chat = "<div class='d-flex   justify-content-start mb-4' titile='"+data.member_no+"'>"+"<div class='img_cont_msg'>"+"<img src='"+data.member_profile+"'class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.content+"<span class='msg_time'>"+data.sendingtime+"</span></div></div>";
 		 $("#chatMessageArea").append($chat).stop().animate({scrollTop: $('#messages')[0].scrollHeight },1000);
 		 
-	 }
-	 
-	sock.onclose = function(event) {
-			
-		};
-		
-	sock.onerror = function(event) {
-	
-	};
-	
-	function disconnect(){
-		sock.close();
+ 	})
 
-	}
+	 	sock.addEventListener('close', function(event)  {
+	 console.log(event)
+	  console.log('The connection has been closed successfully.');
+	});
+
+sock.addEventListener('error', function (event) {
+	  console.log('WebSocket error: ', event);
+	});
+	 
+	
+
+	
+
+	$(document).ready(function(){
+		$('#action_menu_btn').click(function(){
+			$('.action_menu').toggle();		
+		});
+	});
+	
+	 $(document).ready(function() {
+		  $('#message').keypress(function(event){
+		   var keycode = (event.keyCode ? event.keyCode : event.which);
+		   if(keycode == '13'){
+			   if($("#message").val().trim()==""||$('#message').val=="" ){
+				   return false;
+			   }else{
+				 sendMsg();  
+			   }
+		   }
+		   event.stopPropagation();
+		  });
+
+		  $('#sendBtn').click(function() { 
+			  sendMsg();
+		  });/* $('#enterBtn').click(function() { connect(); }); $('#exitBtn').click(function() { disconnect(); }); */
+		 });
  
- var chatroom_no = $('input[name=chat_room_no]').val();
+ var chatroom_no = $("input[name='chat_room_no']").val();
+ console.log(chatroom_no);
  
  function sendMsg(){
-	 console.log('들와')
+	 console.log('보낼겁니당 ')
 	 var msg = $("#message").val();
 	 if(msg==''|| msg.trim() ==''){
 		 return;
@@ -187,7 +213,7 @@
 		 message.member_profile = "${login.member_profile}"
 		 message.chatroom_no =  chatroom_no
 	 }
-	 
+	 console.log("message: ",message);
 	 sock.send(JSON.stringify(message));
 	 $("#message").val("");
 	 $("#message").focus();
@@ -229,33 +255,7 @@
 	 }
  }
  
- 
- 
- 
-	$(document).ready(function(){
-		$('#action_menu_btn').click(function(){
-			$('.action_menu').toggle();		
-		});
-	});
-	
-	 $(document).ready(function() {
-		  $('#message').keypress(function(event){
-		   var keycode = (event.keyCode ? event.keyCode : event.which);
-		   if(keycode == '13'){
-			   if($("#message").val().trim()=="" ||$('#message').val=="" ){
-				   return false;
-			   }else{
 
-				    sendMsg();  
-			   }
-		   }
-		   event.stopPropagation();
-		  });
-
-		  $('#sendBtn').click(function() { 
-			  sendMsg();
-		  });/* $('#enterBtn').click(function() { connect(); }); $('#exitBtn').click(function() { disconnect(); }); */
-		 });
  </script>
 
 </body>
