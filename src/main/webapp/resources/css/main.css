@@ -85,17 +85,22 @@
 	border-radius:70%;
 	overflow: hidden;
 }
-.feedProp span {
-}
+
 .feedImage {
 	padding: 10px;
 }
+.feedImage img{
+	width: 200px;
+	height: 100px;
+}
+
 .feedContent{
 	padding: 10px;
 }
 .feedContent span{
 	font-weight: bold;
 }
+
 .likeWrap {
 	padding: 10px;
 }
