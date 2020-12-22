@@ -65,8 +65,10 @@ public class Board_DaoImpl implements Board_Dao {
 
 	@Override
 	public int update(Board_Dto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int res = sqlSession.update(NAMESPACE + "update", dto);
+		
+		return res;
 	}
 
 	@Override
@@ -86,12 +88,14 @@ public class Board_DaoImpl implements Board_Dao {
 	}
 
 	@Override
-	public Files_Dto getFileUrl(int board_no) {
+	public List<Files_Dto> getFileUrl(int board_no) {
 
-		Files_Dto res = sqlSession.selectOne(NAMESPACE + "getFileUrl", board_no);
+		List<Files_Dto> res = sqlSession.selectList(NAMESPACE + "getFileUrl", board_no);
 		
 		return res;
 	}
+
+	
 
 	
 

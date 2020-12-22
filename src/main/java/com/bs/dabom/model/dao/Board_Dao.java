@@ -18,6 +18,6 @@ public interface Board_Dao {
 	public int update(Board_Dto dto);
 	public int delete(int board_no);
 	public Member_Dto getNameProp(int member_no);
-	public Files_Dto getFileUrl(int board_no);
+	public List<Files_Dto> getFileUrl(int board_no);
 
 }

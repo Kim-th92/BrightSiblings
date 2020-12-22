@@ -10,11 +10,13 @@ response.setDateHeader("Expires", 0L);
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <!-- 파비콘-->
 <link rel="shortcut icon" href="resources/image/cherry-blossom.png">
 <link rel="stylesheet" href="resources/css/header.css" />
 <title>DABOM, 다이어트의 봄</title>
+
 <!-- 제이쿼리 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -39,7 +41,7 @@ response.setDateHeader("Expires", 0L);
 		        <li> <a class="tooltip center-icon" data-tooltip="Home" href="mainpage.do" id="home"> <i class="fas fa-home"></i> </a> </li>
 		        <li> <a class="tooltip center-icon" data-tooltip="Friends" href="friendsmainpage.do?member_no=${login.member_no}" id="group"> <i class="fas fa-user-friends"></i> </a></li>
                 <li> <a class="tooltip center-icon" data-tooltip="Calories" href="#" id="calories"> <i class="fas fa-utensils"></i> </a> </li>
-                <li> <a class="tooltip center-icon" data-tooltip="Youtube" href="#" id="youtube"> <i class="fab fa-youtube"></i> </a> </li>
+                <li> <a class="tooltip center-icon" data-tooltip="Youtube" href="youtube.do" id="youtube"> <i class="fab fa-youtube"></i> </a> </li>
 
 				<li id="space1"></li>
 				<li><a>${login.member_name }님 반갑습니다.</a></li>
@@ -54,20 +56,65 @@ response.setDateHeader("Expires", 0L);
 				<li><a href="logout.do" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
 				<li><a onclick="deletemember();" class="hidecontent"><i	class="fas fa-user-minus"></i>회원탈퇴</a></li>
 			</ul>
-			<div id="msg-hide" class=""></div>
-			<div id="search-hide" class="search-hide"></div>
+			<div id="msg-hide" class="msg-hide" style="overflow: scroll;">
+					<div class="col-md-4 col-xl-3 chat"><div class="card mb-sm-3 mb-md-0 contacts_card">
+					<div class="card-header">
+						<div class="input-group">
+							<input type="text" placeholder="검색" name="" class="form-control search">
+							<div class="input-group-prepend">
+								<span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="card-body contacts_body">
+						<ul class="chatroomlist">
+					</ul>
+					</div>
+					<div class="card-footer"></div>
+				</div>
+				</div>
+               </div>
+           
+			<div id="search-hide" class="search-hide">
+			</div>
 		</nav>
 	</header>
 
 	<script type="text/javascript">
+	var member_no = ${login.member_no};
+		$(document).ready(function(){
+			$.ajax({
+				url: "chatroomlist.do?member_no="+ member_no,
+				type : "GET",
+				success :function(data){
+					if(data.check ==false|| data.chatroomlist ==null){
+						var nomessage = "<div>채팅이 없네요 시작해보세용!!</div>"
+ 						$("#msgsearch").after(nomessage);
+					}else{
+						var chatroomlistarr = data.chatroomlist;
+						var chatroomList ="";
+						for(var i = 0; i < chatroomlistarr.length; i++){
+							chatroomList +="<a onclick="+"\"window.open"+"('chatmsglist.do?chatroom_no="+chatroomlistarr[i].chatroom_no+"','popup','width=500px,height=530px')\""+" style='text-decoration:none; color:black; '><li><div class='d-flex bd-highlight'><div class=‘img_cont'><img src='"+chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'><span class='online_icon offline'></span></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+chatroomlistarr[i].last_message+"</p><p>"+chatroomlistarr[i].created+"</p></div></div></li></a>";
+								
+						}
+						$(".chatroomlist").after(chatroomList);
+						
+						
+					}
+				},error:function(err){
+					console.log(err );
+				}
+			})
+		});
+	
+	
 		function search() {
 			var keyword = $(".search-input").val();
 			if (keyword == '') {
 				$("#search-hide").html('<p>검색어를 입력해 주세요</p>');
 			} else {
 
-				$
-						.ajax({
+				$.ajax({
 							url : "search.do?keyword=" + keyword,
 							type : "GET",
 							success : function(data) {
@@ -105,7 +152,7 @@ response.setDateHeader("Expires", 0L);
 
 		$("#search_btn").click(function() {
 			$(".search-hide").stop().slideDown(500);
-			return false; //중요
+			return false; 
 		});
 		$(document).click(function(e) {
 			if (e.target.className == "search-hide") {
@@ -117,7 +164,7 @@ response.setDateHeader("Expires", 0L);
 
 		$("#btn_profile").click(function() {
 			$("#hide").stop().slideDown(500);
-			return false; //중요
+			return false; 
 		});
 		$(document).click(function(e) {
 			if (e.target.className == "hide") {
@@ -129,7 +176,7 @@ response.setDateHeader("Expires", 0L);
 
 		$("#btn_msg").click(function() {
 			$("#msg-hide").stop().slideDown(500);
-			return false; //중요
+			return false; 
 		});
 		$(document).click(function(e) {
 			if (e.target.className == "msg-hide") {
@@ -149,6 +196,7 @@ response.setDateHeader("Expires", 0L);
 		 hideul.style.display='none'
 		 } 
 		 }); */
+		 
 
 		$(document).ready(function() {
 			var jbOffset = $('header').offset();
@@ -162,9 +210,7 @@ response.setDateHeader("Expires", 0L);
 		});
 		function deletemember() {
 			var checkdelete = confirm("정말로 삭제하시겠습니까?");
-			var member_no = ${login.member_no
-			}
-			;
+			var member_no = ${login.member_no};
 			var loginValue = {
 				"member_no" : member_no
 			}
@@ -194,46 +240,6 @@ response.setDateHeader("Expires", 0L);
 	</script>
 	<%@include file="insertdonation.jsp"%>	
 	<script src="resources/js/header.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script>
-// 전역변수 설정
-var websocket  = null;
 
-
-$(document).ready(function(){
-    
-   send_message();
-  
-});
-function send_message(){
-	websocket= new WebSocket("ws://localhost:8787/dabom/echo.do");
-	
-	//웹소켓열릴때
-	websocket.onopen = function(evt){
-		onOpen(evt);
-	};
-	//웹소켓 핸들러
-	websocket.onmessage =function(evt){
-		onMessage(evt);
-	};
-	
-	websocket.onerror = function(evt){
-		onError(evt);
-	};
-	
-}
-
-function onOpen(evt){
-	websocket.send("${login.member_no}");
-}
-function onMessage(evt){
-	$('.noti-badge').append(evt.data);
-	$('.noti-badge').addClass('badge');
-}
-function onError(evt) {
-
-}
-
-</script>
 </body>
 </html>

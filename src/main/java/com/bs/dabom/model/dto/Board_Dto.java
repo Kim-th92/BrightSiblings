@@ -23,6 +23,8 @@ public class Board_Dto {
 		this.member_no = member_no;
 		this.board_content = board_content;
 	}
+	
+	
 
 
 	public Board_Dto(int board_no, int member_no, String board_content, String board_file, String board_hashtag,

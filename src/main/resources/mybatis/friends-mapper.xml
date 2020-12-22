@@ -14,14 +14,28 @@
 		<result column = "STATUS" property="status"/>
 		<result column = "ACTION_MEMBER" property="action_member"/>
   	</resultMap>
-
-
+  	
+  	<resultMap type="foodDto" id="foodDto">
+ 		<result column = "FOOD_NO" property="food_no"/>
+ 		<result column = "FOOD_NAME" property="food_name"/>
+ 		<result column = "SERVING_SIZE" property="serving_size"/>
+ 		<result column = "KCAL" property="kcal"/>
+ 		<result column = "CARBOHYDRATE" property="carbohydrate"/>
+ 		<result column = "PROTEIN" property="protein"/>
+ 		<result column = "FAT" property="fat"/>
+ 		<result column = "SUGAR" property="sugar"/>
+ 		<result column = "SODIUM" property="sodium"/>
+  	</resultMap>
+  	
 	<select id="friendslist"  resultMap="friendjoin" parameterType="int">
+		 <![CDATA[
 		select m.member_name, m.member_no,m.member_profile
 		from member m join friends f
 		on m.member_no = f.friend_no
 		where
-		m.member_no in (select friend_no from friends where member_no =#{member_no} or  friend_no = #{member_no}) and f.status =1
+		m.member_no <> #{member_no} and m.member_no in (select friend_no from friends where member_no =#{member_no} or  friend_no = #{member_no}) and f.status =1
+		
+		]]>
 	</select>
 	
 	<select id ="searchlist" resultType="memberDto" parameterType="map">
@@ -64,5 +78,25 @@
 	<delete id="cancelRequest" parameterType="friendsDto">
 		delete from friends where member_no = #{member_no} and action_member= #{friend_no}
 	</delete>
+	
+	<insert id ="foodDB" parameterType="java.util.List">
+		insert  all
+		<foreach   item ="item" index="index" separator=" " collection="list" >
+into fooddb (food_no,food_name,serving_size,kcal,carbohydrate,protein,fat,sugar,sodium)  values
+		(
+			#{item.food_no},
+			#{item.food_name},
+			#{item.serving_size},
+			#{item.kcal},
+			#{item.carbohydrate},
+			#{item.protein},
+			#{item.fat},
+			#{item.sugar},
+			#{item.sodium}
+		)
+		
+		</foreach>
+		select * from dual
+	</insert>
 	
 </mapper>

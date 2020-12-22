@@ -71,6 +71,12 @@ public class MyPage_Controller {
 		return "mypage_food";
 	}
 	
+	@RequestMapping("fooddb.do")
+	public Map<String,String> insertfooddb(){
+		
+		return null;
+	}
+	
 	@RequestMapping("mypage_exercise.do")
 	public String mypageExercise(Model model) {
 		return "mypage_exercise";
