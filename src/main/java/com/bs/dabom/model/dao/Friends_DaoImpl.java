@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bs.dabom.model.dto.Food_Dto;
 import com.bs.dabom.model.dto.Friends_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
 
@@ -111,5 +112,21 @@ public class Friends_DaoImpl implements Friends_Dao {
 		res = sqlSession.delete(NAMESPACE+"cancelRequest", dto);
 		return res;
 	}
-
+	@Override
+	public int insertFoodDb(List<Food_Dto> list) {
+		int res = 0;
+		try {
+			System.out.println("들어와따");
+			res = sqlSession.insert(NAMESPACE+"foodDB",list);
+			if(res>0) {
+				return res;
+			}else {
+				System.out.println("실");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 }
