@@ -1,6 +1,7 @@
 package com.bs.dabom.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bs.dabom.model.dto.Friends_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
@@ -28,4 +29,5 @@ public interface Friends_Dao {
 
 
 	public int cancelRequest(Friends_Dto dto);
+	
 }

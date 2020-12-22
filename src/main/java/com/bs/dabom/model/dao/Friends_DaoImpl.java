@@ -111,5 +111,5 @@ public class Friends_DaoImpl implements Friends_Dao {
 		res = sqlSession.delete(NAMESPACE+"cancelRequest", dto);
 		return res;
 	}
-
+	
 }

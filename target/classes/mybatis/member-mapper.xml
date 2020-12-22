@@ -24,14 +24,14 @@
 		member_firstaddr,member_secondaddr,member_regdate,member_profile,member_role,member_delflag) VALUES
 		(memberseq.nextval, #{member_id}, #{member_pw}, #{member_name}, #{member_email}, #{member_phone},#{member_birthday},#{member_zipcode},
 		#{member_firstaddr},#{member_secondaddr},SYSDATE,
-		'resources/image/profile-default.jpg'
+		'resources/image/profile_default.jpg'
 		,'member','N') ]]>
 	</insert>
 	
 	<insert id="snsloginregister" parameterType="memberDto">
 	 <![CDATA[
 		INSERT INTO MEMBER (member_no,member_id,member_name,member_email,member_regdate,member_profile,member_role,member_delflag,sns)
-		values (memberseq.nextval,#{member_id},#{member_name},#{member_id},SYSDATE,'resources/image/profile-default.jpg'
+		values (memberseq.nextval,#{member_id},#{member_name},#{member_id},SYSDATE,'resources/image/profile_default.jpg'
 		,'member','N',#{sns})
 	]]>
 	</insert>
