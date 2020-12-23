@@ -99,8 +99,6 @@
 		     }
 		}
 
-
-	
 		function writeReply(){
 			
 			var replyContent = $("#replyContent").val().trim();
