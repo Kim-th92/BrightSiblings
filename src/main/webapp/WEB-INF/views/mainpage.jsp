@@ -132,5 +132,6 @@
 		}
 	</script>	
 </article>
+<script src="./resource/js/scroll.js"></script>
 </body>
 </html>
