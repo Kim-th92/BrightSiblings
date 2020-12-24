@@ -29,12 +29,16 @@
   	
 	<select id="friendslist"  resultMap="friendjoin" parameterType="int">
 		 <![CDATA[
-		select m.member_name, m.member_no,m.member_profile
-		from member m join friends f
-		on m.member_no = f.friend_no
-		where
-		m.member_no <> #{member_no} and m.member_no in (select friend_no from friends where member_no =#{member_no} or  friend_no = #{member_no}) and f.status =1
 		
+select m.member_name, m.member_no,m.member_profile
+		from member m  full outer join friends f
+		on m.member_no = f.friend_no 
+		where 
+		m.member_no in (select member_no from friends where friend_no =${member_no} ) or
+		m.member_no in (select friend_no from friends where member_no =${member_no}) 
+		
+		and status =1
+
 		]]>
 	</select>
 	
@@ -79,24 +83,6 @@
 		delete from friends where member_no = #{member_no} and action_member= #{friend_no}
 	</delete>
 	
-	<insert id ="foodDB" parameterType="java.util.List">
-		insert  all
-		<foreach   item ="item" index="index" separator=" " collection="list" >
-into fooddb (food_no,food_name,serving_size,kcal,carbohydrate,protein,fat,sugar,sodium)  values
-		(
-			#{item.food_no},
-			#{item.food_name},
-			#{item.serving_size},
-			#{item.kcal},
-			#{item.carbohydrate},
-			#{item.protein},
-			#{item.fat},
-			#{item.sugar},
-			#{item.sodium}
-		)
-		
-		</foreach>
-		select * from dual
-	</insert>
+
 	
 </mapper>

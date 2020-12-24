@@ -39,8 +39,8 @@ response.setDateHeader("Expires", 0L);
 				<li id="space2"></li>
 
 		        <li> <a class="tooltip center-icon" data-tooltip="Home" href="mainpage.do" id="home"> <i class="fas fa-home"></i> </a> </li>
-		        <li> <a class="tooltip center-icon" data-tooltip="Friends" href="friendsmainpage.do?member_no=${login.member_no}" id="group"> <i class="fas fa-user-friends"></i> </a></li>
-                <li> <a class="tooltip center-icon" data-tooltip="Calories" href="#" id="calories"> <i class="fas fa-utensils"></i> </a> </li>
+		        <li> <a class="tooltip center-icon" data-tooltip="NEWS" href="news.do" id="group"> <i class="far fa-newspaper"></i> </a></li>
+                <li> <a class="tooltip center-icon" data-tooltip="FoodDictionary" href="foodlist.do" id="calories"> <i class="fas fa-utensils"></i> </a> </li>
                 <li> <a class="tooltip center-icon" data-tooltip="Youtube" href="youtube.do" id="youtube"> <i class="fab fa-youtube"></i> </a> </li>
 
 				<li id="space1"></li>
@@ -54,6 +54,7 @@ response.setDateHeader("Expires", 0L);
 			</ul>
 			<ul id="hide" class="hide">
 				<li><a href="logout.do" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+				<li><a onclick="updatemember();" class="hidecontent"><i class="fas fa-user-edit"></i>회원수정</a></li>
 				<li><a onclick="deletemember();" class="hidecontent"><i	class="fas fa-user-minus"></i>회원탈퇴</a></li>
 			</ul>
 			<div id="msg-hide" class="msg-hide" style="overflow: scroll;">
@@ -67,7 +68,7 @@ response.setDateHeader("Expires", 0L);
 						</div>
 					</div>
 					<div class="card-body contacts_body">
-						<ul class="chatroomlist">
+						<ul class="chatroomlist" style="box-shadow:none;">
 					</ul>
 					</div>
 					<div class="card-footer"></div>
@@ -94,7 +95,7 @@ response.setDateHeader("Expires", 0L);
 						var chatroomlistarr = data.chatroomlist;
 						var chatroomList ="";
 						for(var i = 0; i < chatroomlistarr.length; i++){
-							chatroomList +="<a onclick="+"\"window.open"+"('chatmsglist.do?chatroom_no="+chatroomlistarr[i].chatroom_no+"','popup','width=500px,height=530px')\""+" style='text-decoration:none; color:black; '><li><div class='d-flex bd-highlight'><div class=‘img_cont'><img src='"+chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'><span class='online_icon offline'></span></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+chatroomlistarr[i].last_message+"</p><p>"+chatroomlistarr[i].created+"</p></div></div></li></a>";
+							chatroomList +="<a onclick="+"\"window.open"+"('chatmsglist.do?chatroom_no="+chatroomlistarr[i].chatroom_no+"','popup','width=500px,height=530px')\""+" style='text-decoration:none; color:black; '><li style='list-style:none;'><div style ='display:flex;' class='d-flex bd-highlight'><div class='img_cont'><img style='width:70px;border-radius:50%;' src='"+chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'><span class='online_icon offline'></span></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+chatroomlistarr[i].last_message+"</p><p>"+chatroomlistarr[i].sendingtime+"</p></div></div></li></a>";
 								
 						}
 						$(".chatroomlist").after(chatroomList);
@@ -238,6 +239,7 @@ response.setDateHeader("Expires", 0L);
 			}
 		}
 	</script>
+		<%@include file = "updatemember.jsp" %>
 	<%@include file="insertdonation.jsp"%>	
 	<script src="resources/js/header.js"></script>
 

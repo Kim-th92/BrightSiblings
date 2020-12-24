@@ -150,7 +150,7 @@ public class WebsocketChat {
 
 					Chatmsg_Dto dto = new Chatmsg_Dto(content, member_no_res, sendingtime, chatroom_no);
 					list.add(dto);
-				}
+				}                    
 				System.out.println("저장할 메세지는  : >>>>>."+list.toString());
 				int res =0;
 				try {

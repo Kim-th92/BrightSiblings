@@ -83,7 +83,7 @@ public class Food_DaoImpl implements Food_Dao {
 			for(Chatmsg_Dto dto : list) {
 				System.out.println(dto.toString());
 				pstm.setString(1, dto.getMessage());
-				pstm.setInt(2,dto.getChatroomno());
+				pstm.setInt(2,dto.getMember_no());
 				pstm.setString(3, dto.getSendingtime());
 				pstm.setInt(4, dto.getChatroomno());
 				

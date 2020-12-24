@@ -21,25 +21,13 @@ var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
 series.randomness = 0;
 series.rotationThreshold = 0.6;
 
-series.data = [ {
-  "tag": "다봄",
-  "count": "1765836"
-}, {
-  "tag": "DIET",
-  "count": "1517355"
-}, {
-  "tag": "다이어트",
-  "count": "1287629"
-}, {
+series.data = [ {"tag": "DIET","count": "1000000"}, { "tag": "다이어트","count": "999999"}, {
   "tag": "식이요법",
-  "count": "1263946"
-}, {
+  "count": "983099"}, {
   "tag": "운동분석",
-  "count": "1174721"
-}, {
+  "count": "962928"}, {
   "tag": "유산소",
-  "count": "1116769"
-}, {
+  "count": "952281"}, {
   "tag": "근력운동",
   "count": "944983"
 }, {
@@ -87,6 +75,24 @@ series.data = [ {
 }, {
   "tag": "단백질",
   "count": "257159"
+}, {
+  "tag": "감량",
+  "count": "457159"
+} , {
+  "tag": "캘린더",
+  "count": "357159"
+} , {
+  "tag": "좋아요",
+  "count": "223159"
+} , {
+  "tag": "동기부여",
+  "count": "251159"
+} , {
+  "tag": "비만유전자",
+  "count": "241659"
+} , {
+  "tag": "식욕억제",
+  "count": "222659"
 } ];
 
 series.dataFields.word = "tag";
