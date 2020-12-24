@@ -31,6 +31,7 @@ public class Chat_Controller {
 	public @ResponseBody Map<String, Object> chatroomlist(@RequestParam("member_no") int member_no){
 		List<Chatroom_Dto> list = chat_biz.chatroomlist(member_no);
 		Map<String,Object> map = new HashMap<String, Object>();
+		System.out.println(member_no);
 		map.put("chatroomlist", list);
 		System.out.println(list.toString());
 		if(list.isEmpty()) {

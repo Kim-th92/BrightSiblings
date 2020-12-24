@@ -7,5 +7,9 @@ create table wordcloud(
 	link varchar2(3000) not null
 	
 )
-select*from wordcloud
+
+https://cphoto.asiae.co.kr/listimglink/6/2018071615433963442_1531723419.jpg
+
+update wordcloud set img ='https://cphoto.asiae.co.kr/listimglink/6/2018071615433963442_1531723419.jpg' where tagname = 'DIET' and img='https://rsvsstsv2fnl-a.akamaihd.net/assets/default-image.jpg'
+
 
