@@ -244,23 +244,7 @@ def daum_search(list):
       
 if __name__ == '__main__':
     daum_search(lst)
-    
 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 */
 	
 }
