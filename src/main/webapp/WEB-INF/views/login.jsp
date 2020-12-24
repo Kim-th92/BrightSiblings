@@ -155,7 +155,9 @@
 			    translateY: ["1.1em", 0],
 			    translateZ: 0,
 			    duration: 1000,
-			    delay: (el, i) => 50 * i
+			    delay: function(el, i){
+			    	return  50 * i;
+			    } 
 			  }).add({
 			    targets: '.ml6',
 			    opacity: 1,

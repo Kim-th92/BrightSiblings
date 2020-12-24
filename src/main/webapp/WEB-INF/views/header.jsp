@@ -18,9 +18,8 @@ response.setDateHeader("Expires", 0L);
 <title>DABOM, 다이어트의 봄</title>
 
 <!-- 제이쿼리 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
 <!-- 아이콘 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
@@ -80,12 +79,14 @@ response.setDateHeader("Expires", 0L);
 			</div>
 		</nav>
 	</header>
+	
+	
 
 	<script type="text/javascript">
-	var member_no = ${login.member_no};
-		$(document).ready(function(){
+
+	$(document).ready(function(){
 			$.ajax({
-				url: "chatroomlist.do?member_no="+ member_no,
+				url: "chatroomlist.do?member_no="+ ${login.member_no},
 				type : "GET",
 				success :function(data){
 					if(data.check ==false|| data.chatroomlist ==null){

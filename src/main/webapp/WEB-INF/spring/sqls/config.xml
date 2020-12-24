@@ -13,6 +13,7 @@
 		<typeAlias type="com.bs.dabom.model.dto.Chatmsg_Dto" alias ="chatmsgDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Chatroom_Dto" alias="chatroomDto"/>
 		<typeAlias type ="com.bs.dabom.model.dto.Food_Dto" alias = "foodDto"/>
+		<typeAlias type ="com.bs.dabom.model.dto.News_Dto" alias = "newsDto"/>
 	</typeAliases>
 	
 	
@@ -27,6 +28,7 @@
 		<mapper resource ="/mybatis/board-mapper.xml"/>
 		<mapper resource ="/mybatis/donation-mapper.xml"/>
 		<mapper resource="/mybatis/chat-mapper.xml"/>
+		<mapper resource="/mybatis/news-mapper.xml"/>
 	</mappers>
 
 
