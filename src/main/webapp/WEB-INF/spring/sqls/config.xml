@@ -21,6 +21,7 @@
 	
 <!-- mapper -->
 	<mappers>
+		<mapper resource= "/mybatis/food-mapper.xml"/>
 		<mapper resource ="/mybatis/member-mapper.xml"/>
 		<mapper resource="/mybatis/friends-mapper.xml"/>
 		<mapper resource ="/mybatis/board-mapper.xml"/>

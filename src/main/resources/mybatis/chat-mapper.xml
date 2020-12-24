@@ -37,8 +37,13 @@
 	</select>
 
 	<select id="getroomlist" resultType="chatroomDto">
-		select *  from chatroom where
-		user_one = #{member_no} or user_two=#{member_no}
+		select c.chatroom_no,c.user_one,c.user_two ,max(msg.sendingtime) as sendingtime
+from chatroom c join chatmsg msg on c.chatroom_no = msg.chatroom_no
+join member m on msg.member_no = m.member_no
+having c.user_one  = #{member_no} or c.user_two =#{member_no}
+group by c.chatroom_no,c.user_one,c.user_two
+
+
 	</select>
 	
 	<select id="getNameProfile"  resultMap="memberDto" parameterType="int">

@@ -24,11 +24,16 @@ insert into friends values(1,7,1,7);
 insert into friends values(8,1,0,1);
 
 select m.member_name, m.member_no,m.member_profile
-		from member m  join friends f
-		on m.member_no = f.friend_no
-		where
-		m.member_no in (select friend_no from friends where member_no =1 or friend_no =1)  and status =1;
+		from member m  full outer join friends f
+		on m.member_no = f.friend_no 
+		where 
+		m.member_no in (select member_no from friends where friend_no =7 ) or
+		m.member_no in (select friend_no from friends where member_no =7) 
+		
+		and status =1
 
+		
+		
 		select m.member_name, m.member_no,m.member_profile
 		from member m  left join friends f
 		on m.member_no = f.member_no

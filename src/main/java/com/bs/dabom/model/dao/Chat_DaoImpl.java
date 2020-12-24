@@ -32,6 +32,8 @@ public class Chat_DaoImpl implements Chat_Dao {
 				dto.setMember_name(name);
 				dto.setLast_message(lastMsg);
 				
+				System.out.println(dto.toString());
+				
 			}else {
 				String profile = sqlSession.selectOne(NAMESPACE+"getProfile",dto.getUser_one());
 				String name = sqlSession.selectOne(NAMESPACE+"getName",dto.getUser_one());

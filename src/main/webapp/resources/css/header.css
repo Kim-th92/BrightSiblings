@@ -246,4 +246,6 @@ ul#hide li:hover .hidecontent{
 	margin :0;
 }
 
-
+div.bd-highlight{
+	display:flex;}
+	
