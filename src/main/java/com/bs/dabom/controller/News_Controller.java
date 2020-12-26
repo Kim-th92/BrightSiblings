@@ -28,7 +28,7 @@ public class News_Controller {
 		if(keyword !=null) {
 			List<News_Dto> list = new ArrayList<News_Dto>();
 			list = biz.selectNewsList(keyword);
-			
+			model.addAttribute("keyword", keyword);
 			model.addAttribute("list",list);
 		}
 		

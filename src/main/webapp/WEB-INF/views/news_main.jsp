@@ -43,13 +43,16 @@
 	<c:choose>
 					
 						<c:when test="${empty list }">
-							<div><p>단어를 클릭해서 뉴스기사를 확인해 보세용!</p></div>
+							<div>
+							
+							<h1> 📰<br/>단어를 클릭해서 <br/>뉴스를 확인해 보세요</h1></div>
 						</c:when>
 						
 						
 						<c:otherwise>
-							<c:forEach items="${list }" var= "dto" >
 						
+							<c:forEach items="${list }" var= "dto" >
+							
 								<div class="news_section1_content"  onclick="location.href='${dto.link}'" style="cursor: pointer;">
 									<div class="content_box">
 										<div class="content_img_box">

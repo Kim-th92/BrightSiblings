@@ -52,6 +52,7 @@ public class Chat_Controller {
 		
 		System.out.println(roomDto);
 		
+		//챗룸이 이미 있을때 
 		if(chatroom_no !=null) {
 			int roomRes = chat_biz.isRoom(chatroom_no);
 			if (roomRes == 0) {
@@ -77,11 +78,13 @@ public class Chat_Controller {
 				
 				list = chat_biz.msglist(chatroom_no);
 				model.addAttribute("memberlist",memberlist);
+				System.out.println("memberlist>>>>>>"+memberlist);
 				model.addAttribute("chatmsglist", list);
 				model.addAttribute("roomno", chatroom_no);
 				return "chatroom";
 		
 			}
+			//멤버노로 들어왔을때 
 		}else {
 			
 			roomDto = new Chatroom_Dto();

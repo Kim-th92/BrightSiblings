@@ -5,38 +5,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@include file="header.jsp" %>
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 
-<%@include file="header.jsp" %>
+
 
 <h2>게시판</h2>
-
-<div id="outter" style="width:100%;"> 
-	<table border="1" style="margin:auto;">
-		<colgroup>
-			<col width="100px"/>
-			<col width="300px"/>
-			<col width="150px"/>
-			<col width="150px"/>
-			
-		</colgroup>
-		
+<div style ="width:100%;">
+<div class="table-responsive" style="margin:auto; width:80%;"> 
+	<table class="table table-striped" >
+	<thead>
 		<tr>
-			<th>No.</th>
-			<th width="50%">음식이름</th>
-			<th>열량(kcal)</th>
-			<th>1회제공량(g)</th>
+			<th align="center" class="col-xs-2">No.</th>
+			<th class="col-xs-6" >음식이름</th>
+			<th class="col-xs-2">열량(kcal)</th>
+			<th class="col-xs-2">1회제공량(g)</th>
 		</tr>
-		<c:forEach items="${viewAll }" var="list">
-			<tr>
+		</thead>
+		<tbody>		
+		<c:forEach items="${viewAll }" var="list" varStatus="idx">
+			<tr class="${idx.count % 2 == 1 ? 'trOdd' : 'trEven'}">
 				<td align="center">${list.food_no}</td>
 				<td><a href='detail?seq=${list.food_no }'>${list.food_name }</a></td>
 				<td>${list.kcal }</td>
 				<td>${list.serving_size } </td>
 			</tr>
 		</c:forEach>
+		</tbody>
+		
 	</table>
 	
 	<div style="display: block; text-align: center;">		
@@ -58,6 +57,6 @@
 		</c:if>
 	</div>
 </div>
-
+</div>
 </body>
 </html>

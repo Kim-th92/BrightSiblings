@@ -57,26 +57,28 @@
 			<div class="card-header msg_head">
 				<div class="d-flex bd-highlight">
 
-
-					<c:forEach items="${membelist }" var="dto">
-							${dto.member_no } ||login.member_no
+			
 							<c:choose>
-							<c:when test="${dto.member_no eq login.member_no }">
-
+							<c:when test="${memberlist[0].member_no eq login.member_no }">
+												<div class="img_cont">
+									<img src="${memberlist[1].member_profile }"
+										class="rounded-circle user_img"> 
+								</div>
+								<div class="user_info">
+									<span> ${memberlist[1].member_name} </span>
+								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="img_cont">
-									<img src="${dto.member_profile }"
-										class="rounded-circle user_img"> <span
-										class="online_icon"></span>
+									<img src="${memberlist[0].member_profile }"
+										class="rounded-circle user_img"> 
 								</div>
 								<div class="user_info">
-									<span> ${dto.member_name} </span>
+									<span> ${memberlist[0].member_name} </span>
 								</div>
+							
 							</c:otherwise>
 						</c:choose>
-					</c:forEach>
-
 
 
 

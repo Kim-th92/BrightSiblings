@@ -35,7 +35,7 @@ series.data = [ {"tag": "DIET","count": "950000"}, { "tag": "다이어트","coun
   "count": "695679"
 }, {
   "tag": "DABOM",
-  "count": "786051"
+  "count": "456051"
 }, {
   "tag": "건강",
   "count": "771410"
@@ -92,7 +92,7 @@ series.data = [ {"tag": "DIET","count": "950000"}, { "tag": "다이어트","coun
   "count": "531659"
 } , {
   "tag": "식욕억제",
-  "count": "462659"
+  "count": "662659"
 } ];
 
 series.dataFields.word = "tag";

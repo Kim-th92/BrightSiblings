@@ -8,9 +8,8 @@
 html, body {
 
     margin: 0;
-
 	height:100vh;
-	    background-size: contain;
+	background-size: contain;
     background-repeat: no-repeat;
     background: linear-gradient(333deg, rgba(255,159,201,1) 1%, rgba(242,245,247,1) 100%);
     overflow:auto;
@@ -18,11 +17,21 @@ html, body {
 }
 tspan{
 	font-family: 'Song Myung', serif;
-text-shadow:3px 5px 0px whitesmoke;}
+text-shadow: 3px 1px black;
+}
+
+tspan:hover tspan{
+	color:white;
+}
 
 
 
-
+h1{
+	  font-size: 60pt;
+  color: #fff;
+  font-family: 'Song Myung', serif;
+  text-shadow: 3px 1px black;
+}
 #chartdiv{
 	 width: 100%;
   height: 480px;
@@ -101,6 +110,7 @@ li,ul,ol{
     justify-content: center;
     flex-wrap: wrap;
     margin: 0 200px;
+	text-align: center;
 }
 
 .news_section1_content{

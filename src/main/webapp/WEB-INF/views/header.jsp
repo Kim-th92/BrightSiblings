@@ -16,8 +16,27 @@ response.setDateHeader("Expires", 0L);
 <link rel="shortcut icon" href="resources/image/cherry-blossom.png">
 <link rel="stylesheet" href="resources/css/header.css" />
 <title>DABOM, 다이어트의 봄</title>
-
-<!-- 제이쿼리 -->
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+	crossorigin="anonymous">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
 <!-- 아이콘 -->
@@ -37,18 +56,18 @@ response.setDateHeader("Expires", 0L);
 
 				<li id="space2"></li>
 
-		        <li> <a class="tooltip center-icon" data-tooltip="Home" href="mainpage.do" id="home"> <i class="fas fa-home"></i> </a> </li>
-		        <li> <a class="tooltip center-icon" data-tooltip="NEWS" href="news.do" id="group"> <i class="far fa-newspaper"></i> </a></li>
-                <li> <a class="tooltip center-icon" data-tooltip="FoodDictionary" href="foodlist.do" id="calories"> <i class="fas fa-utensils"></i> </a> </li>
-                <li> <a class="tooltip center-icon" data-tooltip="Youtube" href="youtube.do" id="youtube"> <i class="fab fa-youtube"></i> </a> </li>
+		        <li> <a class="toltip center-icon" data-tooltip="Home" href="mainpage.do" id="home"> <i class="fas fa-home"></i> </a> </li>
+		        <li> <a class="toltip center-icon" data-tooltip="NEWS" href="news.do" id="group"> <i class="far fa-newspaper"></i> </a></li>
+                <li> <a class="toltip center-icon" data-tooltip="FoodDictionary" href="foodlist.do" id="calories"> <i class="fas fa-utensils"></i> </a> </li>
+                <li> <a class="toltip center-icon" data-tooltip="Youtube" href="youtube.do" id="youtube"> <i class="fab fa-youtube"></i> </a> </li>
 
 				<li id="space1"></li>
 				<li><a>${login.member_name }님 반갑습니다.</a></li>
-				<li><a href="mypage_main.do" class="tooltip" data-tooltip="MYPAGE" id="btn_plus"><img 	style="width: 40px; height: 40px;" class="profileimg" alt="프로필사진"  src="${login.member_profile }"></a></li>
-				<li><a class="tooltip" data-tooltip="Message" id="btn_msg"><i class="fab fa-facebook-messenger"></i></a></li> 		
-				<li><a class="tooltip" data-tooltip="Notification"  id="btn_bell"> <i class="fas fa-bell"></i> <span 	class="noti-badge "></span></a></li>
-				<li><a class="tooltip" data-tooltip="Settings" id="btn_profile"><i class="fas fa-cog"></i></a></li> 
-				<li><a class="tooltip" data-tooltip="Donation" id="btn_donation"><i class="fas fa-hand-holding-usd"></i></a></li>
+				<li><a href="mypage_main.do" class="toltip" data-tooltip="MYPAGE" id="btn_plus"><img 	style="width: 40px; height: 40px;" class="profileimg" alt="프로필사진"  src="${login.member_profile }"></a></li>
+				<li><a class="toltip" data-tooltip="Message" id="btn_msg"><i class="fab fa-facebook-messenger"></i></a></li> 		
+				<li><a class="toltip" data-tooltip="Notification"  id="btn_bell"> <i class="fas fa-bell"></i> <span 	class="noti-badge "></span></a></li>
+				<li><a class="toltip" data-tooltip="Settings" id="btn_profile"><i class="fas fa-cog"></i></a></li> 
+				<li><a class="toltip" data-tooltip="Donation" id="btn_donation"><i class="fas fa-hand-holding-usd"></i></a></li>
 
 			</ul>
 			<ul id="hide" class="hide">
@@ -57,22 +76,31 @@ response.setDateHeader("Expires", 0L);
 				<li><a onclick="deletemember();" class="hidecontent"><i	class="fas fa-user-minus"></i>회원탈퇴</a></li>
 			</ul>
 			<div id="msg-hide" class="msg-hide" style="overflow: scroll;">
-					<div class="col-md-4 col-xl-3 chat"><div class="card mb-sm-3 mb-md-0 contacts_card">
+				<div class="container-fluid h-100">
+			<div class="row justify-content-center h-100">
+				<div class="chat"><div class="card  contacts_card">
 					<div class="card-header">
 						<div class="input-group">
-							<input type="text" placeholder="검색" name="" class="form-control search">
+							<input type="text" placeholder="Search..." name="" class="form-control search">
 							<div class="input-group-prepend">
 								<span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
 							</div>
 						</div>
 					</div>
 					<div class="card-body contacts_body">
-						<ul class="chatroomlist" style="box-shadow:none;">
-					</ul>
+						<ul class="contacts">
+						
+						
+						</ul>
 					</div>
-					<div class="card-footer"></div>
+					
 				</div>
 				</div>
+			
+			</div>
+		</div>
+               
+               
                </div>
            
 			<div id="search-hide" class="search-hide">
@@ -91,15 +119,17 @@ response.setDateHeader("Expires", 0L);
 				success :function(data){
 					if(data.check ==false|| data.chatroomlist ==null){
 						var nomessage = "<div>채팅이 없네요 시작해보세용!!</div>"
- 						$("#msgsearch").after(nomessage);
+ 						$(".contacts").after(nomessage);
 					}else{
 						var chatroomlistarr = data.chatroomlist;
 						var chatroomList ="";
 						for(var i = 0; i < chatroomlistarr.length; i++){
-							chatroomList +="<a onclick="+"\"window.open"+"('chatmsglist.do?chatroom_no="+chatroomlistarr[i].chatroom_no+"','popup','width=500px,height=530px')\""+" style='text-decoration:none; color:black; '><li style='list-style:none;'><div style ='display:flex;' class='d-flex bd-highlight'><div class='img_cont'><img style='width:70px;border-radius:50%;' src='"+chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'><span class='online_icon offline'></span></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+chatroomlistarr[i].last_message+"</p><p>"+chatroomlistarr[i].sendingtime+"</p></div></div></li></a>";
-								
+							chatroomList +="<li><a onclick="+"\"window.open"+"('chatmsglist.do?chatroom_no="+chatroomlistarr[i].chatroom_no+"','popup','width=500px,height=530px')\""+" style='text-decoration:none; color:black; '><div class='d-flex bd-highlight'><div class='img_cont'><img src='"+
+							chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'><span class='online_icon offline'></span></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+
+							chatroomlistarr[i].last_message+"</p><p>"+chatroomlistarr[i].sendingtime+
+							"</p></div></div></a></li>";
 						}
-						$(".chatroomlist").after(chatroomList);
+						$(".contacts").html(chatroomList);
 						
 						
 					}

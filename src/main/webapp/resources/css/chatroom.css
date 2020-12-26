@@ -153,9 +153,12 @@ body,html{
 		margin-bottom: auto;
 		margin-left: 10px;
 		border-radius: 25px;
-		background-color: #82ccdd;
+		background-color:rgba(0,0,255,0.3);
 		padding: 10px;
 		position: relative;
+	}
+	.justify-content-end{
+	background-color: rgba(225,220,0,0.3);
 	}
 	.msg_cotainer_send{
 		margin-top: auto;
