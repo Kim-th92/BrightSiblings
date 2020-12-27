@@ -1,5 +1,7 @@
 package com.bs.dabom.model.biz;
 
+import java.util.List;
+
 import com.bs.dabom.model.dto.Member_Dto;
 
 public interface Member_Biz {
@@ -18,4 +20,8 @@ public interface Member_Biz {
 	public int deleteMember(int member_no);
 	
 	public int uploadProfile(Member_Dto dto);
+	
+	//admin 관련 추가
+	public List<Member_Dto> admin_member_list();
+	public Member_Dto admin_select_list(int member_no);
 }

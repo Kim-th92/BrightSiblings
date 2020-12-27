@@ -1,5 +1,7 @@
 package com.bs.dabom.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -89,6 +91,32 @@ public class Member_DaoImpl implements Member_Dao {
 		Member_Dto dto = null;
 		dto = sqlSession.selectOne(NAMESPACE+"friendDetail",member_no);
 		
+		return dto;
+	}
+	
+	@Override
+	public List<Member_Dto> admin_member_list(){
+		List<Member_Dto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "admin_member_list");
+		} catch (Exception e) {
+			System.out.println("[ERROR] admin_member_list");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public Member_Dto admin_select_list(int member_no) {
+		Member_Dto dto = null;
+		try {
+			dto = sqlSession.selectOne(NAMESPACE + "admin_select_list", member_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] admin_select_list");
+			e.printStackTrace();
+		}
 		return dto;
 	}
 

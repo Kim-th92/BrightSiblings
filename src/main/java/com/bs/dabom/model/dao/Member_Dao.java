@@ -1,5 +1,7 @@
 package com.bs.dabom.model.dao;
 
+import java.util.List;
+
 import com.bs.dabom.model.dto.Member_Dto;
 
 public interface Member_Dao {
@@ -20,4 +22,8 @@ public interface Member_Dao {
 	public int uploadProfile(Member_Dto dto);
 
 	public Member_Dto friendDetail(int member_no);
+	
+	//admin 관련 추가
+	public List<Member_Dto> admin_member_list();
+	public Member_Dto admin_select_list(int member_no);
 }
