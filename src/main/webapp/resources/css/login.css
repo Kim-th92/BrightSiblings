@@ -15,27 +15,25 @@ div#main-container{
 	height:auto;
 	padding-bottom:70px;
 	margin:0px 100px;
+	display:flex;
 	 
 	}
 
 #container-left{
 	width: 45%;
-    display: inline-block;
     margin: 50px;
 	
 }
 #container-right{
-	text-align:center;
-	width: auto;
+	    text-align: center;
+    width: auto;
     display: inline-block;
-
-    border-radius:3%;
+    margin-top: 50px;
+    border-radius: 3%;
     text-align: center;
     background: white;
-   padding: 100px 150px;
-   
-    transform: translateY(-60px);
-	box-shadow: 0px 0px 10px 4px grey;
+    padding: 100px 150px;
+    box-shadow: 0px 0px 10px 4px grey;
    }
 
 #chartdiv{
@@ -45,8 +43,6 @@ div#main-container{
 }
 #content{
 	width: 100%;
-	    position: absolute;
-    left: 12%;
 }
 #footer{
 	width:100%;
@@ -103,3 +99,10 @@ defs {
 *{
 	font-family: 'Song Myung', serif;
 }
+
+
+@media(max-width: 1100px){
+	div#main-container{
+	display: block;
+	}
+	}

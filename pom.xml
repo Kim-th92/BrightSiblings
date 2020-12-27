@@ -291,6 +291,16 @@
 			<version>2.8.6</version>
 		</dependency>
 
+<!-- spring 이메일인증을 위한 의존성 주입  -->
+
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context-support</artifactId>
+    <version>${org.springframework-version}</version>
+</dependency>
+	
 
 
 
