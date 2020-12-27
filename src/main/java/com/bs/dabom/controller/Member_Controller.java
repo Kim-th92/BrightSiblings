@@ -101,6 +101,11 @@ public class Member_Controller {
 			check= false;
 		}
 		map.put("check", check);
+		if(res.getMember_role().equals("admin")) {
+			map.put("role", true);
+		} else {
+			map.put("role", false);
+		}
 		return map;
 	}
 	
@@ -324,7 +329,8 @@ public class Member_Controller {
 			
 		} return returnNode; 
 		}
-		
+	
+	// 어드민 리스트 추가했다가 지움....
 	}
 
 

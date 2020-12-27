@@ -122,7 +122,11 @@
 					contentType : "application/json",
 					success : function(msg) {
 						if (msg.check == true & msg.del != true) {
+							if(msg.role == true){
+								location.href = "admin.do"
+							} else {
 							location.href = "mainpage.do"
+							}
 						}else if(msg.check == true & msg.del ==true){
 							$(".err").show();
 							$(".err").html("탈퇴한 회원입니다. 재가입 해주세요!");

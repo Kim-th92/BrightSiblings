@@ -1,5 +1,7 @@
 package com.bs.dabom.model.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,5 +59,14 @@ public class Member_BizImpl implements Member_Biz {
 		return dao.friendDetail(member_no);
 	}
 	
+	@Override
+	public List<Member_Dto> admin_member_list(){
+		return dao.admin_member_list();
+	}
+
+	@Override
+	public Member_Dto admin_select_list(int member_no) {
+		return dao.admin_select_list(member_no);
+	}
 
 }

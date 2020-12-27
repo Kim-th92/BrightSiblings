@@ -50,4 +50,17 @@
 	<update id="deletemember" parameterType="int">
 		update member set member_delflag='Y' where member_no =#{member_no} 
 	</update>
+	
+	
+	<select id="admin_member_list" resultType="memberDto">
+		select member_no, member_id, member_email, member_delflag, member_regdate
+		from member
+		order by member_no
+	</select>
+	
+	<select id="admin_select_list" resultType="memberDto" parameterType="integer">
+		select member_name, member_email, member_phone, member_birthday, member_zipcode, member_firstaddr, member_secondaddr, member_profile
+		from member
+		where member_no = #{member_no}
+	</select>
 </mapper>
