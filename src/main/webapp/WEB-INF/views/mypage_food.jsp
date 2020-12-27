@@ -6,17 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>🍅나의 식단🍅</title>
+<link rel="stylesheet" href="resources/css/mypage_food.css"/>
 </head>
 <body>
 <%@include file="header.jsp" %>
 <%@include file="mypage_middle.jsp" %>
 <div id= "foodwraper">
-	<div id="food_dict	">
+	<div id="food_dict">
 	 	🍙
-		</div>
+	</div>
 	
-		
-	<div id="foodright">
+<div id="foodright">
 		<div id="food_today">
 			
 		</div>
