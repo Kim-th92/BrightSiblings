@@ -27,7 +27,7 @@ public class Chat_Controller {
 	private Chat_Biz chat_biz;
 	
 	
-	@RequestMapping("chatroomlist.do")
+	@RequestMapping("chatroomlist.do") // 채팅룸 리스트 출력
 	public @ResponseBody Map<String, Object> chatroomlist(@RequestParam("member_no") int member_no){
 		List<Chatroom_Dto> list = chat_biz.chatroomlist(member_no);
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -42,7 +42,7 @@ public class Chat_Controller {
 		return map;
 	}
 	
-	@RequestMapping("chatmsglist.do")
+	@RequestMapping("chatmsglist.do") //룸안에 대화 메세지출력 
 	public  String chatmsglist(HttpServletRequest request,Model model,@RequestParam(required = false) Integer chatroom_no,@RequestParam(required = false)Integer member_no){
 	
 		HttpSession session = request.getSession();
@@ -84,11 +84,11 @@ public class Chat_Controller {
 				return "chatroom";
 		
 			}
-			//멤버노로 들어왔을때 
+			//멤버노로 들어왔을때 (채팅룸 누르지않고 친구랑 대화하기 눌렀을 경우)
 		}else {
 			
 			roomDto = new Chatroom_Dto();
-			if(myno <member_no) {
+			if(myno <member_no) { //작은 멤버 번호를 앞번호로 지정 
 				roomDto.setUser_one(myno);
 				roomDto.setUser_two(member_no);
 			}else {

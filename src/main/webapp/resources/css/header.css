@@ -246,7 +246,7 @@ ul#hide li:hover .hidecontent{
 		.card{
 			height: 500px;
 			border-radius: 15px !important;
-			background-color: rgba(0,0,0,0.9) !important;
+			background-color: rgba(0,0,0,0.6) !important;
 		}
 		.contacts_body{
 			padding:  0.75rem 0 !important;

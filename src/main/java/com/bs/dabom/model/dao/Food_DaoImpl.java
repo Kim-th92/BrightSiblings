@@ -1,16 +1,75 @@
 package com.bs.dabom.model.dao;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.bs.dabom.model.dto.Chatmsg_Dto;
 import com.bs.dabom.model.dto.Food_Dto;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import static com.bs.dabom.model.dao.JDBCTemplate.*;
 
 public class Food_DaoImpl implements Food_Dao {
 
+	
+	public static void main(String[] args) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		List<String> foodnames = new ArrayList<String>();
+		ResultSet rs = null;
+		try {
+			pstm = con.prepareStatement("SELECT FOOD_NAME FROM FOODDB ORDER BY FOOD_NO ");
+			rs = pstm.executeQuery();
+			while(rs.next()) {
+				String foodname = rs.getString("food_name");
+				foodnames.add(foodname);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		 JsonObject jsonObj = new JsonObject();
+		  JsonArray jsonArray2 = new Gson().toJsonTree(foodnames).getAsJsonArray();
+	      jsonObj.add("foodnames", jsonArray2);
+	      System.out.println(jsonObj.toString());
+	      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	      String json = gson.toJson(jsonObj);
+      	FileWriter writer=null;
+	        try {
+
+	            writer = new FileWriter("/Users/seowonchoi/Documents/realfinalproject/BrightSiblings/src/main/java/com/bs/dabom/ws/foodnames.json");
+	            writer.write(json);
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }finally {
+	            try {
+	                writer.close();
+	            } catch (IOException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
+	        }
+
+
+
+	}
 	@Override
 	public int insertFoodDb(List<Food_Dto> list) {
 		

@@ -11,8 +11,8 @@
 	position:fixed;
 	left: 50%;
 	top: 50%;
-	width: 427px;
-	height: 553px;
+	width: 600px;
+	height: 700px;
 	transform:translate(-50%, -50%);
 	box-sizing: border-box;
 	background-color: #FFFFFF;
@@ -44,8 +44,8 @@ h4 {
 }
 
 .img {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     border-radius: 10px;
     object-fit: cover
 }
@@ -70,8 +70,8 @@ h4 {
 
 label {
     margin-bottom: 0;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 12pt;
+    font-weight: 400;
     color: #777;
     padding-left: 3px
 }
@@ -80,7 +80,7 @@ label {
    
 }
 
-input[placeholder] {
+.bg-light[placeholder] {
     font-weight: 500
 }
 
@@ -90,7 +90,7 @@ input[placeholder] {
 }
 
 .py-2 {
-    line-height: 30px;
+    line-height: 15px;
     text-align: left;
     font-size: 30pt;
 }
@@ -98,7 +98,7 @@ input[placeholder] {
 
 .button {
     background-color: #fff;
-    color: #0779e4
+    color:salmonpink;
 }
 button {
 	padding : 5px 10px;

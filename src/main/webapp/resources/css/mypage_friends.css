@@ -11,25 +11,33 @@
 #friendrequest{
 	width:30%;
 	height: 100%;
-	margin:20px 20px;
+	margin:40px 40px;
+	background: #ececf9;
 	
 }
 #requested{
-	border :2px solid black;
-		margin:20px 20px;
-		padding:20px 20px;
+		margin:0px 20px 20px;
+		padding:20px 20px 100px;
+		    box-shadow: 0px 0px 20px 1px #a6a5a7;
+    border-radius: 15px;
+	background-color: white;
 }
 
 #requesting{
-	border :2px solid black;
-		margin:20px 20px;
-		padding:20px 20px;
+		margin:0px 20px;
+		padding:20px 20px 100px;
+		    box-shadow: 0px 0px 20px 1px #a6a5a7;
+    border-radius: 15px;
+	background-color: white;
 }
 #nofriend{
 	    width: 80%;
     height: 600px;
     border-radius: 5%;
     text-align: center;
+        box-shadow: 0px 0px 20px 1px #a6a5a7;
+    border-radius: 15px;
+	background-color: white;
 
 }
 #profile-img{
@@ -38,11 +46,12 @@
 	height:100px;
 }
 #friendslist{
-	width:70%;
-	background: #ececf9;;
-	border:2px solid black;
+	width:50%;
 	margin :40px 20px;
 	padding-left :40px;
+	    box-shadow: 0px 0px 20px 1px #a6a5a7;
+    border-radius: 15px;
+	background-color: white;
 	
 }
 a{

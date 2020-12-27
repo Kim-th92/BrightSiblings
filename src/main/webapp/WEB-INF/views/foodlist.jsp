@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <%@include file="header.jsp" %>
 <title>Insert title here</title>
+   <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" />
+<link rel="stylesheet" href="resources/css/foodlist.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -56,6 +58,16 @@
 			<a href="foodlist.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
 	</div>
+	<div class="inner-form" style="display: block; text-align: center;">
+            <div class="input-field">
+             <input id="search" type="text" placeholder="검색"  />
+              <button class="btn-search" type="button">
+					<i class="fas fa-search"></i>
+              </button>
+             
+            </div>
+          </div>
+   
 </div>
 </div>
 </body>

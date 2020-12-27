@@ -156,8 +156,9 @@ body,html{
 		background-color:rgba(0,0,255,0.3);
 		padding: 10px;
 		position: relative;
+		min-width: 150px;
 	}
-	.justify-content-end{
+	.justify-content-end .msg_cotainer {
 	background-color: rgba(225,220,0,0.3);
 	}
 	.msg_cotainer_send{

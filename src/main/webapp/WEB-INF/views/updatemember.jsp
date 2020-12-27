@@ -16,11 +16,11 @@
 
 	<!-- 팝업 시작 -->
 	<div class="wrapper bg-white mt-sm-5" id="update_popup" style="display: none;">
-    <h4 class="pb-4 border-bottom">회원정보 수정</h4>
+    <h6 class="pb-4 border-bottom">회원정보 수정</h6>
     <div class="d-flex align-items-start py-3 border-bottom"> 
     <img src="" class="img" alt="">
         <div class="pl-sm-4 pl-2" id="img-section"> <b>프로필 사진</b>
-            <p>이미지 파일만 허용됩니다. </p> <button class="btn button border"><b>Upload</b></button>
+            <p>이미지 파일만 허용됩니다.  <button class="btn button border"><b>Upload</b></button></p>
         </div>
     </div>
     <div class="py-2">
@@ -39,7 +39,7 @@
             <div class="col-md-12"> <label for="phone">상세 주소</label> <input type="tel" class="bg-light form-control" name="member_secondaddr" id="member_secondaddr" placeholder="상세주소"> </div>
         </div>
  
-        <div class="py-3 pb-4 border-bottom"> <button class="btn btn-primary mr-3">정보 수정 저장</button> <button onclick="close_popup();" class="btn border button">취소</button> </div>
+        <div class="py-3 pb-4 border-bottom"> <button class="btn btn-danger mr-3">정보 수정 저장</button> <button onclick="close_popup();" class="btn border button">취소</button> </div>
         
     </div>
 </div>
