@@ -4,17 +4,19 @@ public class Paging_Dto {
 
 	// 현재페이지, 시작페이지, 끝페이지, 게시글 총 갯수, 페이지당 글 갯수, 마지막페이지, SQL쿼리에 쓸 start, end
 		private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
+		private String keyword;
 		private int cntPage = 5;
 		
 		public Paging_Dto() {
 		}
-		public Paging_Dto(int total, int nowPage, int cntPerPage) {
+		public Paging_Dto(int total, int nowPage, int cntPerPage,String keyword) {
 			setNowPage(nowPage);
 			setCntPerPage(cntPerPage);
 			setTotal(total);
 			calcLastPage(getTotal(), getCntPerPage());
 			calcStartEndPage(getNowPage(), cntPage);
 			calcStartEnd(getNowPage(), getCntPerPage());
+			this.keyword = keyword;
 		}
 		// 제일 마지막 페이지 계산
 		public void calcLastPage(int total, int cntPerPage) {
@@ -35,6 +37,12 @@ public class Paging_Dto {
 		public void calcStartEnd(int nowPage, int cntPerPage) {
 			setEnd(nowPage * cntPerPage);
 			setStart(getEnd() - cntPerPage + 1);
+		}
+		public String getKeyword() {
+			return keyword;
+		}
+		public void setKeyword(String keyword) {
+			this.keyword =keyword;
 		}
 		
 		public int getNowPage() {
@@ -93,8 +101,9 @@ public class Paging_Dto {
 		}
 		@Override
 		public String toString() {
-			return "Paging_Dto [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total
-					+ ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end
-					+ ", cntPage=" + cntPage + "]";
+			return "Paging_Dto [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total="
+					+ total + ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end="
+					+ end + ", keyword=" + keyword + ", cntPage=" + cntPage + "]";
 		}
+		
 }

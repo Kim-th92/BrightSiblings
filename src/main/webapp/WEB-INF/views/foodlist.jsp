@@ -16,7 +16,8 @@
 
 
 <h2>게시판</h2>
-<div style ="width:100%;">
+<div style ="width:100%;" id ="fooddict-wraper">
+
 <div class="table-responsive" style="margin:auto; width:80%;"> 
 	<table class="table table-striped" >
 	<thead>
@@ -58,17 +59,40 @@
 			<a href="foodlist.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
 	</div>
-	<div class="inner-form" style="display: block; text-align: center;">
-            <div class="input-field">
-             <input id="search" type="text" placeholder="검색"  />
-              <button class="btn-search" type="button">
-					<i class="fas fa-search"></i>
-              </button>
-             
-            </div>
-          </div>
+		<!-- pagination{e} -->
+
+		<!-- search{s} -->
+
+		<div class="form-group row justify-content-center">
+			<div class="w300" style="padding-right:10px">
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+			</div>
+
+			<div>
+				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+			</div>
+		</div>
+
+		<!-- search{e} -->
+
+
+
    
 </div>
+
+<script>
+	$(document).on('click', '#btnSearch', function(e){
+		e.preventDefault();
+		var url = "foodlist.do";
+		url = url + "?keyword=" + $('#keyword').val();
+		location.href = url;
+		console.log(url);
+	});	
+
+</script>
+
+
+
 </div>
 </body>
 </html>

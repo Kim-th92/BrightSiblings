@@ -31,9 +31,7 @@ public class Chat_Controller {
 	public @ResponseBody Map<String, Object> chatroomlist(@RequestParam("member_no") int member_no){
 		List<Chatroom_Dto> list = chat_biz.chatroomlist(member_no);
 		Map<String,Object> map = new HashMap<String, Object>();
-		System.out.println(member_no);
 		map.put("chatroomlist", list);
-		System.out.println(list.toString());
 		if(list.isEmpty()) {
 			map.put("check",false);
 		}else {
@@ -50,7 +48,6 @@ public class Chat_Controller {
 		int myno = myDto.getMember_no();
 		Chatroom_Dto roomDto =null;
 		
-		System.out.println(roomDto);
 		
 		//챗룸이 이미 있을때 
 		if(chatroom_no !=null) {
@@ -78,7 +75,6 @@ public class Chat_Controller {
 				
 				list = chat_biz.msglist(chatroom_no);
 				model.addAttribute("memberlist",memberlist);
-				System.out.println("memberlist>>>>>>"+memberlist);
 				model.addAttribute("chatmsglist", list);
 				model.addAttribute("roomno", chatroom_no);
 				return "chatroom";
