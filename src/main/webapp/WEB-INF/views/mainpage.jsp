@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="resources/css/scroll.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
 </head>
 <body>
 <%@include file="header.jsp" %>
@@ -24,7 +24,9 @@
 			<li>4th Navi</li>
 		</ul>
 	</section>
-	
+</article>
+
+<article id="newsFeed">	
 	<section id="board">
 		<div id="boardDiv">
 					<c:choose>
@@ -41,10 +43,11 @@
 							<div class="writeWrap">
 								<input type="button" value="글쓰기" onclick="location.href='write.do'" />
 							</div>
+							<div class="container" id="container">
 							<c:forEach items="${list }" var= "list" varStatus="status">
 								<input id="boardMemberNo" type="hidden" value="글쓴놈의 회원번호 : ${list.member_no }">
 								<input id="loginMemberNo" type="hidden" value="로그인한 놈의 회원번호 : ${login.member_no }">
-								<div class="feedWrap">
+								<div class="feedWrap" id="feedWrap">
 									<div class="feedProp">
 										<img src="${np[status.index].member_profile }">
 										<span>${np[status.index].member_name }</span>
@@ -78,11 +81,19 @@
 									</div>
 								</div>			
 							</c:forEach>
+							</div>
 						</c:otherwise>
 						
 					</c:choose>
 			
 		</div>
+		
+		<div class="loading">
+        	<div class="ball"></div>
+        	<div class="ball"></div>
+        	<div class="ball"></div>
+    	</div>
+    
 	</section>
 	
 	<section id="friendList">
@@ -130,8 +141,13 @@
 			}
 			
 		}
-	</script>	
+	</script>
+	
 </article>
-<script src="./resource/js/scroll.js"></script>
+
+
+<script src="resources/js/scroll.js"></script>
+
+
 </body>
 </html>

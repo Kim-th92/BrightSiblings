@@ -1,15 +1,36 @@
-//Javascript
-	var count = 0;
-	//스크롤 바닥 감지
-	window.onscroll = function(e) {
-		//추가되는 임시 콘텐츠
-		//window height + window scrollY 값이 document height보다 클 경우,
-		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-			//실행할 로직 (콘텐츠 추가)
-			count++;
-			var addContent = '<div class="feedWrap"><p>' + count
-					+ '번째로 추가된 콘텐츠</p></div>';
-			//article에 추가되는 콘텐츠를 append
-			$('article id=newsFeed').append(addContent);
+const container = document.getElementById('container');
+const loading = document.querySelector('.loading');
+
+getPost();
+getPost();
+getPost();
+
+window.addEventListener('scroll', function () {
+		const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+		console.log({ scrollTop, scrollHeight, clientHeight });
+
+		if (clientHeight + scrollTop >= scrollHeight - 5) {
+			// show the loading animation
+			showLoading();
 		}
-	};
+	});
+
+function showLoading() {
+	loading.classList.add('show');
+	
+	// load more data
+	setTimeout(getPost, 1000)
+}
+
+
+
+function addDataToDOM(data) {
+	const postElement = document.createElement('div');
+	postElement.classList.add('feedWrap');
+
+	container.appendChild(postElement);
+	
+	loading.classList.remove('show');
+}
+
