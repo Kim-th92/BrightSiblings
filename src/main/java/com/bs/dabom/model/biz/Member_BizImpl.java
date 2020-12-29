@@ -69,4 +69,14 @@ public class Member_BizImpl implements Member_Biz {
 		return dao.admin_select_list(member_no);
 	}
 
+	@Override
+	public int updateMember(Member_Dto dto) {
+		return dao.updateMember(dto);
+	}
+
+	@Override
+	public int findpwcheck(Member_Dto dto) {
+		return dao.findpwcheck(dto);
+	}
+
 }

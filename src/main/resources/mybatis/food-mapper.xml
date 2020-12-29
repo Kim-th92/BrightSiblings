@@ -16,7 +16,7 @@
 						FROM FOODDB
 						<if test="keyword != null and keyword != '' ">
 				WHERE FOOD_NAME like  '%'||#{keyword}||'%'
-			</if>
+							</if>
 						ORDER BY FOOD_NO 
 						) A
 				)

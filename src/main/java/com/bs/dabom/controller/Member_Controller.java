@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +25,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +40,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bs.dabom.model.biz.Member_Biz;
+import com.bs.dabom.model.dto.AuthKey;
+import com.bs.dabom.model.dto.MailHandler;
 import com.bs.dabom.model.dto.Member_Dto;
 import com.bs.dabom.snslogin.NaverLoginBo;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -45,14 +52,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 @Controller
 public class Member_Controller {
 
-	private final static String K_CLIENT_ID = "5e5790e19b452854db751365c8cd9a9d";
-	private final static String K_REDIRECT_URI = "http://localhost:8787/dabom/oauth/kakao/callback.do";
-
-	public static String getAuthorizationUrl(HttpSession session) {
-		String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?" + "client_id=" + K_CLIENT_ID + "&redirect_uri="
-				+ K_REDIRECT_URI + "&response_type=code";
-		return kakaoUrl;
-	}
+	
 
 	@Autowired
 	private Member_Biz biz;
@@ -64,6 +64,9 @@ public class Member_Controller {
 	private void setNaverLoginBO(NaverLoginBo naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
+	
+	@Inject
+	private JavaMailSender mailSender;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -142,6 +145,7 @@ public class Member_Controller {
 	@RequestMapping("logout.do")
 	public String logout(HttpServletRequest req,HttpServletResponse resp) {
 		req.getSession().invalidate();
+		req.getSession().removeAttribute("login");
 		 Cookie[] cookies = req.getCookies();
 		    if (cookies != null)
 		        for (Cookie cookie : cookies) {
@@ -155,11 +159,77 @@ public class Member_Controller {
 		return "login";
 	}
 	
-	//아이디 패스워드 찾기 
-	@RequestMapping("findidpw.do")
-	public String findIdpw(Model model) {
-		return "findidpw";
+	//아이디 패스워드 찾기 jsp 이동
+	@RequestMapping("findpw.do")
+	public String findpw(Model model) {
+		return "findpw";
 	}
+	//아이디 패스워드 찾기전 기존에 가입한 회원인지 확인 
+	@RequestMapping("findpwcheck.do")
+	public @ResponseBody Map<String ,String> findpwcheck(@RequestBody Member_Dto dto){
+		System.out.println("dto>>>>>" +dto);
+		int res = biz.findpwcheck(dto);
+		System.out.println(res);
+		Map<String, String> map = new HashMap<String, String>();
+		if(res>0) {
+			map.put("check", "true");
+		}else {
+			map.put("check", "false");
+		}
+		return map;
+	}
+	
+	//메일전송 메서드 
+	@GetMapping("mailsend.do")
+	public Map<String,String> mailsend(@RequestParam("member_email") String member_email) throws MessagingException, UnsupportedEncodingException{
+		String key = new AuthKey().getKey(10, false);
+        MailHandler sendMail = new MailHandler(mailSender);
+        sendMail.setSubject("[이메일 인증]");
+        sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
+                .append("<h2>인증번호는 [")
+                .append(key)
+                .append("]입니다.")
+                .toString());
+        sendMail.setFrom("maggiechoietest@gmail.com", "관리자");
+        sendMail.setTo(member_email);
+        sendMail.send();
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("authkey", key);
+        return map;
+	}
+	
+	
+	//임시비밀번호 발급  
+	@RequestMapping("temppw.do")
+	public @ResponseBody Map<String,String> temppw(@RequestBody Member_Dto dto){
+		Map<String,String> map = new HashMap<String, String>();
+		
+		
+		
+		
+		//10자리 랜덤한 비밀번호 생성 
+	    String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주고 
+	    String temppw = uuid.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌.
+	    
+	    
+		return map;
+	}
+	
+	
+	
+	//회원정보수정
+	@RequestMapping(value="updatemember.do",method=RequestMethod.POST)
+	public @ResponseBody Map<String, String> updateMember(@RequestBody Member_Dto dto){
+		int res = biz.updateMember(dto);
+		Map<String,String> map  =new HashMap<String, String>();
+		if(res>0) {
+			map.put("result", "OK");
+		}else {
+			map.put("result", "NO");
+		}
+		
+		return map;
+	} 
 	
 	
 	//회원탈퇴
@@ -234,6 +304,17 @@ public class Member_Controller {
 	}
 	
 	//카카오 로그인 
+	
+	private final static String K_CLIENT_ID = "5e5790e19b452854db751365c8cd9a9d";
+	private final static String K_REDIRECT_URI = "http://localhost:8787/dabom/oauth/kakao/callback.do";
+
+	public static String getAuthorizationUrl(HttpSession session) {
+		String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?" + "client_id=" + K_CLIENT_ID + "&redirect_uri="
+				+ K_REDIRECT_URI + "&response_type=code";
+		return kakaoUrl;
+	}
+	
+	
 	@RequestMapping(value = "oauth/kakao/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String kekoLogin(@RequestParam("code") String code,HttpServletRequest req,HttpServletResponse res
 			,HttpSession session,Model model) throws Exception{
