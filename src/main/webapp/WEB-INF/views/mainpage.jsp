@@ -85,68 +85,13 @@
 		</div>
 	</section>
 	
-	<section id="friendList">
-		<div id="friendDiv">
-	friend list
-		</div>
-	</section>
 	
 	<script type="text/javascript">
-		function enterkey() {
-		     if (window.event.keyCode == 13) {
-		             // 엔터키가 눌렸을 때 실행할 내용
-		             writeReply();
-		     }
-		}
 
-		function writeReply(){
-			
-			var replyContent = $("#replyContent").val().trim();
-			// 댓글 내용
-			var boardNo = $("#boardNo").val().trim();
-			// 게시판 번호
-			
-			var replyData = {
-					"reply_content" : replyContent,
-					"board_no" : boardNo
-			};
-			
-			if (replyContent == null || replyContent == ""){
-				return false;
-			} else{
-				$ajax({
-					type : "post",
-					url : "/dabom/writeReply.do",
-					data : JSON.stringify(replyData),
-					contentType : "application/json",
-					success : function(msg){
-						console.log(msg);
-						location.reload();
-					},
-					error : function(err){
-						console.log(err);
-					}
-				})				
-			}
-			
-		}
-		
-	//스크롤
-	//Javascript
-	var count = 0;
-	//스크롤 바닥 감지
-	window.onscroll = function(e) {
-		//추가되는 임시 콘텐츠
-		//window height + window scrollY 값이 document height보다 클 경우,
-		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-			//실행할 로직 (콘텐츠 추가)
-			count++;
-			var addContent = '<div class="block"><p>' + count
-					+ '번째로 추가된 콘텐츠</p></div>';
-			//article에 추가되는 콘텐츠를 append
-			$('#boardDiv').append(addContent);
-		}
-	};
+	
+	
+	
+	
 	</script>	
 </article>
 <script src="./resource/js/scroll.js"></script>
