@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+<!-- type aliases -->
+	<typeAliases>
+		<typeAlias type="com.bs.dabom.model.dto.Member_Dto" alias = "memberDto"/>
+		<typeAlias type ="com.bs.dabom.model.dto.Friends_Dto" alias ="friendsDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.Board_Dto" alias = "boardDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.Donation_Dto" alias="donationDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.Files_Dto" alias = "filesDto" />
+		<typeAlias type="com.bs.dabom.model.dto.Chatmsg_Dto" alias ="chatmsgDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.Chatroom_Dto" alias="chatroomDto"/>
+		<typeAlias type ="com.bs.dabom.model.dto.Food_Dto" alias = "foodDto"/>
+		<typeAlias type ="com.bs.dabom.model.dto.News_Dto" alias = "newsDto"/>
+	</typeAliases>
+	
+	
+	
+	
+	
+<!-- mapper -->
+	<mappers>
+		<mapper resource= "/mybatis/food-mapper.xml"/>
+		<mapper resource ="/mybatis/member-mapper.xml"/>
+		<mapper resource="/mybatis/friends-mapper.xml"/>
+		<mapper resource ="/mybatis/board-mapper.xml"/>
+		<mapper resource ="/mybatis/donation-mapper.xml"/>
+		<mapper resource="/mybatis/chat-mapper.xml"/>
+		<mapper resource="/mybatis/news-mapper.xml"/>
+	</mappers>
+
+
+</configuration>

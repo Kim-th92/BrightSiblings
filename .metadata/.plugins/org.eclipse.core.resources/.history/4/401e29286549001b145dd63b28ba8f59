@@ -1,0 +1,5 @@
+package com.bs.dabom.model.dto;
+
+public class MailHandler{
+
+}

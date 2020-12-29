@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+#admin_memberlist{
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 100px;
+}
+
+table{
+	width: 100%;
+}
+
+#admin_memberlist_title {
+	height: 60px;
+}
+#admin_memberlist_title > td {
+	font-weight: bolder;
+}
+
+.admin_memberlist_content{
+	height: 50px;
+}
+	
+td{
+	padding-left: 10px;
+}	
+
+tr.even { 
+	background: gray; 
+}
+
+tr.odd { 
+	background: white; 
+}

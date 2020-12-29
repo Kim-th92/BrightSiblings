@@ -1,0 +1,6 @@
+package com.bs.dabom.model.biz;
+
+public interface News_Biz {
+	
+
+}

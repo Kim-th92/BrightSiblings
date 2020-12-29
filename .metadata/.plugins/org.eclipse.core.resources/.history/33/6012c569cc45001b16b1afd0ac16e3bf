@@ -1,0 +1,5 @@
+package com.bs.dabom.model.dao;
+
+public class News_DaoImpl implements News_Dao {
+
+}

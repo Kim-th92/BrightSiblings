@@ -1,0 +1,11 @@
+package com.bs.dabom.model.biz;
+
+import org.springframework.stereotype.Service;
+
+import com.bs.dabom.model.dao.News_Dao;
+
+@Service
+public class News_BizImpl implements News_Biz {
+
+	private News_Dao dao;
+}

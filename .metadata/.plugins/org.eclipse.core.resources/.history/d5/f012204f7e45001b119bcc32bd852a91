@@ -1,0 +1,99 @@
+package com.bs.dabom.model.dao;
+
+import static com.bs.dabom.model.dao.JDBCTemplate.*;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+
+public class WordCloudParser {
+
+	public static void main(String[] args) {
+		 JSONParser json;
+	        JSONObject jsonObj = new JSONObject();
+	        JSONObject finalJsonObj1 = new JSONObject();
+	        JSONArray jsonarr = null;
+	        
+	      
+	        
+	        // 파일 경로 잡기
+	        String filePath ="/Users/seowonchoi/Documents/realfinalproject/BrightSiblings/src/main/webapp/resources/json/wordcloud.json";
+	        FileInputStream fileStream = null;
+	        
+	        
+	        try {
+	        	  Connection conn =getConnection();
+	  	        PreparedStatement pstmt= null;
+	            fileStream = new FileInputStream(filePath);
+	                        
+	            // 버퍼 선언
+	            byte[] readbuffer = new byte[fileStream.available()];
+	            while(fileStream.read(readbuffer) != -1){}
+	            
+	            String str = new String(readbuffer);
+	            
+	            json = new JSONParser();
+	            jsonObj = (JSONObject) json.parse(str);
+	            
+	            jsonarr = (JSONArray) jsonObj.get("wordcloud");
+	            String s = jsonarr.toString();
+	            String reals = s.substring(1,822995);
+	            jsonObj =(JSONObject)json.parse(reals);
+	            
+	            String[] objectName ={"DIET", "다이어트", "식이요법", "운동분석", "유산소", "근력운동", "닭가슴살", "DABOM", "건강", "칼로리", "BMI", "필라테스", "요가", "소셜네트워크", "한방다이어트", "친구찾기", "채팅", "인바디", "비타민", "보조제", "단백질", "감량", "캘린더", "좋아요", "동기부여", "비만유전자", "식욕억제"};
+	            
+	            pstmt = conn.prepareStatement("INSERT INTO worldcloud VALUES(?, ?, ?, ?)");   
+	            for(int i = 0 ; i < jsonObj.size();i++) {
+	            	
+	            		jsonarr = (JSONArray)jsonObj.get(objectName[i]);
+	            		
+	            		for(int j =0 ; j<jsonarr.size();j++) {
+	            			System.out.println(j);
+	            			JSONObject finalJsonObj2 = new JSONObject();
+	            			finalJsonObj2 =(JSONObject)jsonarr.get(j);
+	            			pstmt.setString(0,objectName[i]);
+	            			pstmt.setString(1, (String) finalJsonObj2.get("img"));
+	            			pstmt.setString(2,(String) finalJsonObj2.get("title"));
+	            			pstmt.setString(3, (String) finalJsonObj2.get("link"));
+	            			
+	            			pstmt.addBatch();
+	            			System.out.println("4. query 실행 및 리턴");
+	            		
+	            			
+	            		} 
+	            		int[] result = pstmt.executeBatch();
+	        			for(int k=0 ;k<result.length ; k++) {
+	        				//성공 : -2
+	        				//실패 : -3
+	        				if(result[k]==-2) {
+	        				}
+	        			}
+	            }
+	            // 쿼리 종료
+	            pstmt.close();
+	            conn.close();
+	         
+	        
+	        // 상세 오류 확인
+	        } catch(SQLException e1) {
+	            e1.getStackTrace();
+	        } catch(FileNotFoundException e2) {
+	            e2.getStackTrace();
+	        } catch(IOException e3) {
+	            e3.getStackTrace();
+	        } catch(ParseException e4) {
+	            e4.getStackTrace();
+	        }
+	    }
+	
+	
+}

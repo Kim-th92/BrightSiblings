@@ -1,0 +1,20 @@
+package com.bs.dabom.model.biz;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bs.dabom.model.dao.FoodPaging_Dao;
+
+@Service
+public class FoodPaging_Biz {
+
+	@Autowired
+	private FoodPaging_Dao dao;
+	
+	public int countBoard() {
+		
+		return dao.countBoard();
+	}
+
+	public List<Food_Dto>
+}

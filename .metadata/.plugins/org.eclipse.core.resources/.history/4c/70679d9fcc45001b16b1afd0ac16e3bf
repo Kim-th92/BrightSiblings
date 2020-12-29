@@ -1,0 +1,5 @@
+package com.bs.dabom.model.biz;
+
+public class News_BizImpl implements News_Biz {
+
+}

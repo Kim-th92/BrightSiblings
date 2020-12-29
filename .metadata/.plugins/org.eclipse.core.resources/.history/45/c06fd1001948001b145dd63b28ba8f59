@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="food">
+ 
+ <select id="countFood" resultType="int">
+ 
+ 	select count(*) from fooddb
+ </select>
+ 
+ <select id="selectFood" resultType ="foodDto">
+ 	SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * 
+						FROM FOODDB
+						ORDER BY FOOD_NO 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end} 
+	<trim prefix="AND" prefixOverrides="AND|OR">
+			<if test="searchType=='title' and keyword != null and keyword != '' ">
+
+				AND TITLE like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test="searchType=='content' and keyword != null and keyword != '' ">
+
+				AND CONTENT like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test="searchType=='reg_id' and keyword != null and keyword != '' ">
+
+				AND reg_id like CONCAT('%', #{keyword}, '%')
+
+			</if>	
+
+		</trim>
+
+
+
+ </select>
+ 
+</mapper>
