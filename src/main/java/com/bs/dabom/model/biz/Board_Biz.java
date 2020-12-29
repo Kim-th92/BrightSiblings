@@ -5,6 +5,7 @@ import java.util.List;
 import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.Files_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
+import com.bs.dabom.model.dto.Reply_Dto;
 
 public interface Board_Biz {
 
@@ -17,4 +18,6 @@ public interface Board_Biz {
 	public int delete(int board_no);
 	public Member_Dto getNameProp(int member_no);
 	public List<Files_Dto> getFileUrl(int board_no);
+	public List<Reply_Dto> getReply(int board_no);
+	public int insertReply(Reply_Dto dto);
 }

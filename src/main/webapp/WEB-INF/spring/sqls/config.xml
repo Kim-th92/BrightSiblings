@@ -6,10 +6,11 @@
 <!-- type aliases -->
 	<typeAliases>
 		<typeAlias type="com.bs.dabom.model.dto.Member_Dto" alias = "memberDto"/>
-		<typeAlias type ="com.bs.dabom.model.dto.Friends_Dto" alias ="friendsDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.Friends_Dto" alias ="friendsDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Board_Dto" alias = "boardDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Donation_Dto" alias="donationDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Files_Dto" alias = "filesDto" />
+		<typeAlias type="com.bs.dabom.model.dto.Reply_Dto" alias="replyDto" />
 	</typeAliases>
 	
 	
