@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.Files_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
+import com.bs.dabom.model.dto.Reply_Dto;
 
 @Repository
 public class Board_DaoImpl implements Board_Dao {
@@ -66,9 +67,14 @@ public class Board_DaoImpl implements Board_Dao {
 	@Override
 	public int update(Board_Dto dto) {
 		
-		int res = sqlSession.update(NAMESPACE + "update", dto);
+		int board_no = dto.getMember_no();
+		System.out.println("board_no는 "+ board_no + "입니다.");
 		
-		return res;
+		int res1 = sqlSession.update(NAMESPACE + "update", dto);
+		int res2 = sqlSession.delete(NAMESPACE + "deleteFile", board_no);
+	
+		
+		return res1;
 	}
 
 	@Override
@@ -91,6 +97,22 @@ public class Board_DaoImpl implements Board_Dao {
 	public List<Files_Dto> getFileUrl(int board_no) {
 
 		List<Files_Dto> res = sqlSession.selectList(NAMESPACE + "getFileUrl", board_no);
+		
+		return res;
+	}
+
+	@Override
+	public int insertReply(Reply_Dto dto) {
+
+		int res = sqlSession.insert(NAMESPACE + "insertReply", dto);
+		
+		return res;
+	}
+
+	@Override
+	public List<Reply_Dto> getReply(int board_no) {
+
+		List<Reply_Dto> res = sqlSession.selectList(NAMESPACE + "getReply", board_no);
 		
 		return res;
 	}
