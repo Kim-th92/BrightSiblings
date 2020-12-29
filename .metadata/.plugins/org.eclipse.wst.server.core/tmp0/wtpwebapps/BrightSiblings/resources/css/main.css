@@ -31,10 +31,7 @@
 #board{
 	width : 100%;
 	height : 100%;
-<<<<<<< HEAD
-=======
 	background-color: ghostwhite;
->>>>>>> master
 }
 #boardDiv{
 	width : 60%;
@@ -43,25 +40,7 @@
 	height : 100%;
 }
 
-<<<<<<< HEAD
-/*
-#friendList{
-	position: absolute;
-	width : 20%;
-	margin-left: 1200px;
-	background-color : blue;
-	height : 100%;
-}
-#friendDiv{
-	position: fixed;
-	width: 20%;
-	background-color : black;
-	height : 100%;
-}
-*/
-=======
 
->>>>>>> master
 
 /* write css */
 
@@ -99,11 +78,7 @@
 }
 .feedImage img{
 	width: 200px;
-<<<<<<< HEAD
-	height: 100px;
-=======
 	height: auto;
->>>>>>> master
 }
 
 .feedContent{

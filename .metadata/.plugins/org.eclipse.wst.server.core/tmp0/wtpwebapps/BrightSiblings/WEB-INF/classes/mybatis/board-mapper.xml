@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "board">
-<<<<<<< HEAD
-=======
 	<resultMap type="replyDto" id="replyMap">
 		<result column = "REPLY_NO" property="reply_no"/>
 		<result column = "BOARD_NO" property="board_no"/>
@@ -11,7 +9,6 @@
 	</resultMap>
 	
 	
->>>>>>> master
 	
 	<select id="selectList" resultType="boardDto">
 		SELECT *
@@ -42,8 +39,6 @@
 		WHERE BOARD_NO = #{board_no}
 	</select>
 	
-<<<<<<< HEAD
-=======
 	<select id="getReply" parameterType="replyDto" resultMap="replyMap">
 		SELECT *
 		FROM REPLY
@@ -51,7 +46,6 @@
 		ORDER BY REPLY_NO DESC
 	</select>
 	
->>>>>>> master
 	<insert id="insert" parameterType="boardDto">
 		INSERT INTO BOARD
 		VALUES(
@@ -76,11 +70,6 @@
 				SYSDATE
 		)
 	</insert>
-<<<<<<< HEAD
-	<update id="update" parameterType="boardDto">
-	
-	</update>
-=======
 	
 	<insert id="insertReply" parameterType="replyDto">
 		INSERT INTO REPLY
@@ -100,15 +89,11 @@
 		WHERE BOARD_NO = #{member_no}
 	</update>
 	
->>>>>>> master
 	<delete id="deleteFile">
 		DELETE FROM FILES
 		WHERE BOARD_NO = #{board_no}
 	</delete>
-<<<<<<< HEAD
-=======
 	
->>>>>>> master
 	<delete id="deleteBoard">
 		DELETE FROM BOARD
 		WHERE BOARD_NO = #{board_no}
