@@ -120,4 +120,25 @@ public class Member_DaoImpl implements Member_Dao {
 		return dto;
 	}
 
+	@Override
+	public int updateMember(Member_Dto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updatemember" ,dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int findpwcheck(Member_Dto dto) {
+		int res = 0;
+		res = sqlSession.selectOne(NAMESPACE+"findpwcheck",dto);
+		
+		return res;
+	}
+
 }

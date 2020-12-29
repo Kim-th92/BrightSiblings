@@ -38,9 +38,7 @@
 			</tr>
 		</c:forEach>
 		</tbody>
-		
 	</table>
-	
 	<div style="display: block; text-align: center;">		
 		<c:if test="${paging.startPage != 1 }">
 			<a href="foodlist.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>

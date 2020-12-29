@@ -21,7 +21,11 @@ public interface Member_Biz {
 	
 	public int uploadProfile(Member_Dto dto);
 	
+	public int updateMember(Member_Dto dto);
+	
 	//admin 관련 추가
 	public List<Member_Dto> admin_member_list();
 	public Member_Dto admin_select_list(int member_no);
+
+	public int findpwcheck(Member_Dto dto);
 }
