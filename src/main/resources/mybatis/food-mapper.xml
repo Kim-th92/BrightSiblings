@@ -14,10 +14,15 @@
 				FROM (
 						SELECT * 
 						FROM FOODDB
+						<if test="keyword != null and keyword != '' ">
+				WHERE FOOD_NAME like  '%'||#{keyword}||'%'
+							</if>
 						ORDER BY FOOD_NO 
 						) A
 				)
-	WHERE RN BETWEEN #{start} AND #{end}
+	WHERE RN BETWEEN #{start} AND #{end} 
+			
+
  </select>
  
 </mapper>

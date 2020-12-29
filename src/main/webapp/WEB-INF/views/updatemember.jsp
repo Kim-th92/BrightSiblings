@@ -16,37 +16,75 @@
 
 	<!-- 팝업 시작 -->
 	<div class="wrapper bg-white mt-sm-5" id="update_popup" style="display: none;">
-    <h6 class="pb-4 border-bottom">회원정보 수정</h6>
-    <div class="d-flex align-items-start py-3 border-bottom"> 
-    <img src="" class="img" alt="">
-        <div class="pl-sm-4 pl-2" id="img-section"> <b>프로필 사진</b>
-            <p>이미지 파일만 허용됩니다.  <button class="btn button border"><b>Upload</b></button></p>
-        </div>
-    </div>
+    <h1 class="pb-4 border-bottom">회원정보 수정</h1>
     <div class="py-2">
         <div class="row py-2">
-            <div class="col-md-6"> <label for="firstname">이름</label> <input type="text" class="bg-light form-control" id="member_name" name="member_name" placeholder="홍길동" readonly="readonly"> </div>
-            <div class="col-md-6"> <label for="firstname">생년월일</label> <input type="text" class="bg-light form-control" id="member_birthday" name="member_birthday"  placeholder="ex) 19990101" readonly="readonly"> </div>
+            <div class="col-md-6"> <label for="firstname">이름</label> <input type="text" class="bg-light form-control" id="member_name" name="member_name" value="${login.member_name }" readonly="readonly"> </div>
+            <div class="col-md-6"> <label for="firstname">생년월일</label> <input type="text" class="bg-light form-control" id="member_birthday" name="member_birthday"  value= "${login.member_birthday }" > </div>
         </div>
         <div class="row py-2">
-            <div class="col-md-6"> <label for="email">이메일 주소</label> <input type="text" class="bg-light form-control" id="member_email" name="member_email"  placeholder="steve_@email.com"> </div>
-            <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">휴대폰번호</label> <input type="tel" class="bg-light form-control" id="member_phone" name="member_phone" placeholder="휴대폰 번호('-'없이 번호만 입력해주세요)"> </div>
+            <div class="col-md-6"> <label for="email">이메일 주소</label> <input type="text" class="bg-light form-control" id="member_email" name="member_email"  value="${login.member_email }"> </div>
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">휴대폰번호</label> <input type="tel" class="bg-light form-control" id="member_phone" name="member_phone" value="${login.member_phone }"> </div>
         </div>
      	<div class="row py-2">
-            <div class="col-md-6"> <label for="email">주소</label> <input type="text" class="bg-light form-control" placeholder="우편번호" name="member_zipcode" id="member_zipcode"  readonly="readonly">
+            <div class="col-md-6"> <label for="email">주소</label> <input type="text" class="bg-light form-control" placeholder="우편번호"  value= "${login.member_zipcode  }"name="member_zipcode" id="member_zipcode"  readonly="readonly">
             <button type="button" class="btn btn-outline-secondary" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button> </div>
-              <div class="col-md-12"> <label for="phone">도로명 주소</label> <input type="tel" class="bg-light form-control" name="member_firstaddr" id="member_firstaddr"  readonly="readonly" placeholder="도로명주소"> </div>
-            <div class="col-md-12"> <label for="phone">상세 주소</label> <input type="tel" class="bg-light form-control" name="member_secondaddr" id="member_secondaddr" placeholder="상세주소"> </div>
+              <div class="col-md-12"> <label for="phone">도로명 주소</label> <input type="tel" class="bg-light form-control" name="member_firstaddr" id="member_firstaddr"  readonly="readonly" value="${login.member_firstaddr }"> </div>
+            <div class="col-md-12"> <label for="phone">상세 주소</label> <input type="tel" class="bg-light form-control" name="member_secondaddr" id="member_secondaddr" value="${login.member_secondaddr }"> </div>
         </div>
  
-        <div class="py-3 pb-4 border-bottom"> <button class="btn btn-danger mr-3">정보 수정 저장</button> <button onclick="close_popup();" class="btn border button">취소</button> </div>
+        <div class="py-3 pb-4 border-bottom"> <button class="updatesubmitbtn btn btn-danger mr-3">정보 수정 저장</button> <button onclick="close_popup();" class="btn border button">취소</button> </div>
         
     </div>
 </div>
 	<div class="update_background"></div>
 
 	<script type="text/javascript">
-// 		클릭시 팝업
+	var member_name ,member_birthday,member_email,member_phone,member_zipcode,member_firstaddr,member_secondaddr;
+	member_no= ${login.member_no};
+	member_name = $('#member_name').val().trim();
+	member_birthday= $('#member_birthday').val().trim();
+	member_email = $('#member_email').val().trim();
+	member_phone= $('#member_phone').val().trim();
+	member_zipcode = $('#member_zipcode').val().trim();
+	member_firstaddr=$('#member_firstaddr').val().trim();
+		member_secondaddr=$('#member_secondaddr').val().trim();
+	
+	$('#member_name').val 
+	
+	var updateValue ={
+			'member_no' : member_no,
+			'member_name': member_name,
+			'member_birthday': member_birthday,
+			'member_email' :member_email ,
+			'member_phone': member_phone, 
+			'member_zipcode': member_zipcode, 
+			'member_firstaddr': member_firstaddr,
+			'member_secondaddr': member_secondaddr					
+	};
+	
+	
+	
+		$('.updatesubmitbtn').click(function(){
+			$.ajax({
+				url: 'updatemember.do' ,
+				type: 'POST',
+				data : JSON.stringify(updateValue),
+				contentType : "application/json",
+				success: function(msg){
+					if(msg.result=='OK'){
+						alert('회원정보 수정 완료되었습니다. ');
+					}else{
+						alert('회원정보 하는 도중 문제가 발생하였네요..\n 다시 시도해 주세요 !')
+					}
+				},
+				error: function(err){
+					alert('업데이트 실패하였습니다.다시 시도해 주세요!');
+				}
+			});
+		});
+		
+		//클릭시 팝업창 닫기
 		function close_popup(){
 			$("#update_popup").hide();
 			$('.update_background').hide();
@@ -61,19 +99,7 @@
 		}
 		
 		
-		$(document).ready(function(){
-			$.ajax({
-				url:"updatemember.do?member_no="+ ${login.member_no},
-				type:"GET",
-				success:function(data){
-					
-				},
-				error: function(err){
-					
-				}
-			});
-		});
-		
+	
 		var empJ = /\s/g;
 		// 이름 정규식 
 		var nameJ = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;

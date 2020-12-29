@@ -18,7 +18,8 @@ public class Food_Controller {
 	@RequestMapping("foodlist.do")
 	public String boardList(Paging_Dto  dto ,Model model,
 			@RequestParam (value="nowPage",required=false)String nowPage,
-			@RequestParam (value="cntPerPage",required=false)String cntPerPage) {
+			@RequestParam (value="cntPerPage",required=false)String cntPerPage,
+			@RequestParam (value="keyword",required=false)String keyword) {
 		int total = biz.countBoard();
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
@@ -28,7 +29,7 @@ public class Food_Controller {
 		} else if (cntPerPage == null) { 
 			cntPerPage = "10";
 		}
-		dto= new Paging_Dto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		dto= new Paging_Dto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage),keyword);
 		model.addAttribute("paging", dto);
 		model.addAttribute("viewAll", biz.selectFood(dto));
 		return "foodlist";

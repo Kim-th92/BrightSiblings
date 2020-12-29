@@ -41,9 +41,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 					||request.getRequestURI().contains("/registerres.do")
 					||request.getRequestURI().contains("/logout.do")
 					||request.getRequestURI().contains("/idcheck.do")
-					||request.getRequestURI().contains("/findidpw.do")
+					||request.getRequestURI().contains("/findpw.do")
 					||request.getRequestURI().contains("/oauth/kakao/callback.do")
-					||request.getRequestURI().contains("/oauth/naver/callback.do")								
+					||request.getRequestURI().contains("/oauth/naver/callback.do")
+					||request.getRequestURI().contains("/findpwcheck.do")
+					||request.getRequestURI().contains("/mailsend.do")
+					||request.getRequestURI().contains("/temppw.do")
+					
 					) {
 				return true;
 			}

@@ -5,6 +5,7 @@ import java.util.List;
 import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.Files_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
+import com.bs.dabom.model.dto.Reply_Dto;
 
 public interface Board_Dao {
 	
@@ -22,5 +23,8 @@ public interface Board_Dao {
 	
 	//adminpage 관련
 	public List<Board_Dto> adminboardList(int end_no);
+	
+	public int insertReply(Reply_Dto dto);
+	public List<Reply_Dto> getReply(int board_no);
 
 }

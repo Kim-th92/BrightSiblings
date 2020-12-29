@@ -12,5 +12,4 @@ create table addmemberinfo(
 	constraint add_member_no_fk FOREIGN KEY (member_no) REFERENCES member(member_no),
 	constraint gender CHECK(gender IN('W','M'))
 	
-
 )

@@ -26,4 +26,8 @@ public interface Member_Dao {
 	//admin 관련 추가
 	public List<Member_Dto> admin_member_list();
 	public Member_Dto admin_select_list(int member_no);
+
+	public int updateMember(Member_Dto dto);
+
+	public int findpwcheck(Member_Dto dto);
 }

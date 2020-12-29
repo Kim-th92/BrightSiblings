@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bs.dabom.model.biz.FoodPaging_Biz;
+import com.bs.dabom.model.biz.Food_Biz;
 import com.bs.dabom.model.biz.Friends_Biz;
 import com.bs.dabom.model.biz.Member_Biz;
 import com.bs.dabom.model.dto.Member_Dto;
-
-
+import com.bs.dabom.model.dto.Paging_Dto;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,6 +38,8 @@ public class MyPage_Controller {
 
 	@Autowired
 	private Member_Biz member_biz;
+	@Autowired
+	private FoodPaging_Biz food_biz;
 	
 	public static void main(String[] args) {
 		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 
@@ -67,7 +70,24 @@ public class MyPage_Controller {
 	}
 	
 	@RequestMapping("mypage_food.do")
-	public String mypageFood(Model model) {
+	public String mypageFood(Model model,Paging_Dto  dto,
+			@RequestParam (value="nowPage",required=false)String nowPage,
+			@RequestParam (value="cntPerPage",required=false)String cntPerPage,
+			@RequestParam (value="keyword",required=false)String keyword) {
+		int total = food_biz.countBoard();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "10";
+		}
+		dto= new Paging_Dto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage),keyword);
+		model.addAttribute("paging", dto);
+		model.addAttribute("viewAll", food_biz.selectFood(dto));
+		
+		
 		return "mypage_food";
 	}
 	
@@ -109,6 +129,7 @@ public class MyPage_Controller {
 	@RequestMapping("profilePicUpload.do")
 	public @ResponseBody Map<String, Integer> profilePicUpload(HttpSession session,MultipartHttpServletRequest mtf) throws UnsupportedEncodingException{
 		MultipartFile file = mtf.getFile("file");
+		//파일이 빈파일인지 유효성 검사 
 		boolean isc = file.isEmpty();
 		
 		Member_Dto member_dto = (Member_Dto) session.getAttribute("login");
@@ -135,7 +156,7 @@ public class MyPage_Controller {
 			try {
 				inputStream = file.getInputStream();
 				String path = mtf.getSession().getServletContext().getRealPath("/resources/profile_img");
-			
+				
 				System.out.println("업로드될 실제 경로 : " + path);
 				
 				File storage = new File(path);

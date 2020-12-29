@@ -10,6 +10,7 @@ import com.bs.dabom.model.dao.Board_DaoImpl;
 import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.Files_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
+import com.bs.dabom.model.dto.Reply_Dto;
 
 @Service
 public class Board_BizImpl implements Board_Biz {
@@ -67,6 +68,16 @@ public class Board_BizImpl implements Board_Biz {
 	@Override
 	public List<Board_Dto> adminboardList(int end_no) {
 		return dao.adminboardList(end_no);
+	}
+	
+	@Override
+	public int insertReply(Reply_Dto dto) {
+		return dao.insertReply(dto);
+	}
+
+	@Override
+	public List<Reply_Dto> getReply(int board_no) {
+		return dao.getReply(board_no);
 	}
 
 	

@@ -34,23 +34,21 @@ public class FileUploadService {
 			try {
 				// 파일 정보
 				String originFilename = multipartFile.getOriginalFilename();
-				String extName
-					= originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
-				Long size = multipartFile.getSize();
+					String extName = originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
+					Long size = multipartFile.getSize();
+					
+					// 서버에서 저장 할 파일 이름
+					String saveFileName = genSaveFileName(extName);
+					
+					System.out.println("originFilename : " + originFilename);
+					System.out.println("extensionName : " + extName);
+					System.out.println("size : " + size);
+					System.out.println("saveFileName : " + saveFileName);
+					
+					writeFile(multipartFile, saveFileName, request);
+					url = PREFIX_URL + saveFileName;
+					System.out.println("<url로 넘어가는 String은" + url + "입니다.>");
 				
-				// 서버에서 저장 할 파일 이름
-				String saveFileName = genSaveFileName(extName);
-				
-
-				
-				System.out.println("originFilename : " + originFilename);
-				System.out.println("extensionName : " + extName);
-				System.out.println("size : " + size);
-				System.out.println("saveFileName : " + saveFileName);
-				
-				writeFile(multipartFile, saveFileName, request);
-				url = PREFIX_URL + saveFileName;
-				System.out.println("<url로 넘어가는 String은" + url + "입니다.>");
 			}
 			catch (IOException e) {
 				// 원래라면 RuntimeException 을 상속받은 예외가 처리되어야 하지만
