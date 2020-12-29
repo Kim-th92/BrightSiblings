@@ -67,5 +67,27 @@
 		WHERE BOARD_NO = #{board_no}
 	</delete>
 
-	
+	<select id="adminboardlist" resultType="boardDto">
+		<![CDATA[
+		select *
+		from 
+		(select row_number() over(order by board_no DESC) as num, 
+			   board_no, member_no, board_content, board_hashtag, board_like,
+			   board_privacy, board_regdate, board_updatedate
+		from board)
+		where num >= 1 and num < #{end_no}
+		order by num
+		]]>
+	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+

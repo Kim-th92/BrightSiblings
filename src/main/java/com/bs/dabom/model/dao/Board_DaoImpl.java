@@ -95,6 +95,17 @@ public class Board_DaoImpl implements Board_Dao {
 		return res;
 	}
 
+	// admin 관련
+	@Override
+	public List<Board_Dto> adminboardList(int end_no) {
+		
+		List<Board_Dto> adminboardlist = new ArrayList<Board_Dto>();
+		
+		adminboardlist = sqlSession.selectList(NAMESPACE + "adminboardlist", end_no);
+		
+		return adminboardlist;
+	}
+
 	
 
 	

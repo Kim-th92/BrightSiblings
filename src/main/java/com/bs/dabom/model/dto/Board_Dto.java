@@ -14,6 +14,9 @@ public class Board_Dto {
 	private Date board_regdate;
 	private Date board_updatedate;
 	
+//	adminpage 관련 페이징
+	private int end_no;
+	
 	public Board_Dto() {
 		
 	}
@@ -93,6 +96,16 @@ public class Board_Dto {
 	}
 	public void setBoard_updatedate(Date board_updatedate) {
 		this.board_updatedate = board_updatedate;
+	}
+
+
+	public int getEnd_no() {
+		return end_no;
+	}
+
+
+	public void setEnd_no(int end_no) {
+		this.end_no = end_no;
 	}
 	
 	

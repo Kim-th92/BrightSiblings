@@ -19,5 +19,8 @@ public interface Board_Dao {
 	public int delete(int board_no);
 	public Member_Dto getNameProp(int member_no);
 	public List<Files_Dto> getFileUrl(int board_no);
+	
+	//adminpage 관련
+	public List<Board_Dto> adminboardList(int end_no);
 
 }

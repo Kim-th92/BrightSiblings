@@ -64,6 +64,11 @@ public class Board_BizImpl implements Board_Biz {
 		return dao.getFileUrl(board_no);
 	}
 
+	@Override
+	public List<Board_Dto> adminboardList(int end_no) {
+		return dao.adminboardList(end_no);
+	}
+
 	
 
 
