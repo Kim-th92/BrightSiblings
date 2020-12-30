@@ -1,0 +1,5 @@
+package com.bs.dabom.model.dao;
+
+public class FoodPaging_Dao {
+
+}

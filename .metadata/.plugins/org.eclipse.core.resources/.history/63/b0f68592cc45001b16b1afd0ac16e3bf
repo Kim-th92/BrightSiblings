@@ -1,0 +1,8 @@
+package com.bs.dabom.model.dao;
+
+import org.mybatis.spring.SqlSessionTemplate;
+
+public class News_DaoImpl implements News_Dao {
+
+	private SqlSessionTemplate sqlSession;
+}

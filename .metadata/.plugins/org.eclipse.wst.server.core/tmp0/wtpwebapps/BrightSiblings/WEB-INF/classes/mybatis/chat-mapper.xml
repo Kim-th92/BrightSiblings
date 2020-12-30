@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="chatmapper">
+
+	<resultMap type="chatmsgDto" id="chatmsgDto">
+		<result column="CHATMESSAGE_NO" property="chatmessageno" />
+		<result column="MESSAGE" property="message" />
+		<result column="MEMBER_NO" property="member_no" />
+		<result column="SENDINGTIME" property="sendingtime" />
+		<result column="CHATROOM_NO" property="chatroomno" />
+		<collection property="memberDto" resultMap="memberDto"></collection>
+
+	</resultMap>
+	<resultMap type="memberDto" id="memberDto">
+		    <result column="MEMBER_PROFILE"  property="member_profile"/>
+			<result column="MEMBER_NO" property="member_no"/>
+			<result column="MEMBER_NAME" property="member_name"/>
+	</resultMap>
+	
+	<resultMap type="chatroomDto" id="chatroomDto">
+		<result column="CHATROOM_NO" property="chatroomno" />
+		<result column="USER_ONE" property="userone" />
+		<result column="USER_TWO" property="usertwo" />
+		<result column="CREATED" property="created" />
+	</resultMap>
+
+	<select id="isRoom" parameterType="int"  resultType="int">
+		select nvl(count(*),0) from chatroom where chatroom_no = #{chatroom_no}
+	</select>
+	
+	<select id ="existRoom" parameterType="chatroomDto" resultType="int">
+		select nvl(count(*),0)  from chatroom where user_one = #{user_one} and user_two =#{user_two}
+	</select>
+	
+	<select id="getRoomno" parameterType="chatroomDto" resultType="int">
+		select chatroom_no from chatroom where user_one = #{user_one} and user_two= #{user_two}
+	</select>
+
+	<select id="getroomlist" resultType="chatroomDto">
+		select c.chatroom_no,c.user_one,c.user_two ,max(msg.sendingtime) as sendingtime
+from chatroom c join chatmsg msg on c.chatroom_no = msg.chatroom_no
+join member m on msg.member_no = m.member_no
+having c.user_one  = #{member_no} or c.user_two =#{member_no}
+group by c.chatroom_no,c.user_one,c.user_two
+
+
+	</select>
+	
+	<select id="getNameProfile"  resultMap="memberDto" parameterType="int">
+		select member_name,member_profile,member_no from member where member_no =(select user_one from chatroom where chatroom_no=#{chatroom_no}) 
+		or member_no = (select user_two from chatroom where chatroom_no=#{chatroom_no})
+	</select>
+	
+	<select id = "getProfile" resultType="String">
+		select member_profile from member where member_no = #{member_no}
+	</select>
+	
+	<select id= "getName" resultType="String">
+		select member_name from member where member_no  =#{member_no}
+	</select>
+	
+	<select id="msglist" resultMap="chatmsgDto" parameterType="int">
+		select  m.member_name,m.member_profile,m.member_no ,msg.message,msg.member_no as sender  ,msg.sendingtime,c.chatroom_no
+from member m,chatroom c  join chatmsg msg
+on c.chatroom_no = msg.chatroom_no
+where  msg.member_no = m.member_no and msg.chatroom_no =#{chatroom_no}
+and( m.member_no =(select user_one from chatroom where chatroom_no =#{chatroom_no}) or  m.member_no =(select user_two from chatroom where chatroom_no =#{chatroom_no} ) )
+order by sendingtime 
+
+
+	</select>
+	<insert id="insertChat" parameterType="map">
+		<foreach collection="list" item= "item" open="INSERT ALL" separator=" " close =" SELECT *FROM DUAL">
+			INTO CHATMSG  (CHATMESSAGE_NO,MESSAGE,MEMBE_NO,SENDINGTIME,CHATROOM_NO)
+			VALUES
+			(
+				chatmsgseq.nextval,
+				#{item.message},
+				#{item.member_no},
+				#{item.sendingtime},
+				#{chatroom_no}
+			)
+		</foreach>
+	</insert>
+
+	<select id="lastchat" resultType="String">
+		SELECT NVL(MESSAGE, '대화를 시작해 보세요!'),sendingtime,member_no
+		FROM(
+		SELECT *
+		FROM
+		chatmsg where chatroom_no =#{chatroom_no}
+		ORDER BY sendingtime desc)
+		WHERE ROWNUM = 1
+	</select>
+
+	<insert id="createRoom">
+		insert into chatroom
+		values(chatroomseq.nextval,#{user_one},#{user_two},
+		sysdate)
+	</insert>
+
+	
+
+
+
+</mapper>

@@ -1,0 +1,18 @@
+package com.bs.dabom.model.dao;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class FoodPaging_Dao {
+
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	public int countBoard() {
+		int res = sqlSession.select
+		return 0;
+	}
+
+}
