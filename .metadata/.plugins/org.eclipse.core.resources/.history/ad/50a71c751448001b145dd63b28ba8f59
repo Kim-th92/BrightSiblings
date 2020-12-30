@@ -1,7 +1,0 @@
-@charset "UTF-8";
-
-#foodwraper{
-	display:flex;
-	background: #ececf9;
-	border-top : 2px solid #d9d9f2;
-}

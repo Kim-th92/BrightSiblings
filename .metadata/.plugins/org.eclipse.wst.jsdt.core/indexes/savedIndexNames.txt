@@ -1,4 +1,0 @@
-INDEX VERSION 1.4+/Users/seowonchoi/Documents/finalproject/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-2144131894.index
-3341493961.index
-2946766110.index

@@ -1,5 +1,0 @@
-package com.bs.dabom.model.dao;
-
-public interface News_Dao {
-
-}

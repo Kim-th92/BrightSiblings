@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;Dabom/src/main/webapp/resources/image/profile-default.jpg&apos; to &apos;profile_default.jpg&apos;" description="Rename resource &apos;profile-default.jpg&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/resources/image/profile-default.jpg" name="profile_default.jpg" stamp="1608309325221" updateReferences="true"/>
-</session>
