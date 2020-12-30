@@ -34,9 +34,10 @@ insert into member values(memberseq.nextval,'admin','admin1234','관리자','adm
 
 update member set member_role = 'admin' where member_id ='admin';
 select member_profile from member where member_no =1;
-select * from member;
+select member_profile from member;
+
 
 update member set member_delflag ='N' where member_no = 1;
-update member set member_profile = 'resources/image/profile-default.jpg' ;
+update member set member_profile = 'resources/image/profile_default.jpg'  where member_profile='resources/image/profile-default.jpg';
 
 delete from member where member_id ='admin';
