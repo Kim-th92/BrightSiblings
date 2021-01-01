@@ -25,4 +25,10 @@
 
  </select>
  
+ <select id="foodDetail" parameterType="int" resultType="foodDto">
+ 	select * from fooddb where food_no = #{food_no}
+ </select>
+ 
+ 
+ 
 </mapper>

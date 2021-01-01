@@ -28,6 +28,12 @@ public class FoodPaging_Dao {
 		
 		return list;
 	}
+
+	public Food_Dto foodDetail(int food_no) {
+		Food_Dto dto = new Food_Dto();
+		dto = sqlSession.selectOne("food.foodDetail",food_no);
+		return dto;
+	}
 	
 	
 

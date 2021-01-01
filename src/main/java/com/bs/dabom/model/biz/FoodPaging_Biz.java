@@ -23,4 +23,8 @@ public class FoodPaging_Biz {
 	public List<Food_Dto> selectFood(Paging_Dto dto){
 		return dao.selectFood(dto);
 	}
+
+	public Food_Dto foodDetail(int food_no) {
+		return dao.foodDetail(food_no);
+	}
 }
