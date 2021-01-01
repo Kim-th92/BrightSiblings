@@ -15,7 +15,11 @@ public class Board_Dto {
 	private Date board_updatedate;
 	
 //	adminpage 관련 페이징
-	private int end_no;
+	private int countPerPage = 5; // 페이지당 글 수
+	private int currentPage;	// 현재 페이지
+	private int totalCount; // 전체 글 수
+	
+	
 	
 	public Board_Dto() {
 		
@@ -96,15 +100,49 @@ public class Board_Dto {
 		this.board_updatedate = board_updatedate;
 	}
 
-
-	public int getEnd_no() {
-		return end_no;
-	}
-
-
-	public void setEnd_no(int end_no) {
-		this.end_no = end_no;
-	}
 	
+	// <<<<<< 페이징 관련 겟,셋,리턴 (시작)
+	public int getCountPerPage() {
+		return countPerPage;
+	}
+
+
+	public void setCountPerPage(int countPerPage) {
+		this.countPerPage = countPerPage;
+	}
+
+
+	public int getCurrentPage() {
+		return (currentPage < 1)? 1 : currentPage;
+	}
+
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public int Total_page_count() {
+		return (totalCount + countPerPage - 1) / countPerPage;
+	}
+
+	public int Start_no() {
+		return (countPerPage * (currentPage - 1)) + 1;
+	}
+
+
+	public int End_no() {
+		return Start_no() + countPerPage;
+	}
+	//>>>>>>페이징 관련 겟,셋,리턴 (끝)
 	
 }

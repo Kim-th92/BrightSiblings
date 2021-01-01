@@ -35,7 +35,7 @@
 		</tr>
 		<tr>
 			<td colspan="3" align="right">
-				<input type="button" value="후원자 명단으로..." onclick="location.href='listdonation.do'"/>
+				<input type="button" value="후원자 명단으로..." onclick="location.href='admin_donation_list.do'"/>
 			</td>
 		</tr>
 	</table>

@@ -35,5 +35,5 @@ having a.member_no = 11
 group by a.member_no
 
 select sum(a.donation)
-from donation a join member b on (a.member_no = b.member_no) 
+from donation a join member b on (a.member_no = b.member_no)
 
