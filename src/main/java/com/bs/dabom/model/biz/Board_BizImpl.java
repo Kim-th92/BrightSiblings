@@ -66,11 +66,6 @@ public class Board_BizImpl implements Board_Biz {
 	}
 
 	@Override
-	public List<Board_Dto> adminboardList(int end_no) {
-		return dao.adminboardList(end_no);
-	}
-	
-	@Override
 	public int insertReply(Reply_Dto dto) {
 		return dao.insertReply(dto);
 	}
@@ -78,6 +73,21 @@ public class Board_BizImpl implements Board_Biz {
 	@Override
 	public List<Reply_Dto> getReply(int board_no) {
 		return dao.getReply(board_no);
+	}
+
+	@Override
+	public List<Board_Dto> adminBoardList() {
+		return dao.adminBoardList();
+	}
+
+	@Override
+	public List<Board_Dto> adminBoardPaging(int start, int end) {
+		return dao.adminBoardPaging(start, end);
+	}
+
+	@Override
+	public int totalCount() {
+		return dao.totalCount();
 	}
 
 	

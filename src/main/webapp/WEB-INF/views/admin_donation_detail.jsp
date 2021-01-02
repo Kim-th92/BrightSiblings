@@ -9,20 +9,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@include file="adminpage.jsp"%>
+	<div class="admin_section">
 
 	<h1>특정회원 후원 내역</h1>
 	
 	<table border="1">
 		<tr>
 			<td>Member_Name</td>
-			<td colspan="2" align="center">${donation_name}</td>
+			<td colspan="2" align="center">${admin_donation_name}</td>
 		</tr>
 		<tr>
 			<td>Donation_No</td>
 			<td>Donation</td>
 			<td>Donation_Date</td>
 		</tr>
-		<c:forEach items="${detaildonation_list}" var="dto">
+		<c:forEach items="${admin_donation_detail}" var="dto">
 			<tr>
 				<td>${dto.donation_no}</td>
 				<td>${dto.donation }</td>
@@ -33,12 +35,13 @@
 			<td>Donation_Sum</td>
 			<td colspan="2" align="right">${select_donation_sum}</td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<td colspan="3" align="right">
 				<input type="button" value="후원자 명단으로..." onclick="location.href='admin_donation_list.do'"/>
 			</td>
-		</tr>
+		</tr> -->
 	</table>
+	</div>
 
 </body>
 </html>

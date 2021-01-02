@@ -1,6 +1,7 @@
 package com.bs.dabom.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -100,17 +101,6 @@ public class Board_DaoImpl implements Board_Dao {
 		
 		return res;
 	}
-
-	// admin 관련
-	@Override
-	public List<Board_Dto> adminboardList(int end_no) {
-		
-		List<Board_Dto> adminboardlist = new ArrayList<Board_Dto>();
-		
-		adminboardlist = sqlSession.selectList(NAMESPACE + "adminboardlist", end_no);
-		
-		return adminboardlist;
-	}
 		
 	@Override
 	public int insertReply(Reply_Dto dto) {
@@ -127,6 +117,46 @@ public class Board_DaoImpl implements Board_Dao {
 		
 		return res;
 	}
+
+	@Override	// 컴플 나면 이거 살려
+	public List<Board_Dto> adminBoardList() {
+		
+		List<Board_Dto> list = new ArrayList<Board_Dto>();
+		
+		list = sqlSession.selectList(NAMESPACE + "adminboardlist");
+		
+		return list;
+	}
+
+	@Override	// 컴플 나면 이거 살려
+	public List<Board_Dto> adminBoardPaging(int start, int end) {
+		
+		List<Board_Dto> list = new ArrayList<Board_Dto>();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("start", start);
+		params.put("end", end);
+		
+		list = sqlSession.selectList(NAMESPACE + "adminboardpaging", params);
+		
+		return list;
+	}
+
+	@Override
+	public int totalCount() {
+		int totalCount = 0;
+
+		try {
+			totalCount = sqlSession.selectOne(NAMESPACE + "totalCount");
+		} catch (Exception e) {
+			System.out.println("[ERROR] totalCount");
+			e.printStackTrace();
+		}
+
+		return totalCount;
+	}
+	
+	
 
 	
 

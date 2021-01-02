@@ -35,12 +35,14 @@
 	<%@include file="adminpage.jsp"%>
 	<div class="admin_section">
 
-<!-- 		스크롤 높이 확인 -->
+		<!-- 		스크롤 높이 확인 -->
 		<div id="container">
 			<div id="log">0</div>
 		</div>
-<!-- 		스크롤 높이 확인 끝 -->
-	
+		<!-- 		스크롤 높이 확인 끝 -->
+		<!-- 		스크롤 더 보기 버든 -->
+		<input type="button" value="글 더보기" onclick="start()" id="stopbutton" />
+
 		<article id="mainWrap">
 
 			<section id="board" style="background-color: ghostwhite;">
@@ -49,21 +51,12 @@
 
 						<c:when test="${empty list }">
 							<div class="writeWrap">
-								<p>------------------------게시글이 없습니다.------------------------</p>
-
+								<p>------------------------게시글이
+									없습니다.------------------------</p>
 							</div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list }" var="list" varStatus="status">
-								<input id="boardMemberNo" type="hidden"
-									value="${list.member_no }">
-								<input id="loginMemberNo" type="hidden"
-									value="${login.member_no }">
-								<input id="loginMemberId" type="hidden"
-									value="${login.member_id }">
-
-								<input id="boardNo" type="hidden" value="${list.board_no }">
-								
 								<div class="feedWrap">
 									<div class="feedProp">
 										<img src="${np[status.index].member_profile }"> <span>${np[status.index].member_name }</span>
@@ -111,28 +104,92 @@
 						</c:otherwise>
 
 					</c:choose>
+					<div id="abctest"></div>
 
 				</div>
 			</section>
-
-
-
-			<script type="text/javascript">
-			// 스크롤 높이 확인
-				$(window).scroll(function() {
-					var height = $(document).scrollTop();
-					log(height);
-
-				});
-
-				function log(str) {
+		</article>
+	</div>
+	<script type="text/javascript">
+			function log(str) {
 					$('#log').text(str);
-				}
+			}
 			// 스크롤 높이 확인 끝
 			
-			</script>
-		</article>
+			var currentPage = 1;
+			var loginMemberNo = ${login.member_no};
+			var scrollTab = 30;
+			
+			
+			$(window).scroll(function() {
+				var height = $(document).scrollTop();
+				log(height);
+			    if (scrollTab == height) {
+					$.ajaxSettings.traditional = true;
+					$.ajax({
+						method: "POST",
+						url: "admin_board_paging.do",
+						data: {"currentPage" : currentPage},
+						success: function(results) {
+							currentPage++;
+							
+							scrollTab = scrollTab + 30;
+							
+							console.log(results);
+							
+							console.log('값 전달 성공');
 
-	</div>
+							var pagingList = results.pagingList;
+							var pagingNpList = results.pagingNpList;
+							var pagingUrlList = results.pagingUrlList;
+							var pagingRepList = results.pagingRepList;
+							var pagingStop = results.pagingStop;	// 이벤트 막기 관련
+							
+							var str = '';
+								    
+							$.each(pagingList, function(i){
+								str += '<div class="feedWrap">'
+								     + '<div class="feedProp">'
+								     + '<img src=' + pagingNpList[i].member_profile + '/> <span>' + pagingNpList[i].member_name + '</span>';
+							
+								if(loginMemberNo == results.pagingList[i].member_no) { 		
+									str += '<input type="button" value="수정" onclick="location.href=' + "'" + pagingList[i].board_no +"'" + '">'
+									     + '<input type="button" value="삭제" onclick="location.href=' + "'" + pagingList[i].board_no +"'" + '">';
+								}
+								str += '</div>'
+									 + '<div class="feedContent">'
+									 + '<p>' + pagingList[i].board_content + '</p>'
+									 + '</div>';
+								     + '<div class="feedImage">';
+								     + '<img src="' + pagingUrlList[i] + '"/>'
+									 + '</div>';
+								     + '<div class="likeWrap">'
+									 + '<img id="like" src="../../resources/image/red_heart.png" style="width: 15px; height: 15px;"> 0'
+									 + '</div>'
+									 + '<div class="replyWrap">';
+				  					 + '<p><span>' + pagingRepList[i].member_id + '</span>' + pagingRepList[i].reply_content + '</p>';
+								 str += '<div class="replyProp">'
+									 + '<img src="${login.member_profile }">${login.member_name}'
+									 + '<form action="writeReply.do" method="post">'
+									 + '<input type="hidden" value="'+ pagingList[i].board_no +'" name="board_no">' 
+									 + '<input type="text" placeholder="댓글 작성" name="reply_content">'
+									 + '<input type="submit" value="입력" />'
+									 + '</form>'
+									 + '</div>'		//replyProp </div
+									 + '</div>'		//replyWrap </div
+									 + '</div>';	//feedWrap <div
+							});
+							$("#abctest").append(str);
+							if(currentPage > pagingStop){
+								alert(scrollTab)
+							}
+						}, error: function() {
+							console.log('값 전달 실패');
+						}
+					});
+				}
+			});
+					
+	</script>	
 </body>
 </html>

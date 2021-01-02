@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bs.dabom.model.biz.Board_Biz;
 import com.bs.dabom.model.biz.Donation_Biz;
 import com.bs.dabom.model.biz.Member_Biz;
+import com.bs.dabom.model.dto.AdminPaging_Dto;
 import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.FileUploadService;
 import com.bs.dabom.model.dto.Files_Dto;
@@ -34,7 +35,7 @@ public class Admin_Controller {
 	private Donation_Biz donationbiz;
 
 	@Autowired
-	private Board_Biz biz;
+	private Board_Biz boardbiz;
 
 	@RequestMapping("/admin.do")
 	public String admin_member_list(Model model) {
@@ -49,23 +50,10 @@ public class Admin_Controller {
 		return "admin_select_list";
 	}
 
-	@ResponseBody
-	@RequestMapping("/boardscroll.do")
-	public Map<String, Object> boardscroll(@RequestParam("end_no") int end_no) {
-		System.out.println("end_no : " + end_no);
-		Board_Dto dto = new Board_Dto();
-//		dto.setEnd_no(end_no);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("end_no", end_no);
-
-		return map;
-	}
-
 	@RequestMapping("/admin_board_list.do")
 	public String mainpage(Model model, HttpSession session) {
-		int end_no = 4;
-		List<Board_Dto> list = biz.adminboardList(end_no);
+
+		List<Board_Dto> list = boardbiz.adminBoardList();
 		// 모든 board 글 내용을 List<Board_Dto>로 받아옴.
 		List<Member_Dto> npList = new ArrayList<Member_Dto>();
 		// nameProp Dto 값 담을 List
@@ -81,7 +69,7 @@ public class Admin_Controller {
 
 			int member_no = list.get(i).getMember_no();
 			// board의 i번째부터 끝까지의 회원 번호
-			Member_Dto nameProp = biz.getNameProp(member_no);
+			Member_Dto nameProp = boardbiz.getNameProp(member_no);
 			// 회원번호를 써서 이름과 프로필을 가져옴
 			npList.add(nameProp);
 			// 그걸 List<Member_Dto>에 담음
@@ -89,7 +77,7 @@ public class Admin_Controller {
 			int board_no = list.get(i).getBoard_no();
 			// board의 i번째부터 끝까지의 게시글 번호
 
-			List<Files_Dto> fileUrl = biz.getFileUrl(board_no);
+			List<Files_Dto> fileUrl = boardbiz.getFileUrl(board_no);
 			// 해당 게시글 번호(board_no)와 일치하는 files_Dto들을 List<>로 받음.
 			// 다중 이미지 업로드를 했다면 여러 개가 List에 들어올 것임
 			List<String> urlString = new ArrayList<String>();
@@ -101,7 +89,7 @@ public class Admin_Controller {
 
 			urlList.add(urlString);
 
-			List<Reply_Dto> repData = biz.getReply(board_no);
+			List<Reply_Dto> repData = boardbiz.getReply(board_no);
 			// 댓글 Dto가 여러 개 담긴 List
 
 			repList.add(repData);
@@ -117,22 +105,69 @@ public class Admin_Controller {
 		return "admin_board_list";
 	}
 
-	@RequestMapping("/admin_board_list2.do")
-	public String mainpage2(Model model, HttpSession session, int end_no) {
+	@ResponseBody
+	@RequestMapping("/admin_board_paging.do")
+	public Map<String, Object> admin_board_paging(@RequestParam("currentPage") int currentPage, HttpSession session) {
+		System.out.println("Ajax에서 받은 currentPage : " + currentPage);
 
-		return "admin_board_list";
+		AdminPaging_Dto pagingDto = new AdminPaging_Dto();
+		pagingDto.setTotalCount(boardbiz.totalCount());
+		pagingDto.setCurrentPage(currentPage);
+
+		int pagingStop = pagingDto.Total_page_count();
+
+		List<Board_Dto> list = boardbiz.adminBoardPaging(pagingDto.Start_no(), pagingDto.End_no());
+		List<Member_Dto> npList = new ArrayList<Member_Dto>();
+		List<List<String>> urlList = new ArrayList<List<String>>();
+		List<List<Reply_Dto>> repList = new ArrayList<List<Reply_Dto>>();
+
+		for (int i = 0; i < list.size(); i++) {
+
+			int member_no = list.get(i).getMember_no();
+
+			Member_Dto nameProp = boardbiz.getNameProp(member_no);
+
+			npList.add(nameProp);
+
+			int board_no = list.get(i).getBoard_no();
+
+			List<Files_Dto> fileUrl = boardbiz.getFileUrl(board_no);
+
+			List<String> urlString = new ArrayList<String>();
+
+			for (Files_Dto res : fileUrl) {
+				String url = res.getFiles_url();
+				urlString.add(url);
+			}
+
+			urlList.add(urlString);
+
+			List<Reply_Dto> repData = boardbiz.getReply(board_no);
+
+			repList.add(repData);
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagingList", list);
+		map.put("pagingStop", pagingStop);
+		map.put("pagingNpList", npList);
+		map.put("pagingUrlList", urlList);
+		map.put("pagingRepList", repList);
+		
+		return map;
+		
 	}
-	
+
 	@RequestMapping("/admin_donation_list.do")
 	public String admin_donation_list(Model model) {
-		model.addAttribute("donationlist", donationbiz.selectList());
+		model.addAttribute("admin_donation_list", donationbiz.selectList());
 		return "admin_donation_list";
 	}
-	
+
 	@RequestMapping("/admin_donation_detail.do")
 	public String detaildonation(Model model, @RequestParam int member_no, String member_name) {
-		model.addAttribute("detaildonation_list", donationbiz.detailDonation(member_no));
-		model.addAttribute("donation_name", member_name);
+		model.addAttribute("admin_donation_detail", donationbiz.detailDonation(member_no));
+		model.addAttribute("admin_donation_name", member_name);
 		model.addAttribute("select_donation_sum", donationbiz.selectDonationSum(member_no));
 		return "admin_donation_detail";
 	}

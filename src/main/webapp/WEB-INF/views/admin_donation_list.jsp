@@ -9,7 +9,8 @@
 <title>관리자용 후원자 명단!!!!!!</title>
 </head>
 <body>
-
+<%@include file="adminpage.jsp"%>
+	<div class="admin_section">
 	<h1>후원자 명단</h1>
 	
 	<table border="1">
@@ -26,7 +27,7 @@
 			<th>Donation_date</th>
 		</tr>
 		<c:choose>
-			<c:when test="${empty list }">
+			<c:when test="${empty admin_donation_list }">
 				<tr>
 					<td colspan="4" align="center">
 					-------------------------------후원자가 없습니다.-------------------------------
@@ -34,11 +35,11 @@
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list }" var="dto">
+				<c:forEach items="${admin_donation_list }" var="dto">
 					<tr>
 						<td>${dto.donation_no }</td>
 						<td>
-							<a href="detaildonation.do?member_no=${dto.member_no }&member_name=${dto.member_name }">
+							<a href="admin_donation_detail.do?member_no=${dto.member_no }&member_name=${dto.member_name }">
 								${dto.member_name }
 							</a>
 						</td>
@@ -54,7 +55,7 @@
 			</td>
 		</tr> -->
 	</table>
-
+	</div>
 
 </body>
 </html>

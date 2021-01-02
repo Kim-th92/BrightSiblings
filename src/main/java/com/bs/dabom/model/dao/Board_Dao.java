@@ -21,10 +21,12 @@ public interface Board_Dao {
 	public Member_Dto getNameProp(int member_no);
 	public List<Files_Dto> getFileUrl(int board_no);
 	
-	//adminpage 관련
-	public List<Board_Dto> adminboardList(int end_no);
-	
 	public int insertReply(Reply_Dto dto);
 	public List<Reply_Dto> getReply(int board_no);
+	
+	//adminpage 관련
+	public List<Board_Dto> adminBoardList();
+	public List<Board_Dto> adminBoardPaging(int start, int end);
+	public int totalCount();
 
 }
