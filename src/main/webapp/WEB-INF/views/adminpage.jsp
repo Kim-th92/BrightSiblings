@@ -23,7 +23,7 @@
 			
 			<li><a href="admin_board_list.do"><i class="fas far fa-edit"></i>Board</a></li>
 			
-			<li><a href="#"><i class="fas fa-hand-holding-usd"></i>Donation</a></li>
+			<li><a href="admin_donation_list.do"><i class="fas fa-hand-holding-usd"></i>Donation</a></li>
 			
 			<li><a href="#"><i class="fas fa-qrcode"></i></a></li>
 			

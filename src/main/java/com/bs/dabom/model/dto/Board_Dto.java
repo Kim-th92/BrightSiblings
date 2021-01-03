@@ -14,6 +14,7 @@ public class Board_Dto {
 	private Date board_regdate;
 	private Date board_updatedate;
 	
+	
 	public Board_Dto() {
 		
 	}
