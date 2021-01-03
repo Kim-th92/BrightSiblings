@@ -16,3 +16,6 @@ local.properties
 .loadpath
 .recommenders
 .target/
+
+### Metadata ###
+/.metadata/

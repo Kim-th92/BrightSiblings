@@ -16,10 +16,11 @@ CREATE TABLE BOARD(
 	CONSTRAINT BOARD_NO_PK PRIMARY KEY(BOARD_NO),
 	CONSTRAINT PRIVACY_CHECK CHECK(BOARD_PRIVACY IN('Y','N'))
 )
-
+--4
 
 SELECT * FROM BOARD
 ORDER BY BOARD_NO DESC;
+
 
 select m.member_no, m.member_name,m.member_profile , b.board_no, b.board_content,b.board_regdate,f.files_no ,f.FILES_URL 
 	from member m join board  b on m.member_no = b.member_no right join files f on b.board_no = f.board_no
@@ -60,4 +61,10 @@ SELECT member_no
 FROM board
 where board_no = #{board_no}
 !-- 해당 게시글을 쓴 회원의 회원 번호
-	
+
+
+
+select m.member_name,m.member_profile,m.member_no ,b.board_content,b.board_regdate,f.files_no ,f.FILES_URL 
+from member m join board  b on m.member_no = b.member_no  join files f on b.board_no = f.board_no
+where b.board_no =1
+

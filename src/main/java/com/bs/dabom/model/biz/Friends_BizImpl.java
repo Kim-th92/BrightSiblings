@@ -21,7 +21,6 @@ public class Friends_BizImpl implements Friends_Biz {
 		return dao.friendsList(memberno);
 	}
 
-
 	@Override
 	public int deleteFriends(int memberno, int friendsno) {
 		return dao.deleteFriends(memberno, friendsno);

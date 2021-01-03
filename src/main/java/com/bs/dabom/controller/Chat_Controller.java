@@ -33,7 +33,7 @@ public class Chat_Controller {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("chatroomlist", list);
 		if(list.isEmpty()) {
-			map.put("check",false);
+			map.put("check",false); 
 		}else {
 			map.put("check", true);
 		}
@@ -61,7 +61,6 @@ public class Chat_Controller {
 					roomDto.setUser_one(member_no);
 					roomDto.setUser_two(myno);
 				}
-				
 				int res = chat_biz.createRoom(roomDto);
 				if(res>0) {
 					chatroom_no = chat_biz.getRoomnumber(roomDto);

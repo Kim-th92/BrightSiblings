@@ -16,6 +16,7 @@ public class Board_Dto {
 	private Files_Dto files_dto;
 	private Reply_Dto reply_dto;
 	
+	
 	public Board_Dto() {
 		
 	}
