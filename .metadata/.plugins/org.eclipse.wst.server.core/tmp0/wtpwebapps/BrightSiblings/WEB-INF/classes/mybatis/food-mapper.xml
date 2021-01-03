@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="food">
+ 
+ <select id="countFood" resultType="int">
+ 
+ 	select count(*) from fooddb
+ </select>
+ 
+ <select id="selectFood" resultType ="foodDto">
+ 	SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * 
+						FROM FOODDB
+						<if test="keyword != null and keyword != '' ">
+				WHERE FOOD_NAME like  '%'||#{keyword}||'%'
+							</if>
+						ORDER BY FOOD_NO 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end} 
+			
+
+ </select>
+ 
+ <select id="foodDetail" parameterType="int" resultType="foodDto">
+ 	select * from fooddb where food_no = #{food_no}
+ </select>
+ 
+ <select id ="selectDailyRecord" parameterType="dailyfoodDto" resultType="int">
+ 
+		select NVL(sum(intake_kcal) ,0)from DAILYFOODRECORD 
+		where member_no = #{member_no}
+		 and TO_CHAR(CALENDAR_DATE,'YYYYMMDD') =#{today}
+ 
+ </select>
+ 
+ <select id="selectDailyFoodRecord" parameterType="dailyfoodDto" resultType="dailyfoodDto">
+ 	select f.food_name as food_name, d.take_size as intake_size, d.intake_kcal as intake_kcal,d.CALENDAR_DATE
+ 	from fooddb f join dailyfoodrecord d using (food_no) 
+	where d.member_no = #{member_no} and TO_CHAR(CALENDAR_DATE,'YYYYMMDD') =#{today} 
+ 
+ </select>
+ 
+ <insert id="insertDailyFoood" parameterType="dailyfoodDto" >
+ 	insert into DAILYFOODRECORD values (#{member_no},sysdate,#{food_no},#{intake_size},#{intake_kcal})
+ </insert>
+ 
+ 
+</mapper>

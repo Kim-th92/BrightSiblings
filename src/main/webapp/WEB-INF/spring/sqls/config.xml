@@ -16,6 +16,8 @@
 		<typeAlias type="com.bs.dabom.model.dto.News_Dto" alias = "newsDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Reply_Dto" alias = "replyDto" />
 		<typeAlias type="com.bs.dabom.model.dto.MyPage_Dto" alias = "myPageDto" />
+		<typeAlias type="com.bs.dabom.model.dto.Water_Dto" alias="waterDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.Dailyfoodrecord_Dto" alias="dailyfoodDto"/>
 	</typeAliases>
 	
 <!-- mapper -->

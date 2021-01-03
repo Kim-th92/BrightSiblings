@@ -75,7 +75,7 @@ response.setDateHeader("Expires", 0L);
 				<li><a onclick="updatemember();" class="hidecontent"><i class="fas fa-user-edit"></i>회원수정</a></li>
 				<li><a onclick="deletemember();" class="hidecontent"><i	class="fas fa-user-minus"></i>회원탈퇴</a></li>
 			</ul>
-			<div id="msg-hide" class="msg-hide" style="overflow: scroll;">
+			<div id="msg-hide" class="msg-hide" >
 				<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">
 				<div class="chat"><div class="card  contacts_card">
@@ -87,7 +87,7 @@ response.setDateHeader("Expires", 0L);
 							</div>
 						</div>
 					</div>
-					<div class="card-body contacts_body">
+					<div class="card-body contacts_body" style="overflow: scroll;">
 						<ul class="contacts">
 						
 						
@@ -181,7 +181,7 @@ response.setDateHeader("Expires", 0L);
 			}
 
 		}
-
+/* 
 		$("#search_btn").click(function() {
 			$(".search-hide").stop().slideDown(500);
 			return false; 
@@ -216,7 +216,7 @@ response.setDateHeader("Expires", 0L);
 			}
 			$("#msg-hide").stop().slideUp(500);
 
-		});
+		}); */
 
 		/* 	var hoverbtn = document.getElementById("btn_profile");
 		 hoverbtn.addEventListener("click",function(){

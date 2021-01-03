@@ -54,6 +54,13 @@ div#main-container{
 	/* margin-top : -60px; */
 }
 
+#footer div{
+    text-align: center;
+    padding: auto;
+    padding: 20px 30px;
+    color: gray;
+}
+
 
 input {
     /* padding: 3px 35px; */

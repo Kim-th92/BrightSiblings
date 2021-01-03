@@ -156,7 +156,7 @@ public class Member_Controller {
 		        }
 		req.getSession(true);
 		
-		return "login";
+		return "redirect:login.do";
 	}
 	
 	//아이디 패스워드 찾기 jsp 이동
