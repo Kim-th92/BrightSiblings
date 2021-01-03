@@ -2,6 +2,7 @@ package com.bs.dabom.controller;
 
 import java.util.HashMap;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,9 @@ import com.bs.dabom.model.biz.FoodPaging_Biz;
 import com.bs.dabom.model.biz.Food_Biz;
 import com.bs.dabom.model.biz.Friends_Biz;
 import com.bs.dabom.model.biz.Member_Biz;
+import com.bs.dabom.model.biz.MyPage_Biz;
 import com.bs.dabom.model.dto.Member_Dto;
+import com.bs.dabom.model.dto.MyPage_Dto;
 import com.bs.dabom.model.dto.Paging_Dto;
 
 import java.io.File;
@@ -40,6 +43,8 @@ public class MyPage_Controller {
 	private Member_Biz member_biz;
 	@Autowired
 	private FoodPaging_Biz food_biz;
+	@Autowired
+	private MyPage_Biz mypage_biz;
 	
 	public static void main(String[] args) {
 		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 
@@ -58,14 +63,12 @@ public class MyPage_Controller {
 		model.addAttribute("requestlist", requestlist);
 		model.addAttribute("list",list);
 		model.addAttribute("requestinglist",requestinglist);
-		
 
 		return "mypage_friends";
 	}
 	
 	@RequestMapping("mypage_main.do")
 	public String mypageFriends(Model model) {
-
 		return "mypage_main";
 	}
 	
@@ -87,19 +90,27 @@ public class MyPage_Controller {
 		model.addAttribute("paging", dto);
 		model.addAttribute("viewAll", food_biz.selectFood(dto));
 		
-		
 		return "mypage_food";
 	}
 	
 	@RequestMapping("fooddb.do")
 	public Map<String,String> insertfooddb(){
-		
 		return null;
 	}
 	
 	@RequestMapping("mypage_exercise.do")
 	public String mypageExercise(Model model) {
 		return "mypage_exercise";
+	}
+	
+	@RequestMapping("distanceres.do")
+	public String distanceres(Model model, MyPage_Dto dto) {
+		int res = mypage_biz.distanceInsert(dto);
+		if (res > 0) {
+			return "mypage_main.do";
+		} else {
+			return "mypage_main.do";
+		}
 	}
 	
 	@RequestMapping("search.do")
