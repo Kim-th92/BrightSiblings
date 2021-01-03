@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    pageEncoding="UTF-8"%><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
@@ -80,59 +80,57 @@
 	
 							</div>
 							
-							<c:forEach items="${list }" var= "list" varStatus="status">
-									<input id="boardMemberNo" type="hidden" value="${list.member_no }">
-									<input id="loginMemberNo" type="hidden" value="${login.member_no }">
-									<input id="loginMemberId" type="hidden" value="${login.member_id }">
-									
-									<input id="boardNo" type="hidden" value="${list.board_no }">
-									<div class="feedWrap">
-										<div class="feedProp">
-											<img src="${np[status.index].member_profile }">
-											<span>${np[status.index].member_name }</span>
-											<c:if test="${login.member_no eq list.member_no  }">
-												<input type="button" value="수정" onclick="location.href='update.do?board_no=${list.board_no }'">
-												<input type="button" value="삭제" onclick="location.href='delete.do?board_no=${list.board_no }'">
-											</c:if>
+									<c:forEach items="${list }" var="list" varStatus="status">
+								<div class="feedWrap">
+									<div class="feedProp">
+										<img src="${np[status.index].member_profile }"> <span>${np[status.index].member_name }</span>
+										<c:if test="${login.member_no eq list.member_no  }">
+											<input type="button" value="수정"
+												onclick="location.href='update.do?board_no=${list.board_no }'">
+											<input type="button" value="삭제"
+												onclick="location.href='delete.do?board_no=${list.board_no }'">
+										</c:if>
+									</div>
+									<div class="feedContent">
+										<p>${list.board_content }</p>
+									</div>
+									<div class="feedImage">
+										<c:forEach items="${url[status.index]}" var="url">
+											<img src="${url}">
+										</c:forEach>
+									</div>
+									<div class="likeWrap">
+										<img id="like" src="../../resources/image/red_heart.png"
+											style="width: 15px; height: 15px;"> 0
+
+										<!-- 좋아요-->
+									</div>
+									<div class="replyWrap">
+										<c:forEach items="${reply[status.index] }" var="rep">
+											<p>
+												<span>${rep.member_id }</span>${rep.reply_content }</p>
+										</c:forEach>
+
+										<div class="replyProp">
+											<img src="${login.member_profile }">
+											${login.member_name}
+											<form action="writeReply.do" method="post">
+												<input type="hidden" value="${list.board_no }"
+													name="board_no"> <input type="text"
+													placeholder="댓글 작성" name="reply_content"> <input
+													type="submit" value="입력" />
+											</form>
 										</div>
-										<div class="feedContent">
-											<p>${list.board_content }</p>
-										</div>
-										<div class="feedImage">
-												<c:forEach items="${url[status.index]}" var = "url">
-													<img src="${url}">
-												</c:forEach>
-										</div>
-										<div class="likeWrap">
-											<img id="like" src="../../resources/image/red_heart.png" style="width:15px; height: 15px;"> 0
-											
-											<!-- 좋아요-->
-										</div>
-										<div class="replyWrap">
-												<c:forEach items="${reply[status.index] }" var="rep">
-													<p><span>${rep.member_id }</span>${rep.reply_content }</p>
-												</c:forEach>
-										
-											<div class="replyProp">
-												<img src="${login.member_profile }">
-												${login.member_name}		
-												<form action="writeReply.do" method="post">
-													<input type="hidden" value="${list.board_no }" name="board_no">
-													<input type="text" placeholder="댓글 작성" name="reply_content">
-													<input type="submit" value="입력" />
-												</form>
-											</div>
-											
-										</div>
-									</div>			
+
+									</div>
+								</div>
 							</c:forEach>
 						</c:otherwise>
-						
 					</c:choose>
-			
+					<div id="abctest"></div>
 		</div>
 	</section>
-	
+</article>	
 	
 
 	<script type="text/javascript">
@@ -176,7 +174,84 @@
 	
 	    }
 	</script>
-</article>
-<script src="./resource/js/scroll.js"></script>
+
+<script type="text/javascript">
+	var currentPage = 2;   // 첫 페이지는 미리 화면에 띄워놓고 2번쨰 페이지 부터 ajax를 호출하기 위해 2로 정함.
+    var loginMemberNo = ${login.member_no};
+    var Stop = 0;      // ajax로 받아온 pagingStop 값을 쓰기 위한 일회용 변수 선언
+    
+    $(window).scroll(function() {
+       var scrollTop_windowHeight = $(window).scrollTop() + $(window).height();
+       var documentHeight = $(document).height();
+       if (scrollTop_windowHeight == documentHeight) {   // 스크롤이 바닥을 찍으면 동작하는 조건
+          if(stop == currentPage) {         // ajax로 받아온 pagingStop(마지막 페이지 번호)와 스크립스상 currentPage(현재 페이지)가 같을 경우 스크롤 페이징 멈춤.
+             alert("더 이상 게시글은 없습니다.")
+          } else {
+             alert(scrollTop_windowHeight);    // if (scrollTop_windowHeight == documentHeight)의 값이 같은지 확인 
+             alert(documentHeight);         // if (scrollTop_windowHeight == documentHeight)의 값이 같은지 확인 
+             
+             $.ajaxSettings.traditional = true;   // ajax 인코딩 문제로 추가
+             $.ajax({
+                method: "POST",
+                url: "admin_board_paging.do",
+                data: {"currentPage" : currentPage},
+                success: function(results) {
+                   currentPage++;
+                   
+                   console.log(results);
+                   
+                   console.log('값 전달 성공');
+
+                   var pagingList = results.pagingList;
+                   var pagingNpList = results.pagingNpList;
+                   var pagingUrlList = results.pagingUrlList;
+                   var pagingRepList = results.pagingRepList;
+                   var pagingStop = results.pagingStop;   // DB에 저장된 게시글의 마지막 페이지 번호를 가져옴.
+                   stop = pagingStop; // 젤 위의 var stop변수를 pagingStop 값과 같게 해줌.
+                   var str = '';
+                          
+                   $.each(pagingList, function(i){
+                      str += '<div class="feedWrap">'
+                           + '<div class="feedProp">'
+                           + '<img src=' + pagingNpList[i].member_profile + '/> <span>' + pagingNpList[i].member_name + '</span>';
+                   
+                      if(loginMemberNo == results.pagingList[i].member_no) {       
+                         str += '<input type="button" value="수정" onclick="location.href=' + "'" + pagingList[i].board_no +"'" + '">'
+                              + '<input type="button" value="삭제" onclick="location.href=' + "'" + pagingList[i].board_no +"'" + '">';
+                      }
+                      str += '</div>'
+                          + '<div class="feedContent">'
+                          + '<p>' + pagingList[i].board_content + '</p>'
+                          + '</div>';
+                           + '<div class="feedImage">';
+                           + '<img src="' + pagingUrlList[i] + '"/>'
+                          + '</div>';
+                           + '<div class="likeWrap">'
+                          + '<img id="like" src="../../resources/image/red_heart.png" style="width: 15px; height: 15px;"> 0'
+                          + '</div>'
+                          + '<div class="replyWrap">';
+                            + '<p><span>' + pagingRepList[i].member_id + '</span>' + pagingRepList[i].reply_content + '</p>';
+                       str += '<div class="replyProp">'
+                          + '<img src="${login.member_profile }">${login.member_name}'
+                          + '<form action="writeReply.do" method="post">'
+                          + '<input type="hidden" value="'+ pagingList[i].board_no +'" name="board_no">' 
+                          + '<input type="text" placeholder="댓글 작성" name="reply_content">'
+                          + '<input type="submit" value="입력" />'
+                          + '</form>'
+                          + '</div>'      //replyProp </div
+                          + '</div>'      //replyWrap </div
+                          + '</div>';   //feedWrap <div
+                   });
+                   $("#abctest").append(str);
+                }, error: function() {
+                   console.log('값 전달 실패');
+                   }
+             }); // ajax 닫기
+          } // else 조건 닫기
+       } // 스크롤 if 조건 닫기
+    }); // 스크롤 펑션 닫기
+
+					
+	</script>	
 </body>
 </html>

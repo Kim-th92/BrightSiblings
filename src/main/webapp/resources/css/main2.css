@@ -1,0 +1,118 @@
+*{
+	margin : 0px;
+	padding : 0px;
+	z-index: 50;
+}
+
+/* district separate */
+
+#mainWrap {
+	width : 100%;
+	height : 100%;
+	background-color: ghostwhite;
+}
+#mainWrap section:nth-child(1) {
+	float:left;
+}
+#mainWrap section:nth-child(2) {
+	float:left;
+}
+#mainWrap section:nth-child(3) {
+	float:left;
+}
+
+#navi{
+	width: 20%;
+	position:fixed;
+	background-color : #F8EEF8;
+	height : 100%;
+}
+
+#board{
+	width : 100%;
+	height : 100%;
+}
+#boardDiv{
+	width : 60%;
+	margin: auto;
+	background-color: ghostwhite;
+	height : 100%;
+}
+
+/*
+#friendList{
+	position: absolute;
+	width : 20%;
+	margin-left: 1200px;
+	background-color : blue;
+	height : 100%;
+}
+#friendDiv{
+	position: fixed;
+	width: 20%;
+	background-color : black;
+	height : 100%;
+}
+*/
+
+/* write css */
+
+.writeWrap {
+	width: 90%;
+	height: 100px;
+	margin: auto;
+	border: 1px solid #ffe6f7;
+	text-align: center;
+}
+
+
+/* main css */
+
+.feedWrap {
+	width: 90%;
+	height: auto;
+	margin: auto;
+	border: 1px solid #ffe6f7;
+}
+
+.feedProp {
+	height: 80px;
+	padding: 10px;
+}
+.feedProp img {
+	width : 60px;
+	height: 60px;
+	border-radius:70%;
+	overflow: hidden;
+}
+
+.feedImage {
+	padding: 10px;
+}
+.feedImage img{
+	width: 200px;
+	height: 100px;
+}
+
+.feedContent{
+	padding: 10px;
+}
+.feedContent span{
+	font-weight: bold;
+}
+
+.likeWrap {
+	padding: 10px;
+}
+.replyProp img {
+	width : 60px;
+	height: 60px;
+	border-radius:70%;
+	overflow: hidden;
+}
+
+#pageUpdate{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}
