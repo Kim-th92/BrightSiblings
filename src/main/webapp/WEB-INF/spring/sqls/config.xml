@@ -12,24 +12,22 @@
 		<typeAlias type="com.bs.dabom.model.dto.Files_Dto" alias = "filesDto" />
 		<typeAlias type="com.bs.dabom.model.dto.Chatmsg_Dto" alias ="chatmsgDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Chatroom_Dto" alias="chatroomDto"/>
-		<typeAlias type ="com.bs.dabom.model.dto.Food_Dto" alias = "foodDto"/>
-		<typeAlias type ="com.bs.dabom.model.dto.News_Dto" alias = "newsDto"/>
-		<typeAlias type="com.bs.dabom.model.dto.Reply_Dto" alias="replyDto" />
+		<typeAlias type="com.bs.dabom.model.dto.Food_Dto" alias = "foodDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.News_Dto" alias = "newsDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.Reply_Dto" alias = "replyDto" />
+		<typeAlias type="com.bs.dabom.model.dto.MyPage_Dto" alias = "myPageDto" />
 	</typeAliases>
-	
-	
-	
-	
 	
 <!-- mapper -->
 	<mappers>
-		<mapper resource= "/mybatis/food-mapper.xml"/>
-		<mapper resource ="/mybatis/member-mapper.xml"/>
-		<mapper resource="/mybatis/friends-mapper.xml"/>
-		<mapper resource ="/mybatis/board-mapper.xml"/>
-		<mapper resource ="/mybatis/donation-mapper.xml"/>
-		<mapper resource="/mybatis/chat-mapper.xml"/>
-		<mapper resource="/mybatis/news-mapper.xml"/>
+		<mapper resource = "/mybatis/food-mapper.xml"/>
+		<mapper resource = "/mybatis/member-mapper.xml"/>
+		<mapper resource = "/mybatis/friends-mapper.xml"/>
+		<mapper resource = "/mybatis/board-mapper.xml"/>
+		<mapper resource = "/mybatis/donation-mapper.xml"/>
+		<mapper resource = "/mybatis/chat-mapper.xml"/>
+		<mapper resource = "/mybatis/news-mapper.xml"/>
+		<mapper resource = "/mybatis/exercise-mapper.xml"/>
 	</mappers>
 
 
