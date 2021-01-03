@@ -32,14 +32,15 @@ table{
 	line-height: 30px;
 	
 }
+table#input{margin-top:30px; margin-bottom: 50px;}
 
-table#detailtable{
+table#detailtable, table#input{
 	    line-height: 30px;
     text-align: center;
 }
-#detailtable th {
+#detailtable th, #input th {
     font-size: 13pt;
-}#detailtable td {
+}#detailtable td ,#input td{
     font-size: 11pt;
 }
 

@@ -9,7 +9,9 @@ public class Dailyfoodrecord_Dto {
 	private int member_no;
 	private Date calendar_date;
 	private int food_no ;
-	private double intacke_kcal;
-	
+	private int intake_size;
+	private int intake_kcal;
+	private String food_name;
+	private String today;
 	
 }

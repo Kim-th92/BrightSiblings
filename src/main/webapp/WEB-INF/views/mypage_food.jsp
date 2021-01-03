@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>🍅나의 식단🍅</title>
 <link rel="stylesheet" href="resources/css/mypage_food.css" />
+ <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <script src="jquery.counterup.min.js"></script>
 </head>
 <body>
 	<%@include file="header.jsp"%>
@@ -14,7 +17,7 @@
 	<div id="foodwraper">
 		<div id="food_dict">
 			<div style="width: 100%;" id="fooddict-wraper">
-				<h1>칼로리사전</h1>
+				<h1 style="text-align: center;margin:20px;">칼로리사전</h1>
 				<div class="table-responsive" style="margin: auto; width: 80%;">
 					<table class="table table-striped">
 						<thead>
@@ -87,9 +90,36 @@
 
 		<div id="foodright">
 			<div id="food_today">
-				<h1></h1>
-				오늘 먹은 칼로리는?
-				
+				<h2></h2>
+				오늘 섭취한 칼로리는?<br/>
+			<span	 style="font-size: 30pt; font-weight: bold; color:#ff1a8c;"  class="counter">${dailyKcal }</span> KCAL
+				<div>
+					
+						<c:choose>
+							<c:when test="${empty dailyFoodList }">
+							
+							</c:when>
+							<c:otherwise>
+								<table border="1px solid black">
+								<tr>
+										<th>음식 이름</th>
+										<th>섭취량</th>
+										<th>섭취 칼로리</th>
+										<th>등록 시간 	</th>
+									</tr>
+								<c:forEach var="list" items="${ dailyFoodList}">
+									<tr>
+										<td>${list.food_name }</td>
+										<td>${list.intake_size } g</td>
+										<td>${list.intake_kcal } kcal</td>
+										<td><fmt:formatDate value="${list.calendar_date}" type="date"  pattern="yy년MM월dd일 HH시mm분"/> </td>										
+									</tr>
+								</c:forEach>
+								</table>
+							</c:otherwise>
+						</c:choose>
+					
+				</div>
 			</div>
 			<div id="food_water">
 				<div>
@@ -158,12 +188,29 @@
 
 <%@ include file="food_dailyrecord.jsp" %>
 	<script>
+	//먹은 칼로리 카운트 애니메이션 
+$(function() {
+		  var cnt0 = 0;
+		  counterFn();
+		  function counterFn() {
+		    id0 = setInterval(count0Fn, 4);
+		    function count0Fn() {
+		      cnt0++;
+		      if (cnt0 > ${dailyKcal}) {
+		        clearInterval(id0);
+		      } else {
+		        $(".counter").text(cnt0);
+		      }
+		    }
+		  }
+		});
+
 	var today = new Date();
 	var year = today.getFullYear(); //년도
 	var month = today.getMonth()+1; //월 0부터 시작해서 1더해주기
 	var date = today.getDate();
-	var foodTodayTitle = $('#food_today h1');
-	var day= year +"년"+ month + "월" + date + "일";
+	var foodTodayTitle = $('#food_today h2');
+	var day= year +"년 "+ month + "월 " + date + "일";
 	foodTodayTitle.text(day);
 	
 	var glass;
@@ -198,7 +245,8 @@
 			   }); */
 			})
 			
-			function fooddetail(foodno){
+var kcalhidden = document.getElementById('foodno');
+function fooddetail(foodno){
 		
 		var foodname = document.getElementById('foodname')
 		var foodkcal = document.getElementById('foodkcal')
@@ -208,6 +256,8 @@
 		var fat= document.getElementById('fat')
 		var sugar = document.getElementById('sugar')
 		var sodium = document.getElementById('sodium')
+		
+		console.log(kcalhidden);
 		$('#food_popup').fadeIn();
 		$('.food_background').fadeIn();
 		$.ajax({
@@ -215,8 +265,6 @@
 			type:'get',
 			success:function(data){
 				var lst = data.fooddetail;
-				console.log(lst)
-				console.log(lst.food_name)
 				foodname.innerHTML=lst.food_name;
 				
 				foodkcal.innerHTML=lst.kcal + 'kcal';
@@ -226,13 +274,50 @@
 				fat.innerHTML=lst.fat;
 				sodium.innerHTML =lst.sodium;
 				sugar.innerHTML=lst.sugar;
-				
-				
+				kcalhidden.value=lst.food_no;
+			
 			},error:function(data){
 				alert(err);
 			}
 		});
 	}
+		
+		function record_kcal(){
+			var kcal =  $('#intakekcal').text();
+			var member_no = ${login.member_no};
+			var food_no =kcalhidden.value;
+			var intake_size = $('#gram').val();
+		console.log(kcal,member_no,food_no)
+			var dailyfoodValue={
+				"member_no":member_no,
+				"food_no" : food_no,
+				"intake_kcal" :kcal,
+				"intake_size":intake_size
+			};		
+			$.ajax({
+				type : "post",
+				url : "dailyfood.do",
+				data : JSON.stringify(dailyfoodValue),
+				contentType : "application/json",
+				success:function(data){
+					if(data.result =="OK"){
+						alert('등록되었습니다.');
+						close_popup();
+						location.reload();
+					}else{
+						alert('등록실패');
+					}
+						
+					},
+				error : function(err){
+						alert('통신실패');
+				}
+				});
+			
+		}
+		 
+		
+		
 	
 	</script>
 

@@ -15,7 +15,7 @@
 
 
 
-<h2>게시판</h2>
+<h2 style="text-align: center;margin:20px;">게시판</h2>
 <div style ="width:100%;" id ="fooddict-wraper">
 
 <div class="table-responsive" style="margin:auto; width:80%;"> 
