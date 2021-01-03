@@ -37,6 +37,7 @@ public class Admin_Controller {
 	public String admin_member_list(Model model) {
 		model.addAttribute("memberlist", memberbiz.admin_member_list());
 		return "admin_member_list";
+		페이지당 글 갯수, 현재 페이지, 전체 글 수
 	}
 	
 	@RequestMapping("/admin_board_list.do")

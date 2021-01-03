@@ -14,46 +14,15 @@
 <script type="text/javascript" src="resources/js/write.js"></script>
 <script type="text/javascript">
 
-	$(window).load(function(){
-		
+	$(document).ready(function(){
+		var startPage = ${startPage };
+		getPage();
 	});
-
 	
 	
 	
 	
-	$(function(){
-			$.ajax({
-				type : 'POST',
-				url : 'showres.do?startPage=1',
-				dataType : 'json',
-				contentType: 'application/json', 
-				success : function(responseData){
-					var data = JSON.parse(responseData);
-					if(!data){
-						console.log("게시판이 비어있습니다.");
-					}
-					var res = "";
-					console.log(json[0].member_no);
-					console.log(json[0].board_no);
-					console.log(json[0].files_url);
-					
-					 res += '<form class="form-signin" action="" id="ajax">';
-			         res += '이름<input type="text" class="form-control"  name="name" value="'+data.first+'">';
-			         res += '아이디<input type="text" class="form-control" name=id" value="'+data.second+'">';
-			         res += '이메일<input type="text" class="form-control"  name="email" value="'+data.third+'">';
-			         res += '비밀번호<input type="text" class="form-control" name="password" value="'+data.fourth+'">';
-			         res += '</form>';
-			            $("#feed").after(html); 
-			            
-				},
-				error : function(error){
-					alert("에러 발생");
-					console.log(error);
-				}
-				
-			});
-	});
+	
 
 
 </script>
@@ -79,6 +48,8 @@
 					
 				</table>
 				<div id="feed">
+				${startPage }
+				<c:out value="${startPage }" />
 				</div>
 		</div>
 	</section>
