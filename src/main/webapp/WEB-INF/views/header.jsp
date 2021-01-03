@@ -270,7 +270,7 @@ response.setDateHeader("Expires", 0L);
 			}
 		}
 	</script>
-		<%@include file = "updatemember.jsp" %>
+	<%@include file = "updatemember.jsp" %>
 	<%@include file="insertdonation.jsp"%>	
 	<script src="resources/js/header.js"></script>
 

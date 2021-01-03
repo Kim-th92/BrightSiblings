@@ -15,6 +15,7 @@
 		<typeAlias type ="com.bs.dabom.model.dto.Food_Dto" alias = "foodDto"/>
 		<typeAlias type ="com.bs.dabom.model.dto.News_Dto" alias = "newsDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Reply_Dto" alias="replyDto" />
+		<typeAlias type="com.bs.dabom.model.dto.BoardRes_Dto" alias="boardResDto"></typeAlias>
 	</typeAliases>
 	
 	
@@ -30,6 +31,7 @@
 		<mapper resource ="/mybatis/donation-mapper.xml"/>
 		<mapper resource="/mybatis/chat-mapper.xml"/>
 		<mapper resource="/mybatis/news-mapper.xml"/>
+		<mapper resource="/mybatis/boardres-mapper.xml" />
 	</mappers>
 
 

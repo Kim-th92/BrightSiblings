@@ -33,8 +33,13 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
+import com.bs.dabom.model.biz.BoardRes_Biz;
+import com.bs.dabom.model.biz.BoardRes_BizImpl;
 import com.bs.dabom.model.biz.Board_Biz;
 import com.bs.dabom.model.biz.Board_BizImpl;
+import com.bs.dabom.model.dao.BoardRes_Dao;
+import com.bs.dabom.model.dao.BoardRes_DaoImpl;
+import com.bs.dabom.model.dto.BoardRes_Dto;
 import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.FileUploadService;
 import com.bs.dabom.model.dto.Files_Dto;
@@ -48,64 +53,18 @@ public class Board_Controller {
 	private Board_Biz biz;
 	
 	@Autowired
+	private BoardRes_Biz resbiz;
+	
+	@Autowired
 	private FileUploadService fileUploadService;
 	
 	
 	@RequestMapping("mainpage.do")
 	public String mainpage(Model model, HttpSession session) {
 		
-		List<Board_Dto> list = biz.selectList();
-		// 모든 board 글 내용을 List<Board_Dto>로 받아옴. 
-		List<Member_Dto> npList = new ArrayList<Member_Dto>();
-		// nameProp Dto 값 담을 List
+		int startPage = 1;
 		
-		List<List<String>> urlList = new ArrayList<List<String>>();
-		// 게시글 file url String 담을 
-		
-		List<List<Reply_Dto>> repList = new ArrayList<List<Reply_Dto>>();
-		// 게시글 reply Dto 담을
-		
-		for(int i=0; i < list.size(); i++) {
-		// board의 총 갯수만큼 반복
-			
-			int member_no = list.get(i).getMember_no();
-			// board의 i번째부터 끝까지의 회원 번호 
-			Member_Dto nameProp = biz.getNameProp(member_no);
-			// 회원번호를 써서 이름과 프로필을 가져옴
-			npList.add(nameProp);
-			// 그걸 List<Member_Dto>에 담음
-			
-			int board_no = list.get(i).getBoard_no();
-			// board의 i번째부터 끝까지의 게시글 번호
-			
-			List<Files_Dto> fileUrl = biz.getFileUrl(board_no);
-			// 해당 게시글 번호(board_no)와 일치하는 files_Dto들을 List<>로 받음.
-			// 다중 이미지 업로드를 했다면 여러 개가 List에 들어올 것임
-				List<String> urlString = new ArrayList<String>();
-				
-				for(Files_Dto res : fileUrl) {
-					String url = res.getFiles_url();
-					urlString.add(url);
-				 }
-			
-			urlList.add(urlString);
-			
-			
-			List<Reply_Dto> repData = biz.getReply(board_no);
-			// 댓글 Dto가 여러 개 담긴 List
-			
-			repList.add(repData);
-				
-				
-		}	
-		
-		
-		model.addAttribute("login", session.getAttribute("login"));
-		// 로그인 정보 담아서 reply 이미지 아이콘 출력
-		model.addAttribute("reply", repList);
-		model.addAttribute("np", npList);
-		model.addAttribute("list", list);
-		model.addAttribute("url", urlList);
+		model.addAttribute("startPage", startPage);
 		return "mainpage";
 	}
 	
@@ -174,6 +133,8 @@ public class Board_Controller {
 		// url 변수
 		boolean result = false;
 		
+		
+		
 		Member_Dto member_dto= (Member_Dto)session.getAttribute("login");
 		int data = member_dto.getMember_no();
 		// 회원 번호
@@ -193,7 +154,16 @@ public class Board_Controller {
 			val = biz.getVal();
 			// 게시판 번호 
 			
+			String path = request.getSession().getServletContext().getRealPath("/resources/feed_img");
+
+			File storage = new File(path);
+			if(!storage.exists()) {
+				storage.mkdir();
+			}
+			
 				for (int i = 0; i < file.size(); i++) {
+					
+					
 					
 					MultipartFile mp = file.get(i);
 					// mp에 든 file을 하나 하나씩 꺼냄.
@@ -269,6 +239,37 @@ public class Board_Controller {
 	public String youtube() {
 		return "youtube";
 	}
+	
+	@RequestMapping("/showres.do")
+	@ResponseBody
+	public String showres(int startPage, Model model) {
+		
+		List<BoardRes_Dto> list = new ArrayList<BoardRes_Dto>();
+				
+		list = resbiz.selectList(startPage);
+		
+		String res = "";
+		
+		if (list != null) {
+				System.out.println("list의 값이 잘 출력 됨 : " + list);
+				for(int i=0; i<list.size(); i++) {
+					 res += "{first :" + list.get(i).getMember_no()
+					      + ", second :" + list.get(i).getMember_name()
+					      + ", third :" +list.get(i).getMember_profile()
+					      + ", fourth :" +list.get(i).getBoard_no()
+					      + ", fifth :" +list.get(i).getBoard_content()
+					      + ", sixth :" +list.get(i).getBoard_regdate()
+					      + ", seventh :" +list.get(i).getFiles_no()
+					      + ", eighth :" +list.get(i).getFiles_url() + "}";
+				}
+		} else {
+			System.out.println("list의 값이 null입니다..");
+			res = "null";
+		}
+		
+		System.out.println("res리턴값은 " + res);
+		return res;
+	}	
 }
 
 
