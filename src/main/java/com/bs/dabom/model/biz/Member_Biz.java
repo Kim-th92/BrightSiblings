@@ -28,4 +28,8 @@ public interface Member_Biz {
 	public Member_Dto admin_select_list(int member_no);
 
 	public int findpwcheck(Member_Dto dto);
+
+	public Member_Dto selectOneByEmail(String member_email);
+
+	public int updatePassword(Member_Dto dto);
 }

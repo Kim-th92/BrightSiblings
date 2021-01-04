@@ -65,7 +65,7 @@ response.setDateHeader("Expires", 0L);
 				<li><a>${login.member_name }님 반갑습니다.</a></li>
 				<li><a href="mypage_main.do" class="toltip" data-tooltip="MYPAGE" id="btn_plus"><img 	style="width: 40px; height: 40px;" class="profileimg" alt="프로필사진"  src="${login.member_profile }"></a></li>
 				<li><a class="toltip" data-tooltip="Message" id="btn_msg"><i class="fab fa-facebook-messenger"></i></a></li> 		
-				<li><a class="toltip" data-tooltip="Notification"  id="btn_bell"> <i class="fas fa-bell"></i> <span 	class="noti-badge "></span></a></li>
+<!-- 				<li><a class="toltip" data-tooltip="Notification"  id="btn_bell"> <i class="fas fa-bell"></i> <span 	class="noti-badge "></span></a></li> -->
 				<li><a class="toltip" data-tooltip="Settings" id="btn_profile"><i class="fas fa-cog"></i></a></li> 
 				<li><a class="toltip" data-tooltip="Donation" id="btn_donation"><i class="fas fa-hand-holding-usd"></i></a></li>
 

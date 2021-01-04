@@ -38,10 +38,10 @@
 
 	<select id="getroomlist" resultType="chatroomDto">
 		select c.chatroom_no,c.user_one,c.user_two ,max(msg.sendingtime) as sendingtime
-from chatroom c join chatmsg msg on c.chatroom_no = msg.chatroom_no
-join member m on msg.member_no = m.member_no
-having c.user_one  = #{member_no} or c.user_two =#{member_no}
-group by c.chatroom_no,c.user_one,c.user_two
+		from chatroom c join chatmsg msg on c.chatroom_no = msg.chatroom_no
+		join member m on msg.member_no = m.member_no
+		having c.user_one  = #{member_no} or c.user_two =#{member_no}
+		group by c.chatroom_no,c.user_one,c.user_two
 
 
 	</select>
@@ -61,13 +61,11 @@ group by c.chatroom_no,c.user_one,c.user_two
 	
 	<select id="msglist" resultMap="chatmsgDto" parameterType="int">
 		select  m.member_name,m.member_profile,m.member_no ,msg.message,msg.member_no as sender  ,msg.sendingtime,c.chatroom_no
-from member m,chatroom c  join chatmsg msg
-on c.chatroom_no = msg.chatroom_no
-where  msg.member_no = m.member_no and msg.chatroom_no =#{chatroom_no}
-and( m.member_no =(select user_one from chatroom where chatroom_no =#{chatroom_no}) or  m.member_no =(select user_two from chatroom where chatroom_no =#{chatroom_no} ) )
-order by sendingtime 
-
-
+		from member m,chatroom c  join chatmsg msg
+		on c.chatroom_no = msg.chatroom_no
+		where  msg.member_no = m.member_no and msg.chatroom_no =#{chatroom_no}
+		and( m.member_no =(select user_one from chatroom where chatroom_no =#{chatroom_no}) or  m.member_no =(select user_two from chatroom where chatroom_no =#{chatroom_no} ) )
+		order by sendingtime 
 	</select>
 	<insert id="insertChat" parameterType="map">
 		<foreach collection="list" item= "item" open="INSERT ALL" separator=" " close =" SELECT *FROM DUAL">

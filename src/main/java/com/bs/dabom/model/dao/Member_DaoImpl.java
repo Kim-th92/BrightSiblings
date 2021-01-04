@@ -141,4 +141,18 @@ public class Member_DaoImpl implements Member_Dao {
 		return res;
 	}
 
+	@Override
+	public Member_Dto selectOneByEmail(String member_email) {
+		Member_Dto dto = sqlSession.selectOne(NAMESPACE+"selectByEmail",member_email);
+		return dto;
+	}
+	
+	@Override
+	public int updatePassword(Member_Dto dto) {
+		int res = 0;
+		res = sqlSession.selectOne(NAMESPACE+"updatePW",dto);
+		
+		return res;
+	}
+
 }

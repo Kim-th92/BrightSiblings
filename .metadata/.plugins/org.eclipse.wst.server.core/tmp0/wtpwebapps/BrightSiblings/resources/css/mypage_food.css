@@ -40,7 +40,10 @@
 	background-color: white;
 
 }
-
+.table-responsive a{
+	color:#ff1a8c;
+	
+}
 
 .waterCont{
   display:flex;
@@ -57,10 +60,8 @@ background: rgba( 255, 255, 255, 0.50);
 width: 70px;
 height: 120px;
 position: relative;
-border:1px solid aquablue;
-border-top : none;
+border:1px solid navy;
     border-radius: 12%;
-    border:outset;
 }
 .water {
 background-image: url("https://priteshgupta.com/demos/fill/waves.png");
@@ -78,4 +79,8 @@ transition: all 3s ease-out;
 -moz-border-radius: 10px;
 border-radius: 10px;
 
+}
+#btnSearch{
+	border:none;
+	background-color: #ff1a8c;
 }

@@ -24,6 +24,11 @@
 		select * from member where member_email = #{member_email}
 		and member_delflag='N'
 	</select>
+	
+	<select id="selectByEmail" parameterType="String" resultType="memberDto">
+		select * from member where member_email =#{member_email}
+	
+	</select>
 
 	<update id="updatemember" parameterType="memberDto">
 		update member set
@@ -59,11 +64,17 @@
 		MEMBER_PROFILE ='${member_profile}' WHERE MEMBER_NO = #{member_no}
 	</update>
 
+	<update id="updatePw" parameterType="memberDto">
+		UPDATE MEMBER 
+		SET MEMBER_PW =#{member_pw}
+		WHERE MEMBER_NO = #{member_no}
+	</update>
 
 	<update id="deletemember" parameterType="int">
 		update member set
 		member_delflag='Y' where member_no =#{member_no}
 	</update>
+	
 
 
 	<select id="admin_member_list" resultType="memberDto">
