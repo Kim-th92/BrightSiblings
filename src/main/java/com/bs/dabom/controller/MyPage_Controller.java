@@ -122,9 +122,7 @@ public class MyPage_Controller {
 		return null;
 	}
 	
-	@RequestMapping("mypage"
-			+ ""
-			+ "_exercise.do")
+	@RequestMapping("mypage_exercise.do")
 	public String mypageExercise(Model model) {
 		return "mypage_exercise";
 	}
@@ -133,9 +131,9 @@ public class MyPage_Controller {
 	public String distanceres(Model model, MyPage_Dto dto) {
 		int res = mypage_biz.distanceInsert(dto);
 		if (res > 0) {
-			return "mypage_main.do";
+			return "redirect:mypage_exercise.do";
 		} else {
-			return "mypage_main.do";
+			return "redirect:mypage_exercise.do";
 		}
 	}
 	
