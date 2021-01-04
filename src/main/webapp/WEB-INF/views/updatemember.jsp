@@ -33,7 +33,7 @@
             <div class="col-md-12"> <label for="phone">상세 주소</label> <input type="tel" class="bg-light form-control" name="member_secondaddr" id="member_secondaddr" value="${login.member_secondaddr }"> </div>
         </div>
  
-        <div class="py-3 pb-4 border-bottom"> <button class="updatesubmitbtn btn btn-danger mr-3">정보 수정 저장</button> <button onclick="close_popup();" class="btn border button">취소</button> </div>
+        <div class="py-3 pb-4 border-bottom"> <button class="updatesubmitbtn btn btn-danger mr-3">정보 수정 저장</button> <button onclick="close_updatepopup();" class="btn border button">취소</button> </div>
         
     </div>
 </div>
@@ -85,7 +85,7 @@
 		});
 		
 		//클릭시 팝업창 닫기
-		function close_popup(){
+		function close_updatepopup(){
 			$("#update_popup").hide();
 			$('.update_background').hide();
 		}

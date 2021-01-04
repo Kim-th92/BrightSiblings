@@ -18,6 +18,12 @@ public interface Board_Biz {
 	public int delete(int board_no);
 	public Member_Dto getNameProp(int member_no);
 	public List<Files_Dto> getFileUrl(int board_no);
+	
 	public List<Reply_Dto> getReply(int board_no);
 	public int insertReply(Reply_Dto dto);
+	
+	// admin 관련
+	public List<Board_Dto> adminBoardList();
+	public List<Board_Dto> adminBoardPaging(int start, int end);
+	public int totalCount();
 }

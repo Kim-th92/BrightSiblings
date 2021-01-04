@@ -84,7 +84,9 @@
 
 	</div>
 
-	<div id="footer"></div>
+	<div id="footer">
+		<div>© 2021 DABOM</div>
+	</div>
 
 	<script>
 		AOS.init({

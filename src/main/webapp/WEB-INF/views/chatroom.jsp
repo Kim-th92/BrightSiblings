@@ -84,9 +84,10 @@
 
 
 					<div class="video_cam">
-						<span onclick=""><i class="fas fa-video"></i></span> <span
-							onclick=""><i class="fas fa-phone"></i></span> <span
-							onclick="disconnect()">나가기 </span>
+						<span  onclick="location.href='https://localhost:82/roomno=${roomno}&member_name=${login.member_name }'">
+						<i class="fas fa-video"></i>
+						</span>					
+						 <span onclick="disconnect()">나가기 </span>
 					</div>
 				</div>
 				<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
@@ -135,8 +136,11 @@
 	</div>
 
 	<script type="text/javascript">
- var sock= new WebSocket('ws://localhost:8787/dabom/echo.do'); 
+
 	
+	
+ var sock= new WebSocket('ws://localhost:8787/dabom/echo.do'); 
+ var room_no = $("input[name='chat_room_no']").val();
 	function disconnect(){
 		sock.close();
 		window.close();
@@ -148,7 +152,7 @@
 		
 	})
 	sock.addEventListener('open',function(evt){
-		var room_no = $("input[name='chat_room_no']").val();
+		
 		
 		sock.send(room_no);
 	});
@@ -255,6 +259,15 @@ sock.addEventListener('error', function (event) {
 	 $("#chatMessageArea").append(msgDiv).stop().animate({scrollTop: $('#chatMessageArea')[0].scrollHeight },1000)
 	
 	 }
+ }
+ 
+ function startVideochat(){
+	 var name = $('.user_info>span').val();
+	 console.log(name);
+	 var msgVideo ="<div class='d-flex  justify-content-end mb-4' titile='${login.member_no}'><div class='msg_cotainer'><form action='https://localhost:82/"+room_no +"' method='get'>"+
+			"<input type='hidden' name='member_name' value='"+name+"'><button type='submit'>영상통화를 시작해 보세요! </button></form><span class='msg_time'>"+t+"</span></div><div class='img_cont_msg'><img src='${login.member_profile}' class='rounded-circle user_img_msg'></div></div>"
+		
+	 $("#chatMessageArea").append(msgVideo).stop().animate({scrollTop: $('#chatMessageArea')[0].scrollHeight },1000)
  }
  
 

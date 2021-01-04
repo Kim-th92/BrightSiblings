@@ -12,7 +12,7 @@
 <body>
 	<%@include file="adminpage.jsp"%>
 	<div class="admin_section">
-		<div id="admin_memberlist">
+		<div class="admin_page">
 			<table>
 				<colgroup>
 					<col width="50px" />
@@ -40,7 +40,7 @@
 							<tr style="text-align: left;"
 								class="admin_memberlist_content ${loop.index % 2 == 0 ? 'even' : 'odd'}">
 								<td>${dto.member_no }</td>
-								<td>${dto.member_id }</td>
+								<td><a href="admin_select_list.do?member_no=${dto.member_no }">${dto.member_id }</a></td>
 								<td>${dto.member_email }</td>
 								<td>${dto.member_delflag }</td>
 								<td>${dto.member_regdate }</td>

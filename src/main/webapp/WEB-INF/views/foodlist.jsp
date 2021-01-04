@@ -15,7 +15,7 @@
 
 
 
-<h2>게시판</h2>
+<h2 style="text-align: center;margin:20px;">게시판</h2>
 <div style ="width:100%;" id ="fooddict-wraper">
 
 <div class="table-responsive" style="margin:auto; width:80%;"> 
@@ -32,7 +32,7 @@
 		<c:forEach items="${viewAll }" var="list" varStatus="idx">
 			<tr class="${idx.count % 2 == 1 ? 'trOdd' : 'trEven'}">
 				<td align="center">${list.food_no}</td>
-				<td><a href='detail?seq=${list.food_no }'>${list.food_name }</a></td>
+				<td><a style="cursor:pointer;color:#ff1a8c; font-weight: bold;" onclick="fooddetail(${list.food_no})">${list.food_name }</a></td>
 				<td>${list.kcal }</td>
 				<td>${list.serving_size } </td>
 			</tr>
@@ -73,6 +73,7 @@
 
 		<!-- search{e} -->
 
+	
 
 
    
@@ -82,15 +83,56 @@
 	$(document).on('click', '#btnSearch', function(e){
 		e.preventDefault();
 		var url = "foodlist.do";
-		url = url + "?keyword=" + $('#keyword').val();
+		url = url + "?keyword=" + $('#keyword').innerHTML();
 		location.href = url;
 		console.log(url);
 	});	
+
+	
+	
+	function fooddetail(foodno){
+		
+		var foodname = document.getElementById('foodname')
+		var foodkcal = document.getElementById('foodkcal')
+		var servingsize = document.getElementById('servingsize')
+		var carbo = document.getElementById('carbo')
+		var protein = document.getElementById('protein')
+		var fat= document.getElementById('fat')
+		var sugar = document.getElementById('sugar')
+		var sodium = document.getElementById('sodium')
+		$('#food_popup').fadeIn();
+		$('.food_background').fadeIn();
+		$.ajax({
+			url : 'fooddetail.do?food_no='+foodno,
+			type:'get',
+			success:function(data){
+				var lst = data.fooddetail;
+				console.log(lst)
+				console.log(lst.food_name)
+				foodname.innerHTML=lst.food_name;
+				
+				foodkcal.innerHTML=lst.kcal + 'kcal';
+				servingsize.innerHTML =lst.serving_size;
+				carbo.innerHTML=lst.carbohydrate;
+				protein.innerHTML=lst.protein;
+				fat.innerHTML=lst.fat;
+				sodium.innerHTML =lst.sodium;
+				sugar.innerHTML=lst.sugar;
+				
+				
+			},error:function(data){
+				alert(err);
+			}
+		});
+	}
+	
+	
 
 </script>
 
 
 
 </div>
+<%@include file = "fooddetail.jsp" %>
 </body>
 </html>
