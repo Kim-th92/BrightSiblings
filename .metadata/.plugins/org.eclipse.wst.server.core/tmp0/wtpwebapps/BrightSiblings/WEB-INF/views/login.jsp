@@ -64,7 +64,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: center; margin: 10px;"><a
-							href="register.do">회원가입</a> | <a style ="pointer : cursor;" onclick="window.open('findpw.do','popup','width=500px,top=300,left=500,height=300px')">ID/PW찾기</a></td>
+							href="register.do">회원가입</a> | <a style ="cursor:pointer;" onclick="window.open('findpw.do','popup','width=500px,top=300,left=500,height=300px')">ID/PW찾기</a></td>
 					</tr>
 					<tr>
 						<td colspan="2"><a href="${kakao_url}"><img

@@ -31,17 +31,17 @@
 	background-color: white;
 }
 #nofriend{
-	    width: 80%;
+	width: 80%;
     height: 600px;
     border-radius: 5%;
     text-align: center;
-        box-shadow: 0px 0px 20px 1px #a6a5a7;
+    box-shadow: 0px 0px 20px 1px #a6a5a7;
     border-radius: 15px;
 	background-color: white;
 
 }
 #profile-img{
-	border-radius : 50% 50%;
+	border-radius : 30% 30%;
 	width:100px;
 	height:100px;
 }
@@ -49,11 +49,24 @@
 	width:50%;
 	margin :40px 20px;
 	padding-left :40px;
-	    box-shadow: 0px 0px 20px 1px #a6a5a7;
+	box-shadow: 0px 0px 20px 1px #a6a5a7;
     border-radius: 15px;
 	background-color: white;
+	text-align: center;
 	
 }
+#borderdiv{
+	    display: inline-block;
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 5% 5%;
+	margin : 10px ;
+}
+#borderdiv button{
+	border:none;
+	border-radius: 10% 10%;
+}
+
 a{
 	text-decoration: none;
 }

@@ -23,13 +23,11 @@ public class WebsocketHandler extends TextWebSocketHandler {
 	Map<String, WebSocketSession> userSessions = new HashMap<>();
 	
 	@Override
-
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("afterConnectionEstablished:" + session);
 		sessions.add(session);
 		String senderId = getId(session);
 		userSessions.put(senderId, session);
-		
 	}
 
 	private String getId(WebSocketSession session) {
@@ -71,7 +69,6 @@ public class WebsocketHandler extends TextWebSocketHandler {
 	}
 
 	@Override
-
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.remove(session);
         log.info("퇴장 : {}",  session);

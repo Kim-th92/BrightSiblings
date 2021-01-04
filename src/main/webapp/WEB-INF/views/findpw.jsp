@@ -20,7 +20,7 @@
   <span class="entypo-mail inputPassIcon">
    </span>
   <input type="text" style ="width:300px;  display:inline-block;" class="member_email"placeholder="이메일을 입력해주세요 "/>  
-  <button class="submit" onclick="namecheck()"><span >인증번호 발송</span></button>
+  <button class="submit" onclick="namecheck()"><span >임시비밀번호 발급</span></button>
 <p style="display:none;" class="err"></p> 
 <input style =" display:none;" type="text" class="authkey" placeholder="인증번호를 입력해 주세요. 	"/>
   
@@ -49,8 +49,6 @@ $(".pass").focusin(function(){
 function namecheck(){
 	var member_id = $('.member_id').val().trim();
 	var member_email = $('.member_email').val().trim();
-	var tempPw;
-	var authkey;
 	var checkValue = {
 			'member_id' : member_id,
 			'member_email' : member_email
@@ -70,14 +68,17 @@ function namecheck(){
 			contentType : "application/json",
 			success : function(msg) {
 				if (msg.check == 'true') {
-						$('.authkey').show();
-						timer();
 						$.ajax({
 							url:'mailsend.do?member_email='+member_email,
 							type:'GET',
-							success:function(mgg){
-								console.log(mgg)
-								alert(mag.authkey);
+							success:function(data){
+								console.log(data)
+								if(data.res =='ok'){
+									alert('임시비밀번호 정상발급 되었습니다!');
+								}else{
+									alert("실패");
+								}
+								
 							},
 							error:function(err){
 								console.log(err)
@@ -98,50 +99,6 @@ function namecheck(){
 			}
 		});
 	}
-}
-
-
-function check(){
-	var authkeyinput = $('.authkey').val();
-	if(!authkeyinput){
-		alert("인증번호를 입력하세요");
-		return false;
-	}
-	
-	if(authkeyinput !=  authkey){
-		alert("잘못된 인증번호입니다 인증번호를 다시 입력해주세요. ");
-		authkeyinput.val = "";
-		return false;
-	}
-	
-	if(authkeyinput == authkey){
-		alert("인증완료 ");	
-		
-	}
-}
-
-
-
-
-function timer(){
-	//타이머 
- 	var time = 180; //  3분시간 제한
- 	var min = "";
- 	var sec = ""; 
- 	
- 	//1초씩 실행되는 함수 
- 	var x = setInterval(function(){
- 		min = parseInt(time/60) ;//몫계산
- 		sec = time%60;               //나머지 계산
- 		
- 		document.getElementById("countdown").innerHTML = min + ':' +sec ;
- 		
- 		if(time<0){
- 			clearInterval(x); 
- 			document.getElementById("countdown").innerHTML = "인증시간이 초과되었습니다. 다시 시도해주세요.";
- 		}
- 	},1000);
-
 }
 
 </script>

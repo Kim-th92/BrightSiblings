@@ -12,12 +12,63 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 
 var birthJ = false;
-
- 
+var emailAuthKey;
 
 
 $(document).ready(function () {
 	var address = $('#member_secondaddr');
+
+
+	$('.authkeyhide').hide();
+	
+	//이메일 인증 관련
+
+//이메일 인증 보내기
+
+
+//이메일 인증하고 인증키랑 같다면 레지스터 아니라면 가입안됨
+	$('#authkeysend').click(function(){
+		var email = $('#member_email').val();
+		if (mailJ.test(email)) {
+				$.ajax({
+					type:"post",
+					url :"varifyemail.do?email="+email,
+					contentType : "application/json",
+					success:function(msg){
+							$('.authkeyhide').show();
+							timer();
+							$('#authkeysend').attr('disabled',true);
+							$('#authkey').attr('disabled',false);
+						alert('인증번호를 입력해 주세요.');
+						emailAuthKey = msg.authkey;
+						
+			},
+			error:function(err){
+				alert(err);
+			}
+	
+		});
+			
+        } else {
+           alert('이메일을 입력해주세용!')
+        }
+	   
+	
+	});
+	 $('#authkey').blur(function () {
+		console.log(emailAuthKey)
+		console.log($('#authkey').val())
+        if (emailAuthKey == $('#authkey').val()) {
+            console.log('true');
+            $('#auth_check').text('인증되었습니다.');
+			$('#authkeycheck').val("true");
+        } else {
+            console.log('false');
+            $('#auth_check').text('인증번호가 맞지않습니다. 다시 시도해주세요 .');
+            $('#auth_check').css('color', 'red');
+        }
+    });
+	
   	 //아이디 중복확인 
     $("#idchk").click(function () {
         if ($('#member_id').val() == '') {
@@ -59,7 +110,7 @@ console.log(member_id);
         } //else if 
     }); //blur 
     $('form').on('submit', function () {
-        var inval_Arr = new Array(7).fill(false);
+        var inval_Arr = new Array(8).fill(false);
         if (idJ.test($('#member_id').val())) {
             inval_Arr[0] = true;
         } else {
@@ -117,13 +168,23 @@ console.log(member_id);
             alert('주소를 확인하세요.');
             return false;
         } else inval_Arr[6] = true;
-        //전체 유효성 검사 
+     
+		if($('#authkeycheck'.val()=='false'||$('#authkey').val().trim()=="")){
+			inval_Arr[7] =false;
+			alert('이메일 인증을 해주세요');
+			return false;
+		}else{
+			inval_Arr[7] = true;
+		}
+		
+		   //전체 유효성 검사 
         var validAll = true;
         for (var i = 0; i < inval_Arr.length; i++) {
             if (inval_Arr[i] == false) {
                 validAll = false;
             }
         }
+
         if (validAll == true) {
             // 유효성 모두 통과 
             alert('감사합니다.');
@@ -238,6 +299,10 @@ console.log(member_id);
             $('#phone_check').css('color', 'red');
         }
     });
+
+	//이메일 인증 유효성 검사 	
+	
+	
 });
 //우편번호 찾기 버튼 클릭시 발생 이벤트 
 function execPostCode() {
@@ -284,3 +349,32 @@ function execPostCode() {
         }
     }).open();
 }
+
+
+//시간제한
+
+function timer(){
+	//타이머 
+ 	var time = 240; //  4분시간 제한
+ 	var min = "";
+ 	var sec = ""; 
+ 	
+ 	//1초씩 실행되는 함수 
+ 	var x = setInterval(function(){
+ 		min = parseInt(time/60) ;//몫계산
+ 		sec1 = time%60;               //나머지 계산
+		sec=(sec1==0|| sec1<10)? '0'+sec1: sec1;
+ 		
+ 		document.getElementById("countdown").innerHTML = min + ':' +sec ;
+ 		time--;
+ 		if(time<0){
+ 			clearInterval(x); 
+ 			document.getElementById("countdown").innerHTML = "인증시간이 초과되었습니다. 다시 시도해주세요.";
+ 			$('#authkey').attr("disabled",true);
+			$('#authkeysend').attr("disabled",false);
+	}
+ 	},1000);
+
+}
+
+
