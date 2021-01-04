@@ -123,7 +123,12 @@ public class MyPage_Controller {
 	}
 	
 	@RequestMapping("mypage_exercise.do")
-	public String mypageExercise(Model model) {
+	public String mypageExercise(Model model, HttpSession session) {
+		Member_Dto login = (Member_Dto)session.getAttribute("login");
+		int member_no = login.getMember_no();
+		model.addAttribute("list", mypage_biz.showList(member_no));
+		model.addAttribute("total", mypage_biz.total(member_no));
+		System.out.println("asdfaf4w4e3r24fe2e4" + mypage_biz.total(member_no));
 		return "mypage_exercise";
 	}
 	
