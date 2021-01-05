@@ -17,4 +17,6 @@ public class AddInfo_Dto {
 	private float targetkcal;
 	private float advisekcal;
 	
+	
+	
 }

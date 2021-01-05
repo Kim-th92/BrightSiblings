@@ -29,6 +29,8 @@ import com.bs.dabom.model.dto.Dailyfoodrecord_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
 import com.bs.dabom.model.dto.MyPage_Dto;
 import com.bs.dabom.model.dto.Paging_Dto;
+import com.bs.dabom.model.dto.AddInfo_Dto;
+import com.bs.dabom.model.biz.AddInfo_Biz;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,6 +51,8 @@ public class MyPage_Controller {
 	private FoodPaging_Biz food_biz;
 	@Autowired
 	private MyPage_Biz mypage_biz;
+	
+
 	
 	public static void main(String[] args) {
 		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 

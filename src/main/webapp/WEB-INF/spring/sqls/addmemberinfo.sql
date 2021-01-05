@@ -12,4 +12,27 @@ create table addmemberinfo(
 	constraint add_member_no_fk FOREIGN KEY (member_no) REFERENCES member(member_no),
 	constraint gender CHECK(gender IN('W','M'))
 	
+<<<<<<<< HEAD:src/main/webapp/WEB-INF/spring/sqls/addmemberinfo.sql
 )
+========
+
+)
+
+SELECT *
+FROM addmemberinfo
+WHERE MEMBER_NO = '14'
+
+INSERT INTO ADDMEMBERINFO
+VALUES(14,180,53,'M',60,20,2000,2000)
+
+SELECT * FROM MEMBER
+
+UPDATE ADDMEMBERINFO SET
+GENDER = 'W',
+TARGETWEIGHT = NULL,
+BMI = null
+WHERE MEMBER_NO = '14'
+
+DELETE FROM ADDMEMBERINFO
+WHERE MEMBER_NO = '14';
+>>>>>>>> yoohyun:src/main/webapp/WEB-INF/spring/sqls/memberaddinfo.sql
