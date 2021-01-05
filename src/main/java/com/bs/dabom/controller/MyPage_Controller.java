@@ -66,12 +66,15 @@ public class MyPage_Controller {
 		model.addAttribute("requestlist", requestlist);
 		model.addAttribute("list",list);
 		model.addAttribute("requestinglist",requestinglist);
-
+		
 		return "mypage_friends";
 	}
 	
 	@RequestMapping("mypage_main.do")
-	public String mypageFriends(Model model) {
+	public String mypageFriends(Model model, HttpSession session) {
+		Member_Dto dto= (Member_Dto)session.getAttribute("login");
+		int memberno = dto.getMember_no(); // 로그인 회원 정보
+		
 		return "mypage_main";
 	}
 	
