@@ -71,7 +71,7 @@ response.setDateHeader("Expires", 0L);
 
 			</ul>
 			<ul id="hide" class="hide">
-				<li><a href="logout.do" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+				<li><a onclivk="location.href='logout.do'" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
 				<li><a onclick="updatemember();" class="hidecontent"><i class="fas fa-user-edit"></i>회원수정</a></li>
 				<li><a onclick="deletemember();" class="hidecontent"><i	class="fas fa-user-minus"></i>회원탈퇴</a></li>
 			</ul>
@@ -125,7 +125,7 @@ response.setDateHeader("Expires", 0L);
 						var chatroomList ="";
 						for(var i = 0; i < chatroomlistarr.length; i++){
 							chatroomList +="<li><a onclick="+"\"window.open"+"('chatmsglist.do?chatroom_no="+chatroomlistarr[i].chatroom_no+"','popup','width=500px,height=530px')\""+" style='text-decoration:none; color:black; '><div class='d-flex bd-highlight'><div class='img_cont'><img src='"+
-							chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'><span class='online_icon offline'></span></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+
+							chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+
 							chatroomlistarr[i].last_message+"</p><p>"+chatroomlistarr[i].sendingtime+
 							"</p></div></div></a></li>";
 						}

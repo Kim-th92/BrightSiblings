@@ -56,12 +56,12 @@
 	
 }
 #borderdiv{
-	    display: inline-block;
-    border: 1px solid black;
+	      display: inline-block;
+    border: 3px solid ghostwhite;
     padding: 20px;
-    border-radius: 5% 5%;
-	margin : 10px ;
-}
+    border-radius: 5px 5px;
+    margin: 10px;
+    }
 #borderdiv button{
 	border:none;
 	border-radius: 10% 10%;

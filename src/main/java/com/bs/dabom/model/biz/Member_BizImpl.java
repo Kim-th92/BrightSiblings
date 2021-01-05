@@ -89,4 +89,9 @@ public class Member_BizImpl implements Member_Biz {
 		return dao.updatePassword(dto);
 	}
 
+	@Override
+	public int uploadBgProfile(Member_Dto member_dto) {
+		return dao.uploadBgProfile(member_dto);
+	}
+
 }
