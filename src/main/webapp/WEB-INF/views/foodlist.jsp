@@ -13,11 +13,12 @@
 </head>
 <body>
 
-
-
-<h2 style="text-align: center;margin:20px;">게시판</h2>
 <div style ="width:100%;" id ="fooddict-wraper">
 
+<h2 style="text-align: center;margin:20px;">게시판</h2>
+<div   style="text-align: center;margin:20px 0px;">
+	<img style="width: 90%; height:150px;" src="./resources/image/foodbanner.jpg" alt="음식배너"/>
+</div>
 <div class="table-responsive" style="margin:auto; width:80%;"> 
 	<table class="table table-striped" >
 	<thead>
@@ -41,7 +42,7 @@
 	</table>
 	<div style="display: block; text-align: center;">		
 		<c:if test="${paging.startPage != 1 }">
-			<a href="foodlist.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+			<a style="color:#ff1a8c;" href="foodlist.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
 		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 			<c:choose>
@@ -49,12 +50,12 @@
 					<b>${p }</b>
 				</c:when>
 				<c:when test="${p != paging.nowPage }">
-					<a href="foodlist.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					<a style="color:#ff1a8c;"  href="foodlist.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
 				</c:when>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${paging.endPage != paging.lastPage}">
-			<a href="foodlist.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+			<a style="color:#ff1a8c;"  href="foodlist.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
 	</div>
 		<!-- pagination{e} -->
@@ -67,17 +68,17 @@
 			</div>
 
 			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+				<button class="btn btn-sm btn-primary" style="background-color: #ff1a8c; border:none;" name="btnSearch" id="btnSearch">검색</button>
 			</div>
 		</div>
 
 		<!-- search{e} -->
-
-	
-
-
    
 </div>
+
+<div id="footer">
+		<div>© 2021 DABOM</div>
+	</div>
 
 <script>
 	$(document).on('click', '#btnSearch', function(e){

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -164,6 +165,88 @@ public class MyPage_Controller {
 		return map;
 	}
 	
+	//멤버배경 사진업로드 멤버에위치 
+	@RequestMapping("profilePicBgUpload.do")
+	public @ResponseBody Map<String,Integer> profileBgPicUpload(HttpSession session,MultipartHttpServletRequest mtf){
+		MultipartFile file = mtf.getFile("file");
+		//파일이 빈파일인지 유효성 검사 
+		boolean isc = file.isEmpty();
+		
+		Member_Dto member_dto = (Member_Dto) session.getAttribute("login");
+		
+		if(isc ==true) {
+			
+			member_dto.setMember_bgprofile("resources/image/profile-bg.png");
+			
+		}else {
+			
+			String oriName = file.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			String filePath = mtf.getSession().getServletContext().getRealPath("/");
+			
+			InputStream inputStream =null;
+			OutputStream outputStream = null;
+			
+
+			try {
+				inputStream = file.getInputStream();
+				String path = mtf.getSession().getServletContext().getRealPath("/resources/bg_profile_img");
+				
+				
+				File storage = new File(path);
+				if(!storage.exists()) {
+					storage.mkdir();
+				}
+				
+				File newFile = new File(path +"/" + oriName);
+				if(!newFile.exists()) {
+					newFile.createNewFile();
+				}
+				
+				outputStream = new FileOutputStream(newFile);
+				
+				int read = 0;
+				byte[] b = new byte[(int)file.getSize()];
+				
+				while((read=inputStream.read(b))!= -1) {
+					outputStream.write(b,0,read);
+					
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					inputStream.close();
+					outputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			member_dto.setMember_bgprofile("resources/bg_profile_img/"+ oriName);
+			
+		}
+		
+		int result = member_biz.uploadBgProfile(member_dto);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("result", result);
+		
+		return map;
+	
+	}
+	
+	//선택한 파일업로드
+	@RequestMapping("profileExPicBgUpload.do")
+	public @ResponseBody Map<String,Integer> profileExPicBgUpload(HttpSession session,@RequestParam("bg_profile") String bg_profile){
+		Member_Dto member_dto = (Member_Dto) session.getAttribute("login");
+		
+		member_dto.setMember_bgprofile(bg_profile);
+		int result = member_biz.uploadBgProfile(member_dto);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("result", result);
+		return map;
+	}
 	
 	//파일업로드 서비스는 멤버에 위치
 	@RequestMapping("profilePicUpload.do")

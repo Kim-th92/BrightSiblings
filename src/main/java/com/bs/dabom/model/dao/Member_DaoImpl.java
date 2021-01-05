@@ -155,4 +155,12 @@ public class Member_DaoImpl implements Member_Dao {
 		return res;
 	}
 
+	@Override
+	public int uploadBgProfile(Member_Dto member_dto) {
+		int res = 0;
+		res = sqlSession.update(NAMESPACE+"uploadBgProfile",member_dto);
+		
+		return res;
+	}
+
 }

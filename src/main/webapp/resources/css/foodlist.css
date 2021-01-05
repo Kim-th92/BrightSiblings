@@ -411,6 +411,11 @@ canvas {
 /**
  * Add the correct display in IE.
  */
+ 
+.table-responsive{
+	min-height: calc(100vh - 70px);
+	height:auto;
+}
 template {
   display: none;
 }
@@ -829,6 +834,25 @@ legend {
   width: 100%;
   max-width: 790px;
 }
+
+
+#footer{
+	width:100%;
+	height:70px;
+	background : #ffe6ee;
+	
+	
+	/* transform : translateY(-100%); 자기자신의 100%만큼 올라와	 */
+	/* margin-top : -60px; */
+}
+
+#footer div{
+    text-align: center;
+    padding: auto;
+    padding: 20px 30px;
+    color: gray;
+}
+
 
 .s006 form legend {
   font-size: 36px;

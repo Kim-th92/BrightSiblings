@@ -32,4 +32,6 @@ public interface Member_Biz {
 	public Member_Dto selectOneByEmail(String member_email);
 
 	public int updatePassword(Member_Dto dto);
+
+	public int uploadBgProfile(Member_Dto member_dto);
 }

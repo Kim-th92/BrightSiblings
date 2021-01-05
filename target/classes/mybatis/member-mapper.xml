@@ -63,6 +63,11 @@
 		UPDATE MEMBER SET
 		MEMBER_PROFILE ='${member_profile}' WHERE MEMBER_NO = #{member_no}
 	</update>
+	
+	<update id="uploadBgProfile" parameterType="memberDto">
+		UPDATE MEMBER SET
+		MEMBER_BGPROFILE ='${member_bgprofile}' WHERE MEMBER_NO = #{member_no}
+	</update>
 
 	<update id="updatePw" parameterType="memberDto">
 		UPDATE MEMBER 

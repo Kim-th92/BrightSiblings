@@ -8,8 +8,6 @@
 <meta charset="UTF-8">
 <title>🍅나의 식단🍅</title>
 <link rel="stylesheet" href="resources/css/mypage_food.css" />
- <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-    <script src="jquery.counterup.min.js"></script>
 </head>
 <body>
 	<%@include file="header.jsp"%>
