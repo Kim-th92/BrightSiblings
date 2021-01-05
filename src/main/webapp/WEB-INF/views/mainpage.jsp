@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/write.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 <script type="text/javascript" src="resources/js/write.js"></script>
 <style>
 	.btn-example:link {
@@ -113,7 +114,18 @@
 										<div class="pop-conts">
 										
 											<form method="post" action="upload.do" enctype="multipart/form-data">
-												<textarea cols="45" rows="8" name="text" style="resize:none;"></textarea>
+												<textarea cols="45" rows="8"  name="text" style="resize:none;"></textarea>
+												 <script>
+												 CKEDITOR.replace( 'text' ,{ allowedContent: 'h1 h2 h3 p blockquote strong em;' +
+													        'a[!href];' +
+													        'table tr th td caption;' +
+													        'span{!font-family};' +
+													        'span{!color};' +
+													        'span(!marker);' +
+													        'del ins'
+													    });
+												 </script>
+												
 												<div id="forBg" style="width: 50px; height: 50px; background : url('resources/image/upload_img.png'); background-size: 50px 50px;">
 													<label class="uploadButton" for="fileUpload" style="width: 50px; height: 50px;">.</label>
 												</div>
