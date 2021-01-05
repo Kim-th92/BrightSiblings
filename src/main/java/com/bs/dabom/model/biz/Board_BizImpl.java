@@ -75,6 +75,21 @@ public class Board_BizImpl implements Board_Biz {
 		return dao.getReply(board_no);
 	}
 
+	@Override
+	public List<Board_Dto> adminBoardList() {
+		return dao.adminBoardList();
+	}
+
+	@Override
+	public List<Board_Dto> adminBoardPaging(int start, int end) {
+		return dao.adminBoardPaging(start, end);
+	}
+
+	@Override
+	public int totalCount() {
+		return dao.totalCount();
+	}
+
 	
 
 

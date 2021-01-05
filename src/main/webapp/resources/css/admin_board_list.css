@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+*{
+	margin : 0px;
+	padding : 0px;
+	z-index: 50;
+}
+
+/* district separate */
+
+#mainWrap {
+	width : 100%;
+	height : 100%;
+	background-color: ghostwhite;
+}
+#mainWrap section:nth-child(1) {
+	float:left;
+}
+#mainWrap section:nth-child(2) {
+	float:left;
+}
+#mainWrap section:nth-child(3) {
+	float:left;
+}
+
+#navi{
+	width: 20%;
+	position:fixed;
+	background-color : #F8EEF8;
+	height : 100%;
+}
+
+#board{
+	width : 100%;
+	height : 100%;
+	background-color: ghostwhite;
+}
+#boardDiv{
+	width : 60%;
+	margin: auto;
+	background-color: ghostwhite;
+	height : 100%;
+}
+
+
+
+/* write css */
+
+.writeWrap {
+	width: 90%;
+	height: 100px;
+	margin: auto;
+	border: 1px solid #ffe6f7;
+	text-align: center;
+}
+
+
+/* main css */
+
+.feedWrap {
+	width: 90%;
+	height: auto;
+	margin: auto;
+	border: 1px solid ghostwhite;
+}
+
+.feedProp {
+	height: 80px;
+	padding: 10px;
+}
+.feedProp img {
+	width : 60px;
+	height: 60px;
+	border-radius:70%;
+	overflow: hidden;
+}
+
+.feedImage {
+	padding: 10px;
+}
+.feedImage img{
+	width: 200px;
+	height: auto;
+}
+
+.feedContent{
+	padding: 10px;
+}
+.feedContent span{
+	font-weight: bold;
+}
+
+.likeWrap {
+	padding: 10px;
+}
+.replyProp img {
+	width : 60px;
+	height: 60px;
+	border-radius:70%;
+	overflow: hidden;
+}
+
+/* load more button */
+.loadmore {
+	float: right;
+	cursor: pointer;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: #ea97ad;
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .1);
+}
+
+.loadmore:hover {
+    background-color: #e16b8a;
+}
+
+.loadmore:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .1),
+                inset 2px 2px 3px rgba(0, 0, 0, .1);
+}

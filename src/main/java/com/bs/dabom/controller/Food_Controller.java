@@ -1,12 +1,20 @@
 package com.bs.dabom.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bs.dabom.model.biz.FoodPaging_Biz;
+import com.bs.dabom.model.dto.Dailyfoodrecord_Dto;
+import com.bs.dabom.model.dto.Food_Dto;
 import com.bs.dabom.model.dto.Paging_Dto;
 
 @Controller
@@ -33,6 +41,30 @@ public class Food_Controller {
 		model.addAttribute("paging", dto);
 		model.addAttribute("viewAll", biz.selectFood(dto));
 		return "foodlist";
+		
+	}
+	
+	@GetMapping("fooddetail.do")
+	public  @ResponseBody Map<String,Object> foodDetail(@RequestParam (value="food_no",required=false)int food_no){
+		Map<String,Object> map = new HashMap<String, Object>();
+		Food_Dto dto = new Food_Dto();
+		dto = biz.foodDetail(food_no);
+		map.put("fooddetail", dto);
+		
+		return map;
+	}
+	
+	@RequestMapping("dailyfood.do")
+	public @ResponseBody Map<String,Object> dailyFood(@RequestBody Dailyfoodrecord_Dto dto) {
+		int res = biz.insertDailyFood(dto);
+		Map<String,Object> map = new HashMap<String, Object>();
+		if(res>0) {
+			map.put("result", "OK");
+		}else {
+
+			map.put("result", "OK");
+		}
+		return map;
 		
 	}
 	

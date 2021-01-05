@@ -79,4 +79,19 @@ public class Member_BizImpl implements Member_Biz {
 		return dao.findpwcheck(dto);
 	}
 
+	@Override
+	public Member_Dto selectOneByEmail(String member_email) {
+		return dao.selectOneByEmail(member_email);
+	}
+
+	@Override
+	public int updatePassword(Member_Dto dto) {
+		return dao.updatePassword(dto);
+	}
+
+	@Override
+	public int uploadBgProfile(Member_Dto member_dto) {
+		return dao.uploadBgProfile(member_dto);
+	}
+
 }

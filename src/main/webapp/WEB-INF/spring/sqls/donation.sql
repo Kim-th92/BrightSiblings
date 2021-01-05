@@ -35,5 +35,13 @@ having a.member_no = 11
 group by a.member_no
 
 select sum(a.donation)
-from donation a join member b on (a.member_no = b.member_no) 
+from donation a join member b on (a.member_no = b.member_no)
 
+select *
+		from 
+		(select row_number() over(order by board_no DESC) as num, 
+			   board_no, member_no, board_content, board_hashtag, board_like,
+			   board_privacy, board_regdate, board_updatedate
+		from board)
+		where num >= 1 and num < 4
+		order by num

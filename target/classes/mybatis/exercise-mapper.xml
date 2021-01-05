@@ -3,8 +3,27 @@
 <mapper namespace = "exercise">
 
 	<insert id="distanceInsert" parameterType="myPageDto">
-		INSERT INTO DAILYEXERCISERECORD(MEMBER_NO, CALENDAR_DATE, BURN_KCAL, DISTANCE)
-		VALUES(#{member_no}, SYSDATE, #{burn_kcal}, #{distance})
+		INSERT INTO DAILYEXERCISERECORD
+		VALUES(#{member_no}, SYSDATE, #{course_name}, #{burn_kcal}, #{distance})
 	</insert>
+	
+	<select id="showList" parameterType="int" resultType="myPageDto">
+		SELECT CALENDAR_DATE, COURSE_NAME, BURN_KCAL, DISTANCE
+		FROM DAILYEXERCISERECORD DER, (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') AS TODAY FROM DUAL) T
+		WHERE TO_CHAR(DER.CALENDAR_DATE, 'YYYYMMDD') = T.TODAY
+		AND MEMBER_NO = #{no}
+		ORDER BY DISTANCE DESC
+	</select>
+
+	<select id="total" parameterType="int" resultType="myPageDto">
+		SELECT SUM(K) TOTAL_BURN_KCAL, SUM(D) TOTAL_DISTANCE
+		FROM (
+				SELECT DER.CALENDAR_DATE, DER.COURSE_NAME, DER.BURN_KCAL K, DER.DISTANCE D
+				FROM MEMBER M, DAILYEXERCISERECORD DER, (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') AS TODAY FROM DUAL) T
+				WHERE M.MEMBER_NO = DER.MEMBER_NO
+				AND TO_CHAR(DER.CALENDAR_DATE, 'YYYYMMDD') = T.TODAY
+				AND DER.MEMBER_NO = #{no}
+			 )
+	</select>
 	
 </mapper>

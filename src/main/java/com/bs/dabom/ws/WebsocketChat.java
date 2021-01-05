@@ -101,8 +101,6 @@ public class WebsocketChat {
 					jsonlist.add(jsonData);
 					chatMsgMap.put(chatroom_no, jsonlist);
 					
-					// 해당 방번호에 데이터보내기
-					// 동기화 : 하나의 일 처리를 수행하는동안 사용자의 변경이 일어나면 NullPointer 에러 발생
 					synchronized (configs) {
 
 						Iterator<Session> sessions = chatMap.keySet().iterator();
@@ -119,8 +117,6 @@ public class WebsocketChat {
 						}
 					}
 				}
-	
-				
 	}
 
 	@OnClose

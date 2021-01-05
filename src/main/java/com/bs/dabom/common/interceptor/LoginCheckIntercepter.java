@@ -47,6 +47,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 					||request.getRequestURI().contains("/findpwcheck.do")
 					||request.getRequestURI().contains("/mailsend.do")
 					||request.getRequestURI().contains("/temppw.do")
+					||request.getRequestURI().contains("varifyemail.do")
 					
 					) {
 				return true;

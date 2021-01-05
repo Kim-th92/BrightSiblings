@@ -30,4 +30,10 @@ public interface Member_Dao {
 	public int updateMember(Member_Dto dto);
 
 	public int findpwcheck(Member_Dto dto);
+
+	public Member_Dto selectOneByEmail(String member_email);
+
+	public int updatePassword(Member_Dto dto);
+
+	public int uploadBgProfile(Member_Dto member_dto);
 }
