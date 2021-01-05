@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "boardres">
+	<resultMap type="boardResDto" id="boardResMap">
+			<result column="MEMBER_NO" property="member_no" />
+			<result column="MEMBER_NAME" property="member_name" />
+			<result column="MEMBER_PROFILE" property="member_profile"/>
+			<result column="BOARD_NO" property="board_no" />
+			<result column="BOARD_CONTENT" property="board_content"/>
+			<result column="BOARD_REGDATE" property="board_regdate"	/>
+			<result column="FILES_NO"	 property="files_no"/>	
+			<result column="FILES_URL" property="files_url" /> 
+	</resultMap>
+	
+	<select id="selectList" resultMap="boardResMap" parameterType="int">
+		SELECT m.member_no, m.member_name, m.member_profile, b.board_no,
+				 b.board_content, b.board_regdate, f.files_no, f.files_url
+				FROM member m, board b, files f
+				WHERE m.member_no = (
+									SELECT member_no
+									FROM board
+									WHERE board_no = #{board_no}
+									)
+				AND b.board_no = #{board_no}
+				AND f.board_no = #{board_no}
+	</select>
+</mapper>

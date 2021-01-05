@@ -66,7 +66,7 @@ public class MyPage_Controller {
 		model.addAttribute("requestlist", requestlist);
 		model.addAttribute("list",list);
 		model.addAttribute("requestinglist",requestinglist);
-
+		
 		return "mypage_friends";
 	}
 	
