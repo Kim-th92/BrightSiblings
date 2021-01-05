@@ -107,9 +107,9 @@ public class MyPage_Controller {
 	public String distanceres(Model model, MyPage_Dto dto) {
 		int res = mypage_biz.distanceInsert(dto);
 		if (res > 0) {
-			return "mypage_main.do";
+			return "redirect:mypage_main.do";
 		} else {
-			return "mypage_main.do";
+			return "redirect:mypage_main.do";
 		}
 	}
 	
