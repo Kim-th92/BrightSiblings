@@ -1,5 +1,7 @@
 package com.bs.dabom.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 
@@ -13,19 +15,22 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bs.dabom.model.biz.FoodPaging_Biz;
-import com.bs.dabom.model.biz.Food_Biz;
 import com.bs.dabom.model.biz.Friends_Biz;
 import com.bs.dabom.model.biz.Member_Biz;
 import com.bs.dabom.model.biz.MyPage_Biz;
+import com.bs.dabom.model.dto.Dailyfoodrecord_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
 import com.bs.dabom.model.dto.MyPage_Dto;
 import com.bs.dabom.model.dto.Paging_Dto;
+import com.bs.dabom.model.dto.AddInfo_Dto;
+import com.bs.dabom.model.biz.AddInfo_Biz;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,6 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -45,6 +51,8 @@ public class MyPage_Controller {
 	private FoodPaging_Biz food_biz;
 	@Autowired
 	private MyPage_Biz mypage_biz;
+	
+
 	
 	public static void main(String[] args) {
 		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 
@@ -63,7 +71,7 @@ public class MyPage_Controller {
 		model.addAttribute("requestlist", requestlist);
 		model.addAttribute("list",list);
 		model.addAttribute("requestinglist",requestinglist);
-
+		
 		return "mypage_friends";
 	}
 	
@@ -76,7 +84,10 @@ public class MyPage_Controller {
 	public String mypageFood(Model model,Paging_Dto  dto,
 			@RequestParam (value="nowPage",required=false)String nowPage,
 			@RequestParam (value="cntPerPage",required=false)String cntPerPage,
-			@RequestParam (value="keyword",required=false)String keyword) {
+			@RequestParam (value="keyword",required=false)String keyword,
+			HttpSession session) {
+	
+		//푸드딕셔너리 페이징
 		int total = food_biz.countBoard();
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
@@ -89,7 +100,25 @@ public class MyPage_Controller {
 		dto= new Paging_Dto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage),keyword);
 		model.addAttribute("paging", dto);
 		model.addAttribute("viewAll", food_biz.selectFood(dto));
+
+		// 오늘 먹은 칼로리 
+		Member_Dto member_dto= (Member_Dto)session.getAttribute("login");
+		int member_no = member_dto.getMember_no();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Calendar c1 = Calendar.getInstance();
+        String strToday = sdf.format(c1.getTime());
+        
+        Dailyfoodrecord_Dto dailyFoodDto = new Dailyfoodrecord_Dto();
+        dailyFoodDto.setMember_no(member_no);
+        dailyFoodDto.setToday(strToday);
 		
+        int dailyKcal = food_biz.selectDailyRecord(dailyFoodDto);
+        List<Dailyfoodrecord_Dto> list = new ArrayList<Dailyfoodrecord_Dto>();
+        list = food_biz.selectDailyFoodRecord(dailyFoodDto);
+        model.addAttribute("dailyKcal", dailyKcal);
+        System.out.println(list.toString());
+        model.addAttribute("dailyFoodList",list);
+
 		return "mypage_food";
 	}
 	
@@ -99,7 +128,12 @@ public class MyPage_Controller {
 	}
 	
 	@RequestMapping("mypage_exercise.do")
-	public String mypageExercise(Model model) {
+	public String mypageExercise(Model model, HttpSession session) {
+		Member_Dto login = (Member_Dto)session.getAttribute("login");
+		int member_no = login.getMember_no();
+		model.addAttribute("list", mypage_biz.showList(member_no));
+		model.addAttribute("total", mypage_biz.total(member_no));
+		System.out.println("asdfaf4w4e3r24fe2e4" + mypage_biz.total(member_no));
 		return "mypage_exercise";
 	}
 	
@@ -107,9 +141,9 @@ public class MyPage_Controller {
 	public String distanceres(Model model, MyPage_Dto dto) {
 		int res = mypage_biz.distanceInsert(dto);
 		if (res > 0) {
-			return "redirect:mypage_main.do";
+			return "redirect:mypage_exercise.do";
 		} else {
-			return "redirect:mypage_main.do";
+			return "redirect:mypage_exercise.do";
 		}
 	}
 	
@@ -135,6 +169,88 @@ public class MyPage_Controller {
 		return map;
 	}
 	
+	//멤버배경 사진업로드 멤버에위치 
+	@RequestMapping("profilePicBgUpload.do")
+	public @ResponseBody Map<String,Integer> profileBgPicUpload(HttpSession session,MultipartHttpServletRequest mtf){
+		MultipartFile file = mtf.getFile("file");
+		//파일이 빈파일인지 유효성 검사 
+		boolean isc = file.isEmpty();
+		
+		Member_Dto member_dto = (Member_Dto) session.getAttribute("login");
+		
+		if(isc ==true) {
+			
+			member_dto.setMember_bgprofile("resources/image/profile-bg.png");
+			
+		}else {
+			
+			String oriName = file.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			String filePath = mtf.getSession().getServletContext().getRealPath("/");
+			
+			InputStream inputStream =null;
+			OutputStream outputStream = null;
+			
+
+			try {
+				inputStream = file.getInputStream();
+				String path = mtf.getSession().getServletContext().getRealPath("/resources/bg_profile_img");
+				
+				
+				File storage = new File(path);
+				if(!storage.exists()) {
+					storage.mkdir();
+				}
+				
+				File newFile = new File(path +"/" + oriName);
+				if(!newFile.exists()) {
+					newFile.createNewFile();
+				}
+				
+				outputStream = new FileOutputStream(newFile);
+				
+				int read = 0;
+				byte[] b = new byte[(int)file.getSize()];
+				
+				while((read=inputStream.read(b))!= -1) {
+					outputStream.write(b,0,read);
+					
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					inputStream.close();
+					outputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			member_dto.setMember_bgprofile("resources/bg_profile_img/"+ oriName);
+			
+		}
+		
+		int result = member_biz.uploadBgProfile(member_dto);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("result", result);
+		
+		return map;
+	
+	}
+	
+	//선택한 파일업로드
+	@RequestMapping("profileExPicBgUpload.do")
+	public @ResponseBody Map<String,Integer> profileExPicBgUpload(HttpSession session,@RequestParam("bg_profile") String bg_profile){
+		Member_Dto member_dto = (Member_Dto) session.getAttribute("login");
+		
+		member_dto.setMember_bgprofile(bg_profile);
+		int result = member_biz.uploadBgProfile(member_dto);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("result", result);
+		return map;
+	}
 	
 	//파일업로드 서비스는 멤버에 위치
 	@RequestMapping("profilePicUpload.do")

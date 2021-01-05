@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+body{
+	background: url(resources/image/background.png);
+	font-family: "Nanum Gothic", sans-serif;
+}
+h1 {
+	
+	margin-left: 170px;
+    margin-right: auto;
+    margin-bottom: 80px;
+	font-weight: 800;
+	
+}
+div .admin_donation {
+	margin: 50px;
+}
+
+table{
+	 border-collapse: collapse;
+	 border-spacing: 1px;
+	 border-radius: 7px;
+  	 text-align: left;
+     line-height: 1.5;
+     border-top: 1px solid #ccc;
+     border-bottom: 1px solid #ccc;
+     width: 70%;
+     margin-left: auto;
+     margin-right: auto;
+}
+
+#admin_donationlist_title {
+	height: 60px;
+    color: #fff;
+    background: #ea97ad;
+}
+#admin_donationlist_title > td {
+	font-weight: bolder;
+}
+
+.admin_donationlist_content{
+	height: 50px;
+}
+	
+td{
+	padding-left: 10px;
+}	
+
+tr.even { 
+	background: #efefef; 
+}
+
+tr.odd { 
+	background: white; 
+}

@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
+body{
+	font-family: "Nanum Gothic", sans-serif;
+}
+
+h1 {
+	width: 400px;
+	margin-left: 200px;
+    margin-right: auto;
+	font-weight: 800;	
+}
+
 table{
 	width: 100%;
 }
@@ -20,7 +31,7 @@ td{
 }	
 
 tr.even { 
-	background: gray; 
+	background: #efefef; 
 }
 
 tr.odd { 

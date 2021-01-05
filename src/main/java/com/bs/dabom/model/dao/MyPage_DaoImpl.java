@@ -1,5 +1,8 @@
 package com.bs.dabom.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +19,44 @@ public class MyPage_DaoImpl implements MyPage_Dao {
 	@Override
 	public int distanceInsert(MyPage_Dto dto) {
 		
-		System.out.println("res시작전");
 		int res = 0 ;
 		System.out.println(dto.toString());
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"distanceInsert", dto);
-			System.out.println("res푸하하");
-			System.out.println(res);
 		} catch (Exception e) {
 			System.out.println("distanceInsert Error");
 			e.printStackTrace();
 		} 		
 		return res;
 	}
+	
+	@Override
+	public List<MyPage_Dto> showList(int member_no) {
+		List<MyPage_Dto> list = new ArrayList<MyPage_Dto>();
+		try {
+			list = sqlSession.selectList(NAMESPACE + "showList", member_no);
+		} catch (Exception e) {
+			System.out.println("showList Error");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<MyPage_Dto> total(int member_no) {
+		List<MyPage_Dto> list = new ArrayList<MyPage_Dto>();
+		try {
+			list = sqlSession.selectList(NAMESPACE + "total", member_no);
+		} catch (Exception e) {
+			System.out.println("total Error");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+
 
 }

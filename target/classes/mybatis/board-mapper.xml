@@ -107,7 +107,7 @@
 			   board_no, member_no, board_content, board_hashtag, board_like,
 			   board_privacy, board_regdate, board_updatedate
 		from board)
-		where num >= 1 and num < 4
+		where num >= 1 and num < 6
 		order by num
 		]]>
 	</select>

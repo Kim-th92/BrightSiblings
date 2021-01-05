@@ -13,6 +13,9 @@ public class Board_Dto {
 	private String board_privacy;
 	private Date board_regdate;
 	private Date board_updatedate;
+	private Files_Dto files_dto;
+	private Reply_Dto reply_dto;
+	
 	
 	
 	public Board_Dto() {

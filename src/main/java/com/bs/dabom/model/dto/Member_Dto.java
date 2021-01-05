@@ -27,7 +27,7 @@ public class Member_Dto {
 	private String sns;
 	private String member_delflag;
 	private Friends_Dto friends_dto;
-	
+	private String member_bgprofile;
 	
 	
 	public Friends_Dto getFriends_dto() {
@@ -162,6 +162,34 @@ public class Member_Dto {
 		this.member_delflag = member_delflag;
 		this.friends_dto = friends_dto;
 	}
+	
+	
+	
+	public Member_Dto(int member_no, String member_id, String member_pw, String member_name, String member_birthday,
+			String member_phone, String member_zipcode, String member_firstaddr, String member_secondaddr,
+			String member_email, String member_profile, Date member_regdate, String member_role, String member_payment,
+			String sns, String member_delflag, Friends_Dto friends_dto, String member_bgprofile) {
+		super();
+		this.member_no = member_no;
+		this.member_id = member_id;
+		this.member_pw = member_pw;
+		this.member_name = member_name;
+		this.member_birthday = member_birthday;
+		this.member_phone = member_phone;
+		this.member_zipcode = member_zipcode;
+		this.member_firstaddr = member_firstaddr;
+		this.member_secondaddr = member_secondaddr;
+		this.member_email = member_email;
+		this.member_profile = member_profile;
+		this.member_regdate = member_regdate;
+		this.member_role = member_role;
+		this.member_payment = member_payment;
+		this.sns = sns;
+		this.member_delflag = member_delflag;
+		this.friends_dto = friends_dto;
+		this.member_bgprofile = member_bgprofile;
+	}
+	
 	@Override
 	public String toString() {
 		return "Member_Dto [member_no=" + member_no + ", member_id=" + member_id + ", member_pw=" + member_pw
@@ -170,13 +198,19 @@ public class Member_Dto {
 				+ ", member_secondaddr=" + member_secondaddr + ", member_email=" + member_email + ", member_profile="
 				+ member_profile + ", member_regdate=" + member_regdate + ", member_role=" + member_role
 				+ ", member_payment=" + member_payment + ", sns=" + sns + ", member_delflag=" + member_delflag
-				+ ", friends_dto=" + friends_dto + "]";
+				+ ", friends_dto=" + friends_dto + ", member_bgprofile=" + member_bgprofile + "]";
 	}
 	public Member_Dto() {
 	}
 	public Member_Dto(String member_id, String member_name) {
 		this.member_id = member_id;
 		this.member_name = member_name;
+	}
+	public String getMember_bgprofile() {
+		return member_bgprofile;
+	}
+	public void setMember_bgprofile(String member_bgprofile) {
+		this.member_bgprofile = member_bgprofile;
 	}
 	
 	

@@ -11,28 +11,29 @@
 </head>
 <body>
 	<%@include file="adminpage.jsp"%>
-	<div class="admin_section">
+	<div class="admin_section" style="background-image: url('resources/image/background.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" >
+	<h1>MEMBER LIST</h1>
 		<div class="admin_page">
 			<table>
 				<colgroup>
 					<col width="50px" />
 					<col width="100px" />
 					<col width="100px" />
-					<col width="50px" />
+					<col width="70px" />
 					<col width="150px" />
 				</colgroup>
 				<tr id="admin_memberlist_title">
 					<td>No</td>
 					<td>ID</td>
 					<td>Email</td>
-					<td>Delflag</td>
-					<td>Regdate</td>
+					<td>회원 탈퇴 여부</td>
+					<td>회원가입 일자</td>
 				</tr>
 				<c:choose>
 					<c:when test="${empty memberlist }">
 						<tr class="admin_memberlist_content">
 							<td colspan="7" align="center">------------------------회원이
-								없습니다.------------------------</td>
+								없습니다.————————————</td>
 						</tr>
 					</c:when>
 					<c:otherwise>

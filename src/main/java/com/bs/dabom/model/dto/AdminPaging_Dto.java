@@ -2,7 +2,7 @@ package com.bs.dabom.model.dto;
 
 public class AdminPaging_Dto {
 
-	private int countPerPage = 3; // 페이지당 글 수
+	private int countPerPage = 5; // 페이지당 글 수
 	private int currentPage; // 현재 페이지
 	private int totalCount; // 전체 글 수
 	

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -52,8 +53,6 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 @Controller
 public class Member_Controller {
 
-	
-
 	@Autowired
 	private Member_Biz biz;
 
@@ -65,7 +64,7 @@ public class Member_Controller {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
-	@Inject
+	@Autowired
 	private JavaMailSender mailSender;
 
 	@Autowired
@@ -129,6 +128,27 @@ public class Member_Controller {
 			return map;
 		}
 
+	//이메일 인증 
+	@RequestMapping("varifyemail.do")
+	public @ResponseBody Map<String,String> varifyemail (@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException{
+		Map<String, String> map = new HashMap<String, String>();
+		int iValue = (int) (Math.random()*1000000);
+		
+		String key =iValue+"";
+        MailHandler sendMail = new MailHandler(mailSender);
+        sendMail.setSubject("[이메일 인증]");
+        sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
+                .append("<h2>임시비밀번호는 [")
+                .append(key)
+                .append("]입니다.")
+                .toString());
+        sendMail.setFrom("maggiechoietest@gmail.com", "관리자");
+        sendMail.setTo(email);
+        sendMail.send();
+        map.put("result","ok");
+        
+        return map;
+	}
 
 	// 회원가입 결과 반환
 	@RequestMapping("registerres.do")
@@ -156,7 +176,7 @@ public class Member_Controller {
 		        }
 		req.getSession(true);
 		
-		return "login";
+		return "redirect:login.do";
 	}
 	
 	//아이디 패스워드 찾기 jsp 이동
@@ -179,44 +199,42 @@ public class Member_Controller {
 		return map;
 	}
 	
-	//메일전송 메서드 
+	//임시비밀번호 	메일전송 메서드 
 	@GetMapping("mailsend.do")
 	public Map<String,String> mailsend(@RequestParam("member_email") String member_email) throws MessagingException, UnsupportedEncodingException{
-		String key = new AuthKey().getKey(10, false);
         MailHandler sendMail = new MailHandler(mailSender);
-        sendMail.setSubject("[이메일 인증]");
-        sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
-                .append("<h2>인증번호는 [")
-                .append(key)
+        String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주고 
+	    String temppw = uuid.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌.
+        sendMail.setSubject("[임시비밀번호 발급]");
+        sendMail.setText(new StringBuffer().append("<h1>임시비밀번호 발급</h1>")
+                .append("<h2>임시비밀번호는 	 [")
+                .append(temppw)
                 .append("]입니다.")
                 .toString());
         sendMail.setFrom("maggiechoietest@gmail.com", "관리자");
         sendMail.setTo(member_email);
         sendMail.send();
         Map<String,String> map = new HashMap<String, String>();
-        map.put("authkey", key);
+        Member_Dto dto = biz.selectOneByEmail(member_email);
+        int res = updatePassword(dto,temppw);
+        if(res>0) {
+        	 map.put("res", "ok");
+        }else {
+        	map.put("res", "no");
+        	
+        }
+       
         return map;
 	}
 	
 	
-	//임시비밀번호 발급  
-	@RequestMapping("temppw.do")
-	public @ResponseBody Map<String,String> temppw(@RequestBody Member_Dto dto){
-		Map<String,String> map = new HashMap<String, String>();
-		
-		
-		
-		
-		//10자리 랜덤한 비밀번호 생성 
-	    String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주고 
-	    String temppw = uuid.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌.
-	    
-	    
-		return map;
+	//업데이트 메서드 
+	private int updatePassword(Member_Dto dto,String uuid) {
+		dto.setMember_pw(passwordEncoder.encode(uuid));
+		int res = biz.updatePassword(dto);
+		return res;
 	}
-	
-	
-	
+
 	//회원정보수정
 	@RequestMapping(value="updatemember.do",method=RequestMethod.POST)
 	public @ResponseBody Map<String, String> updateMember(@RequestBody Member_Dto dto){

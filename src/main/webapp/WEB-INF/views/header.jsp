@@ -65,17 +65,17 @@ response.setDateHeader("Expires", 0L);
 				<li><a>${login.member_name }님 반갑습니다.</a></li>
 				<li><a href="mypage_main.do" class="toltip" data-tooltip="MYPAGE" id="btn_plus"><img 	style="width: 40px; height: 40px;" class="profileimg" alt="프로필사진"  src="${login.member_profile }"></a></li>
 				<li><a class="toltip" data-tooltip="Message" id="btn_msg"><i class="fab fa-facebook-messenger"></i></a></li> 		
-				<li><a class="toltip" data-tooltip="Notification"  id="btn_bell"> <i class="fas fa-bell"></i> <span 	class="noti-badge "></span></a></li>
+<!-- 				<li><a class="toltip" data-tooltip="Notification"  id="btn_bell"> <i class="fas fa-bell"></i> <span 	class="noti-badge "></span></a></li> -->
 				<li><a class="toltip" data-tooltip="Settings" id="btn_profile"><i class="fas fa-cog"></i></a></li> 
 				<li><a class="toltip" data-tooltip="Donation" id="btn_donation"><i class="fas fa-hand-holding-usd"></i></a></li>
 
 			</ul>
 			<ul id="hide" class="hide">
-				<li><a href="logout.do" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+				<li><a onclivk="location.href='logout.do'" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
 				<li><a onclick="updatemember();" class="hidecontent"><i class="fas fa-user-edit"></i>회원수정</a></li>
 				<li><a onclick="deletemember();" class="hidecontent"><i	class="fas fa-user-minus"></i>회원탈퇴</a></li>
 			</ul>
-			<div id="msg-hide" class="msg-hide" style="overflow: scroll;">
+			<div id="msg-hide" class="msg-hide" >
 				<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">
 				<div class="chat"><div class="card  contacts_card">
@@ -87,7 +87,7 @@ response.setDateHeader("Expires", 0L);
 							</div>
 						</div>
 					</div>
-					<div class="card-body contacts_body">
+					<div class="card-body contacts_body" style="overflow: scroll;">
 						<ul class="contacts">
 						
 						
@@ -125,7 +125,7 @@ response.setDateHeader("Expires", 0L);
 						var chatroomList ="";
 						for(var i = 0; i < chatroomlistarr.length; i++){
 							chatroomList +="<li><a onclick="+"\"window.open"+"('chatmsglist.do?chatroom_no="+chatroomlistarr[i].chatroom_no+"','popup','width=500px,height=530px')\""+" style='text-decoration:none; color:black; '><div class='d-flex bd-highlight'><div class='img_cont'><img src='"+
-							chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'><span class='online_icon offline'></span></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+
+							chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+
 							chatroomlistarr[i].last_message+"</p><p>"+chatroomlistarr[i].sendingtime+
 							"</p></div></div></a></li>";
 						}
@@ -181,7 +181,7 @@ response.setDateHeader("Expires", 0L);
 			}
 
 		}
-
+/* 
 		$("#search_btn").click(function() {
 			$(".search-hide").stop().slideDown(500);
 			return false; 
@@ -216,7 +216,7 @@ response.setDateHeader("Expires", 0L);
 			}
 			$("#msg-hide").stop().slideUp(500);
 
-		});
+		}); */
 
 		/* 	var hoverbtn = document.getElementById("btn_profile");
 		 hoverbtn.addEventListener("click",function(){
@@ -270,7 +270,7 @@ response.setDateHeader("Expires", 0L);
 			}
 		}
 	</script>
-		<%@include file = "updatemember.jsp" %>
+	<%@include file = "updatemember.jsp" %>
 	<%@include file="insertdonation.jsp"%>	
 	<script src="resources/js/header.js"></script>
 
