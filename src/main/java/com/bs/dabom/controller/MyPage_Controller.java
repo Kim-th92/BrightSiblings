@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bs.dabom.model.biz.Friends_Biz;
 import com.bs.dabom.model.biz.Member_Biz;
+import com.bs.dabom.model.dto.AddInfo_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
-
+import com.bs.dabom.model.biz.AddInfo_Biz;
 
 
 import java.io.File;
@@ -37,6 +38,8 @@ public class MyPage_Controller {
 
 	@Autowired
 	private Member_Biz member_biz;
+	
+
 	
 	public static void main(String[] args) {
 		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 
@@ -71,6 +74,7 @@ public class MyPage_Controller {
 	public String mypageExercise(Model model) {
 		return "mypage_exercise";
 	}
+	
 	
 	@RequestMapping("search.do")
 	public @ResponseBody Map<String,Object> search(@RequestParam("keyword") String keyword,HttpSession session) {
