@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ import com.bs.dabom.model.biz.FoodPaging_Biz;
 import com.bs.dabom.model.biz.Friends_Biz;
 import com.bs.dabom.model.biz.Member_Biz;
 import com.bs.dabom.model.biz.MyPage_Biz;
+import com.bs.dabom.model.dto.Calendar_Dto;
 import com.bs.dabom.model.dto.Dailyfoodrecord_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
 import com.bs.dabom.model.dto.MyPage_Dto;
@@ -140,6 +142,41 @@ public class MyPage_Controller {
 		} else {
 			return "redirect:mypage_exercise.do";
 		}
+	}
+	
+	@RequestMapping(value= "calendarAjax.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> calendarAjax(@RequestParam("member_no") int member_no,
+											@RequestParam("yyyyMMdd") String yyyyMMdd) {
+		
+		List<Calendar_Dto> list1 = new ArrayList<Calendar_Dto>();
+		List<Calendar_Dto> list2 = new ArrayList<Calendar_Dto>();
+		
+		Calendar_Dto dto = new Calendar_Dto();
+		dto.setMember_no(member_no);
+		dto.setYyyyMMdd(yyyyMMdd);
+		
+		float tk = mypage_biz.showTargetKcal(dto);
+
+		list1 = mypage_biz.showTotalDFR(dto);
+		list2 = mypage_biz.showTotalDER(dto);
+		
+		float tik = list1.get(0).getTotal_intake_kcal();
+		int td = list2.get(0).getTotal_distance();
+		float tbk = list2.get(0).getTotal_burn_kcal();
+		
+		System.out.println(tk);
+		System.out.println(tik);
+		System.out.println(td);
+		System.out.println(tbk);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("tk", tk);
+		map.put("tik", tik);
+		map.put("td", td);
+		map.put("tbk", tbk);
+		
+		return map;
 	}
 	
 	@RequestMapping("search.do")

@@ -26,4 +26,24 @@
 			 )
 	</select>
 	
+	<select id="showTargetKcal" parameterType="calendarDto" resultType="float">
+		SELECT TARGETKCAL
+		FROM ADDMEMBERINFO
+		WHERE MEMBER_NO = #{member_no}
+	</select>
+	
+	<select id="showTotalDFR" parameterType="calendarDto" resultType="calendarDto">
+		SELECT SUM(INTAKE_KCAL) AS TOTAL_INTAKE_KCAL
+		FROM DAILYFOODRECORD
+		WHERE MEMBER_NO = #{member_no}
+		AND TO_CHAR(CALENDAR_DATE, 'YYYYMMDD') = #{yyyyMMdd}
+	</select>
+	
+	<select id="showTotalDER" parameterType="calendarDto" resultType="calendarDto">
+		SELECT SUM(BURN_KCAL) AS TOTAL_BURN_KCAL, SUM(DISTANCE) AS TOTAL_DISTANCE
+		FROM DAILYEXERCISERECORD
+		WHERE MEMBER_NO = #{member_no}
+		AND TO_CHAR(CALENDAR_DATE, 'YYYYMMDD') = #{yyyyMMdd}
+	</select>
+	
 </mapper>
