@@ -98,6 +98,11 @@
 		DELETE FROM BOARD
 		WHERE BOARD_NO = #{board_no}
 	</delete>
+	
+	<delete id="deleteReply">
+		DELETE FROM REPLY
+		WHERE BOARD_NO = #{board_no}
+	</delete>
 
 	<select id="adminboardlist" resultType="boardDto">
 		<![CDATA[
@@ -128,6 +133,14 @@
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(board_no) FROM BOARD
 	</select>
+	
+	<select id="selectListMypage" resultType="boardDto">
+		SELECT *
+		FROM BOARD
+		WHERE MEMBER_NO = #{member_no}
+		ORDER BY BOARD_NO DESC
+	</select>
+	
 </mapper>
 
 

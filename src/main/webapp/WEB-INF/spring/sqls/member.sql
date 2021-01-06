@@ -28,13 +28,13 @@ create table member(
 	constraint delflag_check CHECK(member_delflag IN('Y','N'))
 	
 	);
-
+alter table member add member_bgprofile varchar2(1000)  default '/dabom/resources/image/profile-bg.png' not null;
 insert into member values(memberseq.nextval,'admin','admin1234','관리자','admin@naver.com','010-1234-5678'
 ,'19931207','15905','서울 강동구','237-76','https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.i-boss.co.kr%2Fab-2110-9380&psig=AOvVaw05akYMbTfCj7CognpMpCpn&ust=1607628958985000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIiWhdzSwe0CFQAAAAAdAAAAABAD',sysdate,'admin','','N')
 
 update member set member_role = 'admin' where member_id ='admin';
 select member_profile from member where member_no =1;
-select member_profile from member;
+select member_bgprofile from member;
 
 
 update member set member_delflag ='N' where member_no = 1;

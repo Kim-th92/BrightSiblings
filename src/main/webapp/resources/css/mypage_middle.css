@@ -3,7 +3,6 @@
 #section {
 	width:100%;
 	margin:0;
-	padding-top:100px;
 }
 #profile-section{
 	text-align: center;
@@ -40,9 +39,21 @@ div#mypage-navbar ul li a {
     padding: 10px 20px;
     border-radius: 5% 5%;
 }
+#mypage-profileimg{
+	    height: 400px;
+    background: pink;
+    display: inline-block;
+    width: 80%;
+    border-radius: 15px;
+    background-image: url("/dabom/resources/image/profile-bg.png");
+	background-size: cover;
+	max-width:100%;
+	margin:50px 0px 0px 0px;
+}
 
 
 #mypage-profileimg img{
+	margin:90px 0px 10px 0px;
 	width:200px;
 	height:200px;
 	border-radius : 50% 50%;
@@ -59,4 +70,42 @@ div#mypage-navbar ul li a {
 	transform : translate(70px -40px);
 }
 
+button#profile-bg-add{
+	    height: 50px;
+    width: 150px;
+    position: absolute;
+    top: 335px;
+    border-radius: 15px;
+    right: 15px;
+    font-weight: bold;
+}
+.modalcenter{
+	border-radius: 20% 0px 40% 40%;
+	width: 80%;
+    height: 600px;
+    text-align: center;
+    background:#ea97ad;
+    position: absolute;
+    z-index: 100;
+    top: 518px;
+};
 
+
+.modalbtn{
+	padding: 10px 10px;
+    border: none;
+    border-radius: 5px 5px;
+}
+.modalbtn:hover {
+	background: gray;
+	font-weight: bold;
+	cursor: pointer;
+}
+#selectBG div{
+	    width: 180px;
+    height: 180px;
+    
+}
+#selectBG img{
+	border-radius: 5% 5%;
+}

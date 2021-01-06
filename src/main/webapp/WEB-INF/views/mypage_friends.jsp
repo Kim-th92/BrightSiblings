@@ -33,7 +33,6 @@
 							</a>
 								<button onclick="accepted(${dto.member_no});">수락</button>
 								<button onclick="dennided(${dto.member_no})">거절</button></li>
-
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
@@ -61,7 +60,7 @@
 	</div>
 	<div id="friendslist">
 		<h1>친구목록 </h1>
-		<ul>
+		
 		
 			<c:choose>
 			<c:when test="${empty list }">
@@ -73,18 +72,18 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${list}" var="dto">
-				<li>
-				<div>
+				
+				<div id="borderdiv">
 					<a href="friendDetail.do?member_no=${dto.member_no}"> <img id ="profile-img" src="${dto.member_profile}"/> ${dto.member_name}</a> 
 						<span><button onclick="window.open('chatmsglist.do?member_no=${dto.member_no}','popup','width=500px,height=530px')"><i class="fab fa-facebook-messenger"></i></button></span>
 						<span><button onclick="'"><i class="fas fa-user-minus"></i></button> </span>
 				</div>
-					</li>
+					
 				
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		</ul>
+	
 	</div>
 </div>
 	<script type="text/javascript">

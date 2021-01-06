@@ -8,8 +8,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+<<<<<<< HEAD
 import com.bs.dabom.model.dto.Calendar_Dto;
+=======
+import com.bs.dabom.model.dto.Board_Dto;
+import com.bs.dabom.model.dto.Files_Dto;
+>>>>>>> master
 import com.bs.dabom.model.dto.MyPage_Dto;
+import com.bs.dabom.model.dto.Reply_Dto;
 
 @Repository
 public class MyPage_DaoImpl implements MyPage_Dao {
@@ -59,6 +65,7 @@ public class MyPage_DaoImpl implements MyPage_Dao {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public float showTargetKcal(Calendar_Dto dto) {
 		float res = 0 ;
 		try {
@@ -92,6 +99,32 @@ public class MyPage_DaoImpl implements MyPage_Dao {
 			e.printStackTrace();
 		}
 		return list;
+=======
+	public List<Board_Dto> selectList(int member_no) {
+		List<Board_Dto> list =null;
+			try {
+				list=	sqlSession.selectList("board.selectListMypage",member_no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return list;
+	}
+
+	@Override
+	public List<Files_Dto> getFileUrl(int board_no) {
+		List<Files_Dto> res = sqlSession.selectList("board.getFileUrl", board_no);
+		
+		return res;
+	}
+
+	@Override
+	public List<Reply_Dto> getReply(int board_no) {
+		List<Reply_Dto> res = sqlSession.selectList("board.getReply", board_no);
+		
+		return res;
+		
+>>>>>>> master
 	}
 	
 

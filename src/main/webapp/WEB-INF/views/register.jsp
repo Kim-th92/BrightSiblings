@@ -46,9 +46,17 @@
 				<div class="eheck_font" id="birth_check"></div> 
 			</div> 
 			<div class="form-group"> 
-				<label for="member_email">이메일 주소</label> 
-				<input type="email" class="form-control" id="member_email" name="member_email" placeholder="E-mail"> 
+				<label for="member_email" style="display:block;">이메일 주소</label> 
+				<input style="width: 70%; display: inline;" type="email" class="form-control" id="member_email" name="member_email" placeholder="E-mail"> 
+				<button type="button" class="btn btn-outline-secondary" id ="authkeysend"  >이메일 인증</button>
 				<div class="eheck_font" id="email_check"></div> 
+			</div>
+			<div class="form-group authkeyhide"> 
+				<label for="authkey" style="display:block;">인증번호</label> 
+				<input   type="text"  style="width: 50%; display: inline;" class="form-control" id="authkey" name="authkey" placeholder="인증번호"> 
+				<input type="hidden" id="authkeycheck" value="false"/>
+				<span id="countdown" style="color:red; font-weight: bold;"></span>
+				<div class="eheck_font" id="auth_check"></div> 
 			</div>
 			<div class="form-group"> 
 				<label for="member_phone">휴대폰 번호('-'없이 번호만 입력해주세요)</label> 
@@ -71,6 +79,9 @@
 		</form>
 	</div>
 	</div>
+<script type="text/javascript">
+
+</script>
 <script src="resources/js/register.js"></script>
 </body>
 </html>

@@ -27,9 +27,16 @@ import com.bs.dabom.model.biz.Member_Biz;
 import com.bs.dabom.model.biz.MyPage_Biz;
 import com.bs.dabom.model.dto.Calendar_Dto;
 import com.bs.dabom.model.dto.Dailyfoodrecord_Dto;
+import com.bs.dabom.model.dto.Files_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
 import com.bs.dabom.model.dto.MyPage_Dto;
 import com.bs.dabom.model.dto.Paging_Dto;
+import com.bs.dabom.model.dto.Reply_Dto;
+import com.bs.dabom.model.dto.AddInfo_Dto;
+import com.bs.dabom.model.dto.Board_Dto;
+import com.bs.dabom.model.biz.AddInfo_Biz;
+import com.bs.dabom.model.biz.Board_Biz;
+import com.bs.dabom.model.biz.Board_BizImpl;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -50,6 +57,11 @@ public class MyPage_Controller {
 	private FoodPaging_Biz food_biz;
 	@Autowired
 	private MyPage_Biz mypage_biz;
+	@Autowired
+	private Board_Biz board_biz;
+	
+
+
 	
 	public static void main(String[] args) {
 		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 
@@ -68,13 +80,69 @@ public class MyPage_Controller {
 		model.addAttribute("requestlist", requestlist);
 		model.addAttribute("list",list);
 		model.addAttribute("requestinglist",requestinglist);
-
+		
 		return "mypage_friends";
 	}
 	
 	@RequestMapping("mypage_main.do")
-	public String mypageFriends(Model model) {
+	public String mypageFriends(Model model,HttpSession session) {
+		Member_Dto dto= (Member_Dto)session.getAttribute("login");
+		
+		
+		List<Board_Dto> list = mypage_biz.selectList(dto.getMember_no());
+		// 모든 board 글 내용을 List<Board_Dto>로 받아옴. 
+		List<Member_Dto> npList = new ArrayList<Member_Dto>();
+		// nameProp Dto 값 담을 List
+		
+		List<List<String>> urlList = new ArrayList<List<String>>();
+		// 게시글 file url String 담을 
+		
+		List<List<Reply_Dto>> repList = new ArrayList<List<Reply_Dto>>();
+		// 게시글 reply Dto 담을
+		
+		for(int i=0; i < list.size(); i++) {
+		// board의 총 갯수만큼 반복
+
+			
+			int board_no = list.get(i).getBoard_no();
+			// board의 i번째부터 끝까지의 게시글 번호
+			
+			List<Files_Dto> fileUrl = mypage_biz.getFileUrl(board_no);
+			// 해당 게시글 번호(board_no)와 일치하는 files_Dto들을 List<>로 받음.
+			// 다중 이미지 업로드를 했다면 여러 개가 List에 들어올 것임
+				List<String> urlString = new ArrayList<String>();
+				
+				for(Files_Dto res : fileUrl) {
+					String url = res.getFiles_url();
+					urlString.add(url);
+				 }
+			
+			urlList.add(urlString);
+			
+			
+			List<Reply_Dto> repData = mypage_biz.getReply(board_no);
+			// 댓글 Dto가 여러 개 담긴 List
+			
+			repList.add(repData);
+				
+				
+		}	
+		// 로그인 정보 담아서 reply 이미지 아이콘 출력
+		model.addAttribute("reply", repList);
+		model.addAttribute("list", list);
+		model.addAttribute("url", urlList);
+		
 		return "mypage_main";
+	}
+	
+	@ResponseBody
+	@RequestMapping("mypage_delete.do")
+	public Map<String, Object> delete(Model model, @RequestParam("board_no")int board_no) {
+		System.out.println(board_no+"<<<<<<<");
+		board_biz.delete(board_no);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", "success");
+		return map;
 	}
 	
 	@RequestMapping("mypage_food.do")
@@ -201,6 +269,88 @@ public class MyPage_Controller {
 		return map;
 	}
 	
+	//멤버배경 사진업로드 멤버에위치 
+	@RequestMapping("profilePicBgUpload.do")
+	public @ResponseBody Map<String,Integer> profileBgPicUpload(HttpSession session,MultipartHttpServletRequest mtf){
+		MultipartFile file = mtf.getFile("file");
+		//파일이 빈파일인지 유효성 검사 
+		boolean isc = file.isEmpty();
+		
+		Member_Dto member_dto = (Member_Dto) session.getAttribute("login");
+		
+		if(isc ==true) {
+			
+			member_dto.setMember_bgprofile("resources/image/profile-bg.png");
+			
+		}else {
+			
+			String oriName = file.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			String filePath = mtf.getSession().getServletContext().getRealPath("/");
+			
+			InputStream inputStream =null;
+			OutputStream outputStream = null;
+			
+
+			try {
+				inputStream = file.getInputStream();
+				String path = mtf.getSession().getServletContext().getRealPath("/resources/bg_profile_img");
+				
+				
+				File storage = new File(path);
+				if(!storage.exists()) {
+					storage.mkdir();
+				}
+				
+				File newFile = new File(path +"/" + oriName);
+				if(!newFile.exists()) {
+					newFile.createNewFile();
+				}
+				
+				outputStream = new FileOutputStream(newFile);
+				
+				int read = 0;
+				byte[] b = new byte[(int)file.getSize()];
+				
+				while((read=inputStream.read(b))!= -1) {
+					outputStream.write(b,0,read);
+					
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					inputStream.close();
+					outputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			member_dto.setMember_bgprofile("resources/bg_profile_img/"+ oriName);
+			
+		}
+		
+		int result = member_biz.uploadBgProfile(member_dto);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("result", result);
+		
+		return map;
+	
+	}
+	
+	//선택한 파일업로드
+	@RequestMapping("profileExPicBgUpload.do")
+	public @ResponseBody Map<String,Integer> profileExPicBgUpload(HttpSession session,@RequestParam("bg_profile") String bg_profile){
+		Member_Dto member_dto = (Member_Dto) session.getAttribute("login");
+		
+		member_dto.setMember_bgprofile(bg_profile);
+		int result = member_biz.uploadBgProfile(member_dto);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("result", result);
+		return map;
+	}
 	
 	//파일업로드 서비스는 멤버에 위치
 	@RequestMapping("profilePicUpload.do")
