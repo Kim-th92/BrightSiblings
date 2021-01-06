@@ -1,6 +1,7 @@
 package com.bs.dabom.model.dao;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,12 +9,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
 import com.bs.dabom.model.dto.Calendar_Dto;
-=======
 import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.Files_Dto;
->>>>>>> master
 import com.bs.dabom.model.dto.MyPage_Dto;
 import com.bs.dabom.model.dto.Reply_Dto;
 
@@ -65,7 +63,6 @@ public class MyPage_DaoImpl implements MyPage_Dao {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public float showTargetKcal(Calendar_Dto dto) {
 		float res = 0 ;
 		try {
@@ -99,7 +96,9 @@ public class MyPage_DaoImpl implements MyPage_Dao {
 			e.printStackTrace();
 		}
 		return list;
-=======
+	}
+		
+	@Override
 	public List<Board_Dto> selectList(int member_no) {
 		List<Board_Dto> list =null;
 			try {
@@ -124,7 +123,6 @@ public class MyPage_DaoImpl implements MyPage_Dao {
 		
 		return res;
 		
->>>>>>> master
 	}
 	
 

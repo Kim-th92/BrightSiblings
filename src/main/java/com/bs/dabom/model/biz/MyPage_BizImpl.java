@@ -2,17 +2,15 @@ package com.bs.dabom.model.biz;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bs.dabom.model.dao.MyPage_Dao;
-<<<<<<< HEAD
 import com.bs.dabom.model.dto.Calendar_Dto;
-=======
 import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.Files_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
->>>>>>> master
 import com.bs.dabom.model.dto.MyPage_Dto;
 import com.bs.dabom.model.dto.Reply_Dto;
 
@@ -52,8 +50,6 @@ public class MyPage_BizImpl implements MyPage_Biz {
 		return dao.getReply(board_no);
 	}
 
-	
-	
 	@Override
 	public float showTargetKcal(Calendar_Dto dto) {
 		return dao.showTargetKcal(dto);
