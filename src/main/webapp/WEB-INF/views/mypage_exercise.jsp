@@ -19,6 +19,15 @@
 #today{
 	text-align:center;
 }
+.preview{	
+	position: absolute;
+	background-color: #ea97ad;
+	width: 400px;
+	height: 400px;
+	text-align: center;
+	line-height: 70px;
+	border-radius: 40px 40px 40px 40px;
+}
 </style>
 <link rel="stylesheet" href="resources/css/exercise.css" type="text/css">
 <body>
@@ -312,7 +321,7 @@
 				content += '	<li>';
 				content += '		<span class="label">자전거</span>' + bycicleHour + bycicleMin;
 				content += '	</li>';
-				content += '</ul>'
+				content += '</ul>';
 			
 			document.getElementById('distance').value = distance;
 			document.getElementById('burn_kcal').value = distance/20;
@@ -364,7 +373,6 @@
 	
 	<c:choose>
 		<c:when test="${empty total }">
-		
 			<p>총합 뛴 거리		: 0</p>
 			<p>총합 소모 칼로리	: 0</p>
 		</c:when>
@@ -379,8 +387,53 @@
 	
 	<br/>
 	<br/>
-	<br/>
+	<br/><input type="hidden" class="n" value="${login.member_no }"/>
 	
+<script type="text/javascript">
+	$(function(){
+		$(".daycount").hover(function(){
+		
+			var member_no = $(".n").val().trim();
+			
+			var countView = $(this);
+			var year = $(".y").val().trim();
+			var month = $(".m").val().trim();
+			var day = countView.text().trim();
+			
+			var form = {
+				member_no: member_no,
+				yyyyMMdd: year + isTwo(month) + isTwo(day)
+			}
+			
+			$.ajax({
+				url: "calendarAjax.do",
+				type: "POST",
+				data: form,
+				dataType: "json",
+				success:function(map){
+					
+					var tk = map.tk;
+					var tik = map.tik;
+					var td = map.td;
+					var tbk = map.tbk;
+					
+					countView.after("<div class='preview'>"+tk+"ㅎㅇ"+tik+"ㅎㅇ"+td+"ㅎㅇ"+tbk+"</div>");
+					
+				},
+				error:function(){
+					alert("서버 통신 실패");
+				}
+			});
+			
+		}, function(){
+			$(".preview").remove();			
+		});
+	});
+	
+	function isTwo(n) {
+		return (n.length<2)?"0"+n:n;
+	}
+</script>
 	
 <%
 
@@ -422,22 +475,16 @@
 	int count = 0;
 	
 %>
-	
-	
-	
 	<br/>
 	<br/>
 	<br/>
-	
-	<form method="post" action="mypage_main.do" name="change">
+	<form method="post" action="mypage_exercise.do" name="change">
 		<table width="400" cellpadding="2" cellspacing="0" border="0" align="center">
 		
 			<tr>
-			
 			<td width="140" align="right"><input type="button" value="◁" onClick="monthDown(this.form)"></td>
-			
 			<td width="120" align="center">
-			<select name="year" onchange="selectCheck(this.form)">
+			<select class="y" name="year" onchange="selectCheck(this.form)">
 				<%
 					for (int i = year - 10; i < year + 10; i++) {
 					String selected = (i == year) ? "selected" : "";
@@ -447,7 +494,7 @@
 				%>
 			</select>
 			
-			<select name="month" onchange="selectCheck(this.form)">
+			<select class="m" name="month" onchange="selectCheck(this.form)">
 					<%
 						for (int i = 1; i <= 12; i++) {
 						String selected = (i == month + 1) ? "selected" : "";
@@ -464,7 +511,7 @@
 			
 			<tr>
 				<td align="right" colspan="3">
-					<a href="mypage_main.do"><font size="2">오늘 : <%=today%></font></a>
+					<a href="mypage_exercise.do"><font size="2">오늘 : <%=today%></font></a>
 				</td>
 			</tr>
 			
@@ -483,25 +530,31 @@
 		<tr height="30">
 			<%
 				for (int i = 1; i < startDay; i++) {
-				count++;
+					count++;
 			%>
 			<td>&nbsp;</td>
 			<%
 				}
+			
 			for (int i = startDate; i <= endDate; i++) {
-			String bgcolor = (today.equals(year + ":" + (month + 1) + ":" + i)) ? "#CCCCCC" : "#FFFFFF";
-			String color = (count % 7 == 0 || count % 7 == 6) ? "red" : "black";
-			count++;
+				String bgcolor = (today.equals(year + "." + (month + 1) + "." + i)) ? "#CCCCCC" : "#FFFFFF";
+				String color = (count % 7 == 0 || count % 7 == 6) ? "red" : "black";
+				count++;
 			%>
-			<td bgcolor="<%=bgcolor%>"><font size="2" color=<%=color%>><%=i%></font></td>
+			<td bgcolor="<%=bgcolor%>">
+				<font class="daycount" size="10" color=<%=color%>>
+					<%=i%>
+				</font>
+			</td>
 			<%
 				if (count % 7 == 0 && i < endDate) {
 			%>
-		</tr>
-		<tr height="30">
+				</tr>	
+				<tr height="30">
 			<%
 				}
 			}
+			
 			while (count % 7 != 0) {
 			%>
 			<td>&nbsp;</td>
