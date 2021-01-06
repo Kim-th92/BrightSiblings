@@ -8,6 +8,7 @@
 		<typeAlias type="com.bs.dabom.model.dto.Member_Dto" alias = "memberDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Friends_Dto" alias ="friendsDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Board_Dto" alias = "boardDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.AddInfo_Dto" alias = "addinfoDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Donation_Dto" alias="donationDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Files_Dto" alias = "filesDto" />
 		<typeAlias type="com.bs.dabom.model.dto.Chatmsg_Dto" alias ="chatmsgDto"/>
@@ -32,7 +33,7 @@
 		<mapper resource = "/mybatis/news-mapper.xml"/>
 		<mapper resource = "/mybatis/exercise-mapper.xml"/>
 		<mapper resource="/mybatis/boardres-mapper.xml" />
-
+		<mapper resource ="/mybatis/addinfo-mapper.xml"/>
 	</mappers>
 
 

@@ -33,7 +33,6 @@
 							</a>
 								<button onclick="accepted(${dto.member_no});">수락</button>
 								<button onclick="dennided(${dto.member_no})">거절</button></li>
-
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>

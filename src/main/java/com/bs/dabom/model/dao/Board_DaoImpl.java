@@ -80,9 +80,10 @@ public class Board_DaoImpl implements Board_Dao {
 
 	@Override
 	public int delete(int board_no) {
-
+		int res3 = sqlSession.delete(NAMESPACE+"deleteReply",board_no);
 		int res1 = sqlSession.delete(NAMESPACE + "deleteFile", board_no);
 		int res2 = sqlSession.delete(NAMESPACE + "deleteBoard", board_no);
+		
 		return res2;
 	}
 

@@ -71,7 +71,7 @@ response.setDateHeader("Expires", 0L);
 
 			</ul>
 			<ul id="hide" class="hide">
-				<li><a onclivk="location.href='logout.do'" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+				<li><a onclick="location.href='logout.do'" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
 				<li><a onclick="updatemember();" class="hidecontent"><i class="fas fa-user-edit"></i>회원수정</a></li>
 				<li><a onclick="deletemember();" class="hidecontent"><i	class="fas fa-user-minus"></i>회원탈퇴</a></li>
 			</ul>
