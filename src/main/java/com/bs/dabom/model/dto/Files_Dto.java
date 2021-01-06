@@ -10,18 +10,13 @@ public class Files_Dto {
 	private String files_url;
 	private Date files_regdate;
 	
-	
 	public Files_Dto() {
 	}
-	
-	
 	
 	public Files_Dto(int board_no, String files_url) {
 		this.board_no = board_no;
 		this.files_url = files_url;
 	}
-
-
 
 	public Files_Dto(int files_no, int board_no, String files_url, Date files_regdate) {
 		super();
