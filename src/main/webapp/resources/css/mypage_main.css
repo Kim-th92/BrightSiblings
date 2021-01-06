@@ -1,0 +1,85 @@
+* {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	
+}
+#mainWrapper {
+	background: #ececf9;
+	border-top : 2px solid #d9d9f2;
+	display: flex;
+}
+
+#mainImages{
+	width: 30%;
+    height: 100%;
+    border-radius: 5%;
+    text-align: center;
+    box-shadow: 0px 0px 20px 1px #a6a5a7;
+    border-radius: 15px;
+	background-color: white;
+	margin-top: 50px;
+	margin-left: 200px;
+}
+
+#mainWrite{
+	width: 50%;
+    height: 100%;
+    border-radius: 5%;
+    text-align: center;
+    box-shadow: 0px 0px 20px 1px #a6a5a7;
+    border-radius: 15px;
+	background-color: white;
+	margin-top: 50px;
+	margin-left: 100px;	
+}
+
+.feedWrap {
+	width: 90%;
+	height: 100%;
+	margin: auto;
+	border: 1px solid ghostwhite;
+	margin-top: 40px;
+	box-shadow: 0px 2px 1.5px lightgrey;
+	padding: 15px;
+	
+}
+.feedProp{
+	text-align:left;
+}
+
+.feedProp img {
+	width : 50px;
+	height: 50px;
+	border-radius:25px;
+	overflow: hidden;
+	text-align: left;
+}
+
+.feedContent{
+	text-align: left;
+	padding : 10px;
+}
+
+.feedImage {
+	text-align:left;
+	margin-bottom: 15px;
+}
+
+.feedImage img {
+	width : 200px;
+	height: auto;
+}
+
+.feedReply{
+	text-align:left;
+}
+.feedReply p {
+	font-weight: bold;
+}
+
+.replyWrap {
+	margin-top: 15px;
+}
+
+/* input style */

@@ -23,9 +23,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bs.dabom.model.biz.FoodPaging_Biz;
 import com.bs.dabom.model.biz.Friends_Biz;
 import com.bs.dabom.model.biz.Member_Biz;
+import com.bs.dabom.model.biz.MyMain_Biz;
 import com.bs.dabom.model.biz.MyPage_Biz;
+import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.Dailyfoodrecord_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
+import com.bs.dabom.model.dto.MyMain_Dto;
 import com.bs.dabom.model.dto.MyPage_Dto;
 import com.bs.dabom.model.dto.Paging_Dto;
 
@@ -48,6 +51,8 @@ public class MyPage_Controller {
 	private FoodPaging_Biz food_biz;
 	@Autowired
 	private MyPage_Biz mypage_biz;
+	@Autowired
+	private MyMain_Biz mymain_biz;
 	
 	public static void main(String[] args) {
 		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 
@@ -71,7 +76,28 @@ public class MyPage_Controller {
 	}
 	
 	@RequestMapping("mypage_main.do")
-	public String mypageFriends(Model model) {
+	public String mypageFriends(Model model,HttpSession session) {
+		
+		Member_Dto dto= (Member_Dto)session.getAttribute("login");
+		int member_no = dto.getMember_no();
+		
+		List<MyMain_Dto> board_list = mymain_biz.myList(member_no);
+		
+		List<String> urlList = new ArrayList<String>();
+	
+		for(int i=0; i < board_list.size(); i++) {
+			
+			List<String> egg = board_list.get(i).getUrlList();
+			
+			for(int j=0; j <= egg.size()-1; j++) {
+				urlList.add(egg.get(j));
+			}
+			
+		}
+		
+		model.addAttribute("url", urlList);
+		model.addAttribute("list", board_list);
+		model.addAttribute("login", dto);
 		return "mypage_main";
 	}
 	

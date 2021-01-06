@@ -68,3 +68,11 @@ select m.member_name,m.member_profile,m.member_no ,b.board_content,b.board_regda
 from member m join board  b on m.member_no = b.member_no  join files f on b.board_no = f.board_no
 where b.board_no =1
 
+select *
+from board
+where member_no = 21
+order by board_no desc;
+
+select *
+from files
+where board_no = 13;
