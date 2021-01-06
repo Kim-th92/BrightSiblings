@@ -43,6 +43,8 @@
 	margin: auto;
 	border: 1px solid #ffe6f7;
 	text-align: center;
+	background-color: white;
+	margin-top: 20px;
 }
 .writeWrap > div > img {
 	width: 50px;
@@ -74,6 +76,15 @@
 	border-radius:25px;
 	overflow: hidden;
 	text-align: left;
+}
+
+.upDel{
+	background-color:transparent;
+	border:none;
+}
+
+.upDel:hover{
+	text-decoration: underline;
 }
 
 /* <<<<<< HEAD */
@@ -205,6 +216,13 @@ a.btn-layerClose:hover {
 
 .replyWrap {
 	margin-top: 15px;
+}
+
+.feedReply img {
+	width : 50px;
+	height: 50px;
+	border-radius:25px;
+	overflow: hidden;
 }
 
 /* input style */

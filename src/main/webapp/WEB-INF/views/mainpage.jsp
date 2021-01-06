@@ -15,6 +15,10 @@
 <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 <script type="text/javascript" src="resources/js/write.js"></script>
 <style>
+	*{
+	list-style: none;
+	}
+
 	.btn-example:link {
 		text-decoration: none;
 		color: #e600ac;		
@@ -34,11 +38,16 @@
 		list-style: none;
 		width: 80%;
 		height: 80px;
-		background-color : #fbdafb;
 		margin-top: 20px;
 		margin-left: 20px;
 		text-align: middle;
 	}	
+	#navi ul li a {
+		color: black;
+	}
+	#navi a:hover{
+		color:black;
+	}
 </style>
 
 </head>
@@ -50,21 +59,16 @@
 	<section id="navi">
 	
 		<ul>
-			<li>
-				<img src="${login.member_profile }"><a href="#"><c:out value="${login.member_name }" /></a>
+			<li style="padding-top:25px;">
+				<img src="${login.member_profile }" style="width:45px; height:45px; border-radius:20px; overflow: hidden;" >&nbsp;&nbsp;&nbsp;<a href="#"><c:out value="${login.member_name }" /></a>
 			</li>
-			<li>
-				<img src="#"><a href="#">친구 목록</a>
+			<li style="padding-top:20px;">
+				<img src="/dabom/resources/image/friend.png" style="width:50px; height:36px;">&nbsp;&nbsp;&nbsp;<a href="mypage_friends.do">친구 목록</a>
 			</li>
-			<li>
-				<img src="#"><a href="#">동영상</a>
+			<li style="padding-top:15px;">
+				<img src="/dabom/resources/image/videos.png" style="width:45px; height:45px;">&nbsp;&nbsp;&nbsp;&nbsp;<a href="youtube.do">동영상</a>
 			</li>
-			<li>
-				<img src="#"><a href="#">이벤트</a>
-			</li>
-			<li>
-				<img src="#"><a href="#">좋아요</a>
-			</li>
+
 	
 		</ul>
 		
@@ -80,7 +84,7 @@
 						<c:when test="${empty list }">
 							<div class="writeWrap">
 								
-								<a href="#layer1" class="btn-example" style="color: #e600ac;">당신의 상태를 알려주세요.</a>	
+								<a href="#layer1" class="btn-example" style="color: #593650;">당신의 상태를 알려주세요.</a>	
 								<div id="layer1" class="pop-layer">
 									<div class="pop-container">
 										<div class="pop-conts">
@@ -105,9 +109,9 @@
 						<c:otherwise>
 						
 							<div class="writeWrap">
-								<div>
+								<div style="margin-top:25px;">
 									<img src="${login.member_profile }">
-									<a href="#layer1" class="btn-example" style="color:#e600ac;">당신의 상태를 알려주세요.</a>
+									<a href="#layer1" class="btn-example" style="color:#593650;">당신의 상태를 알려주세요.</a>
 								</div>	
 								<div id="layer1" class="pop-layer">
 									<div class="pop-container">
@@ -149,21 +153,20 @@
 									<div class="feedProp">
 												<fmt:parseDate value="${list.board_regdate }" var="regdate" pattern="yyyy-MM-dd" />
 											
-												<img src="${np[status.index].member_profile }">
-											
-												<p>${np[status.index].member_name }
-												<fmt:formatDate value="${regdate }" pattern="MM월 dd일" /></p>
+												<p><img src="${np[status.index].member_profile }">&nbsp;&nbsp;
+													${np[status.index].member_name }
+													&nbsp;<span style="font-size:10pt;"><fmt:formatDate value="${regdate }" pattern="MM월 dd일" /></span></p>
 											
 											
 											<c:if test="${login.member_no eq list.member_no  }">
-												<div class="upDel" style="text-align: right; display: none;">
-													<a><img class="hbgBtn" src="#"></a>
-														<input type="button" value="수정" onclick="location.href='update.do?board_no=${list.board_no }'">
-														<input type="button" value="삭제" onclick="location.href='delete.do?board_no=${list.board_no }'">
-												</div>
+														<span style="float:right; margin-top: -50px;">
+														<input class="upDel" type="button" value="삭제"  onclick="location.href='delete.do?board_no=${list.board_no }'">
+														<input class="upDel" type="button" value="수정"  onclick="location.href='update.do?board_no=${list.board_no }'">
+														</span>
 											</c:if>
-										
+										<hr>
 									</div>
+								
 									<div class="feedContent">
 										<p>${list.board_content }</p>
 									</div>
@@ -172,28 +175,28 @@
 											<img src="${url}">
 										</c:forEach>
 									</div>
+								<hr>
 									<div class="likeWrap">
 										<img id="like" src="/dabom/resources/image/red_heart.png"> 0
 
 										<!-- 좋아요-->
 									</div>
 									<div class="replyWrap">
-										<c:forEach items="${reply[status.index] }" var="rep">
-											<p>
-												<span>${rep.member_id }</span>${rep.reply_content }</p>
-										</c:forEach>
 
 										<div class="replyProp">
-											<img src="${login.member_profile }">
-											${login.member_name}
+											
 											<form action="writeReply.do" method="post">
-												<input type="hidden" value="main" name="root">
-												<input type="hidden" value="${list.board_no }" name="board_no"> 
-												<input type="text" placeholder="댓글 작성" name="reply_content">
-												 <input type="submit" value="입력" />
+												<img src="${login.member_profile }">&nbsp;&nbsp;
+														<input type="hidden" value="main" name="root">
+														<input type="hidden" value="${list.board_no }" name="board_no">
+												<input type="text" placeholder="댓글을 입력하세요." name="reply_content" style="width: 85%; height: 30px; border: none; border-radius:8px; background-color:#F8EEF8; padding-left:10px;">
 											</form>
 										</div>
-
+										<div class="replyList">
+											<c:forEach items="${reply[status.index] }" var="rep">
+												<p><span>${rep.member_id }&nbsp;&nbsp;&nbsp;</span>${rep.reply_content }</p>
+											</c:forEach>
+										</div>
 									</div>
 								</div>
 							</c:forEach>
@@ -346,6 +349,26 @@
 			sub.append("일");
 			return sub;
 		}
+	</script>
+	
+	
+	<script>
+	$(document).ready(function() {
+		  var placeholderTarget = $('.textbox input[type="text"]');
+		  
+		  //포커스시
+		  placeholderTarget.on('focus', function(){
+		    $(this).siblings('label').fadeOut('fast');
+		  });
+
+		  //포커스아웃시
+		  placeholderTarget.on('focusout', function(){
+		    if($(this).val() == ''){
+		      $(this).siblings('label').fadeIn('fast');
+		    }
+		  });
+		});
+	
 	</script>
 </body>
 </html>
