@@ -35,6 +35,7 @@
 		<mapper resource = "/mybatis/exercise-mapper.xml"/>
 		<mapper resource="/mybatis/boardres-mapper.xml" />
 		<mapper resource ="/mybatis/addinfo-mapper.xml"/>
+		<mapper resource="/mybatis/mymain-mapper.xml" />
 	</mappers>
 
 

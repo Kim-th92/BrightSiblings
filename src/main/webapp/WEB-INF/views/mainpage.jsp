@@ -187,6 +187,7 @@
 											<img src="${login.member_profile }">
 											${login.member_name}
 											<form action="writeReply.do" method="post">
+												<input type="hidden" value="main" name="root">
 												<input type="hidden" value="${list.board_no }" name="board_no"> 
 												<input type="text" placeholder="댓글 작성" name="reply_content">
 												 <input type="submit" value="입력" />

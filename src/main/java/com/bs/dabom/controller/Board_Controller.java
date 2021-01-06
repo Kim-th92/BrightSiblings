@@ -237,16 +237,22 @@ public class Board_Controller {
 	@RequestMapping("/writeReply.do")
 	public String replyUpload(@RequestParam("board_no") int board_no,
 							 @RequestParam("reply_content") String reply_content,
+							 @RequestParam("root") String root,
 							 Model model, HttpSession session) {
 		
-		
+		 
 		
 		Member_Dto member_dto = (Member_Dto)session.getAttribute("login");
 		String member_id = member_dto.getMember_id();
 		Reply_Dto dto = new Reply_Dto(board_no, member_id,reply_content);		
 		int res = biz.insertReply(dto);
-		
-		return res > 0 ? "redirect:mainpage.do" : "redirect:write.do";
+		if(root.equals("main")) {
+			return "redirect:mainpage.do";
+		} else if(root.equals("mypage")){
+			return "redirect:mypage_main.do";
+		} else {
+			return "redirect:mainpage.do";
+		}
 	}
 	
 	@RequestMapping("/update.do")
