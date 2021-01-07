@@ -76,3 +76,6 @@ order by board_no desc;
 select *
 from files
 where board_no = 13;
+
+select *
+from member;

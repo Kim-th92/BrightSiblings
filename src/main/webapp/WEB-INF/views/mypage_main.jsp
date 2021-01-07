@@ -83,14 +83,19 @@
 						<c:forEach var="list" items="${list }">
 							<div class="feedWrap">
 								<div class="feedProp">
-									<img src="${login.member_profile }">
+									<img src="${login.member_profile }">&nbsp;&nbsp;
 									${login.member_id}
+									
 									<fmt:parseDate value="${list.board_regdate }" var="regdate" pattern="yyyy-MM-dd" />
 									<fmt:formatDate value="${regdate }" pattern="MM월 dd일" /></p>
-									<div class="upDel" style="text-align: right; ">
-											<input type="button" value="수정" onclick="location.href='update.do?board_no=${list.board_no }'">
-											<input type="button" value="삭제" onclick="deleteBoard(${list.board_no })">
-									</div>
+									
+									<c:if test="${login.member_no eq list.member_no  }">
+											<span style="float:right">
+													<input class="upDel" type="button" value="수정" onclick="location.href='update.do?board_no=${list.board_no }'">
+													<input class="upDel" type="button" value="삭제" onclick="deleteBoard(${list.board_no })">
+											</span>
+									</c:if>
+								<hr>
 								</div>
 								<div class="feedContent">
 									${list.board_content }
@@ -100,7 +105,7 @@
 										<img src="${url }">
 									</c:forEach>
 								</div>
-								
+								<hr>
 								<div class="feedReply">
 									<c:forEach var="rep" items="${list.replyList }">
 										<p>${rep }</p>
@@ -108,7 +113,7 @@
 									<form action="writeReply.do" method="post">
 												<input type="hidden" value="mypage" name="root">
 												<input type="hidden" value="${list.board_no }" name="board_no"> 
-												<input type="text" placeholder="" name="reply_content" style="height:18px; font-size: 10pt;">
+												<input type="text" placeholder="댓글을 입력하세요." name="reply_content" style="width: 85%; height: 30px; border: none; border-radius:8px; background-color:#F8EEF8; padding-left:10px;">
 												 <input type="submit" value="입력" />
 
 									</form>
