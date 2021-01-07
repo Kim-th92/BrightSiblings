@@ -138,14 +138,14 @@ public class Member_Controller {
         MailHandler sendMail = new MailHandler(mailSender);
         sendMail.setSubject("[이메일 인증]");
         sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
-                .append("<h2>임시비밀번호는 [")
+                .append("<h2>인증번호는 [")
                 .append(key)
                 .append("]입니다.")
                 .toString());
         sendMail.setFrom("maggiechoietest@gmail.com", "관리자");
         sendMail.setTo(email);
         sendMail.send();
-        map.put("result","ok");
+        map.put("authkey",key);
         
         return map;
 	}
@@ -188,7 +188,6 @@ public class Member_Controller {
 	//아이디 패스워드 찾기전 기존에 가입한 회원인지 확인 
 	@RequestMapping("findpwcheck.do")
 	public @ResponseBody Map<String ,String> findpwcheck(@RequestBody Member_Dto dto){
-		System.out.println("dto>>>>>" +dto);
 		int res = biz.findpwcheck(dto);
 		System.out.println(res);
 		Map<String, String> map = new HashMap<String, String>();
@@ -309,7 +308,7 @@ public class Member_Controller {
 			}else {
 				System.out.println("여긴");
 				session.setAttribute("login", res); // 세션 생성
-				return "redirect:/mainpage.do";
+				return "redirect:mainpage.do";
 			}
 			
 		} else if (biz.idChk(member_email) == 0) {
@@ -317,15 +316,15 @@ public class Member_Controller {
 			dto.setSns("naver");
 			snsregres = biz.snsRegister(dto);
 			if (snsregres > 0)
-				return "redirect:/login.do";
+				return "redirect:login.do";
 		}
-		return "redirect:/login.do";
+		return "redirect:login.do";
 	}
 	
 	//카카오 로그인 
 	
 	private final static String K_CLIENT_ID = "5e5790e19b452854db751365c8cd9a9d";
-	private final static String K_REDIRECT_URI = "http://localhost:8787/dabom/oauth/kakao/callback.do";
+	private final static String K_REDIRECT_URI = "http://qclass.iptime.org:8686/dabom/oauth/kakao/callback.do";
 
 	public static String getAuthorizationUrl(HttpSession session) {
 		String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?" + "client_id=" + K_CLIENT_ID + "&redirect_uri="
@@ -387,7 +386,7 @@ public class Member_Controller {
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", "5e5790e19b452854db751365c8cd9a9d"));
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8787/dabom/oauth/kakao/callback.do")); // 리다이렉트 URI
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://qclass.iptime.org:8686/dabom/oauth/kakao/callback.do")); // 리다이렉트 URI
 		postParams.add(new BasicNameValuePair("code", autorize_code)); // 로그인 과정중 얻은 code 값
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
@@ -430,7 +429,5 @@ public class Member_Controller {
 		} return returnNode; 
 		}
 	
-	// 어드민 리스트 추가했다가 지움....
+	// 어드민 리스트 추가했다가 지움….
 	}
-
-

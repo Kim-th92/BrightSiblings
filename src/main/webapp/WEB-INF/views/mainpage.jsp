@@ -72,8 +72,15 @@
 	
 		</ul>
 		
-		<div id="example">
-		
+		<div id="footer" style="
+						position: absolute;
+						bottom: 0px;
+						width:100%; 
+						height: 180px;
+						color: black;
+						background-color: #fee3ff">
+			<p style="text-align:center; margin-top:30px;">&copy; 2020 BrightSiblings | <a href="#" style="text-decoration: none; color: black;" onclick="alert('규태 태형 서원 다희 보민 현준 / 20.01.07 KH')">Dabom</a></p>
+			
 		</div>
 	</section>
 	
@@ -83,21 +90,38 @@
 				<c:choose>
 						<c:when test="${empty list }">
 							<div class="writeWrap">
-								
-								<a href="#layer1" class="btn-example" style="color: #593650;">당신의 상태를 알려주세요.</a>	
+								<div style="margin-top:25px;">
+									<img src="${login.member_profile }">
+									<a href="#layer1" class="btn-example" style="color:#593650;">당신의 상태를 알려주세요.</a>
+								</div>	
 								<div id="layer1" class="pop-layer">
 									<div class="pop-container">
 										<div class="pop-conts">
-											<img src="${login.member_profile }" style="width:150px;"><br/>
-											 ${login.member_name }<br/>
+										
 											<form method="post" action="upload.do" enctype="multipart/form-data">
-												<p>text:<input type="text" name="text"></p>
-												<p><input type="file" name="file1" multiple value="파일"></p>
-												<input type="submit" value="작성">
-											</form>
+												<textarea cols="45" rows="8"  name="text" style="resize:none;"></textarea>
+												 <script>
+												 CKEDITOR.replace( 'text' ,{ allowedContent: 'h1 h2 h3 p blockquote strong em;' +
+													        'a[!href];' +
+													        'table tr th td caption;' +
+													        'span{!font-family};' +
+													        'span{!color};' +
+													        'span(!marker);' +
+													        'del ins'
+													    });
+												 </script>
+												
+												<div id="forBg" style="width: 50px; height: 50px; background : url('resources/image/upload_img.png'); background-size: 50px 50px;">
+													<label class="uploadButton" for="fileUpload" style="width: 50px; height: 50px;">.</label>
+												</div>
+												<input id="fileUpload" type="file" name="file1" multiple value="파일" style="display:none;">
+												
+											
 											<div class="btn-r">
+												<input type="submit" value="작성">
 												<a href="#" class="btn-layerClose">Close</a>
 											</div>
+											</form>
 										</div>	
 									</div>
 								</div>
@@ -245,9 +269,7 @@
 
 		</div>
 	</section>
-	<section id="friendList">
-			&nbsp;
-	</section>
+	
 </article>	
 
 
