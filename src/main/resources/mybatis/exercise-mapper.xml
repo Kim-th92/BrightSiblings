@@ -12,7 +12,6 @@
 		FROM DAILYEXERCISERECORD DER, (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') AS TODAY FROM DUAL) T
 		WHERE TO_CHAR(DER.CALENDAR_DATE, 'YYYYMMDD') = T.TODAY
 		AND MEMBER_NO = #{no}
-		ORDER BY DISTANCE DESC
 	</select>
 
 	<select id="total" parameterType="int" resultType="myPageDto">

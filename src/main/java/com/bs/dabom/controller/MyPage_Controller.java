@@ -171,11 +171,37 @@ public class MyPage_Controller {
 	
 	@RequestMapping("mypage_exercise.do")
 	public String mypageExercise(Model model, HttpSession session) {
+		
 		Member_Dto login = (Member_Dto)session.getAttribute("login");
 		int member_no = login.getMember_no();
 		model.addAttribute("list", mypage_biz.showList(member_no));
-		model.addAttribute("total", mypage_biz.total(member_no));
-		System.out.println("asdfaf4w4e3r24fe2e4" + mypage_biz.total(member_no));
+		List<MyPage_Dto> total = new ArrayList<MyPage_Dto>(); 
+		total = mypage_biz.total(member_no);
+		
+		System.out.println("여기까지왔고");
+		System.out.println(total.get(0));
+		System.out.println(total);
+		
+		
+		if (total.get(0) == null) {
+			
+			System.out.println("null이면");
+			System.out.println(total);
+			System.out.println(total.get(0));
+			
+			model.addAttribute("td", 0);
+		} else {
+			
+			System.out.println("null이 아니면");
+			System.out.println(total);
+			System.out.println(total.get(0));
+			
+			int td = total.get(0).getTotal_distance();
+			float tbk = total.get(0).getTotal_burn_kcal();
+			model.addAttribute("td", td);
+			model.addAttribute("tbk", tbk);
+		}
+		
 		return "mypage_exercise";
 	}
 	
@@ -403,6 +429,12 @@ public class MyPage_Controller {
 		map.put("result", result);
 		
 		return map;
+	}
+	
+	@RequestMapping("mypage_pose.do")
+	public String mypage_pose() {
+		System.out.println("mypage_pose.do");
+		return "mypage_pose";
 	}
 	
 }

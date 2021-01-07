@@ -33,7 +33,7 @@
 					<c:when test="${empty memberlist }">
 						<tr class="admin_memberlist_content">
 							<td colspan="7" align="center">------------------------회원이
-								없습니다.------------------------</td>
+								없습니다.————————————</td>
 						</tr>
 					</c:when>
 					<c:otherwise>

@@ -61,11 +61,6 @@
 					</c:otherwise>
 				</c:choose>
 
-				<!-- <tr>
-			<td colspan="4" align="right">
-				<input type="button" value="관리자 메인페이지로..." onclick="location.href='#'"/>
-			</td>
-		</tr> -->
 			</table>
 		</div>
 	</div>
