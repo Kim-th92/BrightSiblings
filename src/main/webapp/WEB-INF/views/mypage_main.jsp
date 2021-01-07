@@ -9,7 +9,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
-<link rel="stylesheet" href="/dabom/resources/css/mypage_main.css">
+<link rel="stylesheet" href="resources/css/mypage_main.css">
+<link rel="stylesheet" type="text/css" href="resources/css/write.css">
+<script type="text/javascript" src="resources/js/write.js"></script>
 </head>
 <link rel="stylesheet" href="resources/css/mypage_main.css" />
 <body>
@@ -31,11 +33,11 @@
 		
 		
 		<div id="mainWrite">
-		
+				
 					<div class="writeWrap">
-								<div>
+								<div style="padding-top:24px;">
 									<img src="${login.member_profile }">
-									<a href="#layer1" class="btn-example" style="color:#e600ac;">당신의 상태를 알려주세요.</a>
+									<a href="#layer1" class="btn-example" style="color:black;">당신의 상태를 알려주세요.</a>
 								</div>	
 								<div id="layer1" class="pop-layer">
 									<div class="pop-container">
@@ -77,7 +79,7 @@
 			<hr style="width:90%; text-align:center; margin-left: 45px;">
 			<c:choose>
 				<c:when test="${empty list }">
-							<p>첫 글을 작성해보세요 :D</p>
+							<p>글이 없습니다. :D</p>
 				</c:when>
 				<c:otherwise>
 						<c:forEach var="list" items="${list }">
@@ -90,51 +92,49 @@
 									<fmt:formatDate value="${regdate }" pattern="MM월 dd일" /></p>
 									
 									<c:if test="${login.member_no eq list.member_no  }">
-											<span style="float:right">
-													<input class="upDel" type="button" value="수정" onclick="location.href='update.do?board_no=${list.board_no }'">
+											<span style=" margin-top: -60px; float:right">
 													<input class="upDel" type="button" value="삭제" onclick="deleteBoard(${list.board_no })">
-													<a href="#layer1" class="btn-example" style="color:#593650;">수정하시겠습니까?</a>
+													<a href="#layer2" class="btn-example2" style="color:#593650;">수정</a>
 											</span>
-													
-													
-													<div id="layer1" class="pop-layer">
-																<div class="pop-container">
-																	<div class="pop-conts">
-																		<form method="post" action="updateres.do" enctype="multipart/form-data">
-																			<input type="hidden" value="${list.board_no }" name="board_no">
-																			<textarea cols="45" rows="8"  name="board_content" style="resize:none;"></textarea>
-																			 <script>
-																			 CKEDITOR.replace( 'board_content' ,{ allowedContent: 'h1 h2 h3 p blockquote strong em;' +
-																				        'a[!href];' +
-																				        'table tr th td caption;' +
-																				        'span{!font-family};' +
-																				        'span{!color};' +
-																				        'span(!marker);' +
-																				        'del ins'
-																				    });
-																			 </script>
-																			
-																			<c:forEach items="${url }" var="url">
-																				<img src="${url }" style="width:200px; height: auto;">					
-																			</c:forEach>
-																			<input type="file" name="file1" multiple>
-																			<input type="text" value="${list.board_regdate}" readonly="readonly">
-																			<input type="submit" value="완료">
+													<div id="layer2" class="pop-layer2">
+															<div class="pop-container2">
+																<div class="pop-conts">
+																
+																	<form method="post" action="updateres.do" enctype="multipart/form-data">
+																	<c:forEach items="${url[status.index] }" var="url">
+																		<img src="${url }" style="width:50%; height: auto;">					
+																	</c:forEach>
+																		<input type="hidden" value="${list.board_no }" name="board_no">
+																		<textarea cols="45" rows="8"  name="board_content" style="resize:none;">${list.board_content }</textarea>
+																		 <script>
+																		 CKEDITOR.replace( 'board_content' ,{ allowedContent: 'h1 h2 h3 p blockquote strong em;' +
+																			        'a[!href];' +
+																			        'table tr th td caption;' +
+																			        'span{!font-family};' +
+																			        'span{!color};' +
+																			        'span(!marker);' +
+																			        'del ins'
+																			    });
+																		 </script>
+																		 </br>
+																		<input type="file" name="file1" multiple>
 																		
-																			<div class="btn-r">
-																				<input type="submit" value="작성">
-																				<a href="#" class="btn-layerClose">Close</a>
-																			</div>
-																			
-																		</form>
-																	</div>	
-																</div>
+																	
+																	<div class="btn-r2">
+																		<input type="submit" value="작성">
+																		<a href="#" class="btn-layerClose2">Close</a>
+																	</div>
+																	</form>
+																</div>	
 															</div>
+														</div>
 													
 													
 													
 													
-											</span>
+													
+													
+											
 									</c:if>
 								<hr>
 								</div>

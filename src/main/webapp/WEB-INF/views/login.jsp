@@ -85,7 +85,7 @@
 	</div>
 
 	<div id="footer">
-		<div>© 2021 DABOM</div>
+		<p style="text-align:center;">&copy; 2020 BrightSiblings | <a href="#" style="text-decoration: none; color: black;" onclick="alert('규태 태형 서원 다희 보민 현준 / 20.01.07 KH')">Dabom</a></p>
 	</div>
 
 	<script>
