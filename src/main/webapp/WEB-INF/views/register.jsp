@@ -12,6 +12,8 @@
 <link rel="short cut" href ="resources/image/cherry-blossom.png">
 <link rel="stylesheet" href="resources/css/register.css"/>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="container">

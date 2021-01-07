@@ -16,15 +16,13 @@ $(document).click(function(e){
 			e.preventDefault();
 			}
 	$("#hide").stop().slideUp(500);
-	$("#msg-hide").stop().slideUp(500);
 	$(".search_hide").stop().slideUp(500);
 		
 			
 });
 
 $("#btn_msg").click(function(){
-	$("#msg-hide").stop().slideDown(500);
-return false; //중요
+	$("#msg-hide").toggle();
 });
 
 
