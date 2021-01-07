@@ -76,7 +76,6 @@ public class FriendPage_Controller {
 		
 		model.addAttribute("url", urlList);
 		model.addAttribute("list", board_list);
-		model.addAttribute("login", dto);
 		model.addAttribute("dto", dto);
 		
 		

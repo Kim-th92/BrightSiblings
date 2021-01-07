@@ -131,10 +131,10 @@ public class Board_Controller {
 										HttpSession session) {
 		
 		
-		
+		System.out.println("updateres.do 실행");
 		Member_Dto member_dto= (Member_Dto)session.getAttribute("login");
 		int data = member_dto.getMember_no();
-		// 회원 번호
+		// 현재 로그인한 회원의 회원 번호
 		
 		String url = "";
 		// url 스트링
@@ -142,6 +142,7 @@ public class Board_Controller {
 		boolean result = false;
 		
 		Board_Dto dto = new Board_Dto(board_no, board_content);
+		// 수정 할 내용이 담긴 dto
 		
 		int res = biz.update(dto);
 		// board_no에 맞는 content 내용을 board_content로 수정

@@ -72,3 +72,80 @@ a.btn-layerClose:hover {
   background-color: #1f326a;
   color: #fff;
 }
+
+/* -------------------------------  */
+
+.pop-layer2 .pop-container2 {
+  padding: 20px 25px;
+}
+
+.pop-layer2 p.ctxt {
+  color: #666;
+  line-height: 25px;
+}
+
+.pop-layer2 .btn-r2 {
+  width: 100%;
+  margin: 10px 0 20px;
+  padding-top: 10px;
+  border-top: 1px solid #DDD;
+  text-align: right;
+}
+
+.pop-layer2 {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  height: auto;
+  background-color: #fff;
+  border: 1px solid #3571B5;
+  z-index: 10;
+   box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px, rgba(0,0,0,0.5) 2px 2px 3px 3px;
+}
+
+.dim-layer2 {
+  display: none;
+  position: fixed;
+  _position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+.dim-layer2 .dimBg2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: .5;
+  filter: alpha(opacity=50);
+ 
+}
+
+.dim-layer2 .pop-layer2 {
+  display: block;
+}
+
+a.btn-layerClose2 {
+  display: inline-block;
+  height: 25px;
+  padding: 0 14px 0;
+  border: 1px solid #304a8a;
+  background-color: #3f5a9d;
+  font-size: 13px;
+  color: #fff;
+  line-height: 25px;
+ 
+}
+
+a.btn-layerClose2:hover {
+  border: 1px solid #091940;
+  background-color: #1f326a;
+  color: #fff;
+}

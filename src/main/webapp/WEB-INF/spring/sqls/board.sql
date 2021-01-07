@@ -21,6 +21,10 @@ CREATE TABLE BOARD(
 SELECT * FROM BOARD
 ORDER BY BOARD_NO DESC;
 
+SELECT *
+FROM BOARD
+WHERE MEMBER_NO = 21;
+
 
 select m.member_no, m.member_name,m.member_profile , b.board_no, b.board_content,b.board_regdate,f.files_no ,f.FILES_URL 
 	from member m join board  b on m.member_no = b.member_no right join files f on b.board_no = f.board_no

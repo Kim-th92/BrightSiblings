@@ -126,7 +126,51 @@
 										<span style="float:right; margin-top: -50px;">
 												<input class="upDel" type="button" value="수정" onclick="location.href='update.do?board_no=${list.board_no }'">
 												<input class="upDel" type="button" value="삭제" onclick="deleteBoard(${list.board_no })">
-										</span>
+												
+												
+												<a href="#layer1" class="btn-example" style="color:#593650;">수정하시겠습니까?</a></span>
+															<div id="layer1" class="pop-layer">
+																<div class="pop-container">
+																	<div class="pop-conts">
+																		<form method="post" action="updateres.do" enctype="multipart/form-data">
+																			<input type="hidden" value="${list.board_no }" name="board_no">
+																			<textarea cols="45" rows="8"  name="board_content" style="resize:none;"></textarea>
+																			 <script>
+																			 CKEDITOR.replace( 'board_content' ,{ allowedContent: 'h1 h2 h3 p blockquote strong em;' +
+																				        'a[!href];' +
+																				        'table tr th td caption;' +
+																				        'span{!font-family};' +
+																				        'span{!color};' +
+																				        'span(!marker);' +
+																				        'del ins'
+																				    });
+																			 </script>
+																			
+																			<c:forEach items="${url }" var="url">
+																				<img src="${url }" style="width:200px; height: auto;">					
+																			</c:forEach>
+																			<input type="file" name="file1" multiple>
+																			<input type="text" value="${list.board_regdate}" readonly="readonly">
+																			<input type="submit" value="완료">
+																		
+																			<div class="btn-r">
+																				<input type="submit" value="작성">
+																				<a href="#" class="btn-layerClose">Close</a>
+																			</div>
+																			
+																		</form>
+																	</div>	
+																</div>
+															</div>
+												
+												
+												
+												
+												
+												
+												
+												
+										
 									</c:if>
 									</p>
 									<hr>
