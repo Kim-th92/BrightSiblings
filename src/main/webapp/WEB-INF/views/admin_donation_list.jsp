@@ -15,7 +15,8 @@
 </head>
 <body>
 	<%@include file="adminpage.jsp"%>
-	<div class="admin_section" style="background-image: url('resources/image/background.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" >
+	<div class="admin_section"
+		style="background-image: url('resources/image/background.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
 		<h1>DONATION LIST</h1>
 		<div class="admin_donaiton">
 			<table>

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-html{
-	background: #ececf9;	
+html {
+	background: #ececf9;
 }
 
 .dot {
@@ -47,33 +47,19 @@ html{
 	content: none;
 }
 
-
-.record_delete{
-	color: #444;
-	background-color: #d9d9f2;
-	font-family: "montserrat";
-	border-radius: .2rem;
-	margin: 10px;
-	padding: 5px;
+.record_tr {
+	border-bottom: 1px solid;
+	border-top: 1px solid;
 }
 
-.record_delete:hover{
-	cursor: pointer;
-}
-
-.record_tr{
-    border-bottom: 1px solid;
-    border-top: 1px solid;
-}
-
-.today_record{
-    margin-top: 12%;
-    margin-left: 8%;
-    margin-right: 8%;
-    box-shadow: 0px 0px 20px 1px #a6a5a7;
-    border-radius: 15px;
-    background-color: white;
-    padding: 50px;
+.today_record {
+	margin-top: 12%;
+	margin-left: 8%;
+	margin-right: 8%;
+	box-shadow: 0px 0px 20px 1px #a6a5a7;
+	border-radius: 15px;
+	background-color: white;
+	padding: 50px;
 }
 
 .cn {
@@ -85,10 +71,10 @@ html{
 	border-radius: .2rem;
 }
 
-.course_name:focus, .course_name:hover{
+.course_name:focus, .course_name:hover {
 	box-shadow: 0px 0px 10px 0.8px #ff1a8c;
-    border: 2px solid #444;
-    transition: 1s;
+	border: 2px solid #444;
+	transition: 1s;
 }
 
 .course_register {
@@ -102,10 +88,10 @@ html{
 	transition: 0.6s;
 }
 
-.course_register:hover{
-    background: #ff1a8c;
-    cursor: pointer;
-    color: #ececf9;
+.course_register:hover {
+	background: #ff1a8c;
+	cursor: pointer;
+	color: #ececf9;
 }
 
 #map {
@@ -123,7 +109,7 @@ html{
 	border-radius: 25px;
 }
 
-#map:hover{
+#map:hover {
 	box-shadow: 0px 0px 20px 1px #ff1a8c;
 }
 
@@ -146,33 +132,32 @@ form {
 
 #total_today {
 	text-align: center;
-    margin: auto;
-    width: 40%;
+	margin: auto;
+	width: 40%;
 }
 
-.daycount:hover{
+.daycount:hover {
 	cursor: pointer;
 }
 
-.calendar_wraper{
-    margin-top: 11%;
-    margin-left: 8%;
-    margin-right: 8%;
-    margin-bottom: 60%;
+.calendar_wraper {
+	margin-top: 11%;
+	margin-left: 8%;
+	margin-right: 8%;
+	margin-bottom: 50%;
 	width: 84%;
 	background: #ececf9;
 	position: relative;
 }
 
-.calendar_left{
+.calendar_left {
 	float: left;
 	margin-left: 5%;
 	width: 45%;
 }
 
-.calendar_right{
+.calendar_right {
 	float: right;
 	margin-right: 20%;
-    width: 30%;
+	width: 30%;
 }
-

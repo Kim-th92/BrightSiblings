@@ -57,37 +57,37 @@
 			<div class="card-header msg_head">
 				<div class="d-flex bd-highlight">
 
-			
-							<c:choose>
-							<c:when test="${memberlist[0].member_no eq login.member_no }">
-												<div class="img_cont">
-									<img src="${memberlist[1].member_profile }"
-										class="rounded-circle user_img"> 
-								</div>
-								<div class="user_info">
-									<span> ${memberlist[1].member_name} </span>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="img_cont">
-									<img src="${memberlist[0].member_profile }"
-										class="rounded-circle user_img"> 
-								</div>
-								<div class="user_info">
-									<span> ${memberlist[0].member_name} </span>
-								</div>
-							
-							</c:otherwise>
-						</c:choose>
+
+					<c:choose>
+						<c:when test="${memberlist[0].member_no eq login.member_no }">
+							<div class="img_cont">
+								<img src="${memberlist[1].member_profile }"
+									class="rounded-circle user_img">
+							</div>
+							<div class="user_info">
+								<span> ${memberlist[1].member_name} </span>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="img_cont">
+								<img src="${memberlist[0].member_profile }"
+									class="rounded-circle user_img">
+							</div>
+							<div class="user_info">
+								<span> ${memberlist[0].member_name} </span>
+							</div>
+
+						</c:otherwise>
+					</c:choose>
 
 
 
 
 					<div class="video_cam">
-						<span  onclick="location.href='https://localhost:3000/chat/${roomno}/membername/${login.member_name }'">
-						<i class="fas fa-video"></i>
-						</span>					
-						 <span onclick="disconnect()">나가기 </span>
+						<span
+							onclick="location.href='https://localhost:3000/chat/${roomno}/membername/${login.member_name }'">
+							<i class="fas fa-video"></i>
+						</span> <span onclick="disconnect()">나가기 </span>
 					</div>
 				</div>
 				<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
@@ -125,7 +125,8 @@
 			<div class="card-footer">
 				<div class="input-group">
 
-					<textarea name="" id="message" class="form-control type_msg" placeholder="Type your message..."></textarea>
+					<textarea name="" id="message" class="form-control type_msg"
+						placeholder="Type your message..."></textarea>
 					<div class="input-group-append">
 						<span id="sendBtn" class="input-group-text send_btn"><i
 							class="fas fa-location-arrow"></i></span>

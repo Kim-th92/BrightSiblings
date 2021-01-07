@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
 <body>
 
 	<h1>특정회원 후원 내역</h1>
-	
+
 	<table border="1">
 		<tr>
 			<td>Member_Name</td>
@@ -26,7 +26,8 @@
 			<tr>
 				<td>${dto.donation_no}</td>
 				<td>${dto.donation }</td>
-				<td><fmt:formatDate value="${dto.donation_date }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td><fmt:formatDate value="${dto.donation_date }"
+						pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			</tr>
 		</c:forEach>
 		<tr>
@@ -34,9 +35,8 @@
 			<td colspan="2" align="right">${select_donation_sum}</td>
 		</tr>
 		<tr>
-			<td colspan="3" align="right">
-				<input type="button" value="후원자 명단으로..." onclick="location.href='listdonation.do'"/>
-			</td>
+			<td colspan="3" align="right"><input type="button"
+				value="후원자 명단으로..." onclick="location.href='listdonation.do'" /></td>
 		</tr>
 	</table>
 

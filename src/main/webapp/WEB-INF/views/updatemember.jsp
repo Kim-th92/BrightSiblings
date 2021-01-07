@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>업뎃창 </title>
+<title>업뎃창</title>
 <link rel="stylesheet" href="resources/css/updatemember.css">
 
 </head>
@@ -15,28 +15,66 @@
 
 
 	<!-- 팝업 시작 -->
-	<div class="wrapper bg-white mt-sm-5" id="update_popup" style="display: none;">
-    <h1 class="pb-4 border-bottom">회원정보 수정</h1>
-    <div class="py-2">
-        <div class="row py-2">
-            <div class="col-md-6"> <label for="firstname">이름</label> <input type="text" class="bg-light form-control" id="member_name" name="member_name" value="${login.member_name }" readonly="readonly"> </div>
-            <div class="col-md-6"> <label for="firstname">생년월일</label> <input type="text" class="bg-light form-control" id="member_birthday" name="member_birthday"  value= "${login.member_birthday }" > </div>
-        </div>
-        <div class="row py-2">
-            <div class="col-md-6"> <label for="email">이메일 주소</label> <input type="text" class="bg-light form-control" id="member_email" name="member_email"  value="${login.member_email }"> </div>
-            <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">휴대폰번호</label> <input type="tel" class="bg-light form-control" id="member_phone" name="member_phone" value="${login.member_phone }"> </div>
-        </div>
-     	<div class="row py-2">
-            <div class="col-md-6"> <label for="email">주소</label> <input type="text" class="bg-light form-control" placeholder="우편번호"  value= "${login.member_zipcode  }"name="member_zipcode" id="member_zipcode"  readonly="readonly">
-            <button type="button" class="btn btn-outline-secondary" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button> </div>
-              <div class="col-md-12"> <label for="phone">도로명 주소</label> <input type="tel" class="bg-light form-control" name="member_firstaddr" id="member_firstaddr"  readonly="readonly" value="${login.member_firstaddr }"> </div>
-            <div class="col-md-12"> <label for="phone">상세 주소</label> <input type="tel" class="bg-light form-control" name="member_secondaddr" id="member_secondaddr" value="${login.member_secondaddr }"> </div>
-        </div>
- 
-        <div class="py-3 pb-4 border-bottom"> <button class="updatesubmitbtn btn btn-danger mr-3">정보 수정 저장</button> <button onclick="close_updatepopup();" class="btn border button">취소</button> </div>
-        
-    </div>
-</div>
+	<div class="wrapper bg-white mt-sm-5" id="update_popup"
+		style="display: none;">
+		<h1 class="pb-4 border-bottom">회원정보 수정</h1>
+		<div class="py-2">
+			<div class="row py-2">
+				<div class="col-md-6">
+					<label for="firstname">이름</label> <input type="text"
+						class="bg-light form-control" id="member_name" name="member_name"
+						value="${login.member_name }" readonly="readonly">
+				</div>
+				<div class="col-md-6">
+					<label for="firstname">생년월일</label> <input type="text"
+						class="bg-light form-control" id="member_birthday"
+						name="member_birthday" value="${login.member_birthday }">
+				</div>
+			</div>
+			<div class="row py-2">
+				<div class="col-md-6">
+					<label for="email">이메일 주소</label> <input type="text"
+						class="bg-light form-control" id="member_email"
+						name="member_email" value="${login.member_email }">
+				</div>
+				<div class="col-md-6 pt-md-0 pt-3">
+					<label for="phone">휴대폰번호</label> <input type="tel"
+						class="bg-light form-control" id="member_phone"
+						name="member_phone" value="${login.member_phone }">
+				</div>
+			</div>
+			<div class="row py-2">
+				<div class="col-md-6">
+					<label for="email">주소</label> <input type="text"
+						class="bg-light form-control" placeholder="우편번호"
+						value="${login.member_zipcode  }" name="member_zipcode"
+						id="member_zipcode" readonly="readonly">
+					<button type="button" class="btn btn-outline-secondary"
+						onclick="execPostCode();">
+						<i class="fa fa-search"></i> 우편번호 찾기
+					</button>
+				</div>
+				<div class="col-md-12">
+					<label for="phone">도로명 주소</label> <input type="tel"
+						class="bg-light form-control" name="member_firstaddr"
+						id="member_firstaddr" readonly="readonly"
+						value="${login.member_firstaddr }">
+				</div>
+				<div class="col-md-12">
+					<label for="phone">상세 주소</label> <input type="tel"
+						class="bg-light form-control" name="member_secondaddr"
+						id="member_secondaddr" value="${login.member_secondaddr }">
+				</div>
+			</div>
+
+			<div class="py-3 pb-4 border-bottom">
+				<button class="updatesubmitbtn btn btn-danger mr-3">정보 수정
+					저장</button>
+				<button onclick="close_updatepopup();" class="btn border button">취소</button>
+			</div>
+
+		</div>
+	</div>
 	<div class="update_background"></div>
 
 	<script type="text/javascript">

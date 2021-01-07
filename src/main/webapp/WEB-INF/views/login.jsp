@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-    <% response.setHeader("Pragma", "no-cache"); 
+<% response.setHeader("Pragma", "no-cache"); 
     response.setHeader("Cache-Control", "no-cache"); 
     response.setHeader("Cache-Control", "no-store"); 
     response.setDateHeader("Expires", 0L); %>
@@ -12,11 +12,14 @@
 <link rel="stylesheet" href="resources/css/login.css">
 <link rel="shortcut icon" href="resources/image/cherry-blossom.png">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap"
+	rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
 	
 </script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://apis.google.com/js/client:platform.js?onload=start"
@@ -36,7 +39,8 @@
 			<div id="chartdiv"></div>
 			<div id="content">
 				<h1 class="ml6">
-					<span class="text-wrapper"> <span class="letters"><b style="color:#cc0044">다</b>이어터들에게 <b style="color:#cc0044">봄</b>이왔어요</span>
+					<span class="text-wrapper"> <span class="letters"><b
+							style="color: #cc0044">다</b>이어터들에게 <b style="color: #cc0044">봄</b>이왔어요</span>
 					</span>
 				</h1>
 			</div>
@@ -64,7 +68,8 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: center; margin: 10px;"><a
-							href="register.do">회원가입</a> | <a style ="cursor:pointer;" onclick="window.open('findpw.do','popup','width=500px,top=300,left=500,height=300px')">ID/PW찾기</a></td>
+							href="register.do">회원가입</a> | <a style="cursor: pointer;"
+							onclick="window.open('findpw.do','popup','width=500px,top=300,left=500,height=300px')">ID/PW찾기</a></td>
 					</tr>
 					<tr>
 						<td colspan="2"><a href="${kakao_url}"><img

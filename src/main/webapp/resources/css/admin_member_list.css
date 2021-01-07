@@ -1,39 +1,40 @@
 @charset "UTF-8";
 
-body{
+body {
 	font-family: "Nanum Gothic", sans-serif;
 }
+
 h1 {
 	width: 400px;
 	margin-left: 200px;
-    margin-right: auto;
-	font-weight: 800;	
+	margin-right: auto;
+	font-weight: 800;
 }
 
-
-table{
+table {
 	width: 100%;
 }
 
 #admin_memberlist_title {
 	height: 60px;
 }
-#admin_memberlist_title > td {
+
+#admin_memberlist_title>td {
 	font-weight: bolder;
 }
 
-.admin_memberlist_content{
+.admin_memberlist_content {
 	height: 50px;
 }
-	
-td{
-	padding-left: 10px;
-}	
 
-tr.even { 
-	background: #efefef; 
+td {
+	padding-left: 10px;
 }
 
-tr.odd { 
-	background: white; 
+tr.even {
+	background: #efefef;
+}
+
+tr.odd {
+	background: white;
 }

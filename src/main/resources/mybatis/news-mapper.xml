@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace = "news">
+<mapper namespace="news">
 
-	<select id="newslist" parameterType="string" resultType="newsDto">
-		select title,img,link from wordcloud where tagname = #{keyword}
+	<select id="newslist" parameterType="string"
+		resultType="newsDto">
+		select title,img,link from wordcloud where tagname =
+		#{keyword}
 	</select>
 </mapper>

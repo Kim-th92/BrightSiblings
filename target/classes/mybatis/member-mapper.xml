@@ -8,11 +8,14 @@
 	</select>
 
 	<select id="idchk" parameterType="String" resultType="String">
-		select member_id from member where member_id = #{member_id}
+		select
+		member_id from member where member_id = #{member_id}
 	</select>
 
-	<select id ="findpwcheck" parameterType="memberDto" resultType="int">
-		select count(*) from member where member_id =#{member_id} and member_email =#{member_email}
+	<select id="findpwcheck" parameterType="memberDto"
+		resultType="int">
+		select count(*) from member where member_id =#{member_id}
+		and member_email =#{member_email}
 	</select>
 	<select id="friendDetail" resultType="memberDto"
 		parameterType="int">
@@ -24,20 +27,23 @@
 		select * from member where member_email = #{member_email}
 		and member_delflag='N'
 	</select>
-	
-	<select id="selectByEmail" parameterType="String" resultType="memberDto">
+
+	<select id="selectByEmail" parameterType="String"
+		resultType="memberDto">
 		select * from member where member_email =#{member_email}
-	
+
 	</select>
 
 	<update id="updatemember" parameterType="memberDto">
 		update member set
-				member_email= #{member_email},
-				member_zipdcode = #{member_zipcode},
-				member_firstaddr=#{member_firstaddr} ,
-				member_secondaddr = #{member_secondaddr} ,
-				member_phone= #{member_phone},
-				member_birthday = #{member_birthday}
+		member_email= #{member_email},
+		member_zipdcode = #{member_zipcode},
+		member_firstaddr=#{member_firstaddr} ,
+		member_secondaddr =
+		#{member_secondaddr} ,
+		member_phone= #{member_phone},
+		member_birthday =
+		#{member_birthday}
 		where member_no = #{member_no}
 	</update>
 	<insert id="register" parameterType="memberDto">
@@ -63,15 +69,16 @@
 		UPDATE MEMBER SET
 		MEMBER_PROFILE ='${member_profile}' WHERE MEMBER_NO = #{member_no}
 	</update>
-	
+
 	<update id="uploadBgProfile" parameterType="memberDto">
 		UPDATE MEMBER SET
 		MEMBER_BGPROFILE ='${member_bgprofile}' WHERE MEMBER_NO = #{member_no}
 	</update>
 
 	<update id="updatePw" parameterType="memberDto">
-		UPDATE MEMBER 
-		SET MEMBER_PW =#{member_pw}
+		UPDATE MEMBER
+		SET MEMBER_PW
+		=#{member_pw}
 		WHERE MEMBER_NO = #{member_no}
 	</update>
 
@@ -79,7 +86,7 @@
 		update member set
 		member_delflag='Y' where member_no =#{member_no}
 	</update>
-	
+
 
 
 	<select id="admin_member_list" resultType="memberDto">

@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/admin_board_list.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/admin_board_list.css">
 <link rel="stylesheet" type="text/css" href="resources/css/write.css">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -16,12 +17,13 @@
 </head>
 <body>
 	<%@include file="adminpage.jsp"%>
-		<div class="admin_section" style="background-image: url('resources/image/background.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" >
-	
-	<!-- 스크롤 높이 확인 -->
-	<div id="container">
-		<div id=log></div>
-	</div>
+	<div class="admin_section"
+		style="background-image: url('resources/image/background.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
+
+		<!-- 스크롤 높이 확인 -->
+		<div id="container">
+			<div id=log></div>
+		</div>
 
 		<article id="mainWrap">
 
@@ -83,7 +85,8 @@
 						</c:otherwise>
 					</c:choose>
 					<div id="abctest"></div>
-					<button class="loadmore" type="button" value="load more..." onclick="start()" id="stopbutton">Load more...</button>
+					<button class="loadmore" type="button" value="load more..."
+						onclick="start()" id="stopbutton">Load more...</button>
 				</div>
 			</section>
 		</article>
@@ -167,6 +170,6 @@
    
 
 					
-	</script>	
+	</script>
 </body>
 </html>

@@ -13,13 +13,13 @@
 	<div class="wrapper bg-white mt-sm-5" id="food_popup"
 		style="display: none;">
 		<div class="py-2">
-			<table id="detailtable" >
+			<table id="detailtable">
 				<colgroup>
 					<col width="300px">
 					<col width="300px">
 				</colgroup>
 				<tr>
-					<th colspan="2"  style="font-size:40pt;"id ="foodname"></th>
+					<th colspan="2" style="font-size: 40pt;" id="foodname"></th>
 				</tr>
 				<tr>
 					<th colspan="2">열량(1회 제공량 당)</th>
@@ -53,11 +53,12 @@
 					<td id="sodium"></td>
 				</tr>
 			</table>
-			<button onclick="close_popup()" class=" btn btn-danger mr-3">닫기 </button>
+			<button onclick="close_popup()" class=" btn btn-danger mr-3">닫기
+			</button>
 		</div>
 	</div>
 	<div class="food_background"></div>
-	
+
 	<script type="text/javascript">
 		function close_popup(){
 			

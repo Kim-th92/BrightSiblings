@@ -36,10 +36,10 @@
 				</c:choose>
 			</ul>
 		</div>
-		</div>
-		<div id="main">
-	<button onclick="location.href='basic.do'"> 웹소켓 테스트으으</button>
-		</div>
+	</div>
+	<div id="main">
+		<button onclick="location.href='basic.do'">웹소켓 테스트으으</button>
+	</div>
 	<script type="text/javascript">
 	function accepted(member_no){
 		console.log(member_no);

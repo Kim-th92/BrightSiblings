@@ -162,7 +162,7 @@
 								<label for="inputBmi">BMI(체질량 지수)</label>
 								<div class="eheck_font">
 									<input type="number" class="form-control" readonly="readonly"
-										id="bmic" value="" name="bmi" > <input type="button"
+										id="bmic" value="" name="bmi"> <input type="button"
 										onclick="bmiCalculation()" value="확인">
 								</div>
 							</div>
@@ -231,14 +231,14 @@
 									<c:choose>
 										<c:when test="${ addinfo_dto.gender == 'M' }">
 											<input type="radio" name="gender" value="M" checked="checked">남 
-											<span class="hidegender" style=" display: none; " >
-												<input type="radio" name="gender" value="W">여
+											<span class="hidegender" style="display: none;"> <input
+												type="radio" name="gender" value="W">여
 											</span>
 										</c:when>
 										<c:otherwise>
 											<input type="radio" name="gender" value="W" checked="checked">여
-											<span class="hidegender" style="display: none;">
-												<input type="radio" name="gender" value="M">남
+											<span class="hidegender" style="display: none;"> <input
+												type="radio" name="gender" value="M">남
 											</span>
 										</c:otherwise>
 

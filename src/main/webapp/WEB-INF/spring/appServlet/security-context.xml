@@ -7,14 +7,13 @@
 		http://www.springframework.org/schema/beans
 		 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<bean id="bcryptPasswordEncoder"
+	<bean id="bcryptPasswordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
- <!-- 	<security:logout logout-url="/logout.do"
-       invalidate-session="true" 
-       logout-success-url="/logoutSuccess.do" /> --> 
- 
+	<!-- <security:logout logout-url="/logout.do" invalidate-session="true" 
+		logout-success-url="/logoutSuccess.do" /> -->
 
 
-       
+
+
 </beans>

@@ -1,33 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/findpw.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
-  <h2><span class="entypo-key"></span> 비밀번호 찾기 </h2>
- 
-  <span class="entypo-user inputUserIcon">
-     <i class="fa fa-user"></i>
-   </span>
-  <input type="text" class="member_id" placeholder="아이디를 입력해 주세요 	"/>
- 
-  <span class="entypo-mail inputPassIcon">
-   </span>
-  <input type="text" style ="width:300px;  display:inline-block;" class="member_email"placeholder="이메일을 입력해주세요 "/>  
-  <button class="submit" onclick="namecheck()"><span >임시비밀번호 발급</span></button>
-<p style="display:none;" class="err"></p> 
-<input style =" display:none;" type="text" class="authkey" placeholder="인증번호를 입력해 주세요. 	"/>
-  
+	<h2>
+		<span class="entypo-key"></span> 비밀번호 찾기
+	</h2>
 
-  <span id="countdown"></span>
-  <div id ="temppw"></div>
-   
+	<span class="entypo-user inputUserIcon"> <i class="fa fa-user"></i>
+	</span>
+	<input type="text" class="member_id" placeholder="아이디를 입력해 주세요 	" />
+
+	<span class="entypo-mail inputPassIcon"> </span>
+	<input type="text" style="width: 300px; display: inline-block;"
+		class="member_email" placeholder="이메일을 입력해주세요 " />
+	<button class="submit" onclick="namecheck()">
+		<span>임시비밀번호 발급</span>
+	</button>
+	<p style="display: none;" class="err"></p>
+	<input style="display: none;" type="text" class="authkey"
+		placeholder="인증번호를 입력해 주세요. 	" />
+
+
+	<span id="countdown"></span>
+	<div id="temppw"></div>
+
 </body>
 <script type="text/javascript">
 $('document').ready(function(){

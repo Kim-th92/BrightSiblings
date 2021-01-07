@@ -1,48 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace = "exercise">
+<mapper namespace="exercise">
 
 	<insert id="distanceInsert" parameterType="myPageDto">
-		INSERT INTO DAILYEXERCISERECORD
-		VALUES(#{member_no}, SYSDATE, #{course_name}, #{burn_kcal}, #{distance})
+		INSERT INTO
+		DAILYEXERCISERECORD
+		VALUES(#{member_no}, SYSDATE, #{course_name},
+		#{burn_kcal}, #{distance})
 	</insert>
-	
+
 	<select id="showList" parameterType="int" resultType="myPageDto">
-		SELECT CALENDAR_DATE, COURSE_NAME, BURN_KCAL, DISTANCE
-		FROM DAILYEXERCISERECORD DER, (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') AS TODAY FROM DUAL) T
+		SELECT
+		CALENDAR_DATE, COURSE_NAME, BURN_KCAL, DISTANCE
+		FROM
+		DAILYEXERCISERECORD DER, (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') AS TODAY
+		FROM DUAL) T
 		WHERE TO_CHAR(DER.CALENDAR_DATE, 'YYYYMMDD') = T.TODAY
-		AND MEMBER_NO = #{no}
+		AND
+		MEMBER_NO = #{no}
 	</select>
 
 	<select id="total" parameterType="int" resultType="myPageDto">
-		SELECT SUM(K) TOTAL_BURN_KCAL, SUM(D) TOTAL_DISTANCE
+		SELECT SUM(K)
+		TOTAL_BURN_KCAL, SUM(D) TOTAL_DISTANCE
 		FROM (
-				SELECT DER.CALENDAR_DATE, DER.COURSE_NAME, DER.BURN_KCAL K, DER.DISTANCE D
-				FROM MEMBER M, DAILYEXERCISERECORD DER, (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') AS TODAY FROM DUAL) T
-				WHERE M.MEMBER_NO = DER.MEMBER_NO
-				AND TO_CHAR(DER.CALENDAR_DATE, 'YYYYMMDD') = T.TODAY
-				AND DER.MEMBER_NO = #{no}
-			 )
+		SELECT DER.CALENDAR_DATE,
+		DER.COURSE_NAME, DER.BURN_KCAL K, DER.DISTANCE D
+		FROM MEMBER M,
+		DAILYEXERCISERECORD DER, (SELECT TO_CHAR(SYSDATE,
+		'YYYYMMDD') AS TODAY
+		FROM DUAL) T
+		WHERE M.MEMBER_NO = DER.MEMBER_NO
+		AND
+		TO_CHAR(DER.CALENDAR_DATE, 'YYYYMMDD') = T.TODAY
+		AND DER.MEMBER_NO =
+		#{no}
+		)
 	</select>
-	
-	<select id="showTargetKcal" parameterType="calendarDto" resultType="float">
+
+	<select id="showTargetKcal" parameterType="calendarDto"
+		resultType="float">
 		SELECT TARGETKCAL
 		FROM ADDMEMBERINFO
-		WHERE MEMBER_NO = #{member_no}
+		WHERE MEMBER_NO =
+		#{member_no}
 	</select>
-	
-	<select id="showTotalDFR" parameterType="calendarDto" resultType="calendarDto">
+
+	<select id="showTotalDFR" parameterType="calendarDto"
+		resultType="calendarDto">
 		SELECT SUM(INTAKE_KCAL) AS TOTAL_INTAKE_KCAL
-		FROM DAILYFOODRECORD
+		FROM
+		DAILYFOODRECORD
 		WHERE MEMBER_NO = #{member_no}
-		AND TO_CHAR(CALENDAR_DATE, 'YYYYMMDD') = #{yyyyMMdd}
+		AND
+		TO_CHAR(CALENDAR_DATE, 'YYYYMMDD') = #{yyyyMMdd}
 	</select>
-	
-	<select id="showTotalDER" parameterType="calendarDto" resultType="calendarDto">
-		SELECT SUM(BURN_KCAL) AS TOTAL_BURN_KCAL, SUM(DISTANCE) AS TOTAL_DISTANCE
+
+	<select id="showTotalDER" parameterType="calendarDto"
+		resultType="calendarDto">
+		SELECT SUM(BURN_KCAL) AS TOTAL_BURN_KCAL, SUM(DISTANCE) AS
+		TOTAL_DISTANCE
 		FROM DAILYEXERCISERECORD
 		WHERE MEMBER_NO = #{member_no}
 		AND TO_CHAR(CALENDAR_DATE, 'YYYYMMDD') = #{yyyyMMdd}
 	</select>
-	
+
 </mapper>

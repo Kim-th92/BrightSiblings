@@ -37,78 +37,102 @@ response.setDateHeader("Expires", 0L);
 	href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+<script
+	src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script
+	src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
 <!-- 아이콘 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 </head>
 <body>
-	
+
 	<header>
 		<nav>
 			<ul>
-				 <li><a href="mainpage.do" id="dabom"><img style="width:30px;height:30px;" alt="로고" src="resources/image/cherry-blossom.png"/> </a> </li>
-                <li id="search_wrapper">  
-                <input type="text" class="search-input" placeholder="검색" />
-                <button id="search_btn" onclick="search();" class="tooltip-" > <i class="fas fa-search"></i> </button> 
-                </li>
+				<li><a href="mainpage.do" id="dabom"><img
+						style="width: 30px; height: 30px;" alt="로고"
+						src="resources/image/cherry-blossom.png" /> </a></li>
+				<li id="search_wrapper"><input type="text" class="search-input"
+					placeholder="검색" />
+					<button id="search_btn" onclick="search();" class="tooltip-">
+						<i class="fas fa-search"></i>
+					</button></li>
 
 				<li id="space2"></li>
 
-		        <li> <a class="toltip center-icon" data-tooltip="Home" href="mainpage.do" id="home"> <i class="fas fa-home"></i> </a> </li>
-		        <li> <a class="toltip center-icon" data-tooltip="NEWS" href="news.do" id="group"> <i class="far fa-newspaper"></i> </a></li>
-                <li> <a class="toltip center-icon" data-tooltip="FoodDictionary" href="foodlist.do" id="calories"> <i class="fas fa-utensils"></i> </a> </li>
-                <li> <a class="toltip center-icon" data-tooltip="Youtube" href="youtube.do" id="youtube"> <i class="fab fa-youtube"></i> </a> </li>
+				<li><a class="toltip center-icon" data-tooltip="Home"
+					href="mainpage.do" id="home"> <i class="fas fa-home"></i>
+				</a></li>
+				<li><a class="toltip center-icon" data-tooltip="NEWS"
+					href="news.do" id="group"> <i class="far fa-newspaper"></i>
+				</a></li>
+				<li><a class="toltip center-icon" data-tooltip="FoodDictionary"
+					href="foodlist.do" id="calories"> <i class="fas fa-utensils"></i>
+				</a></li>
+				<li><a class="toltip center-icon" data-tooltip="Youtube"
+					href="youtube.do" id="youtube"> <i class="fab fa-youtube"></i>
+				</a></li>
 
 				<li id="space1"></li>
 				<li><a>${login.member_name }님 반갑습니다.</a></li>
-				<li><a href="mypage_main.do" class="toltip" data-tooltip="MYPAGE" id="btn_plus"><img 	style="width: 40px; height: 40px;" class="profileimg" alt="프로필사진"  src="${login.member_profile }"></a></li>
-				<li><a class="toltip" data-tooltip="Message" id="btn_msg"><i class="fab fa-facebook-messenger"></i></a></li> 		
-<!-- 				<li><a class="toltip" data-tooltip="Notification"  id="btn_bell"> <i class="fas fa-bell"></i> <span 	class="noti-badge "></span></a></li> -->
-				<li><a class="toltip" data-tooltip="Settings" id="btn_profile"><i class="fas fa-cog"></i></a></li> 
-				<li><a class="toltip" data-tooltip="Donation" id="btn_donation"><i class="fas fa-hand-holding-usd"></i></a></li>
+				<li><a href="mypage_main.do" class="toltip"
+					data-tooltip="MYPAGE" id="btn_plus"><img
+						style="width: 40px; height: 40px;" class="profileimg" alt="프로필사진"
+						src="${login.member_profile }"></a></li>
+				<li><a class="toltip" data-tooltip="Message" id="btn_msg"><i
+						class="fab fa-facebook-messenger"></i></a></li>
+				<!-- 				<li><a class="toltip" data-tooltip="Notification"  id="btn_bell"> <i class="fas fa-bell"></i> <span 	class="noti-badge "></span></a></li> -->
+				<li><a class="toltip" data-tooltip="Settings" id="btn_profile"><i
+						class="fas fa-cog"></i></a></li>
+				<li><a class="toltip" data-tooltip="Donation" id="btn_donation"><i
+						class="fas fa-hand-holding-usd"></i></a></li>
 
 			</ul>
 			<ul id="hide" class="hide">
-				<li><a onclick="location.href='logout.do'" class="hidecontent"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
-				<li><a onclick="updatemember();" class="hidecontent"><i class="fas fa-user-edit"></i>회원수정</a></li>
-				<li><a onclick="deletemember();" class="hidecontent"><i	class="fas fa-user-minus"></i>회원탈퇴</a></li>
+				<li><a onclick="location.href='logout.do'" class="hidecontent"><i
+						class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+				<li><a onclick="updatemember();" class="hidecontent"><i
+						class="fas fa-user-edit"></i>회원수정</a></li>
+				<li><a onclick="deletemember();" class="hidecontent"><i
+						class="fas fa-user-minus"></i>회원탈퇴</a></li>
 			</ul>
-			<div id="msg-hide" class="msg-hide" >
+			<div id="msg-hide" class="msg-hide">
 				<div class="container-fluid h-100">
-			<div class="row justify-content-center h-100">
-				<div class="chat"><div class="card  contacts_card">
-					<div class="card-header">
-						<div class="input-group">
-							<input type="text" placeholder="Search..." name="" class="form-control search">
-							<div class="input-group-prepend">
-								<span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+					<div class="row justify-content-center h-100">
+						<div class="chat">
+							<div class="card  contacts_card">
+								<div class="card-header">
+									<div class="input-group">
+										<input type="text" placeholder="Search..." name=""
+											class="form-control search">
+										<div class="input-group-prepend">
+											<span class="input-group-text search_btn"><i
+												class="fas fa-search"></i></span>
+										</div>
+									</div>
+								</div>
+								<div class="card-body contacts_body" style="overflow: scroll;">
+									<ul class="contacts">
+
+
+									</ul>
+								</div>
+
 							</div>
 						</div>
+
 					</div>
-					<div class="card-body contacts_body" style="overflow: scroll;">
-						<ul class="contacts">
-						
-						
-						</ul>
-					</div>
-					
 				</div>
-				</div>
-			
+
+
 			</div>
-		</div>
-               
-               
-               </div>
-           
-			<div id="search-hide" class="search-hide">
-			</div>
+
+			<div id="search-hide" class="search-hide"></div>
 		</nav>
 	</header>
-	
-	
+
+
 
 	<script type="text/javascript">
 
@@ -270,8 +294,8 @@ response.setDateHeader("Expires", 0L);
 			}
 		}
 	</script>
-	<%@include file = "updatemember.jsp" %>
-	<%@include file="insertdonation.jsp"%>	
+	<%@include file="updatemember.jsp"%>
+	<%@include file="insertdonation.jsp"%>
 	<script src="resources/js/header.js"></script>
 
 </body>

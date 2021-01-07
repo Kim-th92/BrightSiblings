@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,17 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Upload completed</h1>
-<div class="result-images">
-        <img src="${pageContext.request.contextPath }/resources${url }" style="width:150px">
-        <!-- 
+	<h1>Upload completed</h1>
+	<div class="result-images">
+		<img src="${pageContext.request.contextPath }/resources${url }"
+			style="width: 150px">
+		<!-- 
 	        servlet-context 적용이 안됨. 확인해볼 것
         -->
-        
-        
-        
-</div>
 
-<p> <a href='/fileupload/form'> 다시 업로드 하기 </a> /p>
+
+
+	</div>
+
+	<p>
+		<a href='/fileupload/form'> 다시 업로드 하기 </a> /p>
 </body>
 </html>

@@ -11,8 +11,9 @@
 </head>
 <body>
 	<%@include file="adminpage.jsp"%>
-	<div class="admin_section" style="background-image: url('resources/image/background.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" >
-	<h1>MEMBER LIST</h1>
+	<div class="admin_section"
+		style="background-image: url('resources/image/background.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
+		<h1>MEMBER LIST</h1>
 		<div class="admin_page">
 			<table>
 				<colgroup>
@@ -41,7 +42,8 @@
 							<tr style="text-align: left;"
 								class="admin_memberlist_content ${loop.index % 2 == 0 ? 'even' : 'odd'}">
 								<td>${dto.member_no }</td>
-								<td><a href="admin_select_list.do?member_no=${dto.member_no }">${dto.member_id }</a></td>
+								<td><a
+									href="admin_select_list.do?member_no=${dto.member_no }">${dto.member_id }</a></td>
 								<td>${dto.member_email }</td>
 								<td>${dto.member_delflag }</td>
 								<td>${dto.member_regdate }</td>

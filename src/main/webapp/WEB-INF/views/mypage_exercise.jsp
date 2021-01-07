@@ -312,10 +312,6 @@
 				content += '		<span class="label">도보</span>' + walkHour
 						+ walkMin;
 				content += '	</li>';
-				content += '	<li>';
-				content += '		<span class="label">자전거</span>' + bycicleHour
-						+ bycicleMin;
-				content += '	</li>';
 				content += '</ul>';
 
 				document.getElementById('distance').value = distance;
@@ -367,12 +363,10 @@
 					<c:otherwise>
 						<c:forEach items="${list }" var="dto" varStatus="status">
 							<tr class="record_tr">
-								<td>${status.index+1 }</td>
+								<td style="padding: 10px;">${status.index+1 }</td>
 								<td>${dto.course_name }</td>
 								<td>${dto.distance }</td>
 								<td>${dto.burn_kcal }</td>
-								<td><input type="button" class="record_delete" value="삭제"
-									onclick=""></td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
@@ -400,52 +394,51 @@
 
 		<script type="text/javascript">
 			$(function() {
-				$(".daycount").hover(
-						function() {
+				$(".daycount").hover(function() {
 
-							var member_no = $(".n").val().trim();
+					var member_no = $(".n").val().trim();
 
-							var countView = $(this);
-							var year = $(".y").val().trim();
-							var month = $(".m").val().trim();
-							var day = countView.text().trim();
+					var countView = $(this);
+					var year = $(".y").val().trim();
+					var month = $(".m").val().trim();
+					var day = countView.text().trim();
 
-							var form = {
-								member_no : member_no,
-								yyyyMMdd : year + isTwo(month) + isTwo(day)
-							}
+					var form = {
+						member_no : member_no,
+						yyyyMMdd : year + isTwo(month) + isTwo(day)
+					}
 
-							$.ajax({
-								url : "calendarAjax.do",
-								type : "POST",
-								data : form,
-								dataType : "json",
-								success : function(map) {
+					$.ajax({
+						url : "calendarAjax.do",
+						type : "POST",
+						data : form,
+						dataType : "json",
+						success : function(map) {
 
-									var tik = map.tik;
-									var tbk = map.tbk;
-									var fk = tik-tbk;
-									var tk = map.tk;
-									
-									$('.abc').text(tik);
-									$('.def').text(tbk);
-									$('.ghi').text(fk);
-									$('.jkl').text(tk);
+							var tik = map.tik;
+							var tbk = map.tbk;
+							var fk = tik - tbk;
+							var tk = map.tk;
 
-								},
-								error : function() {
-									
-									$('.abc').empty();
-									$('.def').empty();
-									$('.ghi').empty();
-									$('.jkl').empty();
-									
-								}
-							});
+							$('.abc').text(tik);
+							$('.def').text(tbk);
+							$('.ghi').text(fk);
+							$('.jkl').text(tk);
 
-						}, function() {
-							$(".preview").remove();
-						});
+						},
+						error : function() {
+
+							$('.abc').empty();
+							$('.def').empty();
+							$('.ghi').empty();
+							$('.jkl').empty();
+
+						}
+					});
+
+				}, function() {
+					$(".preview").remove();
+				});
 			});
 
 			function isTwo(n) {
@@ -582,33 +575,47 @@
 			</div>
 
 			<div class="calendar_right">
-				 <table style="height: 300px; width: 430px; margin-left: 20%; margin-top: 25%;">
+				<table class="calendar_right_table"
+					style="box-shadow: 0px 0px 20px 1px #a6a5a7; border-radius: 15px; background-color: white; height: 300px; width: 430px; margin-left: 20%; margin-top: 25%;">
 
 					<tr>
-						<td style="width:74%; text-align:center">총 섭취 칼로리</td>
-						<td style="width:1%; text-align:center">+</td>
-						<td class="abc" style="text-align:right"></td>
+						<td style="width: 10%">&nbsp;</td>
+						<td style="width: 58%; text-align: center">총 섭취 칼로리</td>
+						<td style="width: 1%; text-align: center">+</td>
+						<td class="abc" style="text-align: right"></td>
+						<td style="width: 10%">&nbsp;</td>
 					</tr>
+
 					<tr>
-						<td style="text-align:center; border-bottom: 2px solid #444;">총 소모 칼로리</td>
-						<td style="text-align:center; border-bottom: 2px solid #444;">-</td>
-						<td class="def" style="text-align:right; border-bottom: 2px solid #444;"></td>
+						<td>&nbsp;</td>
+						<td style="text-align: center; border-bottom: 2px solid #444;">총
+							소모 칼로리</td>
+						<td style="text-align: center; border-bottom: 2px solid #444;">-</td>
+						<td class="def"
+							style="text-align: right; border-bottom: 2px solid #444;"></td>
+						<td>&nbsp;</td>
 					</tr>
+
 					<tr>
-						<td style="text-align: center; border-bottom: 6px double #444;">최종 칼로리</td>
+						<td>&nbsp;</td>
+						<td style="text-align: center; border-bottom: 6px double #444;">최종
+							칼로리</td>
 						<td style="border-bottom: 6px double #444;">&nbsp;</td>
-						<td class="ghi" style="text-align:right; border-bottom: 6px double #444;"></td>
+						<td class="ghi"
+							style="text-align: right; border-bottom: 6px double #444;"></td>
+						<td>&nbsp;</td>
 					</tr>
+
 					<tr>
+						<td>&nbsp;</td>
 						<td style="text-align: center;">목표 칼로리</td>
 						<td>&nbsp;</td>
-						<td class="jkl" style="text-align:right"></td>
+						<td class="jkl" style="text-align: right"></td>
+						<td>&nbsp;</td>
 					</tr>
 
 				</table>
 			</div>
-
-			<br /> <br /> <br /> <br /> <br /> <br /> <br />
 		</div>
 	</div>
 

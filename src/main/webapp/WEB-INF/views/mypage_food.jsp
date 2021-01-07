@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,7 @@
 	<div id="foodwraper">
 		<div id="food_dict">
 			<div style="width: 100%;" id="fooddict-wraper">
-				<h1 style="text-align: center;margin:20px;">칼로리사전</h1>
+				<h1 style="text-align: center; margin: 20px;">칼로리사전</h1>
 				<div class="table-responsive" style="margin: auto; width: 80%;">
 					<table class="table table-striped">
 						<thead>
@@ -30,7 +30,9 @@
 							<c:forEach items="${viewAll }" var="list" varStatus="idx">
 								<tr class="${idx.count % 2 == 1 ? 'trOdd' : 'trEven'}">
 									<td align="center">${list.food_no}</td>
-									<td><a style="cursor:pointer;color:#ff1a8c; font-weight: bold;" onclick="fooddetail(${list.food_no})">${list.food_name }</a></td>
+									<td><a
+										style="cursor: pointer; color: #ff1a8c; font-weight: bold;"
+										onclick="fooddetail(${list.food_no})">${list.food_name }</a></td>
 									<td>${list.kcal }</td>
 									<td>${list.serving_size }</td>
 								</tr>
@@ -89,34 +91,36 @@
 		<div id="foodright">
 			<div id="food_today">
 				<h2></h2>
-				오늘 섭취한 칼로리는?<br/>
-			<span	 style="font-size: 30pt; font-weight: bold; color:#ff1a8c;"  class="counter">${dailyKcal }</span> KCAL
+				오늘 섭취한 칼로리는?<br /> <span
+					style="font-size: 30pt; font-weight: bold; color: #ff1a8c;"
+					class="counter">${dailyKcal }</span> KCAL
 				<div>
-					
-						<c:choose>
-							<c:when test="${empty dailyFoodList }">
-							
-							</c:when>
-							<c:otherwise>
-								<table border="1px solid black">
+
+					<c:choose>
+						<c:when test="${empty dailyFoodList }">
+
+						</c:when>
+						<c:otherwise>
+							<table border="1px solid black">
 								<tr>
-										<th>음식 이름</th>
-										<th>섭취량</th>
-										<th>섭취 칼로리</th>
-										<th>등록 시간 	</th>
-									</tr>
+									<th>음식 이름</th>
+									<th>섭취량</th>
+									<th>섭취 칼로리</th>
+									<th>등록 시간</th>
+								</tr>
 								<c:forEach var="list" items="${ dailyFoodList}">
 									<tr>
 										<td>${list.food_name }</td>
-										<td>${list.intake_size } g</td>
-										<td>${list.intake_kcal } kcal</td>
-										<td><fmt:formatDate value="${list.calendar_date}" type="date"  pattern="yy년MM월dd일 HH시mm분"/> </td>										
+										<td>${list.intake_size }g</td>
+										<td>${list.intake_kcal }kcal</td>
+										<td><fmt:formatDate value="${list.calendar_date}"
+												type="date" pattern="yy년MM월dd일 HH시mm분" /></td>
 									</tr>
 								</c:forEach>
-								</table>
-							</c:otherwise>
-						</c:choose>
-					
+							</table>
+						</c:otherwise>
+					</c:choose>
+
 				</div>
 			</div>
 			<div id="food_water">
@@ -149,8 +153,8 @@
 								<div class="water"></div>
 							</div>
 						</div>
-						</div>
-						<div class="waterCont">
+					</div>
+					<div class="waterCont">
 						<div class="waterContainer">
 							<span class="countglass">5잔</span>
 							<div class="glass">
@@ -184,7 +188,7 @@
 	</div>
 
 
-<%@ include file="food_dailyrecord.jsp" %>
+	<%@ include file="food_dailyrecord.jsp"%>
 	<script>
 	//먹은 칼로리 카운트 애니메이션 
 $(function() {

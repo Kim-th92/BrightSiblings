@@ -1,24 +1,20 @@
 @charset "UTF-8";
 
-table{
+table {
 	margin-left: 300px;
 }
 
-tr{
+tr {
 	height: 40px;
-	
 }
 
-td{
+td {
 	padding-left: 20px;
 	border-bottom: 1px solid black;
 }
 
-img{
+img {
 	width: 300px;
 	height: 338px;
 	position: absolute;
 }
-
-
-	

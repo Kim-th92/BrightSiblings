@@ -1,19 +1,23 @@
 @charset "UTF-8";
 
-
-.food_background{
-	position: fixed; left: 0; top: 0; width: 100%; height: 100%;
-	background: rgba(217, 179, 255,0.5);
+.food_background {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(217, 179, 255, 0.5);
 	z-index: 99;
 	display: none;
 }
+
 #food_popup {
-	position:fixed;
+	position: fixed;
 	left: 50%;
 	top: 50%;
 	width: 600px;
 	height: 600px;
-	transform:translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 	box-sizing: border-box;
 	background-color: #FFFFFF;
 	z-index: 100;
@@ -21,37 +25,37 @@
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box
 }
 
-table{
+table {
 	line-height: 30px;
-	
 }
 
-table#detailtable{
-	    line-height: 55px;
-    text-align: center;
+table#detailtable {
+	line-height: 55px;
+	text-align: center;
 }
-#detailtable th{
-font-size: 20pt;
-	}
+
+#detailtable th {
+	font-size: 20pt;
+}
 
 body {
-    font-family: 'Poppins', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 .wrapper {
-    padding: 30px 50px;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    margin: 10px auto;
-    max-width: 600px
+	padding: 30px 50px;
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	margin: 10px auto;
+	max-width: 600px
 }
 
 h4 {
-    letter-spacing: -1px;
-    font-weight: 400
+	letter-spacing: -1px;
+	font-weight: 400
 }

@@ -11,7 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>모달 레이아웃</title>
-<link rel="stylesheet" type="text/css" href="resources/css/insertdonation.css" />
+<link rel="stylesheet" type="text/css"
+	href="resources/css/insertdonation.css" />
 </head>
 <body>
 
@@ -26,28 +27,29 @@
 			<p class="donation_desc_payask">
 				결제요청 메시지 전송을 위해<br>아래 정보를 입력해주세요.
 			</p>
-			<input type="hidden" id="donation_input_hidden" name="member_no" value="${login.member_no}" />
+			<input type="hidden" id="donation_input_hidden" name="member_no"
+				value="${login.member_no}" />
 			<table id="donation_table">
 				<tr>
 					<th class="donation_ask">성명</th>
 				</tr>
 				<tr>
-					<td class="donation_input"><input class="donation_text_color" type="text"
-						name="donor" placeholder="예) 홍길동" style="color: #000000;" /></td>
+					<td class="donation_input"><input class="donation_text_color"
+						type="text" name="donor" placeholder="예) 홍길동"
+						style="color: #000000;" /></td>
 				</tr>
 				<tr>
 					<th class="donation_ask">후원금액</th>
 				</tr>
 				<tr>
-					<td class="donation_input"><input class="donation_text_color" type="text"
-						name="donation"
+					<td class="donation_input"><input class="donation_text_color"
+						type="text" name="donation"
 						oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(^0+)/g,'');"
 						placeholder="예) 1,000 &#10140 1000" style="color: #000000;" /></td>
 				</tr>
 				<tr>
-					<td class="donation_submit">
-						<input type="button" name="donation_btn" value="입력확인" style="cursor: pointer;" />
-					</td>
+					<td class="donation_submit"><input type="button"
+						name="donation_btn" value="입력확인" style="cursor: pointer;" /></td>
 				</tr>
 			</table>
 		</div>
