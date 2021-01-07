@@ -428,6 +428,12 @@ public class MyPage_Controller {
 		return map;
 	}
 	
+	@RequestMapping("mypage_pose.do")
+	public String mypage_pose() {
+		System.out.println("mypage_pose.do");
+		return "mypage_pose";
+	}
+	
 }
 	
 	
