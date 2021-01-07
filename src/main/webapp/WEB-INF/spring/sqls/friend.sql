@@ -41,13 +41,12 @@ select m.member_name, m.member_no,m.member_profile
 		m.member_no in (select member_no  from friends where friend_no =1) and status =0;
 
 		
-select m.member_name,m.member_profile
+select m.member_name, m.member_profile
 from member m join friends f
 on m.member_no = f.friend_no
-where
-m.member_no in(select friend_no from friends where member_no =1) and status =0;
+where m.member_no in(select friend_no from friends where member_no =3) and status =0;
 
-
+delete from friends where member_no = friend_no
 update friends set status =1 where member_no =1 and friend_no = 5;
 select * from friends;
 
