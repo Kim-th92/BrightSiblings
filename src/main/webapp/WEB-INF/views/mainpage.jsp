@@ -161,8 +161,46 @@
 											<c:if test="${login.member_no eq list.member_no  }">
 														<span style="float:right; margin-top: -50px;">
 														<input class="upDel" type="button" value="삭제"  onclick="location.href='delete.do?board_no=${list.board_no }'">
-														<input class="upDel" type="button" value="수정"  onclick="location.href='update.do?board_no=${list.board_no }'">
+														<a href="#layer2" class="btn-example2" style="color:#593650;">수정</a>
 														</span>
+														<div id="layer2" class="pop-layer2">
+															<div class="pop-container2">
+																<div class="pop-conts">
+																
+																	<form method="post" action="updateres.do" enctype="multipart/form-data">
+																	<c:forEach items="${url[status.index] }" var="url">
+																		<img src="${url }" style="width:50%; height: auto;">					
+																	</c:forEach>
+																		<input type="hidden" value="${list.board_no }" name="board_no">
+																		<textarea cols="45" rows="8"  name="board_content" style="resize:none;">${list.board_content }</textarea>
+																		 <script>
+																		 CKEDITOR.replace( 'board_content' ,{ allowedContent: 'h1 h2 h3 p blockquote strong em;' +
+																			        'a[!href];' +
+																			        'table tr th td caption;' +
+																			        'span{!font-family};' +
+																			        'span{!color};' +
+																			        'span(!marker);' +
+																			        'del ins'
+																			    });
+																		 </script>
+																		 </br>
+																		<input type="file" name="file1" multiple>
+																		
+																	
+																	<div class="btn-r2">
+																		<input type="submit" value="작성">
+																		<a href="#" class="btn-layerClose2">Close</a>
+																	</div>
+																	</form>
+																</div>	
+															</div>
+														</div>
+	
+														
+														
+														
+														
+														
 											</c:if>
 										<hr>
 									</div>
@@ -208,7 +246,7 @@
 		</div>
 	</section>
 	<section id="friendList">
-			nothing here
+			&nbsp;
 	</section>
 </article>	
 
@@ -342,6 +380,57 @@
 	
 	    }
 	</script>	
+	
+	<script type="text/javascript">
+
+		$('.btn-example2').click(function(){
+	        var $href = $(this).attr('href');
+	        // #Layer2
+	        layer_popup2($href);
+	    });
+		
+	    function layer_popup2(el){
+	
+	        var $el = $(el);    //레이어의 id를 $el 변수에 저장
+	        var isDim = $el.prev().hasClass('dimBg2'); //dimmed 레이어를 감지하기 위한 boolean 변수
+	
+	        isDim ? $('.dim-layer2').fadeIn() : $el.fadeIn();
+	
+	        
+	        var $elWidth = ~~($el.outerWidth()),
+	            $elHeight = ~~($el.outerHeight()),
+	            docWidth = $(document).width(),
+	            docHeight = $(document).height();
+			
+			
+	        // 화면의 중앙에 레이어를 띄운다.
+	        
+	        if ($elHeight < docHeight || $elWidth < docWidth) {
+	            $el.css({
+	                marginTop: -$elHeight/2,
+	                marginLeft: -$elWidth/2,
+	            })
+	          
+	        } else {
+	            $el.css({top: 0, left: 0});
+	        }
+			
+	        
+	        
+	        $el.find('a.btn-layerClose2').click(function(){
+	            isDim ? $('.dim-layer2').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+	            return false;
+	        });
+	
+	        $('.layer2 .dimBg2').click(function(){
+	            $('.dim-layer2').fadeOut();
+	            return false;
+	        });
+	
+	    }
+	</script>	
+	
+	
 	<script type="text/javascript">
 		function dateFormat(yyyymmdd){
 			var sub = yyyymmdd.substring(5);

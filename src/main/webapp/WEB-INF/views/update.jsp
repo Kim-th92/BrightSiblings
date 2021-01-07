@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<h1>수정창</h1>
+	<div id="updateWrapper">
 		<img src="${login.member_profile }" style="width: 60px; height: 60px; border-radius: 70%; overflow:hidden;">
 		<p>${login.member_name }</p>
 	<div>
@@ -28,6 +28,6 @@
 			
 		</form>
 	</div>
-
+	</div>
 </body>
 </html>

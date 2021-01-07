@@ -69,7 +69,6 @@ public class Board_DaoImpl implements Board_Dao {
 	public int update(Board_Dto dto) {
 		
 		int board_no = dto.getMember_no();
-		System.out.println("board_no는 "+ board_no + "입니다.");
 		
 		int res1 = sqlSession.update(NAMESPACE + "update", dto);
 		int res2 = sqlSession.delete(NAMESPACE + "deleteFile", board_no);
