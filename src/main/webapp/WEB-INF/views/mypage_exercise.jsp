@@ -367,12 +367,10 @@
 					<c:otherwise>
 						<c:forEach items="${list }" var="dto" varStatus="status">
 							<tr class="record_tr">
-								<td>${status.index+1 }</td>
+								<td style="margin:10px; padding:10px">${status.index+1 }</td>
 								<td>${dto.course_name }</td>
 								<td>${dto.distance }</td>
 								<td>${dto.burn_kcal }</td>
-								<td><input type="button" class="record_delete" value="삭제"
-									onclick=""></td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>

@@ -47,20 +47,6 @@ html{
 	content: none;
 }
 
-
-.record_delete{
-	color: #444;
-	background-color: #d9d9f2;
-	font-family: "montserrat";
-	border-radius: .2rem;
-	margin: 10px;
-	padding: 5px;
-}
-
-.record_delete:hover{
-	cursor: pointer;
-}
-
 .record_tr{
     border-bottom: 1px solid;
     border-top: 1px solid;
