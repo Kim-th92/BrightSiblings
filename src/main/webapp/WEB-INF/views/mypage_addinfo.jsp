@@ -113,23 +113,23 @@
 
 		<c:choose>
 			<c:when test="${empty addinfo_dto.bmi }">
-				<a>값이 없을 떄</a>
+				<a><br/></a>
 				<div id="addinfo-insert">
 					<form action="addinfo_insert.do" method="post">
 						<h2>정보 추가</h2>
 
 
-						<div>
-							<h4>회원 정보 수정</h4>
+						<h4>회원 정보 수정</h4>
+						<div class="addinfo-parent">
 							<div class="addinfo" id="divHeight">
 								<label for="inputHeight" class="">신장</label>
-								<div class="eheck_font">
+								<div class="eheck_font" >
 									<input type="text" class="form-control" id="height"
 										data-rule-required="true" placeholder="신장을 입력하세요"
-										maxlength="20" name="height"> <span class="span">CM</span>
+										maxlength="20" name="height" > <span class="span">CM</span>
 								</div>
 							</div>
-							<br />
+							<br/>
 							<div class="addinfo" id="divWeight">
 								<label for="inputWeight" class="">체중</label>
 								<div class="eheck_font">
@@ -138,7 +138,6 @@
 										maxlength="20" name="weight" /> <span class="span">Kg</span>
 								</div>
 							</div>
-							<br />
 							<div class="addinfo" id="divGender">
 								<label for="inputGender" class="">성별</label>
 								<div class="eheck_font">
@@ -148,7 +147,6 @@
 									</select>
 								</div>
 							</div>
-							<br />
 							<div class="addinfo" id="divTargetWeight">
 								<label for="inputTargetWeight" class="">목표 체중</label>
 								<div class="eheck_font">
@@ -157,16 +155,14 @@
 										maxlength="10" name="targetweight"> <span class="span">Kg</span>
 								</div>
 							</div>
-							<br />
 							<div class="addinfo">
 								<label for="inputBmi">BMI(체질량 지수)</label>
 								<div class="eheck_font">
 									<input type="number" class="form-control" readonly="readonly"
-										id="bmic" value="" name="bmi" > <input type="button"
+										id="bmic" value="" name="bmi"> <input type="button"
 										onclick="bmiCalculation()" value="확인">
 								</div>
 							</div>
-							<br />
 							<div class="addinfo" id="divTargetKcal">
 								<label for="inputTargetKcal" class="">목표 칼로리</label>
 								<div class="eheck_font">
@@ -175,43 +171,39 @@
 										maxlength="10" name="targetkcal"> <span class="span">Calories/day</span>
 								</div>
 							</div>
-							<br />
 							<div class="addinfo" id="divAdviseKcal">
 								<label for="inputAdviseKcal" class="">권장 칼로리</label>
-								<div class="eheck_font">
+								<div class="eheck_font" >
 									<input type="number" class="form-control" id="advisekcal"
 										readonly="readonly" data-rule-required="true" value=""
-										name="advisekcal"> <span class="span">Calories/day</span>
+										name="advisekcal" > <span class="span">Calories/day</span>
 									<input type="button" onclick="adviseCalculation()" value="확인">
 								</div>
 							</div>
-							<input type="hidden" value="${login.member_birthday }"
-								id="birthday"> <input type="submit" value="확인"
-								onclick="return addinfo_popup()" /> <input type="button"
-								onclick="location.href='cancel.do'" value="취소" />
 						</div>
+							<input type="hidden" value="${login.member_birthday }" id="birthday"> 
+							<input type="submit" value="확인" onclick="return addinfo_popup()" />
+							<input type="button" onclick="location.href='cancel.do'" value="취소" />
 					</form>
 				</div>
 				<div id="addinfo-background"></div>
 			</c:when>
 
 			<c:otherwise>
-
-
-				<a>값이 있을 때</a>
+				<a></br></a>
 				<div id="addinfo-update">
 					<form action="addinfo_update.do" method="post">
 						<h2>회원 추가 정보</h2>
 
 
-						<div>
+						<div class="addinfo-parent1">
 							<div class="addinfo_u" id="divHeight">
 								<label for="inputHeight" class="">신장</label>
 								<div class="eheck_font">
 									<input type="text" class="form-control-u" id="height1"
 										data-rule-required="true" placeholder="신장을 입력하세요"
 										value="${addinfo_dto.height }" readonly="readonly"
-										name="height" maxlength="20">
+										name="height" maxlength="20"> <span class="span">CM</span>
 								</div>
 							</div>
 							<br />
@@ -221,41 +213,38 @@
 									<input type="text" class="form-control-u" id="weight1"
 										data-rule-required="true" placeholder="체중을 입력하세요"
 										value="${addinfo_dto.weight }" readonly="readonly"
-										name="weight" maxlength="20">
+										name="weight" maxlength="20"> <span class="span">Kg</span>
 								</div>
 							</div>
-							<br />
 							<div class="addinfo_u" id="divGender">
 								<label for="inputGender" class="">성별</label>
 								<div class="eheck_font">
 									<c:choose>
 										<c:when test="${ addinfo_dto.gender == 'M' }">
 											<input type="radio" name="gender" value="M" checked="checked">남 
-											<span class="hidegender" style=" display: none; " >
-												<input type="radio" name="gender" value="W">여
+											<span class="hidegender" style="display: none;"> <input
+												type="radio" name="gender" value="W">여
 											</span>
 										</c:when>
 										<c:otherwise>
 											<input type="radio" name="gender" value="W" checked="checked">여
-											<span class="hidegender" style="display: none;">
-												<input type="radio" name="gender" value="M">남
+											<span class="hidegender" style="display: none;"> <input
+												type="radio" name="gender" value="M">남
 											</span>
 										</c:otherwise>
 
 									</c:choose>
 								</div>
 							</div>
-							<br />
 							<div class="addinfo_u" id="divTargetWeight">
 								<label for="inputTargetWeight" class="">목표 체중</label>
 								<div class="eheck_font">
 									<input type="number" class="form-control-u" id="targetweight1"
 										data-rule-required="true" placeholder="목표 체중을 입력하세요"
 										value="${addinfo_dto.targetweight }" readonly="readonly"
-										name="targetweight" maxlength="10">
+										name="targetweight" maxlength="10"> <span class="span">Kg</span>
 								</div>
 							</div>
-							<br />
 							<div class="addinfo_u" id="divBmi">
 								<label for="inputBmi">BMI(체질량 지수)</label>
 								<div class="eheck_font" id="bmi1">
@@ -263,31 +252,29 @@
 										step='0.01' name="bmi" id="bmic1" value="${addinfo_dto.bmi }">
 								</div>
 							</div>
-							<br />
 							<div class="addinfo_u" id="divTargetKcal">
 								<label for="inputTargetKcal" class="">목표 칼로리</label>
 								<div class="eheck_font">
 									<input type="number" class="form-control-u" id="targetkcal1"
 										data-rule-required="true" placeholder="목표 칼로리를 입력하세요"
 										readonly="readonly" value="${addinfo_dto.targetkcal }"
-										name="targetkcal" maxlength="10">
+										name="targetkcal" maxlength="10"><span class="span">Calories/day</span>
 								</div>
 							</div>
-							<br />
 							<div class="addinfo_u" id="divAdviseKcal">
 								<label for="inputAdviseKcal" class="">권장 칼로리</label>
 								<div class="eheck_font" id="advise1">
 									<input type="number" class="form-control-u" id="advisekcal1"
 										data-rule-required="false" placeholder="목표 칼로리를 입력하세요"
 										readonly="readonly" value="${addinfo_dto.advisekcal }"
-										step='0.01' name="advisekcal">
+										step='0.01' name="advisekcal"> <span class="span">Calories/day</span>
 								</div>
 							</div>
+
+						</div>
 							<br /> <input type="button" onclick="changeRead()" value="수정"
 								id="update-button" /> <input type="button"
 								onclick="location.href='addinfo_delete.do'" value="삭제" />
-
-						</div>
 						<input type="hidden" value="${login.member_birthday }"
 							id="birthday">
 					</form>

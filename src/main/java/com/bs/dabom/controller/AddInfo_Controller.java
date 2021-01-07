@@ -47,10 +47,9 @@ public class AddInfo_Controller {
 		Member_Dto member_dto = (Member_Dto)session.getAttribute("login");
 		int member_no = member_dto.getMember_no();
 		dto.setMember_no(member_no);
-		System.out.println(dto);
 		int res = biz.update(dto);
 		if(res>0) {
-			return "mypage_addinfo";
+			return "redirect:mypage_addinfo.do";
 		}
 		return "mypage_main";
 		
