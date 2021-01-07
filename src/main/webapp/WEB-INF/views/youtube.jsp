@@ -10,7 +10,7 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-    <div class="container mt-5 pt-5">
+    <div class="container mt-5 pt-5" style="background-image: url('resources/image/background.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
         <h1 class="display-4 text-center">Exercise</h1>
         <div class="row my-5" id="video-channel"></div>
         <br>

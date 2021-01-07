@@ -10,7 +10,7 @@
 </head>
 <body>
 <%@include file="adminpage.jsp"%>
-	<div class="admin_section">
+	<div class="admin_section" style="background-image: url('resources/image/background.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" >
 
 	<h1>특정회원 후원 내역</h1>
 	
