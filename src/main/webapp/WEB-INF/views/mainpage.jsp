@@ -187,8 +187,8 @@
           if(stop == currentPage) {         // ajax로 받아온 pagingStop(마지막 페이지 번호)와 스크립스상 currentPage(현재 페이지)가 같을 경우 스크롤 페이징 멈춤.
              alert("더 이상 게시글은 없습니다.")
           } else {
-             alert(scrollTop_windowHeight);    // if (scrollTop_windowHeight == documentHeight)의 값이 같은지 확인 
-             alert(documentHeight);         // if (scrollTop_windowHeight == documentHeight)의 값이 같은지 확인 
+             //alert(scrollTop_windowHeight);    // if (scrollTop_windowHeight == documentHeight)의 값이 같은지 확인 
+             //alert(documentHeight);         // if (scrollTop_windowHeight == documentHeight)의 값이 같은지 확인 
              
              $.ajaxSettings.traditional = true;   // ajax 인코딩 문제로 추가
              $.ajax({
