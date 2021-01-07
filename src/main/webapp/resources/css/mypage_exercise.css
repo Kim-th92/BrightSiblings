@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+html{
+	background: #ececf9;	
+}
+
+.dot {
+	overflow: hidden;
+	float: left;
+	width: 14px;
+	height: 14px;
+	background-image: url('../image/cherry-blossom.png');
+	background-size: contain;
+}
+
+.dotOverlay {
+	position: relative;
+	bottom: 10px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	float: left;
+	font-size: 12px;
+	padding: 5px;
+	background: #fff;
+}
+
+.number {
+	font-weight: bold;
+	color: lightcoral;
+}
+
+.distanceInfo {
+	position: relative;
+	top: 5px;
+	left: 5px;
+	list-style: none;
+	margin: 0;
+}
+
+.distanceInfo .label {
+	display: inline-block;
+	width: 50px;
+}
+
+.distanceInfo:after {
+	content: none;
+}
+
+
+.record_delete{
+	color: #444;
+	background-color: #d9d9f2;
+	font-family: "montserrat";
+	border-radius: .2rem;
+	margin: 10px;
+	padding: 5px;
+}
+
+.record_delete:hover{
+	cursor: pointer;
+}
+
+.record_tr{
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+}
+
+.today_record{
+    margin-top: 12%;
+    margin-left: 8%;
+    margin-right: 8%;
+    box-shadow: 0px 0px 20px 1px #a6a5a7;
+    border-radius: 15px;
+    background-color: white;
+    padding: 50px;
+}
+
+.cn {
+	margin: 45px
+}
+
+.course_name {
+	margin: 10px;
+	border-radius: .2rem;
+}
+
+.course_name:focus, .course_name:hover{
+	box-shadow: 0px 0px 10px 0.8px #ff1a8c;
+    border: 2px solid #444;
+    transition: 1s;
+}
+
+.course_register {
+	border: 1px solid #ff1a8c;
+	background: #ececf9;
+	font-family: "montserrat";
+	padding: 10px 140px;
+	border-radius: .2rem;
+	margin-top: 5%;
+	color: #ff1a8c;
+	transition: 0.6s;
+}
+
+.course_register:hover{
+    background: #ff1a8c;
+    cursor: pointer;
+    color: #ececf9;
+}
+
+#map {
+	transition: 0.6s;
+	width: 67%;
+	height: 420px;
+	margin-top: 8%;
+	margin-left: 16%;
+	margin-right: 16%;
+	margin-bottom: 5%;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0px 0px 20px 1px #a6a5a7;
+	background: url(http://t1.daumcdn.net/mapjsapi/images/2x/bg_tile.png);
+	border-radius: 25px;
+}
+
+#map:hover{
+	box-shadow: 0px 0px 20px 1px #ff1a8c;
+}
+
+#exercisewraper {
+	width: 100%;
+	background: #ececf9;
+	border-top: 2px solid #d9d9f2;
+	position: relative;
+}
+
+form {
+	margin: 0 auto;
+	width: 460px;
+}
+
+#today {
+	text-align: center;
+	margin: 7%;
+}
+
+#total_today {
+	text-align: center;
+    margin: auto;
+    width: 40%;
+}
+
+.daycount:hover{
+	cursor: pointer;
+}
+
+.calendar_wraper{
+    margin-top: 11%;
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-bottom: 60%;
+	width: 84%;
+	background: #ececf9;
+	position: relative;
+}
+
+.calendar_left{
+	float: left;
+	margin-left: 5%;
+	width: 45%;
+}
+
+.calendar_right{
+	float: right;
+	margin-right: 20%;
+    width: 30%;
+}
+

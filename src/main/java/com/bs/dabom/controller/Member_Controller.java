@@ -169,8 +169,9 @@ public class Member_Controller {
 		 Cookie[] cookies = req.getCookies();
 		    if (cookies != null)
 		        for (Cookie cookie : cookies) {
+		        	System.out.println(cookie.getName().toString());
 		            cookie.setValue("");
-		            cookie.setPath("/");
+		            cookie.setPath("/dabom");
 		            cookie.setMaxAge(0);
 		            resp.addCookie(cookie);
 		        }

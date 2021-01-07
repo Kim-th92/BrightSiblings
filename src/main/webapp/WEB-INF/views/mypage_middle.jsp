@@ -47,7 +47,8 @@
 				<li><a id ="friends" href="mypage_friends.do">친구</a></li>
 				<li><a id="food" href="mypage_food.do">식단</a></li>
 				<li><a id="exercise" href="mypage_exercise.do">런닝</a></li>
-				<li><a id="addinfo" href="mypage_addinfo.do">내 정보 편집</li>
+				<li><a id="exercise" href="mypage_pose.do">분석</a></li>
+				<li><a id="addinfo" href="mypage_addinfo.do">내 정보 편집</a></li>
 			</ul>
 		</div>
 	</div>

@@ -20,7 +20,7 @@
 	<img style="width: 90%; height:150px;" src="./resources/image/foodbanner.jpg" alt="음식배너"/>
 </div>
 <div class="table-responsive" style="margin:auto; width:80%;"> 
-	<table class="table table-striped" >
+	<table class="table " >
 	<thead>
 		<tr>
 			<th align="center" class="col-xs-2">No.</th>
@@ -31,9 +31,9 @@
 		</thead>
 		<tbody>		
 		<c:forEach items="${viewAll }" var="list" varStatus="idx">
-			<tr class="${idx.count % 2 == 1 ? 'trOdd' : 'trEven'}">
+			<tr class="trEven">
 				<td align="center">${list.food_no}</td>
-				<td><a style="cursor:pointer;color:#ff1a8c; font-weight: bold;" onclick="fooddetail(${list.food_no})">${list.food_name }</a></td>
+				<td><a style="cursor:pointer; font-weight: bold;" onclick="fooddetail(${list.food_no})">${list.food_name }</a></td>
 				<td>${list.kcal }</td>
 				<td>${list.serving_size } </td>
 			</tr>

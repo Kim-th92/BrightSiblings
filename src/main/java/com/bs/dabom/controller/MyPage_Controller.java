@@ -24,13 +24,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bs.dabom.model.biz.FoodPaging_Biz;
 import com.bs.dabom.model.biz.Friends_Biz;
 import com.bs.dabom.model.biz.Member_Biz;
+import com.bs.dabom.model.biz.MyMain_Biz;
 import com.bs.dabom.model.biz.MyPage_Biz;
+import com.bs.dabom.model.dto.Calendar_Dto;
+import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.dto.Dailyfoodrecord_Dto;
+import com.bs.dabom.model.dto.Files_Dto;
 import com.bs.dabom.model.dto.Member_Dto;
+import com.bs.dabom.model.dto.MyMain_Dto;
 import com.bs.dabom.model.dto.MyPage_Dto;
 import com.bs.dabom.model.dto.Paging_Dto;
+import com.bs.dabom.model.dto.Reply_Dto;
 import com.bs.dabom.model.dto.AddInfo_Dto;
+import com.bs.dabom.model.dto.Board_Dto;
 import com.bs.dabom.model.biz.AddInfo_Biz;
+import com.bs.dabom.model.biz.Board_Biz;
+import com.bs.dabom.model.biz.Board_BizImpl;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,8 +60,10 @@ public class MyPage_Controller {
 	private FoodPaging_Biz food_biz;
 	@Autowired
 	private MyPage_Biz mypage_biz;
-	
-
+	@Autowired
+	private Board_Biz board_biz;
+	@Autowired
+	private MyMain_Biz mymain_biz;
 	
 	public static void main(String[] args) {
 		  System.out.println("내프로젝트의 루트경로는?  " + System.getProperty("user.dir")); 
@@ -76,8 +87,39 @@ public class MyPage_Controller {
 	}
 	
 	@RequestMapping("mypage_main.do")
-	public String mypageFriends(Model model) {
+	public String mypageFriends(Model model,HttpSession session) {
+		
+		Member_Dto dto= (Member_Dto)session.getAttribute("login");
+		int member_no = dto.getMember_no();
+		
+		List<MyMain_Dto> board_list = mymain_biz.myList(member_no);
+		
+		List<String> urlList = new ArrayList<String>();
+	
+		for(int i=0; i < board_list.size(); i++) {
+			
+			List<String> egg = board_list.get(i).getUrlList();
+			
+			for(int j=0; j <= egg.size()-1; j++) {
+				urlList.add(egg.get(j));
+			}
+			
+		}
+		
+		model.addAttribute("url", urlList);
+		model.addAttribute("list", board_list);
+		model.addAttribute("login", dto);
 		return "mypage_main";
+	}
+	
+	@ResponseBody
+	@RequestMapping("mypage_delete.do")
+	public Map<String, Object> delete(Model model, @RequestParam("board_no")int board_no) {
+		System.out.println(board_no+"<<<<<<<");
+		board_biz.delete(board_no);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", "success");
+		return map;
 	}
 	
 	@RequestMapping("mypage_food.do")
@@ -129,11 +171,37 @@ public class MyPage_Controller {
 	
 	@RequestMapping("mypage_exercise.do")
 	public String mypageExercise(Model model, HttpSession session) {
+		
 		Member_Dto login = (Member_Dto)session.getAttribute("login");
 		int member_no = login.getMember_no();
 		model.addAttribute("list", mypage_biz.showList(member_no));
-		model.addAttribute("total", mypage_biz.total(member_no));
-		System.out.println("asdfaf4w4e3r24fe2e4" + mypage_biz.total(member_no));
+		List<MyPage_Dto> total = new ArrayList<MyPage_Dto>(); 
+		total = mypage_biz.total(member_no);
+		
+		System.out.println("여기까지왔고");
+		System.out.println(total.get(0));
+		System.out.println(total);
+		
+		
+		if (total.get(0) == null) {
+			
+			System.out.println("null이면");
+			System.out.println(total);
+			System.out.println(total.get(0));
+			
+			model.addAttribute("td", 0);
+		} else {
+			
+			System.out.println("null이 아니면");
+			System.out.println(total);
+			System.out.println(total.get(0));
+			
+			int td = total.get(0).getTotal_distance();
+			float tbk = total.get(0).getTotal_burn_kcal();
+			model.addAttribute("td", td);
+			model.addAttribute("tbk", tbk);
+		}
+		
 		return "mypage_exercise";
 	}
 	
@@ -145,6 +213,41 @@ public class MyPage_Controller {
 		} else {
 			return "redirect:mypage_exercise.do";
 		}
+	}
+	
+	@RequestMapping(value= "calendarAjax.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> calendarAjax(@RequestParam("member_no") int member_no,
+											@RequestParam("yyyyMMdd") String yyyyMMdd) {
+		
+		List<Calendar_Dto> list1 = new ArrayList<Calendar_Dto>();
+		List<Calendar_Dto> list2 = new ArrayList<Calendar_Dto>();
+		
+		Calendar_Dto dto = new Calendar_Dto();
+		dto.setMember_no(member_no);
+		dto.setYyyyMMdd(yyyyMMdd);
+		
+		float tk = mypage_biz.showTargetKcal(dto);
+
+		list1 = mypage_biz.showTotalDFR(dto);
+		list2 = mypage_biz.showTotalDER(dto);
+		
+		float tik = list1.get(0).getTotal_intake_kcal();
+		int td = list2.get(0).getTotal_distance();
+		float tbk = list2.get(0).getTotal_burn_kcal();
+		
+		System.out.println(tk);
+		System.out.println(tik);
+		System.out.println(td);
+		System.out.println(tbk);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("tk", tk);
+		map.put("tik", tik);
+		map.put("td", td);
+		map.put("tbk", tbk);
+		
+		return map;
 	}
 	
 	@RequestMapping("search.do")
@@ -326,6 +429,12 @@ public class MyPage_Controller {
 		map.put("result", result);
 		
 		return map;
+	}
+	
+	@RequestMapping("mypage_pose.do")
+	public String mypage_pose() {
+		System.out.println("mypage_pose.do");
+		return "mypage_pose";
 	}
 	
 }

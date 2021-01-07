@@ -20,6 +20,7 @@
 		<typeAlias type="com.bs.dabom.model.dto.MyPage_Dto" alias = "myPageDto" />
 		<typeAlias type="com.bs.dabom.model.dto.Water_Dto" alias="waterDto"/>
 		<typeAlias type="com.bs.dabom.model.dto.Dailyfoodrecord_Dto" alias="dailyfoodDto"/>
+		<typeAlias type="com.bs.dabom.model.dto.Calendar_Dto" alias="calendarDto"/>
 	</typeAliases>
 	
 <!-- mapper -->
@@ -34,6 +35,7 @@
 		<mapper resource = "/mybatis/exercise-mapper.xml"/>
 		<mapper resource="/mybatis/boardres-mapper.xml" />
 		<mapper resource ="/mybatis/addinfo-mapper.xml"/>
+		<mapper resource="/mybatis/mymain-mapper.xml" />
 	</mappers>
 
 
