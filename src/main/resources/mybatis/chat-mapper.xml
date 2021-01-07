@@ -80,6 +80,8 @@
 			)
 		</foreach>
 	</insert>
+	
+	
 
 	<select id="lastchat" resultType="String">
 		SELECT NVL(MESSAGE, '대화를 시작해 보세요!'),sendingtime,member_no

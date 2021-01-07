@@ -16,6 +16,7 @@ response.setDateHeader("Expires", 0L);
 <link rel="shortcut icon" href="resources/image/cherry-blossom.png">
 <link rel="stylesheet" href="resources/css/header.css" />
 <title>DABOM, 다이어트의 봄</title>
+
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -42,6 +43,8 @@ response.setDateHeader("Expires", 0L);
 <!-- 아이콘 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
 	
@@ -81,7 +84,7 @@ response.setDateHeader("Expires", 0L);
 				<div class="chat"><div class="card  contacts_card">
 					<div class="card-header">
 						<div class="input-group">
-							<input type="text" placeholder="Search..." name="" class="form-control search">
+							<input type="text" placeholder="Search..." name="" class="form-control search searchChat"  onkeyup="searchChat();">
 							<div class="input-group-prepend">
 								<span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
 							</div>
@@ -124,8 +127,8 @@ response.setDateHeader("Expires", 0L);
 						var chatroomlistarr = data.chatroomlist;
 						var chatroomList ="";
 						for(var i = 0; i < chatroomlistarr.length; i++){
-							chatroomList +="<li><a onclick="+"\"window.open"+"('chatmsglist.do?chatroom_no="+chatroomlistarr[i].chatroom_no+"','popup','width=500px,height=530px')\""+" style='text-decoration:none; color:black; '><div class='d-flex bd-highlight'><div class='img_cont'><img src='"+
-							chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'></div><div class='user_info'><span>"+chatroomlistarr[i].member_name+"</span><p>"+
+							chatroomList +="<li class='onechatmap'><a onclick="+"\"window.open"+"('chatmsglist.do?chatroom_no="+chatroomlistarr[i].chatroom_no+"','popup','width=500px,height=530px')\""+" style='text-decoration:none; color:black; '><div class='d-flex bd-highlight'><div class='img_cont'><img src='"+
+							chatroomlistarr[i].member_profile+"' class='rounded-circle user_img'></div><div class='user_info'><span class='user_info_name'>"+chatroomlistarr[i].member_name+"</span><p>"+
 							chatroomlistarr[i].last_message+"</p><p>"+chatroomlistarr[i].sendingtime+
 							"</p></div></div></a></li>";
 						}
@@ -140,6 +143,23 @@ response.setDateHeader("Expires", 0L);
 		});
 	
 	
+		function searchChat() {
+			  var value, name, item, i;
+
+		        value = $(".searchChat").val();
+		        item = document.getElementsByClassName("onechatmap");
+
+		        for(i=0;i<item.length;i++){
+		          name = item[i].getElementsByClassName("user_info_name");
+		          if(name[0].innerHTML.indexOf(value) > -1){
+		            item[i].style.display = "flex";
+		          }else{
+		            item[i].style.display = "none";
+		          }
+		        }
+
+		}
+		
 		function search() {
 			var keyword = $(".search-input").val();
 			if (keyword == '') {

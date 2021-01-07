@@ -25,7 +25,7 @@
 				<input type="file" name="file"  id="profile-bg-file"  accept="image/gif,image/jpg,image/jpeg,image/png" style="display:none"/></form>
 					<button id="profile-bg-add">배경사진편집</button>
 			</div>
-			<div id="hidemodal">
+			<div id="hidemodal" style="display:none;">
 				<div class="modalcenter">
 					<h1>사진을 선택하시거나, 원하는 사진을 업로드 해보세요!</h1>
 						<div id="selectBG" style="display: grid;grid-gap: 10px; margin-left:40px;margin-bottom:60px; grid-template-rows: 200px 200px;grid-template-columns: 1fr 1fr 1fr 1fr;">

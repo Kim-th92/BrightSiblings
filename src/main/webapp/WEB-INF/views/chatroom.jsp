@@ -84,7 +84,7 @@
 
 
 					<div class="video_cam">
-						<span  onclick="location.href='https://localhost:3000/chat/${roomno}/membername/${login.member_name }'">
+						<span  onclick="window.open('https://localhost:3000/chat/${roomno}/membername/${login.member_name }','title','height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes')">
 						<i class="fas fa-video"></i>
 						</span>					
 						 <span onclick="disconnect()">나가기 </span>

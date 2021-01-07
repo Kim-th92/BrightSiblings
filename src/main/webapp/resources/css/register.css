@@ -16,6 +16,9 @@ background-color: linear-gradient(#ffe0d8,#ff9b93);
 	
 
 }
+* {
+	font-family: 'Nanum Gothic', sans-serif;
+}
 
 #register {
     width: 70%;
