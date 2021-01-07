@@ -580,33 +580,47 @@
 			</div>
 
 			<div class="calendar_right">
-				 <table style="height: 300px; width: 430px; margin-left: 20%; margin-top: 25%;">
+				 <table style="height: 300px;
+								width: 430px;
+								margin-left: 25%;
+								margin-top: 32%;
+								background:white;
+								box-shadow: 0px 0px 20px 1px #a6a5a7;
+								border-radius: 15px;
+				 				">
 
 					<tr>
-						<td style="width:74%; text-align:center">총 섭취 칼로리</td>
+						<td style="width:10%">&nbsp;</td>
+						<td style="width:59%; text-align:center">총 섭취 칼로리</td>
 						<td style="width:1%; text-align:center">+</td>
 						<td class="abc" style="text-align:right"></td>
+						<td style="width:10%">&nbsp;</td>
 					</tr>
 					<tr>
+						<td>&nbsp;</td>
 						<td style="text-align:center; border-bottom: 2px solid #444;">총 소모 칼로리</td>
 						<td style="text-align:center; border-bottom: 2px solid #444;">-</td>
 						<td class="def" style="text-align:right; border-bottom: 2px solid #444;"></td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
+						<td>&nbsp;</td>
 						<td style="text-align: center; border-bottom: 6px double #444;">최종 칼로리</td>
 						<td style="border-bottom: 6px double #444;">&nbsp;</td>
 						<td class="ghi" style="text-align:right; border-bottom: 6px double #444;"></td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
+						<td>&nbsp;</td>
 						<td style="text-align: center;">목표 칼로리</td>
 						<td>&nbsp;</td>
 						<td class="jkl" style="text-align:right"></td>
+						<td>&nbsp;</td>
 					</tr>
 
 				</table>
 			</div>
 
-			<br /> <br /> <br /> <br /> <br /> <br /> <br />
 		</div>
 	</div>
 
